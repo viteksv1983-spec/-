@@ -1,0 +1,28 @@
+services:
+  # Backend service
+  - type: web
+    name: cake-shop-backend
+    runtime: python
+    buildCommand: cd backend && pip install -r requirements.txt
+    startCommand: cd backend && uvicorn main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: DATABASE_URL
+        value: sqlite:///sql_app.db # Should be replaced with PostgreSQL for production
+      - key: PYTHON_VERSION
+        value: 3.11.0
+
+  # Frontend service
+  - type: web
+    name: cake-shop-frontend
+    runtime: static
+    buildCommand: cd frontend && npm install && npm run build
+    staticPublishPath: frontend/dist
+    routingRules:
+      - route: /*
+        rewrite: /index.html
+    envVars:
+      - key: VITE_API_URL
+        fromService:
+          type: web
+          name: cake-shop-backend
+          property: host

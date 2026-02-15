@@ -27,14 +27,14 @@ A web application for a cake shop inspired by the Vatsak brand.
 2. Install dependencies: `npm install`
 3. Run dev server: `npm run dev`
 
-## Deployment to GitHub
-1. Create a new repository on GitHub.
-2. Run the following commands in the project root:
-   ```bash
-   git init
-   git add .
-   git commit -m "Initial commit"
-   git branch -M main
-   git remote add origin YOUR_REPOSITORY_URL
-   git push -u origin main
-   ```
+## Deployment to Render
+
+This project is ready for deployment on [Render](https://render.com/).
+
+1. Create a Render account.
+2. Click "New" -> "Blueprint".
+3. Connect your GitHub repository.
+4. Render will automatically detect the `render.yaml` file and set up both the backend and frontend.
+
+## Deployment to GitHub manually (if needed)
+...
