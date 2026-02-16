@@ -1,4 +1,10 @@
 from typing import List
+import sys
+import os
+
+# Fix definitions for deployment: Add project root to path
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
 from fastapi import FastAPI, Depends, HTTPException, File, UploadFile
 from fastapi.staticfiles import StaticFiles
 import uuid
