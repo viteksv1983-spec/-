@@ -171,6 +171,16 @@ def read_orders(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
 def read_root():
     return {"message": "Welcome to Cake Shop API"}
 
+from . import seed
+
+@app.post("/seed_db")
+def seed_database():
+    try:
+        seed.seed_data()
+        return {"message": "Database seeded successfully"}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
 @app.get("/health")
 def health_check():
     return {"status": "ok"}
