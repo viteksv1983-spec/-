@@ -1,6 +1,6 @@
 from sqlalchemy import Boolean, Column, ForeignKey, Integer, String, Float
 from sqlalchemy.orm import relationship
-from database import Base
+from backend.database import Base
 
 class Cake(Base):
     __tablename__ = "cakes"
@@ -30,7 +30,9 @@ class Order(Base):
     __tablename__ = "orders"
 
     id = Column(Integer, primary_key=True, index=True)
-    user_id = Column(Integer, ForeignKey("users.id"))
+    user_id = Column(Integer, ForeignKey("users.id"), nullable=True)
+    customer_name = Column(String, nullable=True)
+    customer_phone = Column(String, nullable=True)
     total_price = Column(Float)
     status = Column(String, default="pending")
 
@@ -43,7 +45,10 @@ class OrderItem(Base):
     id = Column(Integer, primary_key=True, index=True)
     order_id = Column(Integer, ForeignKey("orders.id"))
     cake_id = Column(Integer, ForeignKey("cakes.id"))
+    scale = Column(String, nullable=True)  # Placeholder in case needed for something else
     quantity = Column(Integer)
+    flavor = Column(String, nullable=True)
+    weight = Column(Float, nullable=True)  # Selected weight in kg (e.g., 1.5)
 
     order = relationship("Order", back_populates="items")
     cake = relationship("Cake")

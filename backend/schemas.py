@@ -42,6 +42,8 @@ class TokenData(BaseModel):
 class OrderItemBase(BaseModel):
     cake_id: int
     quantity: int
+    flavor: Optional[str] = None
+    weight: Optional[float] = None
 
 class OrderItemCreate(OrderItemBase):
     pass
@@ -62,6 +64,15 @@ class OrderCreate(BaseModel):
     # But wait, if I remove it, I need to make sure frontend doesn't send it, or I instruct pydantic to ignore extra.
     # Actually, previous OrderCreate had items.
     items: List[OrderItemCreate]
+
+class QuickOrderCreate(BaseModel):
+    customer_name: str
+    customer_phone: str
+    cake_id: int
+    quantity: int = 1
+    flavor: Optional[str] = None
+    weight: Optional[float] = None
+
 
 class Order(OrderBase):
     id: int

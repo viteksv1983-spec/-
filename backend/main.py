@@ -7,10 +7,11 @@ import os
 from pathlib import Path
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
-import crud
-import models
-import schemas
-from database import SessionLocal, engine
+from backend import crud
+from backend import models
+from backend import schemas
+from backend.database import SessionLocal, engine
+from backend import auth
 from jose import JWTError, jwt
 
 models.Base.metadata.create_all(bind=engine)
@@ -18,15 +19,19 @@ models.Base.metadata.create_all(bind=engine)
 app = FastAPI(title="Cake Shop API", description="API for checking and ordering cakes", version="0.1.0")
 
 # CORS setup to allow frontend connection
+# For production, you might want to restrict this to your specific frontend domain.
+# But for initial deployment debugging, allowing all is often easier.
 origins = [
-    "http://localhost:5173", # Vite default
+    "http://localhost:5173",
     "http://localhost:3000",
     "http://localhost:5174",
+    "https://cake-shop-frontend.onrender.com", # Example Render URL
+    "*", # Allow all for now
 ]
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=origins,
+    allow_origins=["*"], # Allow all origins explicitly
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -51,7 +56,7 @@ def get_db():
 
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 from datetime import timedelta
-import auth
+
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
 
@@ -144,6 +149,12 @@ def create_order(order: schemas.OrderCreate, db: Session = Depends(get_db), curr
     # For now, let's overwrite it in the logic.
     order.user_id = current_user.id
     return crud.create_order(db=db, order=order)
+
+
+
+@app.post("/orders/quick", response_model=schemas.Order)
+def create_quick_order(order: schemas.QuickOrderCreate, db: Session = Depends(get_db)):
+    return crud.create_quick_order(db=db, order=order)
 
 @app.get("/orders/", response_model=List[schemas.Order])
 def read_orders(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):

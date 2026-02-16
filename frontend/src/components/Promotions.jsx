@@ -4,20 +4,6 @@ import { Link } from 'react-router-dom';
 function Promotions() {
     return (
         <div className="min-h-screen bg-white">
-            {/* Hero Section */}
-            <div className="relative bg-gradient-to-r from-[#f5efe6] to-[#fff8e7] py-16 md:py-24">
-                <div className="container mx-auto px-6">
-                    <div className="max-w-4xl mx-auto text-center">
-                        <div className="text-sm text-amber-700 mb-4 uppercase tracking-widest">Спеціальні пропозиції</div>
-                        <h1 className="text-4xl md:text-6xl font-bold text-gray-800 mb-6" style={{ fontFamily: "'Oswald', sans-serif" }}>
-                            АКЦІЇ ТА ЗНИЖКИ
-                        </h1>
-                        <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-                            Вигідні пропозиції на улюблені торти та солодощі. Встигніть скористатися спеціальними цінами!
-                        </p>
-                    </div>
-                </div>
-            </div>
 
             {/* Current Promotions */}
             <div className="container mx-auto px-6 py-16">

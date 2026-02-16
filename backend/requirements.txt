@@ -9,3 +9,7 @@ python-multipart
 python-jose[cryptography]
 passlib[bcrypt]
 requests
+selenium
+webdriver-manager
+beautifulsoup4
+gunicorn

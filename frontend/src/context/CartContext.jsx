@@ -17,28 +17,30 @@ export const CartProvider = ({ children }) => {
         localStorage.setItem('cart', JSON.stringify(cartItems));
     }, [cartItems]);
 
-    const addToCart = (cake, quantity = 1) => {
+    const addToCart = (cake, quantity = 1, flavor = null, weight = null) => {
         setCartItems(prevItems => {
-            const existingItem = prevItems.find(item => item.id === cake.id);
+            const existingItem = prevItems.find(item => item.id === cake.id && item.flavor === flavor && item.weight === weight);
             if (existingItem) {
                 return prevItems.map(item =>
-                    item.id === cake.id ? { ...item, quantity: item.quantity + quantity } : item
+                    (item.id === cake.id && item.flavor === flavor && item.weight === weight)
+                        ? { ...item, quantity: item.quantity + quantity }
+                        : item
                 );
             } else {
-                return [...prevItems, { ...cake, quantity }];
+                return [...prevItems, { ...cake, quantity, flavor, weight }];
             }
         });
     };
 
-    const removeFromCart = (cakeId) => {
-        setCartItems(prevItems => prevItems.filter(item => item.id !== cakeId));
+    const removeFromCart = (cakeId, flavor = null, weight = null) => {
+        setCartItems(prevItems => prevItems.filter(item => !(item.id === cakeId && item.flavor === flavor && item.weight === weight)));
     };
 
-    const updateQuantity = (cakeId, quantity) => {
+    const updateQuantity = (cakeId, flavor = null, weight = null, quantity) => {
         if (quantity < 1) return;
         setCartItems(prevItems =>
             prevItems.map(item =>
-                item.id === cakeId ? { ...item, quantity: quantity } : item
+                (item.id === cakeId && item.flavor === flavor && item.weight === weight) ? { ...item, quantity: quantity } : item
             )
         );
     };

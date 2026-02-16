@@ -27,7 +27,8 @@ function Cart() {
             const orderData = {
                 items: cartItems.map(item => ({
                     cake_id: item.id,
-                    quantity: item.quantity
+                    quantity: item.quantity,
+                    flavor: item.flavor
                 }))
             };
 
@@ -92,8 +93,8 @@ function Cart() {
                 <div className="bg-white shadow-xl overflow-hidden border-t-4 border-vatsak-red">
                     <ul className="divide-y divide-gray-100">
                         {cartItems.map((item) => (
-                            <li key={item.id} className="p-6 sm:flex sm:items-center hover:bg-gray-50 transition-colors">
-                                <div className="h-24 w-24 flex-shrink-0 overflow-hidden border border-gray-200 bg-white">
+                            <li key={`${item.id}-${item.flavor}`} className="p-6 sm:flex sm:items-center hover:bg-gray-50 transition-colors">
+                                <div className="h-24 w-24 flex-shrink-0 overflow-hidden border border-gray-200 bg-white shadow-sm rounded-xl">
                                     {item.image_url && (
                                         <img
                                             src={item.image_url.startsWith('http') ? item.image_url : `http://localhost:8000${item.image_url}`}
@@ -106,22 +107,36 @@ function Cart() {
                                 <div className="ml-4 flex-1 flex flex-col sm:ml-6">
                                     <div>
                                         <div className="flex justify-between text-base font-medium text-gray-900">
-                                            <h3 className="uppercase tracking-wide font-bold text-lg">{item.name}</h3>
+                                            <div>
+                                                <h3 className="uppercase tracking-wide font-bold text-lg">{item.name}</h3>
+                                                {item.flavor && (
+                                                    <p className="text-sm text-vatsak-red font-bold mt-1 uppercase tracking-wider flex items-center gap-2">
+                                                        <span className="w-1.5 h-1.5 bg-vatsak-red rounded-full"></span>
+                                                        Начинка: {item.flavor}
+                                                    </p>
+                                                )}
+                                                {item.weight && (
+                                                    <p className="text-sm text-gray-500 font-bold mt-1 uppercase tracking-wider flex items-center gap-2">
+                                                        <span className="w-1.5 h-1.5 bg-gray-400 rounded-full"></span>
+                                                        Вага: {item.weight} кг
+                                                    </p>
+                                                )}
+                                            </div>
                                             <p className="ml-4 text-vatsak-red font-bold text-xl">{item.price * item.quantity} <span className="text-sm text-gray-500 font-normal">грн</span></p>
                                         </div>
                                         <p className="mt-1 text-sm text-gray-500">{item.price} грн / шт</p>
                                     </div>
                                     <div className="flex-1 flex items-end justify-between text-sm mt-4">
-                                        <div className="flex items-center border border-gray-300">
-                                            <button onClick={() => updateQuantity(item.id, item.quantity - 1)} className="w-8 h-8 flex items-center justify-center hover:bg-gray-100 text-gray-600 font-bold text-lg">-</button>
-                                            <span className="w-10 h-8 flex items-center justify-center font-medium text-gray-900 border-x border-gray-200">{item.quantity}</span>
-                                            <button onClick={() => updateQuantity(item.id, item.quantity + 1)} className="w-8 h-8 flex items-center justify-center hover:bg-gray-100 text-gray-600 font-bold text-lg">+</button>
+                                        <div className="flex items-center border border-gray-300 rounded-lg overflow-hidden">
+                                            <button onClick={() => updateQuantity(item.id, item.flavor, item.quantity - 1)} className="w-10 h-10 flex items-center justify-center hover:bg-gray-100 text-gray-600 font-bold text-lg transition-colors">-</button>
+                                            <span className="w-12 h-10 flex items-center justify-center font-bold text-gray-900 border-x border-gray-200 bg-gray-50/50">{item.quantity}</span>
+                                            <button onClick={() => updateQuantity(item.id, item.flavor, item.quantity + 1)} className="w-10 h-10 flex items-center justify-center hover:bg-gray-100 text-gray-600 font-bold text-lg transition-colors">+</button>
                                         </div>
 
                                         <button
                                             type="button"
-                                            onClick={() => removeFromCart(item.id)}
-                                            className="font-medium text-gray-400 hover:text-vatsak-red transition-colors uppercase tracking-wider text-xs flex items-center gap-1"
+                                            onClick={() => removeFromCart(item.id, item.flavor)}
+                                            className="font-bold text-gray-400 hover:text-vatsak-red transition-colors uppercase tracking-widest text-[10px] flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-red-50"
                                         >
                                             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
                                             Видалити

@@ -1,7 +1,9 @@
 import React, { useContext, useState } from 'react';
+import { FaInstagram, FaFacebook, FaTelegram, FaSearch } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
 import { CartContext } from '../context/CartContext';
+import logo from '../assets/logo.png';
 
 function Navbar() {
     const { user, logout } = useContext(AuthContext);
@@ -10,58 +12,48 @@ function Navbar() {
 
     return (
         <nav className="bg-white border-b-2 border-vatsak-gold sticky top-0 z-50">
-            {/* Top Bar (Optional, usually for contacts/login) */}
-            <div className="bg-vatsak-red text-white py-1">
-                <div className="container mx-auto px-6 flex justify-end text-sm">
-                    {user ? (
-                        <div className="flex items-center space-x-4">
-                            <div className="flex items-center space-x-2 border-r border-red-400 pr-4">
-                                <div className="h-6 w-6 bg-vatsak-gold text-vatsak-red rounded-full flex items-center justify-center font-bold text-xs">
-                                    {user.email[0].toUpperCase()}
-                                </div>
-                                <span className="font-medium">Особистий кабінет</span>
-                            </div>
-                            <button onClick={logout} className="hover:text-vatsak-gold transition-colors font-bold uppercase text-xs tracking-widest">Вийти</button>
-                        </div>
-                    ) : (
-                        <div className="flex space-x-4">
-                            <Link to="/login" className="hover:text-vatsak-gold transition-colors">Увійти</Link>
-                            <Link to="/register" className="hover:text-vatsak-gold transition-colors">Реєстрація</Link>
-                        </div>
-                    )}
-                </div>
-            </div>
+            {/* Top Bar removed at user request */}
 
             {/* Main Header */}
             <div className="container mx-auto px-6 py-4">
                 <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+
                     {/* Logo Area */}
-                    <Link to="/" className="flex items-center flex-shrink-0">
-                        <div className="text-center">
-                            <div className="text-3xl md:text-4xl font-serif text-gray-800 tracking-wider" style={{ fontFamily: "'Playfair Display', serif" }}>
-                                Інна Тортики
-                            </div>
-                            <div className="text-xs text-gray-500 tracking-widest uppercase mt-1">Авторська кондитерська</div>
+                    <Link to="/" className="flex items-center gap-3 flex-shrink-0 group">
+                        <img src={logo} alt="ANTREME" className="h-16 md:h-20 w-auto object-contain group-hover:scale-105 transition-transform duration-300" />
+                        <div className="flex flex-col">
+                            <span className="text-gray-600 text-[10px] md:text-xs uppercase tracking-widest font-medium">Кондитерская мастерская</span>
+                            <span className="text-2xl md:text-3xl font-serif font-bold text-[#5a0020] leading-none tracking-wide group-hover:text-vatsak-gold transition-colors duration-300">Antreme</span>
                         </div>
                     </Link>
 
-                    {/* Search Bar - Central & Prominent */}
-                    <div className="w-full md:max-w-xl mx-4 flex relative">
-                        <input
-                            type="text"
-                            placeholder="Знайдіть свій улюблений торт..."
-                            className="w-full border-2 border-gray-200 rounded-full py-2 px-5 focus:outline-none focus:border-vatsak-red transition-colors"
-                        />
-                        <button className="absolute right-1 top-1 bottom-1 bg-vatsak-red text-white p-2 rounded-full px-4 hover:bg-red-800 transition-colors">
-                            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
-                        </button>
+                    {/* Search Bar */}
+                    <div className="flex-grow flex justify-center px-4 md:px-10">
+                        <div className="relative w-full max-w-md">
+                            <input
+                                type="text"
+                                placeholder="Поиск"
+                                className="w-full py-2 pl-10 pr-4 bg-gray-100 border-none rounded-full text-gray-700 focus:outline-none focus:ring-2 focus:ring-vatsak-gold placeholder-gray-500 font-medium"
+                            />
+                            <FaSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 text-lg" />
+                        </div>
                     </div>
 
                     {/* Actions (Phone, Cart) */}
                     <div className="flex items-center space-x-6 flex-shrink-0">
-                        <div className="hidden lg:flex flex-col items-end text-sm text-gray-700">
-                            <span className="font-bold text-vatsak-red text-lg">0 800 123 456</span>
-                            <span className="text-xs text-gray-500">Безкоштовна підтримка</span>
+                        <div className="hidden lg:flex flex-col items-center text-sm text-gray-700">
+                            <div className="flex items-center space-x-4 mb-1">
+                                <a href="https://www.instagram.com/liudmilaprikhodko" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-vatsak-red transition-colors">
+                                    <FaInstagram className="text-3xl" />
+                                </a>
+                                <a href="https://www.facebook.com/sveetdesert/" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-blue-600 transition-colors">
+                                    <FaFacebook className="text-3xl" />
+                                </a>
+                                <a href="https://t.me/antreeeme" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-sky-500 transition-colors">
+                                    <FaTelegram className="text-3xl" />
+                                </a>
+                            </div>
+                            <a href="tel:0979081504" className="font-bold text-vatsak-red text-xl hover:text-red-700 transition-colors">097 908 15 04</a>
                         </div>
 
                         <Link to="/cart" className="relative group flex items-center gap-2 text-gray-700 hover:text-vatsak-red transition-colors">
@@ -86,14 +78,16 @@ function Navbar() {
                 </div>
 
                 {/* Secondary Navigation (Categories) */}
-                <div className="hidden md:flex justify-center mt-4 space-x-8 border-t border-gray-100 pt-4 font-medium text-sm uppercase tracking-wide text-gray-600">
-                    <Link to="/" className="hover:text-vatsak-red transition-colors">Головна</Link>
-                    <Link to="/cakes" className="hover:text-vatsak-red transition-colors">Всі продукти</Link>
-                    <Link to="/cakes?category=cakes" className="hover:text-vatsak-red transition-colors">Торти</Link>
-                    <Link to="/cakes?category=cookies" className="hover:text-vatsak-red transition-colors">Печенье</Link>
-                    <Link to="/cakes?category=sweets" className="hover:text-vatsak-red transition-colors">Солодощі</Link>
-                    <Link to="/promotions" className="hover:text-vatsak-red transition-colors">Акції</Link>
-                    <Link to="/delivery" className="hover:text-vatsak-red transition-colors">Доставка</Link>
+                <div className="hidden md:flex justify-center mt-4 space-x-6 lg:space-x-8 border-t border-gray-100 pt-6 font-bold text-[11px] lg:text-xs uppercase tracking-[0.15em] text-gray-800 flex-wrap">
+                    <Link to="/" className="hover:text-vatsak-red transition-all hover:-translate-y-0.5 whitespace-nowrap">Головна</Link>
+                    <Link to="/cakes?category=bento" className="hover:text-vatsak-red transition-all hover:-translate-y-0.5 whitespace-nowrap">Бенто тортики</Link>
+                    <Link to="/cakes?category=biscuit" className="hover:text-vatsak-red transition-all hover:-translate-y-0.5 whitespace-nowrap">Бісквітні торти</Link>
+                    <Link to="/cakes?category=wedding" className="hover:text-vatsak-red transition-all hover:-translate-y-0.5 whitespace-nowrap">Весільні торти</Link>
+                    <Link to="/cakes?category=mousse" className="hover:text-vatsak-red transition-all hover:-translate-y-0.5 whitespace-nowrap">Мусові торти</Link>
+                    <Link to="/cakes?category=cupcakes" className="hover:text-vatsak-red transition-all hover:-translate-y-0.5 whitespace-nowrap">Капкейки</Link>
+                    <Link to="/cakes?category=gingerbread" className="hover:text-vatsak-red transition-all hover:-translate-y-0.5 whitespace-nowrap">Імбирні пряники</Link>
+                    <Link to="/fillings" className="hover:text-vatsak-red transition-all hover:-translate-y-0.5 whitespace-nowrap">Начинки</Link>
+                    <Link to="/delivery" className="hover:text-vatsak-red transition-all hover:-translate-y-0.5 whitespace-nowrap border-l border-gray-200 pl-6">Доставка</Link>
                 </div>
             </div>
 
@@ -102,10 +96,14 @@ function Navbar() {
                 <div className="md:hidden bg-white border-t border-gray-100 absolute w-full shadow-lg">
                     <div className="px-6 py-4 flex flex-col space-y-4 font-medium">
                         <Link to="/" className="text-gray-800 hover:text-vatsak-red uppercase text-sm">Головна</Link>
-                        <Link to="/cakes" className="text-gray-800 hover:text-vatsak-red uppercase text-sm">Всі продукти</Link>
-                        <Link to="/cakes?category=cakes" className="text-gray-800 hover:text-vatsak-red uppercase text-sm">Торти</Link>
-                        <Link to="/cakes?category=cookies" className="text-gray-800 hover:text-vatsak-red uppercase text-sm">Печенье</Link>
-                        <Link to="/cakes?category=sweets" className="text-gray-800 hover:text-vatsak-red uppercase text-sm">Солодощі</Link>
+                        <Link to="/cakes?category=bento" className="text-gray-800 hover:text-vatsak-red uppercase text-sm">Бенто тортики</Link>
+                        <Link to="/cakes?category=biscuit" className="text-gray-800 hover:text-vatsak-red uppercase text-sm">Бісквітні торти</Link>
+                        <Link to="/cakes?category=wedding" className="text-gray-800 hover:text-vatsak-red uppercase text-sm">Весільні торти</Link>
+                        <Link to="/cakes?category=mousse" className="text-gray-800 hover:text-vatsak-red uppercase text-sm">Мусові торти</Link>
+                        <Link to="/cakes?category=cupcakes" className="text-gray-800 hover:text-vatsak-red uppercase text-sm">Капкейки</Link>
+                        <Link to="/cakes?category=gingerbread" className="text-gray-800 hover:text-vatsak-red uppercase text-sm">Імбирні пряники</Link>
+                        <Link to="/fillings" className="text-gray-800 hover:text-vatsak-red uppercase text-sm">Начинки</Link>
+                        <Link to="/delivery" className="text-gray-800 hover:text-vatsak-red uppercase text-sm">Доставка</Link>
                         <Link to="/cart" className="text-gray-800 hover:text-vatsak-red uppercase text-sm">Кошик ({cartCount})</Link>
                     </div>
                 </div>

@@ -1,0 +1,34 @@
+[
+    {
+        "image_url": "/static/images/facebook/fb_product_1.jpg",
+        "description": "Delicious custom dessert"
+    },
+    {
+        "image_url": "/static/images/facebook/fb_product_2.jpg",
+        "description": "Delicious custom dessert"
+    },
+    {
+        "image_url": "/static/images/facebook/fb_product_3.jpg",
+        "description": "Delicious custom dessert"
+    },
+    {
+        "image_url": "/static/images/facebook/fb_product_4.jpg",
+        "description": "Delicious custom dessert"
+    },
+    {
+        "image_url": "/static/images/facebook/fb_product_5.jpg",
+        "description": "Delicious custom dessert"
+    },
+    {
+        "image_url": "/static/images/facebook/fb_product_6.jpg",
+        "description": "Delicious custom dessert"
+    },
+    {
+        "image_url": "/static/images/facebook/fb_product_7.jpg",
+        "description": "Delicious custom dessert"
+    },
+    {
+        "image_url": "/static/images/facebook/fb_product_8.jpg",
+        "description": "Delicious custom dessert"
+    }
+]

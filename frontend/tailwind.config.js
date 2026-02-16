@@ -15,6 +15,7 @@ export default {
                     red: '#7b002c', // Deep Maroon/Red
                     gold: '#c5a059', // Gold/Beige
                     light: '#fdfbf7', // Off-white background
+                    accent: '#ffd700', // Bright Gold
                 }
             }
         },

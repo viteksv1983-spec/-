@@ -7,6 +7,7 @@
     --color-vatsak-red: #7b002c;
     --color-vatsak-gold: #c5a059;
     --color-vatsak-light: #fdfbf7;
+    --color-vatsak-accent: #ffd700;
 }
 
 @layer base {

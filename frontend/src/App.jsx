@@ -11,6 +11,7 @@ import Register from './components/Register';
 import Cart from './components/Cart';
 import Promotions from './components/Promotions';
 import Delivery from './components/Delivery';
+import Fillings from './components/Fillings';
 import Footer from './components/Footer';
 
 function App() {
@@ -30,6 +31,7 @@ function App() {
                 <Route path="/cart" element={<Cart />} />
                 <Route path="/promotions" element={<Promotions />} />
                 <Route path="/delivery" element={<Delivery />} />
+                <Route path="/fillings" element={<Fillings />} />
               </Routes>
             </main>
             <Footer />
