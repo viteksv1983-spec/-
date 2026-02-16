@@ -1,3 +1,9 @@
+import sys
+import os
+
+# Add project root to sys.path to resolve 'backend' package
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
 from sqlalchemy.orm import Session
 from backend import crud, models, schemas
 from backend.database import SessionLocal, engine
