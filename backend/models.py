@@ -1,6 +1,6 @@
 from sqlalchemy import Boolean, Column, ForeignKey, Integer, String, Float
 from sqlalchemy.orm import relationship
-from backend.database import Base
+from .database import Base
 
 class Cake(Base):
     __tablename__ = "cakes"
