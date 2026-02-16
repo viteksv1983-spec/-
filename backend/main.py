@@ -171,7 +171,7 @@ def read_orders(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
 def read_root():
     return {"message": "Welcome to Cake Shop API"}
 
-from . import seed
+from backend import seed
 
 @app.post("/seed_db")
 def seed_database():
