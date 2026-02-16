@@ -13,11 +13,11 @@ import os
 from pathlib import Path
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
-from . import crud
-from . import models
-from . import schemas
-from .database import SessionLocal, engine
-from . import auth
+from backend import crud
+from backend import models
+from backend import schemas
+from backend.database import SessionLocal, engine
+from backend import auth
 from jose import JWTError, jwt
 
 models.Base.metadata.create_all(bind=engine)
