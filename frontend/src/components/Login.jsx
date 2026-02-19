@@ -1,12 +1,14 @@
 import React, { useState, useContext } from 'react';
 import { AuthContext } from '../context/AuthContext';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
+import { GoogleLogin } from '@react-oauth/google';
 
 function Login() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const { login } = useContext(AuthContext);
+    const { login, loginWithGoogle } = useContext(AuthContext);
     const navigate = useNavigate();
+    const location = useLocation();
     const [error, setError] = useState('');
 
     const [isLoading, setIsLoading] = useState(false);
@@ -17,7 +19,8 @@ function Login() {
         setError('');
         try {
             await login(email, password);
-            navigate('/');
+            const redirectPath = location.state?.from || '/';
+            navigate(redirectPath);
         } catch (err) {
             setError('Невірний email або пароль. Будь ласка, спробуйте ще раз.');
         } finally {
@@ -33,9 +36,6 @@ function Login() {
                     <h2 className="mt-6 text-center text-4xl font-serif font-bold text-gray-900 tracking-tight">
                         Авторизація
                     </h2>
-                    <p className="mt-3 text-center text-sm text-gray-500 font-medium uppercase tracking-widest">
-                        Магазин Вацак
-                    </p>
                 </div>
                 {error && (
                     <div className="bg-red-50 border-l-4 border-vatsak-red p-4 mb-4 animate-pulse" role="alert">
@@ -45,14 +45,14 @@ function Login() {
                 <form className="mt-8 space-y-7" onSubmit={handleSubmit}>
                     <div className="space-y-5">
                         <div className="relative group">
-                            <label htmlFor="email-address" className="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-1 transition-colors group-focus-within:text-vatsak-gold">Електронна пошта</label>
+                            <label htmlFor="login-username" className="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-1 transition-colors group-focus-within:text-vatsak-gold">Логін або Email</label>
                             <input
-                                id="email-address"
-                                name="email"
-                                type="email"
+                                id="login-username"
+                                name="username"
+                                type="text"
                                 required
                                 className="appearance-none block w-full px-4 py-3 border-b-2 border-gray-200 bg-gray-50 text-gray-900 focus:outline-none focus:border-vatsak-gold transition-all sm:text-sm"
-                                placeholder="example@mail.com"
+                                placeholder="Ваш логін"
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
                             />
@@ -93,6 +93,28 @@ function Login() {
                                 </svg>
                             ) : 'Увійти'}
                         </button>
+                    </div>
+
+                    <div className="relative my-8">
+                        <div className="absolute inset-0 flex items-center">
+                            <div className="w-full border-t border-gray-200"></div>
+                        </div>
+                        <div className="relative flex justify-center text-xs uppercase tracking-widest font-bold">
+                            <span className="bg-white px-4 text-gray-500">Або за допомогою</span>
+                        </div>
+                    </div>
+
+                    <div className="flex justify-center">
+                        <GoogleLogin
+                            onSuccess={credentialResponse => {
+                                loginWithGoogle(credentialResponse.credential);
+                                const redirectPath = location.state?.from || '/';
+                                navigate(redirectPath);
+                            }}
+                            onError={() => {
+                                setError('Помилка авторизації через Google');
+                            }}
+                        />
                     </div>
 
                     <div className="mt-6 text-center">

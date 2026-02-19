@@ -1,8 +1,13 @@
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
 import { CartProvider } from './context/CartContext';
-import Navbar from './components/Navbar';
+
+// Layouts
+import PublicLayout from './components/PublicLayout';
+import AdminLayout from './components/admin/AdminLayout';
+import ProtectedRoute from './components/ProtectedRoute';
+
+// Public Components
 import Home from './components/Home';
 import CakeList from './components/CakeList';
 import CakeDetail from './components/CakeDetail';
@@ -12,30 +17,59 @@ import Cart from './components/Cart';
 import Promotions from './components/Promotions';
 import Delivery from './components/Delivery';
 import Fillings from './components/Fillings';
-import Footer from './components/Footer';
+import About from './components/About';
+import GalleryPhoto from './components/GalleryPhoto';
+import GalleryVideo from './components/GalleryVideo';
+import Reviews from './components/Reviews';
+import ScrollToTop from './components/ScrollToTop';
+import HolidayCakes from './components/HolidayCakes';
+import Blog from './components/Blog';
+
+// Admin Components
+import Orders from './components/admin/Orders';
+import Products from './components/admin/Products';
+import ProductEdit from './components/admin/ProductEdit';
+import PageEditor from './components/admin/PageEditor';
+import CategoryManager from './components/admin/CategoryManager';
+import SEOPages from './components/admin/SEOPages';
 
 function App() {
   return (
     <AuthProvider>
       <CartProvider>
         <Router>
-          <div className="min-h-screen flex flex-col bg-gray-50 font-sans text-gray-900">
-            <Navbar />
-            <main className="flex-grow">
-              <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/cakes" element={<CakeList />} />
-                <Route path="/cakes/:id" element={<CakeDetail />} />
-                <Route path="/login" element={<Login />} />
-                <Route path="/register" element={<Register />} />
-                <Route path="/cart" element={<Cart />} />
-                <Route path="/promotions" element={<Promotions />} />
-                <Route path="/delivery" element={<Delivery />} />
-                <Route path="/fillings" element={<Fillings />} />
-              </Routes>
-            </main>
-            <Footer />
-          </div>
+          <ScrollToTop />
+          <Routes>
+            <Route element={<PublicLayout />}>
+              <Route path="/" element={<Home />} />
+              <Route path="/cakes" element={<CakeList />} />
+              <Route path="/cakes/:id" element={<CakeDetail />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/register" element={<Register />} />
+              <Route path="/cart" element={<Cart />} />
+              <Route path="/promotions" element={<Promotions />} />
+              <Route path="/delivery" element={<Delivery />} />
+              <Route path="/holiday" element={<HolidayCakes />} />
+              <Route path="/fillings" element={<Fillings />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/gallery/photo" element={<GalleryPhoto />} />
+              <Route path="/gallery/video" element={<GalleryVideo />} />
+              <Route path="/reviews" element={<Reviews />} />
+              <Route path="/blog" element={<Blog />} />
+            </Route>
+
+            <Route element={<ProtectedRoute />}>
+              <Route path="/admin" element={<AdminLayout />}>
+                <Route index element={<Navigate to="orders" replace />} />
+                <Route path="orders" element={<Orders />} />
+                <Route path="products" element={<Products />} />
+                <Route path="products/new" element={<ProductEdit />} />
+                <Route path="products/edit/:id" element={<ProductEdit />} />
+                <Route path="seo" element={<PageEditor />} />
+                <Route path="categories" element={<CategoryManager />} />
+              </Route>
+            </Route>
+          </Routes>
         </Router>
       </CartProvider>
     </AuthProvider>

@@ -1,4 +1,5 @@
-from sqlalchemy import Boolean, Column, ForeignKey, Integer, String, Float
+from sqlalchemy import Boolean, Column, ForeignKey, Integer, String, Float, DateTime
+from sqlalchemy.sql import func
 from sqlalchemy.orm import relationship
 from backend.database import Base
 
@@ -16,6 +17,46 @@ class Cake(Base):
     shelf_life = Column(String, nullable=True)  # Термін придатності
     category = Column(String, nullable=True)  # Категорія (порційний, цілий, святковий)
 
+    # SEO Fields
+    meta_title = Column(String, nullable=True)
+    meta_description = Column(String, nullable=True)
+    meta_keywords = Column(String, nullable=True)
+    h1_heading = Column(String, nullable=True)
+    canonical_url = Column(String, nullable=True)
+    og_title = Column(String, nullable=True)
+    og_description = Column(String, nullable=True)
+    og_image = Column(String, nullable=True)
+    schema_json = Column(String, nullable=True)
+
+class Page(Base):
+    __tablename__ = "pages"
+
+    id = Column(Integer, primary_key=True, index=True)
+    route_path = Column(String, unique=True, index=True)  # e.g., "/", "/catalog"
+    name = Column(String)  # internal name, e.g., "Home Page"
+    
+    # SEO Fields
+    meta_title = Column(String, nullable=True)
+    meta_description = Column(String, nullable=True)
+    meta_keywords = Column(String, nullable=True)
+    h1_heading = Column(String, nullable=True)
+    canonical_url = Column(String, nullable=True)
+    og_title = Column(String, nullable=True)
+    og_description = Column(String, nullable=True)
+    og_image = Column(String, nullable=True)
+    schema_json = Column(String, nullable=True)
+    
+    content = Column(String, nullable=True)  # Rich text or JSON content
+    content_images = Column(String, nullable=True)  # JSON list of image URLs
+
+class CategoryMetadata(Base):
+    __tablename__ = "category_metadata"
+
+    id = Column(Integer, primary_key=True, index=True)
+    slug = Column(String, unique=True, index=True)
+    image_url = Column(String, nullable=True)
+    description = Column(String, nullable=True)
+
 class User(Base):
     __tablename__ = "users"
 
@@ -23,6 +64,7 @@ class User(Base):
     email = Column(String, unique=True, index=True)
     hashed_password = Column(String)
     is_active = Column(Boolean, default=True)
+    is_admin = Column(Boolean, default=False)
 
     orders = relationship("Order", back_populates="owner")
 
@@ -35,6 +77,9 @@ class Order(Base):
     customer_phone = Column(String, nullable=True)
     total_price = Column(Float)
     status = Column(String, default="pending")
+    created_at = Column(DateTime(timezone=True), default=func.now)
+    delivery_method = Column(String, nullable=True)  # "pickup" or "uklon"
+    delivery_date = Column(String, nullable=True)    # e.g., "2026-02-18"
 
     owner = relationship("User", back_populates="orders")
     items = relationship("OrderItem", back_populates="order")

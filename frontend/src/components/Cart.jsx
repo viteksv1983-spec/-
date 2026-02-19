@@ -11,35 +11,56 @@ function Cart() {
     const [isCheckingOut, setIsCheckingOut] = useState(false);
     const [error, setError] = useState('');
     const [isSuccess, setIsSuccess] = useState(false);
+    const [customerDetails, setCustomerDetails] = useState({
+        name: '',
+        phone: '',
+        deliveryDate: '', // Added for checkout flow
+        deliveryMethod: cartItems.length > 0 ? (cartItems[0].deliveryMethod || 'pickup') : 'pickup'
+    });
+
+    const handleDetailsChange = (e) => {
+        const { name, value } = e.target;
+        setCustomerDetails(prev => ({ ...prev, [name]: value }));
+    };
 
     const handleCheckout = async () => {
-        if (!user) {
-            navigate('/login');
+        if (cartItems.length === 0) return;
+
+        if (!customerDetails.name || !customerDetails.phone || !customerDetails.deliveryDate) {
+            setError('Будь ласка, вкажіть ваше ім\'я, номер телефону та бажану дату отримання.');
+            setIsCheckingOut(false);
             return;
         }
 
-        if (cartItems.length === 0) return;
-
-        setIsCheckingOut(true);
-        setError('');
-
         try {
+            const firstItem = cartItems[0];
             const orderData = {
+                customer_name: customerDetails.name,
+                customer_phone: customerDetails.phone,
+                delivery_method: customerDetails.deliveryMethod,
+                delivery_date: customerDetails.deliveryDate,
                 items: cartItems.map(item => ({
                     cake_id: item.id,
                     quantity: item.quantity,
-                    flavor: item.flavor
+                    flavor: item.flavor,
+                    weight: item.weight
                 }))
             };
 
-            await api.post('/orders/', orderData);
+            console.log("Submitting order:", orderData);
+            const response = await api.post('/orders/', orderData);
+            console.log("Order submitted successfully:", response.data);
 
             clearCart();
             setIsSuccess(true);
-            // Redirection logic can be handled or just show the success state.
         } catch (err) {
-            console.error("Checkout failed", err);
-            setError('Не вдалося оформити замовлення. Будь ласка, перевірте підключення та спробуйте ще раз.');
+            console.error("Checkout failed:", err);
+            if (err.response) {
+                console.error("Server responded with:", err.response.data);
+                setError(`Помилка сервера: ${JSON.stringify(err.response.data.detail || err.response.data)}`);
+            } else {
+                setError('Не вдалося оформити замовлення. Будь ласка, перевірте підключення та спробуйте ще раз.');
+            }
         } finally {
             setIsCheckingOut(false);
         }
@@ -97,7 +118,7 @@ function Cart() {
                                 <div className="h-24 w-24 flex-shrink-0 overflow-hidden border border-gray-200 bg-white shadow-sm rounded-xl">
                                     {item.image_url && (
                                         <img
-                                            src={item.image_url.startsWith('http') ? item.image_url : `http://localhost:8000${item.image_url}`}
+                                            src={item.image_url.startsWith('http') ? item.image_url : `${api.defaults.baseURL}${item.image_url}`}
                                             alt={item.name}
                                             className="h-full w-full object-cover object-center"
                                         />
@@ -128,14 +149,14 @@ function Cart() {
                                     </div>
                                     <div className="flex-1 flex items-end justify-between text-sm mt-4">
                                         <div className="flex items-center border border-gray-300 rounded-lg overflow-hidden">
-                                            <button onClick={() => updateQuantity(item.id, item.flavor, item.quantity - 1)} className="w-10 h-10 flex items-center justify-center hover:bg-gray-100 text-gray-600 font-bold text-lg transition-colors">-</button>
+                                            <button onClick={() => updateQuantity(item.id, item.flavor, item.weight, item.deliveryDate, item.deliveryMethod, item.quantity - 1)} className="w-10 h-10 flex items-center justify-center hover:bg-gray-100 text-gray-600 font-bold text-lg transition-colors">-</button>
                                             <span className="w-12 h-10 flex items-center justify-center font-bold text-gray-900 border-x border-gray-200 bg-gray-50/50">{item.quantity}</span>
-                                            <button onClick={() => updateQuantity(item.id, item.flavor, item.quantity + 1)} className="w-10 h-10 flex items-center justify-center hover:bg-gray-100 text-gray-600 font-bold text-lg transition-colors">+</button>
+                                            <button onClick={() => updateQuantity(item.id, item.flavor, item.weight, item.deliveryDate, item.deliveryMethod, item.quantity + 1)} className="w-10 h-10 flex items-center justify-center hover:bg-gray-100 text-gray-600 font-bold text-lg transition-colors">+</button>
                                         </div>
 
                                         <button
                                             type="button"
-                                            onClick={() => removeFromCart(item.id, item.flavor)}
+                                            onClick={() => removeFromCart(item.id, item.flavor, item.weight, item.deliveryDate, item.deliveryMethod)}
                                             className="font-bold text-gray-400 hover:text-vatsak-red transition-colors uppercase tracking-widest text-[10px] flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-red-50"
                                         >
                                             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
@@ -152,7 +173,64 @@ function Cart() {
                             <p className="uppercase tracking-wide font-bold text-lg">Підсумок</p>
                             <p className="text-3xl font-bold text-vatsak-red">{cartTotal.toFixed(2)} <span className="text-lg text-gray-500 font-normal">грн</span></p>
                         </div>
-                        <p className="mt-0.5 text-sm text-gray-500 mb-8">Доставка та податки розраховуються при оформленні замовлення.</p>
+                        <p className="mt-0.5 text-sm text-gray-500 mb-6">Доставка оплачується окремо за тарифами служби таксі.</p>
+
+                        <div className="space-y-4 mb-8">
+                            <div>
+                                <label className="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-2">Ваше Ім'я</label>
+                                <input
+                                    type="text"
+                                    name="name"
+                                    value={customerDetails.name}
+                                    onChange={handleDetailsChange}
+                                    placeholder="Введіть ваше ім'я"
+                                    className="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-vatsak-red focus:border-transparent transition-all outline-none text-gray-900 font-medium"
+                                />
+                            </div>
+                            <div>
+                                <label className="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-2">Ваш Телефон</label>
+                                <input
+                                    type="tel"
+                                    name="phone"
+                                    value={customerDetails.phone}
+                                    onChange={handleDetailsChange}
+                                    placeholder="+380..."
+                                    className="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-vatsak-red focus:border-transparent transition-all outline-none text-gray-900 font-medium"
+                                />
+                            </div>
+                            <div>
+                                <label className="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-2">Дата отримання</label>
+                                <input
+                                    type="date"
+                                    name="deliveryDate"
+                                    value={customerDetails.deliveryDate}
+                                    onChange={handleDetailsChange}
+                                    onClick={(e) => e.target.showPicker()}
+                                    min={new Date(Date.now() + 2 * 86400000).toISOString().split('T')[0]} // Min 2 days from now
+                                    className="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-vatsak-red focus:border-transparent transition-all outline-none text-gray-900 font-medium cursor-pointer"
+                                />
+                                <p className="text-[10px] text-gray-400 mt-1 italic">* Мінімальний термін замовлення — 2-3 дні</p>
+                            </div>
+
+                            <div>
+                                <label className="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-2">Спосіб отримання</label>
+                                <div className="relative">
+                                    <select
+                                        name="deliveryMethod"
+                                        value={customerDetails.deliveryMethod}
+                                        onChange={handleDetailsChange}
+                                        className="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-vatsak-red focus:border-transparent transition-all outline-none text-gray-900 font-medium appearance-none cursor-pointer"
+                                    >
+                                        <option value="pickup">🏪 Самовивіз</option>
+                                        <option value="uklon">🚕 Доставка Uklon</option>
+                                    </select>
+                                    <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-gray-400">
+                                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                         <button
                             onClick={handleCheckout}
                             disabled={isCheckingOut}

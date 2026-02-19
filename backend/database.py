@@ -9,7 +9,11 @@ load_dotenv()
 # Default to sqlite for local dev if Postgres is not provided yet, but user asked for Postgres.
 # We will assume a default or env var.
 # For now, put a placeholder or use sqlite for non-blocking dev.
-SQLALCHEMY_DATABASE_URL = os.getenv("DATABASE_URL", "sqlite:///./sql_app.db")
+# Use absolute path to ensure we always use the same DB file regardless of CWD
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+print(f"DEBUG: database.py BASE_DIR: {BASE_DIR}")
+SQLALCHEMY_DATABASE_URL = os.getenv("DATABASE_URL", f"sqlite:///{os.path.join(BASE_DIR, 'sql_app.db')}")
+print(f"DEBUG: Using DB URL: {SQLALCHEMY_DATABASE_URL}")
 # SQLALCHEMY_DATABASE_URL = "postgresql://user:password@postgresserver/db"
 if SQLALCHEMY_DATABASE_URL and SQLALCHEMY_DATABASE_URL.startswith("postgres://"):
     SQLALCHEMY_DATABASE_URL = SQLALCHEMY_DATABASE_URL.replace("postgres://", "postgresql://", 1)

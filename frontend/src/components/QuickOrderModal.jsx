@@ -1,13 +1,21 @@
 import React, { useState } from 'react';
 import api from '../api';
 
-const QuickOrderModal = ({ cake, isOpen, onClose }) => {
+const QuickOrderModal = ({
+    cake,
+    isOpen,
+    onClose,
+    deliveryDate,
+    deliveryMethod,
+    flavor,
+    weight
+}) => {
     const [name, setName] = useState('');
     const [phone, setPhone] = useState('');
     const [loading, setLoading] = useState(false);
     const [message, setMessage] = useState('');
 
-    if (!isOpen) return null;
+    if (!isOpen || !cake) return null;
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -19,9 +27,11 @@ const QuickOrderModal = ({ cake, isOpen, onClose }) => {
                 customer_name: name,
                 customer_phone: phone,
                 cake_id: cake.id,
-                quantity: 1, // Default to 1 for quick order
-                flavor: null, // Could be extended to pass selected flavor if available
-                weight: null
+                quantity: 1,
+                flavor: flavor || null,
+                weight: weight || null,
+                delivery_method: deliveryMethod || 'pickup',
+                delivery_date: deliveryDate || null
             });
             setMessage('Замовлення прийнято! Ми зв\'яжемося з вами найближчим часом.');
             setTimeout(() => {
@@ -32,7 +42,10 @@ const QuickOrderModal = ({ cake, isOpen, onClose }) => {
             }, 3000);
         } catch (error) {
             console.error("Error creating quick order:", error);
-            setMessage('Сталася помилка. Спробуйте ще раз.');
+            const errorMsg = error.response?.data?.detail
+                ? (typeof error.response.data.detail === 'string' ? error.response.data.detail : JSON.stringify(error.response.data.detail))
+                : 'Сталася помилка. Перевірте з\'єднання та спробуйте ще раз.';
+            setMessage(errorMsg);
         } finally {
             setLoading(false);
         }
@@ -40,61 +53,84 @@ const QuickOrderModal = ({ cake, isOpen, onClose }) => {
 
     return (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
-            <div className="bg-white p-6 rounded-lg shadow-xl max-w-sm w-full mx-4 relative">
+            <div className="bg-white p-6 rounded-lg shadow-xl max-w-sm w-full mx-4 relative transform animate-fade-in">
                 <button
                     onClick={onClose}
-                    className="absolute top-2 right-2 text-gray-500 hover:text-gray-700 font-bold text-xl"
+                    className="absolute top-2 right-2 text-gray-500 hover:text-gray-700 font-bold text-xl h-8 w-8 flex items-center justify-center rounded-full hover:bg-gray-100 transition-colors"
                 >
                     &times;
                 </button>
-                <h2 className="text-2xl font-bold mb-4 text-center text-gray-800">Замовлення в 1 клік</h2>
-                <p className="text-sm text-gray-600 mb-4 text-center">
-                    Залиште свої контакти і ми зателефонуємо вам для уточнення деталей замовлення: <span className="font-semibold">{cake.name}</span>
-                </p>
+                <div className="text-center mb-6">
+                    <div className="w-16 h-16 bg-green-50 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <svg className="w-8 h-8 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
+                        </svg>
+                    </div>
+                    <h2 className="text-2xl font-bold text-gray-800">Швидке замовлення</h2>
+                    <p className="text-xs text-gray-500 mt-2">
+                        Залиште свої контакти і ми зателефонуємо вам для підтвердження: <br />
+                        <span className="font-bold text-gray-700">{cake?.name}</span>
+                    </p>
+                    {(deliveryDate || flavor || weight) && (
+                        <div className="mt-3 flex flex-wrap justify-center gap-1">
+                            {deliveryDate && <span className="text-[9px] bg-amber-50 text-amber-700 px-2 py-0.5 rounded border border-amber-100">📅 {deliveryDate}</span>}
+                            {deliveryMethod === 'uklon' && <span className="text-[9px] bg-blue-50 text-blue-700 px-2 py-0.5 rounded border border-blue-100">🚕 Доставка</span>}
+                            {flavor && <span className="text-[9px] bg-red-50 text-red-700 px-2 py-0.5 rounded border border-red-100">🍰 {flavor}</span>}
+                            {weight && <span className="text-[9px] bg-gray-50 text-gray-700 px-2 py-0.5 rounded border border-gray-200">⚖️ {weight} кг</span>}
+                        </div>
+                    )}
+                </div>
 
                 {message ? (
-                    <div className={`text-center p-3 rounded mb-4 ${message.includes('помилка') ? 'bg-red-100 text-red-700' : 'bg-green-100 text-green-700'}`}>
+                    <div className={`text-center p-4 rounded-xl mb-4 text-sm font-medium ${message.includes('помилка') ? 'bg-red-50 text-red-700 border border-red-100' : 'bg-green-50 text-green-700 border border-green-100'}`}>
                         {message}
                     </div>
                 ) : (
                     <form onSubmit={handleSubmit} className="space-y-4">
                         <div>
-                            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="name">
-                                Ім'я
+                            <label className="block text-gray-700 text-[10px] font-bold uppercase tracking-widest mb-1.5" htmlFor="name">
+                                Ваше Ім'я
                             </label>
                             <input
-                                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm text-gray-800 focus:outline-none focus:ring-2 focus:ring-green-500/20 focus:border-green-500 transition-all"
                                 id="name"
                                 type="text"
-                                placeholder="Ваше ім'я"
+                                placeholder="Олександр"
                                 value={name}
                                 onChange={(e) => setName(e.target.value)}
                                 required
                             />
                         </div>
                         <div>
-                            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="phone">
-                                Телефон
+                            <label className="block text-gray-700 text-[10px] font-bold uppercase tracking-widest mb-1.5" htmlFor="phone">
+                                Номер телефону
                             </label>
                             <input
-                                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm text-gray-800 focus:outline-none focus:ring-2 focus:ring-green-500/20 focus:border-green-500 transition-all"
                                 id="phone"
                                 type="tel"
-                                placeholder="+380..."
+                                placeholder="+38 (___) ___ __ __"
                                 value={phone}
                                 onChange={(e) => setPhone(e.target.value)}
                                 required
                             />
                         </div>
-                        <div className="flex justify-center">
-                            <button
-                                className={`bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full transition duration-300 ${loading ? 'opacity-50 cursor-not-allowed' : ''}`}
-                                type="submit"
-                                disabled={loading}
-                            >
-                                {loading ? 'Відправка...' : 'Замовити'}
-                            </button>
-                        </div>
+
+                        <button
+                            className={`w-full bg-green-500 hover:bg-green-600 text-white font-bold py-4 rounded-xl shadow-lg shadow-green-200 transition-all active:scale-95 flex items-center justify-center gap-2 ${loading ? 'opacity-50 cursor-not-allowed' : ''}`}
+                            type="submit"
+                            disabled={loading}
+                        >
+                            {loading ? (
+                                <>
+                                    <svg className="animate-spin h-5 w-5 text-white" fill="none" viewBox="0 0 24 24">
+                                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                    </svg>
+                                    Оформлення...
+                                </>
+                            ) : 'Підтвердити замовлення'}
+                        </button>
                     </form>
                 )}
             </div>

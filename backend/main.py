@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Optional
 import sys
 import os
 
@@ -24,6 +24,37 @@ models.Base.metadata.create_all(bind=engine)
 
 app = FastAPI(title="Cake Shop API", description="API for checking and ordering cakes", version="0.1.0")
 
+# Populate SEO pages on startup
+@app.on_event("startup")
+async def startup_event():
+    db = SessionLocal()
+    try:
+        default_pages = [
+            {"route_path": "/", "name": "Головна сторінка"},
+            {"route_path": "/cakes", "name": "Каталог (Всі торти)"},
+            {"route_path": "/cakes?category=bento", "name": "Категорія: Бенто тортики"},
+            {"route_path": "/cakes?category=biscuit", "name": "Категорія: Бісквітні торти"},
+            {"route_path": "/cakes?category=wedding", "name": "Категорія: Весільні торти"},
+            {"route_path": "/cakes?category=mousse", "name": "Категорія: Мусові торти"},
+            {"route_path": "/cakes?category=cupcakes", "name": "Категорія: Капкейки"},
+            {"route_path": "/cakes?category=gingerbread", "name": "Категорія: Імбирні пряники"},
+            {"route_path": "/fillings", "name": "Начинки"},
+            {"route_path": "/delivery", "name": "Доставка та оплата"},
+            {"route_path": "/about", "name": "Про нас"},
+            {"route_path": "/gallery/photo", "name": "Фотогалерея"},
+            {"route_path": "/gallery/video", "name": "Відеогалерея"},
+            {"route_path": "/cart", "name": "Кошик"},
+            {"route_path": "/login", "name": "Вхід"},
+            {"route_path": "/register", "name": "Реєстрація"},
+        ]
+        for p in default_pages:
+            existing = crud.get_page_by_route(db, p["route_path"])
+            if not existing:
+                crud.create_page(db, schemas.PageCreate(**p))
+        db.commit()
+    finally:
+        db.close()
+
 # CORS setup to allow frontend connection
 # For production, you might want to restrict this to your specific frontend domain.
 # But for initial deployment debugging, allowing all is often easier.
@@ -37,19 +68,19 @@ origins = [
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"], # Allow all origins explicitly
-    allow_credentials=True,
+    allow_origins=["*"],
+    allow_credentials=False, # Must be False if allow_origins is ["*"]
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
 # Static files configuration
 STATIC_DIR = Path(__file__).parent / "static"
-print(f"[DEBUG] Static files directory: {STATIC_DIR}")
-print(f"[DEBUG] Static directory exists: {STATIC_DIR.exists()}")
-if STATIC_DIR.exists():
-    print(f"[DEBUG] Files in static: {list(STATIC_DIR.iterdir())}")
+MEDIA_DIR = Path(__file__).parent / "media"
+MEDIA_DIR.mkdir(parents=True, exist_ok=True)
+
 app.mount("/static", StaticFiles(directory=str(STATIC_DIR)), name="static")
+app.mount("/media", StaticFiles(directory=str(MEDIA_DIR)), name="media")
 
 
 # Dependency
@@ -65,6 +96,7 @@ from datetime import timedelta
 
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
+oauth2_scheme_optional = OAuth2PasswordBearer(tokenUrl="token", auto_error=False)
 
 def get_current_user(token: str = Depends(oauth2_scheme), db: Session = Depends(get_db)):
     credentials_exception = HTTPException(
@@ -85,8 +117,21 @@ def get_current_user(token: str = Depends(oauth2_scheme), db: Session = Depends(
         raise credentials_exception
     return user
 
+def get_optional_current_user(token: Optional[str] = Depends(oauth2_scheme_optional), db: Session = Depends(get_db)):
+    if not token:
+        return None
+    try:
+        payload = jwt.decode(token, auth.SECRET_KEY, algorithms=[auth.ALGORITHM])
+        email: str = payload.get("sub")
+        if email is None:
+            return None
+        user = crud.get_user_by_email(db, email=email)
+        return user
+    except JWTError:
+        return None
+
 @app.post("/token", response_model=schemas.Token)
-async def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends(), db: Session = Depends(get_db)):
+def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends(), db: Session = Depends(get_db)):
     user = crud.get_user_by_email(db, email=form_data.username)
     if not user or not auth.verify_password(form_data.password, user.hashed_password):
         raise HTTPException(
@@ -94,6 +139,27 @@ async def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends(
             detail="Incorrect username or password",
             headers={"WWW-Authenticate": "Bearer"},
         )
+    access_token_expires = timedelta(minutes=auth.ACCESS_TOKEN_EXPIRE_MINUTES)
+    access_token = auth.create_access_token(
+        data={"sub": user.email}, expires_delta=access_token_expires
+    )
+    return {"access_token": access_token, "token_type": "bearer"}
+
+@app.post("/auth/google")
+async def google_auth(token: str, db: Session = Depends(get_db)):
+    idinfo = auth.verify_google_token(token)
+    if not idinfo:
+        raise HTTPException(status_code=400, detail="Invalid Google token")
+    
+    email = idinfo['email']
+    user = crud.get_user_by_email(db, email=email)
+    
+    if not user:
+        # Create user if doesn't exist
+        # Password will be random/unused for Google users
+        user_in = schemas.UserCreate(email=email, password=str(uuid.uuid4()))
+        user = crud.create_user(db, user_in)
+    
     access_token_expires = timedelta(minutes=auth.ACCESS_TOKEN_EXPIRE_MINUTES)
     access_token = auth.create_access_token(
         data={"sub": user.email}, expires_delta=access_token_expires
@@ -108,31 +174,17 @@ def create_user(user: schemas.UserCreate, db: Session = Depends(get_db)):
     return crud.create_user(db=db, user=user)
 
 @app.get("/users/me/", response_model=schemas.User)
-async def read_users_me(current_user: schemas.User = Depends(get_current_user)):
+async def read_users_me(current_user: models.User = Depends(get_current_user)):
     return current_user
 
-@app.post("/upload/")
-async def upload_image(file: UploadFile = File(...)):
-    # Create directory if not exists (redundant if we did it, but safe)
-    os.makedirs("static/images", exist_ok=True)
-    
-    # Generate unique filename
-    file_extension = file.filename.split(".")[-1]
-    unique_filename = f"{uuid.uuid4()}.{file_extension}"
-    file_path = f"static/images/{unique_filename}"
-    
-    with open(file_path, "wb") as buffer:
-        shutil.copyfileobj(file.file, buffer)
-        
-    return {"url": f"/static/images/{unique_filename}"}
 
 @app.post("/cakes/", response_model=schemas.Cake)
 def create_cake(cake: schemas.CakeCreate, db: Session = Depends(get_db)):
     return crud.create_cake(db=db, cake=cake)
 
 @app.get("/cakes/", response_model=List[schemas.Cake])
-def read_cakes(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
-    cakes = crud.get_cakes(db, skip=skip, limit=limit)
+def read_cakes(skip: int = 0, limit: int = 100, category: Optional[str] = None, db: Session = Depends(get_db)):
+    cakes = crud.get_cakes(db, skip=skip, limit=limit, category=category)
     return cakes
 
 @app.get("/cakes/{cake_id}", response_model=schemas.Cake)
@@ -142,25 +194,136 @@ def read_cake(cake_id: int, db: Session = Depends(get_db)):
         raise HTTPException(status_code=404, detail="Cake not found")
     return db_cake
 
+
+# Validating requests installation
+import requests
+
+# Telegram Configuration
+TELEGRAM_BOT_TOKEN = "7564033230:AAHiF7g4aXN-T0d-XJqP9QzC6YI5WqX9n90" # TODO: Move to env vars
+TELEGRAM_CHAT_ID = "-4758367634" # TODO: Move to env vars
+
+def send_telegram_notification(message: str):
+    try:
+        url = f"https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}/sendMessage"
+        data = {"chat_id": TELEGRAM_CHAT_ID, "text": message, "parse_mode": "HTML"}
+        requests.post(url, json=data, timeout=5)
+    except Exception as e:
+        print(f"Failed to send Telegram notification: {e}")
+
 @app.post("/orders/", response_model=schemas.Order)
-def create_order(order: schemas.OrderCreate, db: Session = Depends(get_db), current_user: schemas.User = Depends(get_current_user)):
-    # Override user_id from auth token to ensure security
-    # We need to modify schemas.OrderCreate or handle it here.
-    # The schema OrderCreate expects user_id. 
-    # Let's override it in the crud call or modify the schema object.
-    # Better: create a new object or modify the existing one.
-    # Since Pydantic models are immutable by default (in v2? or just good practice), we might need to be careful.
-    # But wait, schemas.OrderCreate probably has user_id.
-    # We should actually remove user_id from OrderCreate if it's inferred from token, OR overwrite it.
-    # For now, let's overwrite it in the logic.
-    order.user_id = current_user.id
-    return crud.create_order(db=db, order=order)
+def create_order(order: schemas.OrderCreate, db: Session = Depends(get_db), current_user: Optional[models.User] = Depends(get_optional_current_user)):
+    # Override user_id from auth token if available
+    user_id = current_user.id if current_user else None
+    
+    # Creating order
+    db_order = crud.create_order(db=db, order=order, user_id=user_id)
+    
+    # Send Telegram Notification
+    msg = f"<b>Нове замовлення! (Кошик)</b>\n"
+    msg += f"Сума: {db_order.total_price} грн\n"
+    msg += f"Ім'я: {order.customer_name}\n"
+    msg += f"Телефон: {order.customer_phone}\n"
+    if current_user:
+        msg += f"Клієнт (Email): {current_user.email}\n"
+    else:
+        msg += f"Тип: Гостьове замовлення\n"
+    
+    send_telegram_notification(msg)
+    
+    return db_order
 
+@app.patch("/orders/{order_id}/status", response_model=schemas.Order)
+def update_order_status(order_id: int, status_update: dict, db: Session = Depends(get_db), current_user: models.User = Depends(get_current_user)):
+    status = status_update.get("status")
+    if not status:
+        raise HTTPException(status_code=400, detail="Status is required")
+    
+    db_order = crud.update_order_status(db, order_id=order_id, status=status)
+    if not db_order:
+        raise HTTPException(status_code=404, detail="Order not found")
+    return db_order
 
+@app.get("/orders/", response_model=List[schemas.Order])
+def read_orders(status: Optional[str] = None, skip: int = 0, limit: int = 100, db: Session = Depends(get_db), current_user: models.User = Depends(get_current_user)):
+    orders = crud.get_orders(db, skip=skip, limit=limit, status=status)
+    return orders
 
 @app.post("/orders/quick", response_model=schemas.Order)
 def create_quick_order(order: schemas.QuickOrderCreate, db: Session = Depends(get_db)):
-    return crud.create_quick_order(db=db, order=order)
+    db_order = crud.create_quick_order(db=db, order=order)
+    if not db_order:
+        raise HTTPException(status_code=404, detail="Cake not found")
+    
+    # Send Telegram Notification
+    cake = crud.get_cake(db, order.cake_id)
+    cake_name = cake.name if cake else "Unknown Cake"
+    
+    msg = f"<b>Нове замовлення! (В 1 клік)</b>\n"
+    msg += f"Товар: {cake_name}\n"
+    msg += f"Ім'я: {order.customer_name}\n"
+    msg += f"Телефон: {order.customer_phone}\n"
+    msg += f"Кількість: {order.quantity}\n"
+    if order.weight:
+        msg += f"Вага: {order.weight} кг\n"
+    if order.flavor:
+        msg += f"Начинка: {order.flavor}\n"
+    msg += f"Сума: {db_order.total_price} грн\n"
+        
+    send_telegram_notification(msg)
+    
+    return db_order
+
+# --- Admin / SEO Endpoints ---
+
+@app.patch("/cakes/{cake_id}", response_model=schemas.Cake)
+def update_cake(cake_id: int, cake: schemas.CakeUpdate, db: Session = Depends(get_db), current_user: schemas.User = Depends(get_current_user)):
+    # TODO: Check if user is admin
+    db_cake = crud.update_cake(db, cake_id=cake_id, cake=cake)
+    if not db_cake:
+         raise HTTPException(status_code=404, detail="Cake not found")
+    return db_cake
+
+# Pages
+@app.get("/admin/pages", response_model=List[schemas.Page])
+def read_pages(skip: int = 0, limit: int = 100, db: Session = Depends(get_db), current_user: schemas.User = Depends(get_current_user)):
+    return crud.get_pages(db, skip=skip, limit=limit)
+
+@app.post("/admin/pages", response_model=schemas.Page)
+def create_page(page: schemas.PageCreate, db: Session = Depends(get_db), current_user: schemas.User = Depends(get_current_user)):
+    return crud.create_page(db=db, page=page)
+
+@app.patch("/admin/pages/{page_id}", response_model=schemas.Page)
+def update_page(page_id: int, page: schemas.PageUpdate, db: Session = Depends(get_db), current_user: schemas.User = Depends(get_current_user)):
+    db_page = crud.update_page(db, page_id=page_id, page=page)
+    if not db_page:
+        raise HTTPException(status_code=404, detail="Page not found")
+    return db_page
+
+# Category Metadata
+@app.get("/admin/categories/metadata", response_model=List[schemas.CategoryMetadata])
+def read_all_category_metadata(db: Session = Depends(get_db)):
+    return crud.get_all_category_metadata(db)
+
+@app.get("/admin/categories/metadata/{slug}", response_model=Optional[schemas.CategoryMetadata])
+def read_category_metadata(slug: str, db: Session = Depends(get_db)):
+    return crud.get_category_metadata(db, slug=slug)
+
+@app.patch("/admin/categories/metadata/{slug}", response_model=schemas.CategoryMetadata)
+def update_category_metadata(slug: str, metadata: schemas.CategoryMetadataUpdate, db: Session = Depends(get_db), current_user: schemas.User = Depends(get_current_user)):
+    return crud.update_category_metadata(db, slug=slug, metadata=metadata)
+
+@app.get("/api/seo/{route_path:path}") # :path to catch full routes including slashes
+def get_seo(route_path: str, db: Session = Depends(get_db)):
+    # Ensure route_path starts with / if not provided
+    if not route_path.startswith("/"):
+        route_path = "/" + route_path
+        
+    page = crud.get_page_by_route(db, route_path)
+    if not page:
+         # Return default or 404? 
+         # Better to return empty/default structure so frontend doesn't crash
+         return {} 
+    return page
 
 @app.get("/orders/", response_model=List[schemas.Order])
 def read_orders(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
@@ -181,6 +344,21 @@ def seed_database():
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
+@app.post("/admin/upload")
+def upload_image(file: UploadFile = File(...), current_user: schemas.User = Depends(get_current_user)):
+    file_extension = file.filename.split('.')[-1]
+    file_name = f"{uuid.uuid4()}.{file_extension}"
+    file_path = MEDIA_DIR / file_name
+    
+    with file_path.open("wb") as buffer:
+        shutil.copyfileobj(file.file, buffer)
+        
+    return {"image_url": f"/media/{file_name}"}
+
 @app.get("/health")
 def health_check():
     return {"status": "ok"}
+
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run(app, host="0.0.0.0", port=8000)

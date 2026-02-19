@@ -23,17 +23,15 @@ function Fillings() {
                             key={index}
                             className="bg-white rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 group flex flex-col h-full border border-gray-100"
                         >
+
                             <div className="relative h-64 overflow-hidden">
                                 <img
                                     src={filling.image}
                                     alt={filling.name}
-                                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                                    onError={(e) => { e.target.src = 'https://placehold.co/600x400?text=Antreme+Filling'; }}
                                 />
-                                <div className="absolute bottom-4 left-6">
-                                    <span className="bg-white/90 backdrop-blur-sm text-[#5a0020] px-4 py-1 rounded-full text-xs font-bold uppercase tracking-widest shadow-lg">
-                                        Premium
-                                    </span>
-                                </div>
+                                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
                             </div>
 
                             <div className="p-8 flex flex-col flex-grow">

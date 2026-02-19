@@ -17,30 +17,51 @@ export const CartProvider = ({ children }) => {
         localStorage.setItem('cart', JSON.stringify(cartItems));
     }, [cartItems]);
 
-    const addToCart = (cake, quantity = 1, flavor = null, weight = null) => {
+    const addToCart = (cake, quantity = 1, flavor = null, weight = null, deliveryDate = null, deliveryMethod = 'pickup') => {
+        const finalWeight = weight !== null ? weight : cake.weight;
         setCartItems(prevItems => {
-            const existingItem = prevItems.find(item => item.id === cake.id && item.flavor === flavor && item.weight === weight);
+            const existingItem = prevItems.find(item =>
+                item.id === cake.id &&
+                item.flavor === flavor &&
+                item.weight === finalWeight &&
+                item.deliveryDate === deliveryDate &&
+                item.deliveryMethod === deliveryMethod
+            );
             if (existingItem) {
                 return prevItems.map(item =>
-                    (item.id === cake.id && item.flavor === flavor && item.weight === weight)
+                    (item.id === cake.id &&
+                        item.flavor === flavor &&
+                        item.weight === finalWeight &&
+                        item.deliveryDate === deliveryDate &&
+                        item.deliveryMethod === deliveryMethod)
                         ? { ...item, quantity: item.quantity + quantity }
                         : item
                 );
             } else {
-                return [...prevItems, { ...cake, quantity, flavor, weight }];
+                return [...prevItems, { ...cake, quantity, flavor, weight: finalWeight, deliveryDate, deliveryMethod }];
             }
         });
     };
 
-    const removeFromCart = (cakeId, flavor = null, weight = null) => {
-        setCartItems(prevItems => prevItems.filter(item => !(item.id === cakeId && item.flavor === flavor && item.weight === weight)));
+    const removeFromCart = (cakeId, flavor = null, weight = null, deliveryDate = null, deliveryMethod = null) => {
+        setCartItems(prevItems => prevItems.filter(item =>
+            !(item.id === cakeId &&
+                item.flavor === flavor &&
+                item.weight === weight &&
+                item.deliveryDate === deliveryDate &&
+                item.deliveryMethod === deliveryMethod)
+        ));
     };
 
-    const updateQuantity = (cakeId, flavor = null, weight = null, quantity) => {
+    const updateQuantity = (cakeId, flavor = null, weight = null, deliveryDate = null, deliveryMethod = null, quantity) => {
         if (quantity < 1) return;
         setCartItems(prevItems =>
             prevItems.map(item =>
-                (item.id === cakeId && item.flavor === flavor && item.weight === weight) ? { ...item, quantity: quantity } : item
+                (item.id === cakeId &&
+                    item.flavor === flavor &&
+                    item.weight === weight &&
+                    item.deliveryDate === deliveryDate &&
+                    item.deliveryMethod === deliveryMethod) ? { ...item, quantity: quantity } : item
             )
         );
     };

@@ -3,17 +3,19 @@ import api from '../api';
 
 export const AuthContext = createContext();
 
+export const useAuth = () => React.useContext(AuthContext);
+
 export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [token, setToken] = useState(localStorage.getItem('token'));
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
+        setLoading(true);
         if (token) {
             // Set token in header
             api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-            // Fetch user details locally or from API if needed. 
-            // For now, let's try to get current user from API to validate token
+            // Fetch user details from API to validate token
             api.get('/users/me/')
                 .then(response => {
                     setUser(response.data);
@@ -26,6 +28,7 @@ export const AuthProvider = ({ children }) => {
                 });
         } else {
             delete api.defaults.headers.common['Authorization'];
+            setUser(null);
             setLoading(false);
         }
     }, [token]);
@@ -48,14 +51,26 @@ export const AuthProvider = ({ children }) => {
     };
 
     const logout = () => {
+        console.log("Logging out...");
         localStorage.removeItem('token');
         setToken(null);
         setUser(null);
         delete api.defaults.headers.common['Authorization'];
+        // Using window.location to force a full refresh and ensure all states are reset
+        window.location.href = '/';
+    };
+
+    const loginWithGoogle = async (googleToken) => {
+        const response = await api.post('/auth/google', null, {
+            params: { token: googleToken }
+        });
+        const accessToken = response.data.access_token;
+        localStorage.setItem('token', accessToken);
+        setToken(accessToken);
     };
 
     return (
-        <AuthContext.Provider value={{ user, token, login, register, logout, loading }}>
+        <AuthContext.Provider value={{ user, token, login, register, logout, loading, loginWithGoogle }}>
             {children}
         </AuthContext.Provider>
     );
