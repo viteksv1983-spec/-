@@ -53,41 +53,64 @@ function Home() {
 
     return (
         <div className="min-h-screen bg-[#FDFCF9]">
-            {/* New Hero Section - Banner Image based - Beautiful & Fixed Side Gaps */}
-            <div className="w-full pt-6 md:pt-10 mb-6 px-4 md:px-8">
-                <div className="mx-auto max-w-[1400px] relative w-full aspect-[16/9] md:aspect-[2.4/1] overflow-hidden rounded-[2.5rem] md:rounded-[3.5rem] shadow-[0_20px_60px_rgba(0,0,0,0.12)]">
-                    {/* The Image */}
-                    <img
-                        src={bannerImg}
-                        alt="Антреме - Торти на замовлення"
-                        className="w-full h-full object-cover object-center transition-opacity duration-1000 scale-[1.03]"
-                        style={{ opacity: isVisible ? 1 : 0 }}
-                    />
+            {/* Premium Hero Section - Redesigned 2026 */}
+            <div className="w-full pt-6 md:pt-10 mb-10 px-4 md:px-8">
+                <div className="mx-auto max-w-[1400px] relative overflow-hidden rounded-[2.5rem] md:rounded-[4rem] shadow-[0_30px_70px_rgba(0,0,0,0.2)] bg-gradient-to-br from-[#4a0404] via-[#7b002c] to-[#4a0404]">
+                    {/* Decorative Elements */}
+                    <div className="absolute top-0 right-0 w-1/2 h-full bg-white/5 skew-x-[-15deg] translate-x-1/2 pointer-events-none"></div>
 
-                    {/* Functional Overlay - Buttons positioned over the banner's visual buttons */}
-                    <div className="absolute inset-0 flex items-end pb-[12%] sm:pb-[10%] md:pb-[8%] lg:pb-[7%] pl-[7%] md:pl-[9%] lg:pl-[12%]">
-                        <div className="flex flex-row gap-2.5 md:gap-5 lg:gap-7 pointer-events-auto">
-                            {/* Overlay Button 1: Переглянути каталог */}
-                            <Link
-                                to="/cakes"
-                                className="w-[110px] sm:w-[150px] md:w-[190px] lg:w-[230px] aspect-[2.9/1] bg-transparent hover:bg-black/5 transition-colors rounded-xl md:rounded-2xl cursor-pointer"
-                                title="Переглянути каталог"
-                            />
+                    <div className="container mx-auto px-8 md:px-16 py-12 md:py-20">
+                        <div className="flex flex-col lg:flex-row items-center justify-between gap-12">
+                            {/* Left Text Block */}
+                            <div className="lg:w-1/2 text-center lg:text-left z-10 animate-fade-in">
+                                <h1 className="text-4xl md:text-6xl lg:text-7xl font-black text-white leading-tight mb-4 uppercase tracking-tighter" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                                    Торти на замовлення <br />
+                                    в Києві —
+                                </h1>
+                                <div className="text-vatsak-gold text-lg md:text-2xl font-bold mb-6 tracking-widest uppercase italic" style={{ fontFamily: "'Dancing Script', cursive" }}>
+                                    Кондитерська майстерня Antreme
+                                </div>
+                                <p className="text-pink-100 text-base md:text-xl mb-10 leading-relaxed max-w-xl mx-auto lg:mx-0 opacity-90">
+                                    Авторські торти ручної роботи з натуральних інгредієнтів. <br />
+                                    Створюємо індивідуальний дизайн для вашого свята. <br />
+                                    Доставка по Києву в день замовлення.
+                                </p>
 
-                            {/* Overlay Button 2: Замовити торт */}
-                            <button
-                                onClick={handleQuickOrderDefault}
-                                className="w-[110px] sm:w-[150px] md:w-[190px] lg:w-[230px] aspect-[2.9/1] bg-transparent hover:bg-white/10 transition-colors rounded-xl md:rounded-2xl cursor-pointer"
-                                title="Замовити торт"
-                            />
+                                <div className="flex flex-col sm:flex-row gap-5 justify-center lg:justify-start">
+                                    <Link
+                                        to="/cakes"
+                                        className="px-10 py-5 bg-[#7b002c] hover:bg-[#5a0020] text-white font-bold uppercase tracking-widest text-sm rounded-[50px] transition-all shadow-xl hover:shadow-[#7b002c]/30 transform hover:-translate-y-1 active:scale-95 border border-white/10"
+                                    >
+                                        Переглянути каталог
+                                    </Link>
+                                    <button
+                                        onClick={handleQuickOrderDefault}
+                                        className="px-10 py-5 bg-[#ffcc00] hover:bg-[#ffdb4d] text-gray-900 font-bold uppercase tracking-widest text-sm rounded-[50px] transition-all shadow-xl hover:shadow-[#ffcc00]/30 transform hover:-translate-y-1 active:scale-95"
+                                    >
+                                        Замовити торт
+                                    </button>
+                                </div>
+                            </div>
+
+                            {/* Right Image Block */}
+                            <div className="lg:w-1/2 relative z-10 animate-fade-in-delayed">
+                                <div className="relative group">
+                                    {/* Image Container with Glow */}
+                                    <div className="absolute -inset-10 bg-vatsak-gold/10 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition duration-1000"></div>
+                                    <img
+                                        src={new URL('../assets/cake-optimized-1600.webp', import.meta.url).href}
+                                        alt="Преміальний торт Antreme"
+                                        className="w-full h-auto max-w-[600px] mx-auto drop-shadow-[0_25px_40px_rgba(0,0,0,0.5)] transform transition-transform duration-700 hover:scale-105"
+                                        style={{ filter: 'contrast(1.05) saturate(1.1)' }}
+                                        onError={(e) => {
+                                            e.target.onerror = null;
+                                            e.target.src = bannerImg; // Fallback to current banner if new image not found
+                                            e.target.className = "w-full h-full object-cover rounded-3xl opacity-50";
+                                        }}
+                                    />
+                                </div>
+                            </div>
                         </div>
-                    </div>
-
-                    {/* SEO Hidden Headings */}
-                    <div className="sr-only">
-                        <h2>Кондитерська майстерня Antreme</h2>
-                        <h1>Торти на замовлення в Києві з доставкою</h1>
-                        <p>Авторські торти ручної роботи з натуральних інгредієнтів. Індивідуальний дизайн, 6000 виконаних замовлень. Доставка по Києву у зручний для вас час.</p>
                     </div>
                 </div>
             </div>
