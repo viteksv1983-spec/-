@@ -18,40 +18,20 @@ from backend import models
 from backend import schemas
 from backend.database import SessionLocal, engine
 from backend import auth
+from backend import auto_seed
 from jose import JWTError, jwt
 
 models.Base.metadata.create_all(bind=engine)
 
 app = FastAPI(title="Cake Shop API", description="API for checking and ordering cakes", version="0.1.0")
 
-# Populate SEO pages on startup
+# Populate database with mock data on startup if empty
 @app.on_event("startup")
 async def startup_event():
     db = SessionLocal()
     try:
-        default_pages = [
-            {"route_path": "/", "name": "Головна сторінка"},
-            {"route_path": "/cakes", "name": "Каталог (Всі торти)"},
-            {"route_path": "/cakes?category=bento", "name": "Категорія: Бенто тортики"},
-            {"route_path": "/cakes?category=biscuit", "name": "Категорія: Бісквітні торти"},
-            {"route_path": "/cakes?category=wedding", "name": "Категорія: Весільні торти"},
-            {"route_path": "/cakes?category=mousse", "name": "Категорія: Мусові торти"},
-            {"route_path": "/cakes?category=cupcakes", "name": "Категорія: Капкейки"},
-            {"route_path": "/cakes?category=gingerbread", "name": "Категорія: Імбирні пряники"},
-            {"route_path": "/fillings", "name": "Начинки"},
-            {"route_path": "/delivery", "name": "Доставка та оплата"},
-            {"route_path": "/about", "name": "Про нас"},
-            {"route_path": "/gallery/photo", "name": "Фотогалерея"},
-            {"route_path": "/gallery/video", "name": "Відеогалерея"},
-            {"route_path": "/cart", "name": "Кошик"},
-            {"route_path": "/login", "name": "Вхід"},
-            {"route_path": "/register", "name": "Реєстрація"},
-        ]
-        for p in default_pages:
-            existing = crud.get_page_by_route(db, p["route_path"])
-            if not existing:
-                crud.create_page(db, schemas.PageCreate(**p))
-        db.commit()
+        # Auto-seed cakes, categories and pages if DB is empty
+        auto_seed.check_and_seed_data(db)
     finally:
         db.close()
 
