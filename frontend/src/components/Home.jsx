@@ -62,7 +62,7 @@ function Home() {
                     <div className="container mx-auto px-8 md:px-20 py-14 md:py-24 relative z-10">
                         <div className="flex flex-col lg:flex-row items-center justify-between gap-16">
                             {/* Left Text Block */}
-                            <div className="lg:w-1/2 text-center lg:text-left animate-fade-in">
+                            <div className="lg:w-[45%] text-center lg:text-left animate-fade-in relative z-20">
                                 <h1 className="text-3xl md:text-5xl lg:text-6xl font-black text-white leading-[1.1] mb-5 tracking-tight" style={{ fontFamily: "'Oswald', sans-serif" }}>
                                     Торти на замовлення <br />
                                     в Києві —
@@ -70,11 +70,17 @@ function Home() {
                                 <div className="text-[#F2B705] text-2xl md:text-3xl font-bold mb-8 tracking-wider uppercase italic drop-shadow-sm" style={{ fontFamily: "'Dancing Script', cursive" }}>
                                     Кондитерська майстерня Antreme
                                 </div>
-                                <p className="text-pink-50 text-base md:text-lg mb-12 leading-relaxed max-w-lg mx-auto lg:mx-0 opacity-80 font-light">
-                                    Авторські торти ручної роботи з натуральних інгредієнтів. <br />
-                                    Створюємо індивідуальний дизайн для вашого свята. <br />
-                                    Доставка по Києву в день замовлення.
-                                </p>
+                                <div className="space-y-2 mb-12">
+                                    <p className="text-pink-50 text-base md:text-lg leading-relaxed opacity-85 font-light">
+                                        Авторські торти ручної роботи з натуральних інгредієнтів.
+                                    </p>
+                                    <p className="text-pink-50 text-base md:text-lg leading-relaxed opacity-85 font-light">
+                                        Кожен торт створюється індивідуально протягом 3 днів.
+                                    </p>
+                                    <p className="text-pink-50 text-base md:text-lg leading-relaxed opacity-85 font-light">
+                                        Доставка по Києву у зручний для вас час.
+                                    </p>
+                                </div>
 
                                 <div className="flex flex-col sm:flex-row gap-6 justify-center lg:justify-start">
                                     <button
@@ -93,16 +99,16 @@ function Home() {
                             </div>
 
                             {/* Right Image Block */}
-                            <div className="lg:w-1/2 relative animate-fade-in-delayed flex justify-center">
-                                <div className="relative group max-w-[650px] w-full">
+                            <div className="lg:w-[55%] relative animate-fade-in-delayed flex justify-center lg:justify-end lg:-mr-10">
+                                <div className="relative group w-full flex justify-center lg:justify-end">
                                     {/* Light Glow behind the cake */}
-                                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-4/5 h-4/5 bg-[#F2B705]/15 rounded-full blur-[100px] pointer-events-none group-hover:bg-[#F2B705]/25 transition duration-1000"></div>
+                                    <div className="absolute top-1/2 left-1/2 lg:left-2/3 -translate-x-1/2 -translate-y-1/2 w-[90%] h-[90%] bg-[#F2B705]/20 rounded-full blur-[120px] pointer-events-none group-hover:bg-[#F2B705]/30 transition duration-1000"></div>
 
                                     <img
                                         src={new URL('../assets/cake-optimized-1600.webp', import.meta.url).href}
                                         alt="Преміальний торт Antreme"
-                                        className="w-full h-auto drop-shadow-[0_35px_50px_rgba(0,0,0,0.6)] transform transition-all duration-700 hover:scale-110 relative z-10"
-                                        style={{ filter: 'contrast(1.03) saturate(1.05)' }}
+                                        className="w-full h-auto max-w-[500px] md:max-w-[700px] lg:max-w-[850px] drop-shadow-[0_45px_70px_rgba(0,0,0,0.7)] transform transition-all duration-700 hover:scale-[1.12] lg:hover:translate-x-6 relative z-10"
+                                        style={{ filter: 'contrast(1.04) saturate(1.1)' }}
                                         onError={(e) => {
                                             e.target.onerror = null;
                                             e.target.src = bannerImg;
@@ -111,7 +117,7 @@ function Home() {
                                     />
 
                                     {/* Soft bottom shadow for the cake */}
-                                    <div className="absolute bottom-[5%] left-1/2 -translate-x-1/2 w-3/4 h-[40px] bg-black/40 rounded-[100%] blur-2xl pointer-events-none"></div>
+                                    <div className="absolute bottom-[2%] left-1/2 lg:left-2/3 -translate-x-1/2 w-4/5 h-[50px] bg-black/50 rounded-[100%] blur-3xl pointer-events-none"></div>
                                 </div>
                             </div>
                         </div>
