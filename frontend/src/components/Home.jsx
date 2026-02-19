@@ -83,18 +83,18 @@ function Home() {
                                 </div>
 
                                 <div className="flex flex-col sm:flex-row gap-6 justify-center lg:justify-start">
-                                    <button
-                                        onClick={handleQuickOrderDefault}
-                                        className="px-12 py-5 bg-[#F2B705] hover:bg-[#ffcc00] text-gray-950 font-black uppercase tracking-widest text-sm rounded-[50px] transition-all shadow-[0_10px_30px_rgba(242,183,5,0.3)] hover:shadow-[0_15px_40px_rgba(242,183,5,0.5)] transform hover:-translate-y-1 active:scale-95"
-                                    >
-                                        Замовити торт
-                                    </button>
                                     <Link
                                         to="/cakes"
                                         className="px-12 py-5 bg-[#7b002c] hover:bg-[#8b0033] text-white font-bold uppercase tracking-widest text-sm rounded-[50px] transition-all shadow-[0_10px_30px_rgba(123,0,44,0.3)] hover:shadow-[0_15px_40px_rgba(123,0,44,0.5)] transform hover:-translate-y-1 active:scale-95 border border-white/5"
                                     >
                                         Переглянути каталог
                                     </Link>
+                                    <button
+                                        onClick={handleQuickOrderDefault}
+                                        className="px-12 py-5 bg-[#F2B705] hover:bg-[#ffcc00] text-gray-950 font-black uppercase tracking-widest text-sm rounded-[50px] transition-all shadow-[0_10px_30px_rgba(242,183,5,0.3)] hover:shadow-[0_15px_40px_rgba(242,183,5,0.5)] transform hover:-translate-y-1 active:scale-95"
+                                    >
+                                        Замовити торт
+                                    </button>
                                 </div>
                             </div>
 
