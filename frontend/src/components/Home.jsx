@@ -59,39 +59,40 @@ function Home() {
                     {/* Soft Light Highlight on the right - Lightened */}
                     <div className="absolute top-0 right-0 w-2/3 h-full bg-gradient-to-l from-white/15 to-transparent pointer-events-none blur-3xl"></div>
 
-                    <div className="container mx-auto px-8 md:px-20 py-6 md:py-8 relative z-10">
-                        <div className="flex flex-col lg:flex-row items-center justify-between gap-10 lg:gap-16">
+                    <div className="container mx-auto px-6 md:px-20 py-8 md:py-8 relative z-10">
+                        <div className="flex flex-col lg:flex-row items-center justify-between gap-6 lg:gap-16">
                             {/* Left Text Block */}
-                            <div className="lg:w-[42%] text-center lg:text-left animate-fade-in relative z-20">
-                                <h1 className="text-3xl md:text-4xl lg:text-[54px] font-black text-white leading-[1.0] mb-4 tracking-tight" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                            <div className="w-full lg:w-[42%] text-left animate-fade-in relative z-20">
+                                <h1 className="text-4xl md:text-4xl lg:text-[54px] font-black text-white leading-[1.0] mb-3 md:mb-4 tracking-tight" style={{ fontFamily: "'Oswald', sans-serif" }}>
                                     Торти на замовлення <br />
                                     в Києві —
                                 </h1>
-                                <div className="text-[#F2B705] text-[22px] md:text-[28px] font-bold mb-6 tracking-wider uppercase drop-shadow-sm" style={{ fontFamily: "'Dancing Script', cursive", fontStyle: 'normal' }}>
-                                    Кондитерська майстерня Antreme
+                                <div className="text-[#F2B705] text-[18px] md:text-[28px] font-bold mb-4 md:mb-6 tracking-wider uppercase drop-shadow-sm" style={{ fontFamily: "'Oswald', sans-serif", fontStyle: 'normal' }}>
+                                    Кондитерська майстерня <br className="md:hidden" /> Antreme
                                 </div>
-                                <div className="space-y-1.5 mb-8 md:mb-10">
-                                    <p className="text-pink-50 text-base md:text-[17px] leading-relaxed opacity-90 font-light">
+                                <div className="space-y-1 mb-6 md:mb-10">
+                                    <p className="text-pink-50 text-[15px] md:text-[17px] leading-relaxed opacity-90 font-light">
                                         Авторські торти ручної роботи з натуральних інгредієнтів.
                                     </p>
-                                    <p className="text-pink-100 text-base md:text-[17px] leading-relaxed opacity-90 font-light">
+                                    <p className="text-pink-100 text-[15px] md:text-[17px] leading-relaxed opacity-90 font-light">
                                         Кожен торт створюється індивідуально протягом 3 днів.
                                     </p>
-                                    <p className="text-pink-100 text-base md:text-[17px] leading-relaxed opacity-90 font-light">
+                                    <p className="text-pink-100 hidden md:block text-[15px] md:text-[17px] leading-relaxed opacity-90 font-light">
                                         Доставка по Києву у зручний для вас час.
                                     </p>
                                 </div>
 
-                                <div className="flex flex-col sm:flex-row gap-5 lg:gap-6 justify-center lg:justify-start mt-6">
+                                {/* Desktop Buttons */}
+                                <div className="hidden lg:flex flex-row gap-6 mt-6">
                                     <button
                                         onClick={handleQuickOrderDefault}
-                                        className="h-[56px] px-10 md:px-12 bg-gradient-to-r from-[#F2B705] to-[#FFC83D] hover:from-[#FFC83D] hover:to-[#F2B705] text-gray-900 font-extrabold uppercase tracking-widest text-[13px] rounded-full transition-all duration-300 shadow-[0_10px_30px_rgba(242,183,5,0.3)] hover:shadow-[0_15px_40px_rgba(242,183,5,0.5)] transform hover:scale-[1.03] active:scale-95 flex items-center justify-center text-center whitespace-nowrap"
+                                        className="h-[56px] px-10 bg-gradient-to-r from-[#F2B705] to-[#FFC83D] hover:from-[#FFC83D] hover:to-[#F2B705] text-gray-900 font-extrabold uppercase tracking-widest text-[13px] rounded-full transition-all duration-300 shadow-[0_10px_30px_rgba(242,183,5,0.3)] hover:shadow-[0_15px_40px_rgba(242,183,5,0.5)] transform hover:scale-[1.03] active:scale-95 flex items-center justify-center text-center whitespace-nowrap"
                                     >
                                         Замовити торт
                                     </button>
                                     <Link
                                         to="/cakes"
-                                        className="h-[56px] px-10 md:px-12 bg-[#B3123A] hover:bg-[#d11a48] text-white font-bold uppercase tracking-widest text-[13px] rounded-full transition-all duration-300 shadow-[0_10px_30px_rgba(179,18,58,0.2)] hover:shadow-[0_15px_40px_rgba(179,18,58,0.3)] transform hover:scale-[1.03] active:scale-95 border border-white/10 flex items-center justify-center text-center whitespace-nowrap"
+                                        className="h-[56px] px-10 bg-[#B3123A] hover:bg-[#d11a48] text-white font-bold uppercase tracking-widest text-[13px] rounded-full transition-all duration-300 shadow-[0_10px_30px_rgba(179,18,58,0.2)] hover:shadow-[0_15px_40px_rgba(179,18,58,0.3)] transform hover:scale-[1.03] active:scale-95 border border-white/10 flex items-center justify-center text-center whitespace-nowrap"
                                     >
                                         Переглянути каталог
                                     </Link>
@@ -99,8 +100,8 @@ function Home() {
                             </div>
 
                             {/* Right Image Block/Cake with Glows and Shadows */}
-                            <div className="lg:w-[58%] relative animate-fade-in-delayed flex justify-center lg:justify-end lg:-mr-12">
-                                <div className="relative group w-full flex justify-center lg:justify-end">
+                            <div className="w-full lg:w-[58%] relative animate-fade-in-delayed flex justify-center lg:justify-end lg:-mr-12 -mt-4 lg:mt-0">
+                                <div className="relative group w-full flex justify-center lg:justify-end max-w-[400px] md:max-w-none">
                                     {/* Advanced Dynamic Radial Glow */}
                                     <div className="absolute top-1/2 left-1/2 lg:left-2/3 -translate-x-1/2 -translate-y-1/2 w-[90%] h-[90%] bg-gradient-to-r from-[#F2B705]/15 to-transparent rounded-full blur-[120px] pointer-events-none group-hover:from-[#F2B705]/25 transition-all duration-1000 opacity-60"></div>
 
@@ -108,7 +109,7 @@ function Home() {
                                         <img
                                             src={new URL('../assets/cake-optimized-1600.webp', import.meta.url).href}
                                             alt="Преміальний торт Antreme"
-                                            className="w-[105%] lg:w-[115%] h-auto max-w-[550px] md:max-w-[700px] lg:max-w-[850px] drop-shadow-[0_50px_70px_rgba(0,0,0,0.7)] transform transition-all duration-1000 hover:scale-[1.10] lg:hover:translate-x-6 pointer-events-auto"
+                                            className="w-[110%] lg:w-[115%] h-auto drop-shadow-[0_50px_70px_rgba(0,0,0,0.7)] transform transition-all duration-1000 animate-float pointer-events-auto"
                                             style={{ filter: 'contrast(1.05) saturate(1.15)' }}
                                             onError={(e) => {
                                                 e.target.onerror = null;
@@ -118,9 +119,25 @@ function Home() {
                                         />
 
                                         {/* Voluminous Bottom Shadow */}
-                                        <div className="absolute bottom-[2%] left-1/2 lg:left-2/3 -translate-x-1/2 w-4/5 h-[50px] bg-black/60 rounded-[100%] blur-[40px] pointer-events-none -z-10"></div>
+                                        <div className="absolute bottom-[2%] left-1/2 lg:left-2/3 -translate-x-1/2 w-4/5 h-[30px] lg:h-[50px] bg-black/60 rounded-[100%] blur-[30px] lg:blur-[40px] pointer-events-none -z-10"></div>
                                     </div>
                                 </div>
+                            </div>
+
+                            {/* Mobile Buttons - Side-by-side like in screenshot */}
+                            <div className="lg:hidden flex flex-row gap-3 w-full justify-between items-center pb-2">
+                                <button
+                                    onClick={handleQuickOrderDefault}
+                                    className="flex-1 h-[52px] bg-gradient-to-r from-[#F2B705] to-[#FFC83D] text-gray-900 font-extrabold uppercase tracking-tight text-[11px] rounded-full shadow-lg flex items-center justify-center text-center"
+                                >
+                                    Замовити торт
+                                </button>
+                                <Link
+                                    to="/cakes"
+                                    className="flex-1 h-[52px] bg-[#B3123A] text-white font-bold uppercase tracking-tight text-[11px] rounded-full border border-white/10 shadow-lg flex items-center justify-center text-center px-2"
+                                >
+                                    Переглянути каталог
+                                </Link>
                             </div>
                         </div>
                     </div>
