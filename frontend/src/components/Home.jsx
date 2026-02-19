@@ -53,61 +53,65 @@ function Home() {
 
     return (
         <div className="min-h-screen bg-[#FDFCF9]">
-            {/* Premium Hero Section - Redesigned 2026 */}
+            {/* Premium Hero Section - Refined 2026 */}
             <div className="w-full pt-6 md:pt-10 mb-10 px-4 md:px-8">
-                <div className="mx-auto max-w-[1400px] relative overflow-hidden rounded-[2.5rem] md:rounded-[4rem] shadow-[0_30px_70px_rgba(0,0,0,0.2)] bg-gradient-to-br from-[#4a0404] via-[#7b002c] to-[#4a0404]">
-                    {/* Decorative Elements */}
-                    <div className="absolute top-0 right-0 w-1/2 h-full bg-white/5 skew-x-[-15deg] translate-x-1/2 pointer-events-none"></div>
+                <div className="mx-auto max-w-[1400px] relative overflow-hidden rounded-[2.5rem] md:rounded-[4rem] shadow-[0_40px_80px_rgba(0,0,0,0.3)] bg-gradient-to-br from-[#380202] via-[#5a0020] to-[#380202]">
+                    {/* Soft Light Highlight on the right */}
+                    <div className="absolute top-0 right-0 w-2/3 h-full bg-gradient-to-l from-white/10 to-transparent pointer-events-none blur-3xl"></div>
 
-                    <div className="container mx-auto px-8 md:px-16 py-12 md:py-20">
-                        <div className="flex flex-col lg:flex-row items-center justify-between gap-12">
+                    <div className="container mx-auto px-8 md:px-20 py-14 md:py-24 relative z-10">
+                        <div className="flex flex-col lg:flex-row items-center justify-between gap-16">
                             {/* Left Text Block */}
-                            <div className="lg:w-1/2 text-center lg:text-left z-10 animate-fade-in">
-                                <h1 className="text-4xl md:text-6xl lg:text-7xl font-black text-white leading-tight mb-4 uppercase tracking-tighter" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                            <div className="lg:w-1/2 text-center lg:text-left animate-fade-in">
+                                <h1 className="text-3xl md:text-5xl lg:text-6xl font-black text-white leading-[1.1] mb-5 tracking-tight" style={{ fontFamily: "'Oswald', sans-serif" }}>
                                     Торти на замовлення <br />
                                     в Києві —
                                 </h1>
-                                <div className="text-vatsak-gold text-lg md:text-2xl font-bold mb-6 tracking-widest uppercase italic" style={{ fontFamily: "'Dancing Script', cursive" }}>
+                                <div className="text-[#F2B705] text-2xl md:text-3xl font-bold mb-8 tracking-wider uppercase italic drop-shadow-sm" style={{ fontFamily: "'Dancing Script', cursive" }}>
                                     Кондитерська майстерня Antreme
                                 </div>
-                                <p className="text-pink-100 text-base md:text-xl mb-10 leading-relaxed max-w-xl mx-auto lg:mx-0 opacity-90">
+                                <p className="text-pink-50 text-base md:text-lg mb-12 leading-relaxed max-w-lg mx-auto lg:mx-0 opacity-80 font-light">
                                     Авторські торти ручної роботи з натуральних інгредієнтів. <br />
                                     Створюємо індивідуальний дизайн для вашого свята. <br />
                                     Доставка по Києву в день замовлення.
                                 </p>
 
-                                <div className="flex flex-col sm:flex-row gap-5 justify-center lg:justify-start">
-                                    <Link
-                                        to="/cakes"
-                                        className="px-10 py-5 bg-[#7b002c] hover:bg-[#5a0020] text-white font-bold uppercase tracking-widest text-sm rounded-[50px] transition-all shadow-xl hover:shadow-[#7b002c]/30 transform hover:-translate-y-1 active:scale-95 border border-white/10"
-                                    >
-                                        Переглянути каталог
-                                    </Link>
+                                <div className="flex flex-col sm:flex-row gap-6 justify-center lg:justify-start">
                                     <button
                                         onClick={handleQuickOrderDefault}
-                                        className="px-10 py-5 bg-[#ffcc00] hover:bg-[#ffdb4d] text-gray-900 font-bold uppercase tracking-widest text-sm rounded-[50px] transition-all shadow-xl hover:shadow-[#ffcc00]/30 transform hover:-translate-y-1 active:scale-95"
+                                        className="px-12 py-5 bg-[#F2B705] hover:bg-[#ffcc00] text-gray-950 font-black uppercase tracking-widest text-sm rounded-[50px] transition-all shadow-[0_10px_30px_rgba(242,183,5,0.3)] hover:shadow-[0_15px_40px_rgba(242,183,5,0.5)] transform hover:-translate-y-1 active:scale-95"
                                     >
                                         Замовити торт
                                     </button>
+                                    <Link
+                                        to="/cakes"
+                                        className="px-12 py-5 bg-[#7b002c] hover:bg-[#8b0033] text-white font-bold uppercase tracking-widest text-sm rounded-[50px] transition-all shadow-[0_10px_30px_rgba(123,0,44,0.3)] hover:shadow-[0_15px_40px_rgba(123,0,44,0.5)] transform hover:-translate-y-1 active:scale-95 border border-white/5"
+                                    >
+                                        Переглянути каталог
+                                    </Link>
                                 </div>
                             </div>
 
                             {/* Right Image Block */}
-                            <div className="lg:w-1/2 relative z-10 animate-fade-in-delayed">
-                                <div className="relative group">
-                                    {/* Image Container with Glow */}
-                                    <div className="absolute -inset-10 bg-vatsak-gold/10 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition duration-1000"></div>
+                            <div className="lg:w-1/2 relative animate-fade-in-delayed flex justify-center">
+                                <div className="relative group max-w-[650px] w-full">
+                                    {/* Light Glow behind the cake */}
+                                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-4/5 h-4/5 bg-[#F2B705]/15 rounded-full blur-[100px] pointer-events-none group-hover:bg-[#F2B705]/25 transition duration-1000"></div>
+
                                     <img
                                         src={new URL('../assets/cake-optimized-1600.webp', import.meta.url).href}
                                         alt="Преміальний торт Antreme"
-                                        className="w-full h-auto max-w-[600px] mx-auto drop-shadow-[0_25px_40px_rgba(0,0,0,0.5)] transform transition-transform duration-700 hover:scale-105"
-                                        style={{ filter: 'contrast(1.05) saturate(1.1)' }}
+                                        className="w-full h-auto drop-shadow-[0_35px_50px_rgba(0,0,0,0.6)] transform transition-all duration-700 hover:scale-110 relative z-10"
+                                        style={{ filter: 'contrast(1.03) saturate(1.05)' }}
                                         onError={(e) => {
                                             e.target.onerror = null;
-                                            e.target.src = bannerImg; // Fallback to current banner if new image not found
-                                            e.target.className = "w-full h-full object-cover rounded-3xl opacity-50";
+                                            e.target.src = bannerImg;
+                                            e.target.className = "w-full h-full object-cover rounded-3xl opacity-40 grayscale";
                                         }}
                                     />
+
+                                    {/* Soft bottom shadow for the cake */}
+                                    <div className="absolute bottom-[5%] left-1/2 -translate-x-1/2 w-3/4 h-[40px] bg-black/40 rounded-[100%] blur-2xl pointer-events-none"></div>
                                 </div>
                             </div>
                         </div>
