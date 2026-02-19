@@ -16,7 +16,7 @@ from sqlalchemy.orm import Session
 from backend import crud
 from backend import models
 from backend import schemas
-from backend.database import SessionLocal, engine
+from backend.database import SessionLocal, engine, get_db
 from backend import auth
 from backend import auto_seed
 from jose import JWTError, jwt
@@ -36,7 +36,7 @@ async def startup_event():
         db.close()
 
 @app.get("/health-check")
-async def health_check(db: Session = Depends(crud.get_db)):
+async def health_check(db: Session = Depends(get_db)):
     cakes_count = db.query(models.Cake).count()
     pages_count = db.query(models.Page).count()
     return {
