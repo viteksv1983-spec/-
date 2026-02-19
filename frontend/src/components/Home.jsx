@@ -62,62 +62,64 @@ function Home() {
                     <div className="container mx-auto px-8 md:px-20 py-14 md:py-24 relative z-10">
                         <div className="flex flex-col lg:flex-row items-center justify-between gap-16">
                             {/* Left Text Block */}
-                            <div className="lg:w-[45%] text-center lg:text-left animate-fade-in relative z-20">
+                            <div className="lg:w-[40%] text-center lg:text-left animate-fade-in relative z-20">
                                 <h1 className="text-3xl md:text-5xl lg:text-6xl font-black text-white leading-[1.1] mb-5 tracking-tight" style={{ fontFamily: "'Oswald', sans-serif" }}>
                                     Торти на замовлення <br />
                                     в Києві —
                                 </h1>
-                                <div className="text-[#F2B705] text-2xl md:text-3xl font-bold mb-8 tracking-wider uppercase italic drop-shadow-sm" style={{ fontFamily: "'Dancing Script', cursive" }}>
+                                <div className="text-[#F2B705] text-2xl md:text-3xl font-bold mb-8 tracking-wider uppercase drop-shadow-sm" style={{ fontFamily: "'Dancing Script', cursive", fontStyle: 'normal' }}>
                                     Кондитерська майстерня Antreme
                                 </div>
-                                <div className="space-y-2 mb-12">
-                                    <p className="text-pink-50 text-base md:text-lg leading-relaxed opacity-85 font-light">
+                                <div className="space-y-3 mb-10">
+                                    <p className="text-pink-50 text-base md:text-lg leading-relaxed opacity-90 font-light">
                                         Авторські торти ручної роботи з натуральних інгредієнтів.
                                     </p>
-                                    <p className="text-pink-50 text-base md:text-lg leading-relaxed opacity-85 font-light">
+                                    <p className="text-pink-100 text-base md:text-lg leading-relaxed opacity-90 font-light">
                                         Кожен торт створюється індивідуально протягом 3 днів.
                                     </p>
-                                    <p className="text-pink-50 text-base md:text-lg leading-relaxed opacity-85 font-light">
+                                    <p className="text-pink-100 text-base md:text-lg leading-relaxed opacity-90 font-light">
                                         Доставка по Києву у зручний для вас час.
                                     </p>
                                 </div>
 
-                                <div className="flex flex-col sm:flex-row gap-6 justify-center lg:justify-start mt-4">
+                                <div className="flex flex-col sm:flex-row gap-5 lg:gap-6 justify-center lg:justify-start mt-6">
                                     <button
                                         onClick={handleQuickOrderDefault}
-                                        className="px-12 py-5 bg-[#F2B705] hover:bg-[#ffcc00] text-gray-950 font-black uppercase tracking-widest text-sm rounded-[50px] transition-all shadow-[0_10px_30px_rgba(242,183,5,0.3)] hover:shadow-[0_15px_40px_rgba(242,183,5,0.5)] transform hover:-translate-y-1 active:scale-95"
+                                        className="h-[60px] px-10 md:px-12 bg-gradient-to-r from-[#F2B705] to-[#FFCC33] hover:from-[#FFCC33] hover:to-[#F2B705] text-gray-950 font-black uppercase tracking-widest text-[13px] rounded-full transition-all duration-300 shadow-[0_8px_25px_rgba(242,183,5,0.25)] hover:shadow-[0_12px_35px_rgba(242,183,5,0.4)] transform hover:scale-[1.03] active:scale-95 flex items-center justify-center"
                                     >
                                         Замовити торт
                                     </button>
                                     <Link
                                         to="/cakes"
-                                        className="px-12 py-5 bg-[#5a0020] hover:bg-[#7b002c] text-white font-bold uppercase tracking-widest text-sm rounded-[50px] transition-all shadow-[0_10px_30px_rgba(0,0,0,0.2)] hover:shadow-[0_15px_40px_rgba(0,0,0,0.3)] transform hover:-translate-y-1 active:scale-95 border border-white/10"
+                                        className="h-[60px] px-10 md:px-12 bg-[#7b2c2c] hover:bg-[#8b3c3c] text-white font-bold uppercase tracking-widest text-[13px] rounded-full transition-all duration-300 shadow-[0_8px_25px_rgba(0,0,0,0.2)] hover:shadow-[0_12px_35px_rgba(0,0,0,0.3)] transform hover:scale-[1.03] active:scale-95 border border-white/10 flex items-center justify-center"
                                     >
                                         Переглянути каталог
                                     </Link>
                                 </div>
                             </div>
 
-                            {/* Right Image Block */}
-                            <div className="lg:w-[55%] relative animate-fade-in-delayed flex justify-center lg:justify-end lg:-mr-10">
+                            {/* Right Image Block/Cake with Glows and Shadows */}
+                            <div className="lg:w-[60%] relative animate-fade-in-delayed flex justify-center lg:justify-end lg:-mr-16">
                                 <div className="relative group w-full flex justify-center lg:justify-end">
-                                    {/* Light Glow behind the cake */}
-                                    <div className="absolute top-1/2 left-1/2 lg:left-2/3 -translate-x-1/2 -translate-y-1/2 w-[90%] h-[90%] bg-[#F2B705]/20 rounded-full blur-[120px] pointer-events-none group-hover:bg-[#F2B705]/30 transition duration-1000"></div>
+                                    {/* Advanced Dynamic Radial Glow */}
+                                    <div className="absolute top-1/2 left-1/2 lg:left-2/3 -translate-x-1/2 -translate-y-1/2 w-[100%] h-[100%] bg-gradient-to-r from-[#F2B705]/20 to-transparent rounded-full blur-[140px] pointer-events-none group-hover:from-[#F2B705]/30 transition-all duration-1000 opacity-60"></div>
 
-                                    <img
-                                        src={new URL('../assets/cake-optimized-1600.webp', import.meta.url).href}
-                                        alt="Преміальний торт Antreme"
-                                        className="w-full h-auto max-w-[500px] md:max-w-[700px] lg:max-w-[850px] drop-shadow-[0_45px_70px_rgba(0,0,0,0.7)] transform transition-all duration-700 hover:scale-[1.12] lg:hover:translate-x-6 relative z-10"
-                                        style={{ filter: 'contrast(1.04) saturate(1.1)' }}
-                                        onError={(e) => {
-                                            e.target.onerror = null;
-                                            e.target.src = bannerImg;
-                                            e.target.className = "w-full h-full object-cover rounded-3xl opacity-40 grayscale";
-                                        }}
-                                    />
+                                    <div className="relative z-10 w-full flex justify-center lg:justify-end pointer-events-none">
+                                        <img
+                                            src={new URL('../assets/cake-optimized-1600.webp', import.meta.url).href}
+                                            alt="Преміальний торт Antreme"
+                                            className="w-[115%] lg:w-[130%] h-auto max-w-[600px] md:max-w-[800px] lg:max-w-[1000px] drop-shadow-[0_60px_90px_rgba(0,0,0,0.8)] transform transition-all duration-1000 hover:scale-[1.15] lg:hover:translate-x-8 pointer-events-auto"
+                                            style={{ filter: 'contrast(1.05) saturate(1.15)' }}
+                                            onError={(e) => {
+                                                e.target.onerror = null;
+                                                e.target.src = bannerImg;
+                                                e.target.className = "w-full h-full object-cover rounded-3xl opacity-30 grayscale";
+                                            }}
+                                        />
 
-                                    {/* Soft bottom shadow for the cake */}
-                                    <div className="absolute bottom-[2%] left-1/2 lg:left-2/3 -translate-x-1/2 w-4/5 h-[50px] bg-black/50 rounded-[100%] blur-3xl pointer-events-none"></div>
+                                        {/* Voluminous Bottom Shadow */}
+                                        <div className="absolute bottom-[2%] left-1/2 lg:left-2/3 -translate-x-1/2 w-4/5 h-[60px] bg-black/60 rounded-[100%] blur-[45px] pointer-events-none -z-10"></div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
