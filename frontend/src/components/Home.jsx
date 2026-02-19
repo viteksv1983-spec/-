@@ -54,20 +54,20 @@ function Home() {
     return (
         <div className="min-h-screen bg-[#FDFCF9]">
             {/* Premium Hero Section - Refined, Compact & Light 2026 */}
-            <div className="w-full pt-2 md:pt-4 mb-4 px-4 md:px-8">
+            <div className="w-full pt-1 md:pt-3 mb-3 px-4 md:px-8">
                 <div className="mx-auto max-w-[1400px] relative overflow-hidden rounded-[2.5rem] md:rounded-[4rem] shadow-[0_40px_80px_rgba(0,0,0,0.3)] bg-gradient-to-br from-[#380202] via-[#5a0020] to-[#380202]">
                     {/* Soft Light Highlight on the right - Lightened */}
                     <div className="absolute top-0 right-0 w-2/3 h-full bg-gradient-to-l from-white/15 to-transparent pointer-events-none blur-3xl"></div>
 
-                    <div className="container mx-auto px-8 md:px-20 py-8 md:py-12 relative z-10">
+                    <div className="container mx-auto px-8 md:px-20 py-6 md:py-8 relative z-10">
                         <div className="flex flex-col lg:flex-row items-center justify-between gap-10 lg:gap-16">
                             {/* Left Text Block */}
                             <div className="lg:w-[42%] text-center lg:text-left animate-fade-in relative z-20">
-                                <h1 className="text-3xl md:text-4xl lg:text-[54px] font-black text-white leading-[1.05] mb-4 tracking-tight" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                                <h1 className="text-3xl md:text-4xl lg:text-[54px] font-black text-white leading-[1.0] mb-4 tracking-tight" style={{ fontFamily: "'Oswald', sans-serif" }}>
                                     Торти на замовлення <br />
                                     в Києві —
                                 </h1>
-                                <div className="text-[#F2B705] text-xl md:text-2xl font-bold mb-6 tracking-wider uppercase drop-shadow-sm" style={{ fontFamily: "'Dancing Script', cursive", fontStyle: 'normal' }}>
+                                <div className="text-[#F2B705] text-[22px] md:text-[28px] font-bold mb-6 tracking-wider uppercase drop-shadow-sm" style={{ fontFamily: "'Dancing Script', cursive", fontStyle: 'normal' }}>
                                     Кондитерська майстерня Antreme
                                 </div>
                                 <div className="space-y-1.5 mb-8 md:mb-10">
@@ -99,7 +99,7 @@ function Home() {
                             </div>
 
                             {/* Right Image Block/Cake with Glows and Shadows */}
-                            <div className="lg:w-[58%] relative animate-fade-in-delayed flex justify-center lg:justify-end lg:-mr-8">
+                            <div className="lg:w-[58%] relative animate-fade-in-delayed flex justify-center lg:justify-end lg:-mr-12">
                                 <div className="relative group w-full flex justify-center lg:justify-end">
                                     {/* Advanced Dynamic Radial Glow */}
                                     <div className="absolute top-1/2 left-1/2 lg:left-2/3 -translate-x-1/2 -translate-y-1/2 w-[90%] h-[90%] bg-gradient-to-r from-[#F2B705]/15 to-transparent rounded-full blur-[120px] pointer-events-none group-hover:from-[#F2B705]/25 transition-all duration-1000 opacity-60"></div>
