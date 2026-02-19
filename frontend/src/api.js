@@ -1,6 +1,7 @@
 import axios from 'axios';
 
-const baseURL = `http://${window.location.hostname}:8000`;
+// Use production API URL from environment variable, or fallback to local
+const baseURL = import.meta.env.VITE_API_URL || `http://${window.location.hostname}:8000`;
 console.log('API BaseURL initialized as:', baseURL);
 
 const api = axios.create({
