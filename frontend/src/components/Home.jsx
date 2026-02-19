@@ -82,16 +82,16 @@ function Home() {
                                     </p>
                                 </div>
 
-                                <div className="flex flex-col sm:flex-row gap-5 lg:gap-6 justify-center lg:justify-start mt-6">
+                                <div className="flex flex-col sm:flex-row gap-5 lg:gap-6 justify-center lg:justify-start mt-8">
                                     <button
                                         onClick={handleQuickOrderDefault}
-                                        className="h-[60px] px-10 md:px-12 bg-gradient-to-r from-[#F2B705] to-[#FFCC33] hover:from-[#FFCC33] hover:to-[#F2B705] text-gray-950 font-black uppercase tracking-widest text-[13px] rounded-full transition-all duration-300 shadow-[0_8px_25px_rgba(242,183,5,0.25)] hover:shadow-[0_12px_35px_rgba(242,183,5,0.4)] transform hover:scale-[1.03] active:scale-95 flex items-center justify-center"
+                                        className="h-[60px] px-9 md:px-11 bg-gradient-to-r from-[#F2B705] to-[#FFC83D] hover:from-[#FFC83D] hover:to-[#F2B705] text-gray-900 font-extrabold uppercase tracking-widest text-[13px] rounded-full transition-all duration-300 shadow-[0_10px_30px_rgba(242,183,5,0.3)] hover:shadow-[0_15px_40px_rgba(242,183,5,0.5)] transform hover:scale-[1.03] active:scale-95 flex items-center justify-center"
                                     >
                                         Замовити торт
                                     </button>
                                     <Link
                                         to="/cakes"
-                                        className="h-[60px] px-10 md:px-12 bg-[#7b2c2c] hover:bg-[#8b3c3c] text-white font-bold uppercase tracking-widest text-[13px] rounded-full transition-all duration-300 shadow-[0_8px_25px_rgba(0,0,0,0.2)] hover:shadow-[0_12px_35px_rgba(0,0,0,0.3)] transform hover:scale-[1.03] active:scale-95 border border-white/10 flex items-center justify-center"
+                                        className="h-[60px] px-9 md:px-11 bg-[#B3123A] hover:bg-[#d11a48] text-white font-bold uppercase tracking-widest text-[13px] rounded-full transition-all duration-300 shadow-[0_10px_30px_rgba(179,18,58,0.2)] hover:shadow-[0_15px_40px_rgba(179,18,58,0.3)] transform hover:scale-[1.03] active:scale-95 border border-white/10 flex items-center justify-center"
                                     >
                                         Переглянути каталог
                                     </Link>
