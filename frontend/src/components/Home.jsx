@@ -53,31 +53,31 @@ function Home() {
 
     return (
         <div className="min-h-screen bg-[#FDFCF9]">
-            {/* Premium Hero Section - Refined & Compact 2026 */}
-            <div className="w-full pt-4 md:pt-6 mb-6 px-4 md:px-8">
+            {/* Premium Hero Section - Refined, Compact & Light 2026 */}
+            <div className="w-full pt-2 md:pt-4 mb-4 px-4 md:px-8">
                 <div className="mx-auto max-w-[1400px] relative overflow-hidden rounded-[2.5rem] md:rounded-[4rem] shadow-[0_40px_80px_rgba(0,0,0,0.3)] bg-gradient-to-br from-[#380202] via-[#5a0020] to-[#380202]">
-                    {/* Soft Light Highlight on the right */}
-                    <div className="absolute top-0 right-0 w-2/3 h-full bg-gradient-to-l from-white/10 to-transparent pointer-events-none blur-3xl"></div>
+                    {/* Soft Light Highlight on the right - Lightened */}
+                    <div className="absolute top-0 right-0 w-2/3 h-full bg-gradient-to-l from-white/15 to-transparent pointer-events-none blur-3xl"></div>
 
-                    <div className="container mx-auto px-8 md:px-20 py-10 md:py-16 relative z-10">
-                        <div className="flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-16">
+                    <div className="container mx-auto px-8 md:px-20 py-8 md:py-12 relative z-10">
+                        <div className="flex flex-col lg:flex-row items-center justify-between gap-10 lg:gap-16">
                             {/* Left Text Block */}
                             <div className="lg:w-[42%] text-center lg:text-left animate-fade-in relative z-20">
-                                <h1 className="text-3xl md:text-5xl lg:text-6xl font-black text-white leading-[1.1] mb-4 tracking-tight" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                                <h1 className="text-3xl md:text-4xl lg:text-[54px] font-black text-white leading-[1.05] mb-4 tracking-tight" style={{ fontFamily: "'Oswald', sans-serif" }}>
                                     Торти на замовлення <br />
                                     в Києві —
                                 </h1>
-                                <div className="text-[#F2B705] text-2xl md:text-3xl font-bold mb-6 tracking-wider uppercase drop-shadow-sm" style={{ fontFamily: "'Dancing Script', cursive", fontStyle: 'normal' }}>
+                                <div className="text-[#F2B705] text-xl md:text-2xl font-bold mb-6 tracking-wider uppercase drop-shadow-sm" style={{ fontFamily: "'Dancing Script', cursive", fontStyle: 'normal' }}>
                                     Кондитерська майстерня Antreme
                                 </div>
-                                <div className="space-y-2 mb-8 md:mb-10">
-                                    <p className="text-pink-50 text-base md:text-lg leading-relaxed opacity-90 font-light">
+                                <div className="space-y-1.5 mb-8 md:mb-10">
+                                    <p className="text-pink-50 text-base md:text-[17px] leading-relaxed opacity-90 font-light">
                                         Авторські торти ручної роботи з натуральних інгредієнтів.
                                     </p>
-                                    <p className="text-pink-100 text-base md:text-lg leading-relaxed opacity-90 font-light">
+                                    <p className="text-pink-100 text-base md:text-[17px] leading-relaxed opacity-90 font-light">
                                         Кожен торт створюється індивідуально протягом 3 днів.
                                     </p>
-                                    <p className="text-pink-100 text-base md:text-lg leading-relaxed opacity-90 font-light">
+                                    <p className="text-pink-100 text-base md:text-[17px] leading-relaxed opacity-90 font-light">
                                         Доставка по Києву у зручний для вас час.
                                     </p>
                                 </div>
