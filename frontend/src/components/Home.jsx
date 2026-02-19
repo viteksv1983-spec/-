@@ -53,24 +53,24 @@ function Home() {
 
     return (
         <div className="min-h-screen bg-[#FDFCF9]">
-            {/* Premium Hero Section - Refined 2026 */}
-            <div className="w-full pt-6 md:pt-10 mb-10 px-4 md:px-8">
+            {/* Premium Hero Section - Refined & Compact 2026 */}
+            <div className="w-full pt-4 md:pt-6 mb-6 px-4 md:px-8">
                 <div className="mx-auto max-w-[1400px] relative overflow-hidden rounded-[2.5rem] md:rounded-[4rem] shadow-[0_40px_80px_rgba(0,0,0,0.3)] bg-gradient-to-br from-[#380202] via-[#5a0020] to-[#380202]">
                     {/* Soft Light Highlight on the right */}
                     <div className="absolute top-0 right-0 w-2/3 h-full bg-gradient-to-l from-white/10 to-transparent pointer-events-none blur-3xl"></div>
 
-                    <div className="container mx-auto px-8 md:px-20 py-14 md:py-24 relative z-10">
-                        <div className="flex flex-col lg:flex-row items-center justify-between gap-16">
+                    <div className="container mx-auto px-8 md:px-20 py-10 md:py-16 relative z-10">
+                        <div className="flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-16">
                             {/* Left Text Block */}
-                            <div className="lg:w-[40%] text-center lg:text-left animate-fade-in relative z-20">
-                                <h1 className="text-3xl md:text-5xl lg:text-6xl font-black text-white leading-[1.1] mb-5 tracking-tight" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                            <div className="lg:w-[42%] text-center lg:text-left animate-fade-in relative z-20">
+                                <h1 className="text-3xl md:text-5xl lg:text-6xl font-black text-white leading-[1.1] mb-4 tracking-tight" style={{ fontFamily: "'Oswald', sans-serif" }}>
                                     Торти на замовлення <br />
                                     в Києві —
                                 </h1>
-                                <div className="text-[#F2B705] text-2xl md:text-3xl font-bold mb-8 tracking-wider uppercase drop-shadow-sm" style={{ fontFamily: "'Dancing Script', cursive", fontStyle: 'normal' }}>
+                                <div className="text-[#F2B705] text-2xl md:text-3xl font-bold mb-6 tracking-wider uppercase drop-shadow-sm" style={{ fontFamily: "'Dancing Script', cursive", fontStyle: 'normal' }}>
                                     Кондитерська майстерня Antreme
                                 </div>
-                                <div className="space-y-3 mb-10">
+                                <div className="space-y-2 mb-8 md:mb-10">
                                     <p className="text-pink-50 text-base md:text-lg leading-relaxed opacity-90 font-light">
                                         Авторські торти ручної роботи з натуральних інгредієнтів.
                                     </p>
@@ -82,16 +82,16 @@ function Home() {
                                     </p>
                                 </div>
 
-                                <div className="flex flex-col sm:flex-row gap-5 lg:gap-6 justify-center lg:justify-start mt-8">
+                                <div className="flex flex-col sm:flex-row gap-5 lg:gap-6 justify-center lg:justify-start mt-6">
                                     <button
                                         onClick={handleQuickOrderDefault}
-                                        className="h-[60px] px-9 md:px-11 bg-gradient-to-r from-[#F2B705] to-[#FFC83D] hover:from-[#FFC83D] hover:to-[#F2B705] text-gray-900 font-extrabold uppercase tracking-widest text-[13px] rounded-full transition-all duration-300 shadow-[0_10px_30px_rgba(242,183,5,0.3)] hover:shadow-[0_15px_40px_rgba(242,183,5,0.5)] transform hover:scale-[1.03] active:scale-95 flex items-center justify-center"
+                                        className="h-[56px] px-10 md:px-12 bg-gradient-to-r from-[#F2B705] to-[#FFC83D] hover:from-[#FFC83D] hover:to-[#F2B705] text-gray-900 font-extrabold uppercase tracking-widest text-[13px] rounded-full transition-all duration-300 shadow-[0_10px_30px_rgba(242,183,5,0.3)] hover:shadow-[0_15px_40px_rgba(242,183,5,0.5)] transform hover:scale-[1.03] active:scale-95 flex items-center justify-center"
                                     >
                                         Замовити торт
                                     </button>
                                     <Link
                                         to="/cakes"
-                                        className="h-[60px] px-9 md:px-11 bg-[#B3123A] hover:bg-[#d11a48] text-white font-bold uppercase tracking-widest text-[13px] rounded-full transition-all duration-300 shadow-[0_10px_30px_rgba(179,18,58,0.2)] hover:shadow-[0_15px_40px_rgba(179,18,58,0.3)] transform hover:scale-[1.03] active:scale-95 border border-white/10 flex items-center justify-center"
+                                        className="h-[56px] px-10 md:px-12 bg-[#B3123A] hover:bg-[#d11a48] text-white font-bold uppercase tracking-widest text-[13px] rounded-full transition-all duration-300 shadow-[0_10px_30px_rgba(179,18,58,0.2)] hover:shadow-[0_15px_40px_rgba(179,18,58,0.3)] transform hover:scale-[1.03] active:scale-95 border border-white/10 flex items-center justify-center"
                                     >
                                         Переглянути каталог
                                     </Link>
@@ -99,16 +99,16 @@ function Home() {
                             </div>
 
                             {/* Right Image Block/Cake with Glows and Shadows */}
-                            <div className="lg:w-[60%] relative animate-fade-in-delayed flex justify-center lg:justify-end lg:-mr-16">
+                            <div className="lg:w-[58%] relative animate-fade-in-delayed flex justify-center lg:justify-end lg:-mr-8">
                                 <div className="relative group w-full flex justify-center lg:justify-end">
                                     {/* Advanced Dynamic Radial Glow */}
-                                    <div className="absolute top-1/2 left-1/2 lg:left-2/3 -translate-x-1/2 -translate-y-1/2 w-[100%] h-[100%] bg-gradient-to-r from-[#F2B705]/20 to-transparent rounded-full blur-[140px] pointer-events-none group-hover:from-[#F2B705]/30 transition-all duration-1000 opacity-60"></div>
+                                    <div className="absolute top-1/2 left-1/2 lg:left-2/3 -translate-x-1/2 -translate-y-1/2 w-[90%] h-[90%] bg-gradient-to-r from-[#F2B705]/15 to-transparent rounded-full blur-[120px] pointer-events-none group-hover:from-[#F2B705]/25 transition-all duration-1000 opacity-60"></div>
 
                                     <div className="relative z-10 w-full flex justify-center lg:justify-end pointer-events-none">
                                         <img
                                             src={new URL('../assets/cake-optimized-1600.webp', import.meta.url).href}
                                             alt="Преміальний торт Antreme"
-                                            className="w-[115%] lg:w-[130%] h-auto max-w-[600px] md:max-w-[800px] lg:max-w-[1000px] drop-shadow-[0_60px_90px_rgba(0,0,0,0.8)] transform transition-all duration-1000 hover:scale-[1.15] lg:hover:translate-x-8 pointer-events-auto"
+                                            className="w-[105%] lg:w-[115%] h-auto max-w-[550px] md:max-w-[700px] lg:max-w-[850px] drop-shadow-[0_50px_70px_rgba(0,0,0,0.7)] transform transition-all duration-1000 hover:scale-[1.10] lg:hover:translate-x-6 pointer-events-auto"
                                             style={{ filter: 'contrast(1.05) saturate(1.15)' }}
                                             onError={(e) => {
                                                 e.target.onerror = null;
@@ -118,7 +118,7 @@ function Home() {
                                         />
 
                                         {/* Voluminous Bottom Shadow */}
-                                        <div className="absolute bottom-[2%] left-1/2 lg:left-2/3 -translate-x-1/2 w-4/5 h-[60px] bg-black/60 rounded-[100%] blur-[45px] pointer-events-none -z-10"></div>
+                                        <div className="absolute bottom-[2%] left-1/2 lg:left-2/3 -translate-x-1/2 w-4/5 h-[50px] bg-black/60 rounded-[100%] blur-[40px] pointer-events-none -z-10"></div>
                                     </div>
                                 </div>
                             </div>
