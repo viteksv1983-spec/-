@@ -35,6 +35,17 @@ async def startup_event():
     finally:
         db.close()
 
+@app.get("/health-check")
+async def health_check(db: Session = Depends(crud.get_db)):
+    cakes_count = db.query(models.Cake).count()
+    pages_count = db.query(models.Page).count()
+    return {
+        "status": "online",
+        "database": "connected",
+        "cakes_count": cakes_count,
+        "pages_count": pages_count
+    }
+
 # CORS setup to allow frontend connection
 # For production, you might want to restrict this to your specific frontend domain.
 # But for initial deployment debugging, allowing all is often easier.
