@@ -16,6 +16,17 @@ def check_and_seed_data(db: Session):
 
     print("Database is empty. Starting auto-seeding process...")
 
+    # 1.5 Seed Default Admin User if no users exist
+    user_count = db.query(models.User).count()
+    if user_count == 0:
+        print("No users found. Creating default admin...")
+        admin_user = schemas.UserCreate(
+            email="admin", # Simplification for admin login
+            password="admin"
+        )
+        crud.create_user(db, admin_user)
+        print("Default admin created (admin/admin)")
+
     # 2. Seed SEO Pages (Common logic)
     default_pages = [
         {"route_path": "/", "name": "Головна сторінка"},

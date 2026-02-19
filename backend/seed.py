@@ -21,11 +21,23 @@ def seed_data():
         db.query(models.Order).delete()
         db.query(models.Cake).delete()
         db.commit()
+        db.commit()
         print("Existing data cleared.")
     except Exception as e:
         print(f"Error clearing data: {e}")
         db.rollback()
         return
+
+    # Create default admin if not exists
+    print("Checking for admin user...")
+    if not crud.get_user_by_email(db, "admin"):
+        print("Creating default admin user...")
+        admin_user = schemas.UserCreate(
+            email="admin",
+            password="admin"
+        )
+        crud.create_user(db, admin_user)
+        print("Default admin created: admin/admin")
 
     import json
     import os
