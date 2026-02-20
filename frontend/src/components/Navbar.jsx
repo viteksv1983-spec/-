@@ -27,8 +27,8 @@ function Navbar() {
 
     return (
         <nav className="sticky top-0 z-50 shadow-lg">
-            {/* Main Header - Premium Warm Cream-Caramel Background */}
-            <div className="bg-[#F6E7D6] w-full border-b border-[#D39A5E]/20">
+            {/* Main Header - Very Light Premium Cream Background */}
+            <div className="bg-[#FDF8F3] w-full border-b border-gray-100">
                 <div className="container mx-auto px-6 py-4">
                     <div className="container mx-auto px-4 md:px-6">
                         {/* Desktop Header Layout */}
@@ -42,33 +42,33 @@ function Navbar() {
                                 </div>
                             </Link>
 
-                            {/* Search Bar */}
-                            <form onSubmit={handleSearch} className="flex items-center w-full max-w-[220px] lg:max-w-[280px] flex-shrink-0">
-                                <div className="flex-grow">
+                            {/* Search Bar Area */}
+                            <form onSubmit={handleSearch} className="flex items-center w-full max-w-[200px] lg:max-w-[240px] flex-shrink-0">
+                                <div className="relative w-full">
                                     <input
                                         type="text"
                                         placeholder="Пошук..."
                                         value={searchQuery}
                                         onChange={(e) => setSearchQuery(e.target.value)}
-                                        className="w-full h-[34px] py-0 pl-3 pr-2 bg-white border-2 border-white rounded-l-lg text-[12px] text-gray-900 focus:outline-none placeholder-gray-400 font-medium transition-all"
+                                        className="w-full h-[36px] py-0 pl-4 pr-10 bg-white border border-gray-200 rounded-md text-[13px] text-gray-900 focus:outline-none placeholder-gray-400 font-medium"
                                     />
+                                    <button
+                                        type="submit"
+                                        className="absolute right-0 top-0 w-10 h-full bg-[#5a0020] text-white flex items-center justify-center rounded-r-md transition-colors hover:bg-black"
+                                    >
+                                        <FaSearch className="text-sm" />
+                                    </button>
                                 </div>
-                                <button
-                                    type="submit"
-                                    className="w-10 h-[34px] bg-[#D39A5E] hover:bg-[#5a0020] text-white flex items-center justify-center rounded-r-lg shadow-md active:scale-95 border-2 border-[#D39A5E] hover:border-[#5a0020] transition-all flex-shrink-0"
-                                >
-                                    <FaSearch className="text-sm" />
-                                </button>
                             </form>
 
-                            {/* Desktop Links */}
-                            <div className="hidden xl:flex items-center space-x-4 font-bold text-[10px] lg:text-[11px] uppercase tracking-wider text-[#5a0020] flex-shrink-0">
-                                <Link to="/about" className="hover:text-black transition-colors whitespace-nowrap">Про нас</Link>
-                                <Link to="/delivery" className="hover:text-black transition-colors whitespace-nowrap">Доставка та оплата</Link>
-                                <Link to="/gallery/photo" className="hover:text-black transition-colors whitespace-nowrap">Фото</Link>
-                                <Link to="/gallery/video" className="hover:text-black transition-colors whitespace-nowrap">Відео</Link>
-                                <Link to="/reviews" className="hover:text-black transition-colors whitespace-nowrap">Відгуки</Link>
-                                <Link to="/blog" className="hover:text-black transition-colors whitespace-nowrap">Блог</Link>
+                            {/* Desktop Links - Subtle & Dark */}
+                            <div className="hidden xl:flex items-center space-x-5 font-bold text-[11px] uppercase tracking-tight text-gray-800 flex-shrink-0">
+                                <Link to="/about" className="hover:text-[#5a0020] transition-colors">Про нас</Link>
+                                <Link to="/delivery" className="hover:text-[#5a0020] transition-colors">Доставка та оплата</Link>
+                                <Link to="/gallery/photo" className="hover:text-[#5a0020] transition-colors">Фото</Link>
+                                <Link to="/gallery/video" className="hover:text-[#5a0020] transition-colors">Відео</Link>
+                                <Link to="/reviews" className="hover:text-[#5a0020] transition-colors">Відгуки</Link>
+                                <Link to="/blog" className="hover:text-[#5a0020] transition-colors">Блог</Link>
                             </div>
 
                             {/* Actions */}
@@ -88,7 +88,7 @@ function Navbar() {
                                             <FaViber className="text-xl" />
                                         </a>
                                     </div>
-                                    <a href="tel:0979081504" className="font-bold text-[#5a0020] text-base lg:text-lg hover:text-black transition-colors whitespace-nowrap">097 908 15 04</a>
+                                    <a href="tel:0979081504" className="font-extrabold text-[#5a0020] text-[18px] hover:text-black transition-colors whitespace-nowrap">097 908 15 04</a>
                                 </div>
 
                                 <div className="hidden xl:flex items-center">
@@ -152,14 +152,14 @@ function Navbar() {
 
             {/* Secondary Navigation (Categories) - Scrollable on Mobile - Hidden on Mobile altogether by user request */}
             <div className={`bg-white border-t border-gray-100 py-2.5 md:py-4 overflow-x-auto scrollbar-hide hidden md:block`}>
-                <div className="container mx-auto px-4 md:px-6 flex items-center justify-start md:justify-center space-x-5 md:space-x-8 font-bold text-[10px] md:text-xs uppercase tracking-widest text-gray-800 flex-nowrap md:flex-wrap min-w-max">
-                    <Link to="/holiday" className="text-[#a0742d] hover:text-[#5a0020] transition-all hover:-translate-y-0.5 whitespace-nowrap font-black border-r border-gray-100 pr-5 md:pr-8">Торти на замовлення</Link>
-                    <Link to="/cakes?category=bento" className="hover:text-[#5a0020] transition-all hover:-translate-y-0.5 whitespace-nowrap">Бенто тортики</Link>
-                    <Link to="/cakes?category=biscuit" className="hover:text-[#5a0020] transition-all hover:-translate-y-0.5 whitespace-nowrap">Бісквітні торти</Link>
-                    <Link to="/cakes?category=mousse" className="hover:text-[#5a0020] transition-all hover:-translate-y-0.5 whitespace-nowrap">Мусові торти</Link>
-                    <Link to="/cakes?category=cupcakes" className="hover:text-[#5a0020] transition-all hover:-translate-y-0.5 whitespace-nowrap">Капкейки</Link>
-                    <Link to="/cakes?category=gingerbread" className="hover:text-[#5a0020] transition-all hover:-translate-y-0.5 whitespace-nowrap">Імбирні пряники</Link>
-                    <Link to="/fillings" className="hover:text-[#5a0020] transition-all hover:-translate-y-0.5 whitespace-nowrap">Начинки</Link>
+                <div className="container mx-auto px-4 md:px-6 flex items-center justify-start md:justify-center space-x-6 md:space-x-12 font-bold text-[11px] md:text-[12px] uppercase tracking-widest flex-nowrap md:flex-wrap min-w-max">
+                    <Link to="/holiday" className="text-[#a0153e] hover:text-[#5a0020] transition-all whitespace-nowrap font-black">Торти на замовлення</Link>
+                    <Link to="/cakes?category=bento" className="text-gray-900 hover:text-[#a0153e] transition-all whitespace-nowrap">Бенто тортики</Link>
+                    <Link to="/cakes?category=biscuit" className="text-gray-900 hover:text-[#a0153e] transition-all whitespace-nowrap">Бісквітні торти</Link>
+                    <Link to="/cakes?category=mousse" className="text-gray-900 hover:text-[#a0153e] transition-all whitespace-nowrap">Мусові торти</Link>
+                    <Link to="/cakes?category=cupcakes" className="text-gray-900 hover:text-[#a0153e] transition-all whitespace-nowrap">Капкейки</Link>
+                    <Link to="/cakes?category=gingerbread" className="text-gray-900 hover:text-[#a0153e] transition-all whitespace-nowrap">Імбирні пряники</Link>
+                    <Link to="/fillings" className="text-gray-900 hover:text-[#a0153e] transition-all whitespace-nowrap">Начинки</Link>
                 </div>
             </div>
 

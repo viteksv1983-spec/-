@@ -53,38 +53,40 @@ function Home() {
 
     return (
         <div className="min-h-screen bg-[#F9F4EE]">
-            {/* Premium Deep Burgundy Hero Section with Warm Glow - Boxed Version */}
-            <div className="w-full pt-1 md:pt-3 mb-3 px-4 md:px-8">
-                <section className="mx-auto max-w-[1400px] relative min-h-[70vh] lg:min-h-[75vh] flex items-center overflow-hidden rounded-[2.5rem] md:rounded-[4rem] shadow-[0_40px_80px_rgba(0,0,0,0.3)] bg-gradient-to-br from-[#6E1224] to-[#4C0815]">
-                    {/* Soft Warm Glow behind the cake */}
-                    <div className="absolute top-1/2 right-0 -translate-y-1/2 w-[800px] h-[800px] bg-[#F5C24D]/10 rounded-full blur-[150px] pointer-events-none animate-pulse-slow"></div>
-                    <div className="absolute top-1/4 -right-20 w-[600px] h-[600px] bg-[#E6A800]/5 rounded-full blur-[130px] pointer-events-none"></div>
+            {/* Premium Deep Burgundy Hero Section - Precise Match to Screenshot */}
+            <div className="w-full pt-1 md:pt-4 mb-4 px-4 md:px-8">
+                <section className="mx-auto max-w-[1400px] relative min-h-[65vh] lg:min-h-[70vh] flex items-center overflow-hidden rounded-[3rem] md:rounded-[4.5rem] shadow-[0_40px_100px_rgba(0,0,0,0.4)] bg-gradient-to-br from-[#3D0814] via-[#630D21] to-[#2D060F]">
+                    {/* Radial glow behind the cake */}
+                    <div className="absolute top-1/2 right-[-10%] -translate-y-1/2 w-[80%] h-[120%] bg-white/10 rounded-full blur-[120px] pointer-events-none"></div>
 
-                    <div className="container mx-auto px-4 md:px-8 relative z-10 py-6 md:py-10">
-                        <div className="flex flex-col lg:flex-row items-center justify-between gap-8 md:gap-12">
+                    <div className="container mx-auto px-6 md:px-16 relative z-10 py-10 md:py-12">
+                        <div className="flex flex-col lg:flex-row items-center justify-between gap-10">
                             {/* Text Content */}
-                            <div className="lg:w-[48%] text-left animate-fade-in order-2 lg:order-1 pt-1 md:pt-3 mb-3 px-4 md:px-8">
-                                <h1 className="text-3xl md:text-4xl lg:text-[54px] font-black text-white leading-[1.0] mb-4 tracking-tight" style={{ fontFamily: "'Oswald', sans-serif" }}>
-                                    Торти на замовлення <br />
+                            <div className="lg:w-[50%] text-left animate-fade-in order-2 lg:order-1">
+                                <h1 className="text-4xl md:text-5xl lg:text-[64px] font-black text-white leading-[1.0] mb-4 tracking-tight" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                                    Торти на <br />
+                                    замовлення <br />
                                     в Києві —
                                 </h1>
-                                <div className="text-[#F5C24D] text-[22px] md:text-[28px] font-bold mb-6 tracking-wider uppercase drop-shadow-md" style={{ fontFamily: "'Dancing Script', cursive", fontStyle: 'normal' }}>
-                                    Кондитерська майстерня Antreme
+                                <div className="text-[#FFD700] text-[18px] md:text-[22px] font-bold mb-8 tracking-[0.15em] uppercase" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                                    КОНДИТЕРСЬКА МАЙСТЕРНЯ <br className="md:hidden" /> ANTREME
                                 </div>
-                                <p className="text-white/90 text-[15px] md:text-[17px] mb-8 leading-relaxed max-w-[540px] font-medium drop-shadow-sm">
-                                    Створюємо не просто десерти, а солодкі шедеври для ваших особливих моментів. Вишуканий дизайн та неперевершений смак у кожному шматочку.
+                                <p className="text-white/80 text-[14px] md:text-[16px] mb-10 leading-relaxed max-w-[480px] font-medium">
+                                    Авторські торти ручної роботи з натуральних інгредієнтів. <br />
+                                    Кожен торт створюється індивідуально протягом 3 днів. <br />
+                                    Доставка по Києву у зручний для вас час.
                                 </p>
 
-                                <div className="flex flex-col sm:flex-row gap-4 md:gap-6 pt-2">
+                                <div className="flex flex-col sm:flex-row gap-5">
                                     <button
                                         onClick={handleQuickOrderDefault}
-                                        className="h-[56px] px-10 md:px-12 bg-gradient-to-r from-[#F5C24D] to-[#E6A800] hover:from-[#E6A800] hover:to-[#F5C24D] text-gray-950 font-extrabold uppercase tracking-widest text-[13px] rounded-full transition-all duration-300 shadow-[0_10px_30px_rgba(245,194,77,0.3)] hover:shadow-[0_15px_40px_rgba(245,194,77,0.5)] transform hover:scale-[1.03] active:scale-95 flex items-center justify-center text-center whitespace-nowrap"
+                                        className="h-[52px] px-10 bg-[#FFD700] hover:bg-[#FFC800] text-gray-900 font-extrabold uppercase tracking-widest text-[12px] rounded-full transition-all duration-300 shadow-lg active:scale-95"
                                     >
                                         Замовити торт
                                     </button>
                                     <Link
                                         to="/cakes"
-                                        className="h-[56px] px-10 md:px-12 bg-[#C2183F] hover:bg-[#d11a48] text-white font-bold uppercase tracking-tight text-[13px] rounded-full transition-all duration-300 shadow-[0_10px_30px_rgba(194,24,63,0.2)] hover:shadow-[0_15px_40px_rgba(194,24,63,0.3)] transform hover:scale-[1.03] active:scale-95 border border-white/10 flex items-center justify-center text-center whitespace-nowrap"
+                                        className="h-[52px] px-10 bg-[#A0153E] hover:bg-[#801132] text-white font-bold uppercase tracking-widest text-[12px] rounded-full transition-all duration-300 shadow-lg active:scale-95 flex items-center justify-center"
                                     >
                                         Переглянути каталог
                                     </Link>
@@ -92,15 +94,11 @@ function Home() {
                             </div>
 
                             {/* Image Column */}
-                            <div className="lg:w-[58%] relative animate-fade-in-delayed flex justify-center lg:justify-end lg:-mr-12 order-1 lg:order-2">
-                                {/* Soft Glow behind cake */}
-                                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-[#F5C24D]/15 rounded-full blur-[100px] pointer-events-none"></div>
-
+                            <div className="lg:w-[50%] relative animate-fade-in-delayed flex justify-center lg:justify-end order-1 lg:order-2">
                                 <img
                                     src={new URL('../assets/cake-optimized-1600.webp', import.meta.url).href}
                                     alt="Преміальний торт Antreme"
-                                    className="w-[105%] lg:w-[115%] h-auto max-w-[550px] md:max-w-[700px] lg:max-w-[850px] drop-shadow-[0_50px_70px_rgba(0,0,0,0.7)] transform transition-all duration-1000 hover:scale-[1.10] lg:hover:translate-x-6 pointer-events-auto relative z-10"
-                                    style={{ filter: 'contrast(1.05) saturate(1.15)' }}
+                                    className="w-[90%] md:w-full h-auto max-w-[550px] lg:max-w-[650px] drop-shadow-[0_30px_50px_rgba(0,0,0,0.6)] transform transition-transform duration-1000 hover:scale-105"
                                     onError={(e) => {
                                         e.target.onerror = null;
                                         e.target.src = bannerImg;
@@ -118,173 +116,146 @@ function Home() {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     {/* Card 1 - Бенто */}
-                    <div className="group bg-white rounded-lg shadow-xl overflow-hidden hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 animate-scale-in">
-                        <div className="relative aspect-[4/3] bg-gradient-to-br from-pink-100 to-amber-50 flex items-center justify-center overflow-hidden">
-                            <div className="absolute inset-0 bg-gradient-to-br from-transparent to-black/10"></div>
-                            <div className="text-9xl opacity-90 group-hover:scale-125 transition-transform duration-700 relative z-10">🍥</div>
-                            <div className="absolute top-4 right-4 bg-vatsak-red text-white px-3 py-1 text-xs font-bold uppercase rounded-full">
-                                Тренд
+                    <div className="group bg-white rounded-3xl shadow-xl overflow-hidden hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2">
+                        <div className="relative aspect-[4/3] bg-[#FDE7F0] flex items-center justify-center overflow-hidden">
+                            <div className="text-8xl md:text-9xl opacity-90 group-hover:scale-110 transition-transform duration-700 relative z-10">🍥</div>
+                            <div className="absolute top-4 right-4 bg-[#8B1A24] text-white px-3 py-1 text-[10px] font-bold uppercase rounded-md">
+                                ТРЕНД
                             </div>
                         </div>
-                        <div className="p-8 text-center bg-gradient-to-b from-white to-gray-50">
-                            <h3 className="text-2xl font-bold text-gray-800 mb-2 uppercase group-hover:text-vatsak-red transition-colors" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                        <div className="p-8 text-center">
+                            <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-2 uppercase tracking-tight" style={{ fontFamily: "'Oswald', sans-serif" }}>
                                 БЕНТО ТОРТИ
                             </h3>
-                            <p className="text-gray-600 mb-6 text-sm">
+                            <p className="text-gray-500 mb-6 text-sm font-medium">
                                 Маленькі бенто торти для важливих моментів
                             </p>
-                            <Link to="/cakes?category=bento" className="inline-block bg-gradient-to-r from-[#ffd700] to-[#ffed4e] text-gray-900 px-8 py-3 font-bold uppercase text-xs tracking-wider hover:from-[#ffed4e] hover:to-[#ffd700] transition-all shadow-md hover:shadow-lg transform hover:scale-105 duration-300 rounded-lg">
-                                Замовити
+                            <Link to="/cakes?category=bento" className="inline-block bg-[#FFD700] hover:bg-[#FFC800] text-gray-900 px-10 py-3 font-extrabold uppercase text-[11px] tracking-widest transition-all shadow-md hover:shadow-lg rounded-md">
+                                ЗАМОВИТИ
                             </Link>
                         </div>
                     </div>
 
                     {/* Card 2 - Бісквітні */}
-                    <div className="group bg-white rounded-lg shadow-xl overflow-hidden hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 animate-scale-in-delayed">
-                        <div className="relative aspect-[4/3] bg-gradient-to-br from-amber-100 to-orange-50 flex items-center justify-center overflow-hidden">
-                            <div className="absolute inset-0 bg-gradient-to-br from-transparent to-black/10"></div>
-                            <div className="text-9xl opacity-90 group-hover:scale-125 transition-transform duration-700 relative z-10">🍰</div>
+                    <div className="group bg-white rounded-3xl shadow-xl overflow-hidden hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2">
+                        <div className="relative aspect-[4/3] bg-[#FEF4D5] flex items-center justify-center overflow-hidden">
+                            <div className="text-8xl md:text-9xl opacity-90 group-hover:scale-110 transition-transform duration-700 relative z-10">🍰</div>
                         </div>
-                        <div className="p-8 text-center bg-gradient-to-b from-white to-gray-50">
-                            <h3 className="text-2xl font-bold text-gray-800 mb-2 uppercase group-hover:text-vatsak-red transition-colors" style={{ fontFamily: "'Oswald', sans-serif" }}>
-                                Бісквітні Торти
+                        <div className="p-8 text-center">
+                            <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-2 uppercase tracking-tight" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                                БІСКВІТНІ ТОРТИ
                             </h3>
-                            <p className="text-gray-600 mb-6 text-sm">
+                            <p className="text-gray-500 mb-6 text-sm font-medium">
                                 Класичні смаки, знайомі з дитинства
                             </p>
-                            <Link to="/cakes?category=biscuit" className="inline-block bg-gradient-to-r from-[#ffd700] to-[#ffed4e] text-gray-900 px-8 py-3 font-bold uppercase text-xs tracking-wider hover:from-[#ffed4e] hover:to-[#ffd700] transition-all shadow-md hover:shadow-lg transform hover:scale-105 duration-300 rounded-lg">
-                                Замовити
+                            <Link to="/cakes?category=biscuit" className="inline-block bg-[#FFD700] hover:bg-[#FFC800] text-gray-900 px-10 py-3 font-extrabold uppercase text-[11px] tracking-widest transition-all shadow-md hover:shadow-lg rounded-md">
+                                ЗАМОВИТИ
                             </Link>
                         </div>
                     </div>
 
                     {/* Card 3 - Весільні */}
-                    <div className="group bg-white rounded-lg shadow-xl overflow-hidden hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 animate-scale-in-more-delayed">
-                        <div className="relative aspect-[4/3] bg-gradient-to-br from-purple-100 to-pink-50 flex items-center justify-center overflow-hidden">
-                            <div className="absolute inset-0 bg-gradient-to-br from-transparent to-black/10"></div>
-                            <div className="text-9xl opacity-90 group-hover:scale-125 transition-transform duration-700 relative z-10">🎂</div>
+                    <div className="group bg-white rounded-3xl shadow-xl overflow-hidden hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2">
+                        <div className="relative aspect-[4/3] bg-[#F1E8FE] flex items-center justify-center overflow-hidden">
+                            <div className="text-8xl md:text-9xl opacity-90 group-hover:scale-110 transition-transform duration-700 relative z-10">🎂</div>
                         </div>
-                        <div className="p-8 text-center bg-gradient-to-b from-white to-gray-50">
-                            <h3 className="text-2xl font-bold text-gray-800 mb-2 uppercase group-hover:text-vatsak-red transition-colors" style={{ fontFamily: "'Oswald', sans-serif" }}>
-                                Весільні Торти
+                        <div className="p-8 text-center">
+                            <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-2 uppercase tracking-tight" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                                ВЕСІЛЬНІ ТОРТИ
                             </h3>
-                            <p className="text-gray-600 mb-6 text-sm">
+                            <p className="text-gray-500 mb-6 text-sm font-medium">
                                 Вишукані торти для вашого особливого дня
                             </p>
-                            <Link to="/cakes?category=wedding" className="inline-block bg-gradient-to-r from-[#ffd700] to-[#ffed4e] text-gray-900 px-8 py-3 font-bold uppercase text-xs tracking-wider hover:from-[#ffed4e] hover:to-[#ffd700] transition-all shadow-md hover:shadow-lg transform hover:scale-105 duration-300 rounded-lg">
-                                Замовити
+                            <Link to="/cakes?category=wedding" className="inline-block bg-[#FFD700] hover:bg-[#FFC800] text-gray-900 px-10 py-3 font-extrabold uppercase text-[11px] tracking-widest transition-all shadow-md hover:shadow-lg rounded-md">
+                                ЗАМОВИТИ
                             </Link>
                         </div>
                     </div>
 
                     {/* Card 4 - Мусові */}
-                    <div className="group bg-white rounded-lg shadow-xl overflow-hidden hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 animate-scale-in">
-                        <div className="relative aspect-[4/3] bg-gradient-to-br from-red-100 to-pink-50 flex items-center justify-center overflow-hidden">
-                            <div className="absolute inset-0 bg-gradient-to-br from-transparent to-black/10"></div>
-                            <div className="text-9xl opacity-90 group-hover:scale-125 transition-transform duration-700 relative z-10">🍮</div>
+                    <div className="group bg-white rounded-3xl shadow-xl overflow-hidden hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2">
+                        <div className="relative aspect-[4/3] bg-[#FEE7E9] flex items-center justify-center overflow-hidden">
+                            <div className="text-8xl md:text-9xl opacity-90 group-hover:scale-110 transition-transform duration-700 relative z-10">🍮</div>
                         </div>
-                        <div className="p-8 text-center bg-gradient-to-b from-white to-gray-50">
-                            <h3 className="text-2xl font-bold text-gray-800 mb-2 uppercase group-hover:text-vatsak-red transition-colors" style={{ fontFamily: "'Oswald', sans-serif" }}>
-                                Мусові Торти
+                        <div className="p-8 text-center">
+                            <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-2 uppercase tracking-tight" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                                МУСОВІ ТОРТИ
                             </h3>
-                            <p className="text-gray-600 mb-6 text-sm">
+                            <p className="text-gray-500 mb-6 text-sm font-medium">
                                 Сучасні десерти з дзеркальною глазур'ю
                             </p>
-                            <Link to="/cakes?category=mousse" className="inline-block bg-gradient-to-r from-[#ffd700] to-[#ffed4e] text-gray-900 px-8 py-3 font-bold uppercase text-xs tracking-wider hover:from-[#ffed4e] hover:to-[#ffd700] transition-all shadow-md hover:shadow-lg transform hover:scale-105 duration-300 rounded-lg">
-                                Замовити
+                            <Link to="/cakes?category=mousse" className="inline-block bg-[#FFD700] hover:bg-[#FFC800] text-gray-900 px-10 py-3 font-extrabold uppercase text-[11px] tracking-widest transition-all shadow-md hover:shadow-lg rounded-md">
+                                ЗАМОВИТИ
                             </Link>
                         </div>
                     </div>
 
                     {/* Card 5 - Капкейки */}
-                    <div className="group bg-white rounded-lg shadow-xl overflow-hidden hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 animate-scale-in-delayed">
-                        <div className="relative aspect-[4/3] bg-gradient-to-br from-blue-100 to-indigo-50 flex items-center justify-center overflow-hidden">
-                            <div className="absolute inset-0 bg-gradient-to-br from-transparent to-black/10"></div>
-                            <div className="text-9xl opacity-90 group-hover:scale-125 transition-transform duration-700 relative z-10">🧁</div>
+                    <div className="group bg-white rounded-3xl shadow-xl overflow-hidden hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2">
+                        <div className="relative aspect-[4/3] bg-[#E7F3FD] flex items-center justify-center overflow-hidden">
+                            <div className="text-8xl md:text-9xl opacity-90 group-hover:scale-110 transition-transform duration-700 relative z-10">🧁</div>
                         </div>
-                        <div className="p-8 text-center bg-gradient-to-b from-white to-gray-50">
-                            <h3 className="text-2xl font-bold text-gray-800 mb-2 uppercase group-hover:text-vatsak-red transition-colors" style={{ fontFamily: "'Oswald', sans-serif" }}>
-                                Капкейки
+                        <div className="p-8 text-center">
+                            <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-2 uppercase tracking-tight" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                                КАПКЕЙКИ
                             </h3>
-                            <p className="text-gray-600 mb-6 text-sm">
+                            <p className="text-gray-500 mb-6 text-sm font-medium">
                                 Порційні десерти для будь-якої події
                             </p>
-                            <Link to="/cakes?category=cupcakes" className="inline-block bg-gradient-to-r from-[#ffd700] to-[#ffed4e] text-gray-900 px-8 py-3 font-bold uppercase text-xs tracking-wider hover:from-[#ffed4e] hover:to-[#ffd700] transition-all shadow-md hover:shadow-lg transform hover:scale-105 duration-300 rounded-lg">
-                                Замовити
+                            <Link to="/cakes?category=cupcakes" className="inline-block bg-[#FFD700] hover:bg-[#FFC800] text-gray-900 px-10 py-3 font-extrabold uppercase text-[11px] tracking-widest transition-all shadow-md hover:shadow-lg rounded-md">
+                                ЗАМОВИТИ
                             </Link>
                         </div>
                     </div>
 
                     {/* Card 6 - Пряники */}
-                    <div className="group bg-white rounded-lg shadow-xl overflow-hidden hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 animate-scale-in-more-delayed">
-                        <div className="relative aspect-[4/3] bg-gradient-to-br from-green-100 to-emerald-50 flex items-center justify-center overflow-hidden">
-                            <div className="absolute inset-0 bg-gradient-to-br from-transparent to-black/10"></div>
-                            <div className="text-9xl opacity-90 group-hover:scale-125 transition-transform duration-700 relative z-10">🍪</div>
+                    <div className="group bg-white rounded-3xl shadow-xl overflow-hidden hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2">
+                        <div className="relative aspect-[4/3] bg-[#E7FDE7] flex items-center justify-center overflow-hidden">
+                            <div className="text-8xl md:text-9xl opacity-90 group-hover:scale-110 transition-transform duration-700 relative z-10">🍪</div>
                         </div>
-                        <div className="p-8 text-center bg-gradient-to-b from-white to-gray-50">
-                            <h3 className="text-2xl font-bold text-gray-800 mb-2 uppercase group-hover:text-vatsak-red transition-colors" style={{ fontFamily: "'Oswald', sans-serif" }}>
-                                Імбирні Пряники
+                        <div className="p-8 text-center">
+                            <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-2 uppercase tracking-tight" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                                ІМБИРНІ ПРЯНИКИ
                             </h3>
-                            <p className="text-gray-600 mb-6 text-sm">
+                            <p className="text-gray-500 mb-6 text-sm font-medium">
                                 Ароматні подарунки з ручним розписом
                             </p>
-                            <Link to="/cakes?category=gingerbread" className="inline-block bg-gradient-to-r from-[#ffd700] to-[#ffed4e] text-gray-900 px-8 py-3 font-bold uppercase text-xs tracking-wider hover:from-[#ffed4e] hover:to-[#ffd700] transition-all shadow-md hover:shadow-lg transform hover:scale-105 duration-300 rounded-lg">
-                                Замовити
+                            <Link to="/cakes?category=gingerbread" className="inline-block bg-[#FFD700] hover:bg-[#FFC800] text-gray-900 px-10 py-3 font-extrabold uppercase text-[11px] tracking-widest transition-all shadow-md hover:shadow-lg rounded-md">
+                                ЗАМОВИТИ
                             </Link>
                         </div>
                     </div>
                 </div>
             </div >
 
-            {/* Visual Impact Section - Vatsak Style - Boxed and Shrunk */}
-            < div className="container mx-auto px-4 md:px-6 mb-16 bg-white" >
-                <div className="relative bg-[#F6E7D6]/30 py-12 overflow-hidden rounded-[2.5rem] shadow-sm border border-[#D39A5E]/20">
-                    {/* Decorative product images with floating emojis - Scaled down */}
-                    <div className="absolute inset-0 flex items-center justify-center opacity-40">
-                        {/* Top Left - Cake slice */}
-                        <div className="absolute top-4 left-10 md:left-40 transform -rotate-12 animate-float">
-                            <div className="text-6xl md:text-8xl drop-shadow-[0_4px_10px_rgba(0,0,0,0.1)]" style={{ filter: 'contrast(1.2) saturate(1.3)' }}>🍰</div>
-                        </div>
-
-                        {/* Top Right - Orange slices */}
-                        <div className="absolute top-4 right-10 md:right-48 transform rotate-12 animate-float-delayed">
-                            <div className="text-5xl md:text-6xl drop-shadow-[0_4px_10px_rgba(0,0,0,0.1)]" style={{ filter: 'contrast(1.2) saturate(1.4)' }}>🍊</div>
-                        </div>
-
-                        {/* Bottom Right - Chocolate truffles */}
-                        <div className="absolute bottom-6 right-8 md:right-52 transform rotate-6 animate-float-slow">
-                            <div className="text-6xl md:text-7xl drop-shadow-[0_6px_15px_rgba(0,0,0,0.15)]" style={{ filter: 'contrast(1.2) saturate(1.3)' }}>🍫</div>
-                        </div>
-
-                        {/* Bottom Left - Berries */}
-                        <div className="absolute bottom-8 left-8 md:left-56 transform -rotate-6 animate-float">
-                            <div className="text-5xl md:text-6xl drop-shadow-[0_4px_10px_rgba(0,0,0,0.1)]" style={{ filter: 'contrast(1.2) saturate(1.5)' }}>🍓</div>
-                        </div>
+            {/* Visual Impact Section - Clean Premium Style */}
+            <div className="container mx-auto px-4 md:px-8 mb-20">
+                <div className="relative bg-[#FDF8F3] py-16 md:py-24 overflow-hidden rounded-[3rem] md:rounded-[4rem] border border-gray-100 shadow-sm">
+                    {/* Decorative subtle floating elements */}
+                    <div className="absolute inset-0 flex items-center justify-center opacity-20 pointer-events-none">
+                        <div className="absolute top-10 left-[15%] animate-float text-6xl">🍰</div>
+                        <div className="absolute top-10 right-[15%] animate-float-delayed text-5xl">🍓</div>
+                        <div className="absolute bottom-10 left-[20%] animate-float-slow text-6xl">🍫</div>
+                        <div className="absolute bottom-10 right-[20%] animate-float text-5xl">🍊</div>
                     </div>
 
                     <div className="container mx-auto px-6 relative z-10">
                         <div className="max-w-4xl mx-auto text-center">
-                            <h2 className="text-4xl md:text-6xl lg:text-7xl font-black mb-4 leading-tight uppercase" style={{ fontFamily: "'Oswald', sans-serif" }}>
-                                <span className="text-vatsak-gold drop-shadow-[0_2px_8px_rgba(255,215,0,0.3)] animate-pulse-slow">
-                                    Смак
-                                </span>
-                                <span className="text-gray-800">, </span>
-                                <span className="text-vatsak-gold drop-shadow-[0_2px_8px_rgba(255,215,0,0.3)] animate-pulse-slow" style={{ animationDelay: '0.2s' }}>
-                                    Якість
-                                </span>
+                            <h2 className="text-5xl md:text-7xl lg:text-8xl font-black mb-6 leading-tight uppercase tracking-tight" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                                <span className="text-[#FFD700] drop-shadow-sm">Смак</span>
+                                <span className="text-gray-900">, </span>
+                                <span className="text-[#FFD700] drop-shadow-sm">Якість</span>
                                 <br className="hidden md:block" />
-                                <span className="text-gray-800"> і </span>
-                                <span className="text-vatsak-gold drop-shadow-[0_2px_8px_rgba(255,215,0,0.3)] animate-pulse-slow" style={{ animationDelay: '0.4s' }}>
-                                    Ціна
-                                </span>
+                                <span className="text-gray-900"> і </span>
+                                <span className="text-[#FFD700] drop-shadow-sm">Ціна</span>
                             </h2>
-                            <p className="text-lg md:text-xl text-gray-500 italic" style={{ fontFamily: "'Dancing Script', cursive" }}>
+                            <p className="text-xl md:text-2xl text-gray-500 italic" style={{ fontFamily: "'Dancing Script', cursive" }}>
                                 це наші головні цінності
                             </p>
                         </div>
                     </div>
                 </div>
-            </div >
+            </div>
 
             {/* About Section - Confectioner Spotlight */}
             < div className="relative bg-gradient-to-br from-[#f8f9fa] via-[#fff] to-[#f8f9fa] py-24 overflow-hidden" >
@@ -328,8 +299,8 @@ function Home() {
                                 <img src={logo} alt="ANTREME Logo" className="w-[450px] h-auto object-contain" />
                             </div>
 
-                            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6 leading-tight animate-fade-in" style={{ fontFamily: "'Oswald', sans-serif" }}>
-                                ТОРТИ З <span className="text-vatsak-red">ДУШЕЮ</span> ТА <span className="text-vatsak-gold">ЛЮБОВ'Ю</span>
+                            <h2 className="text-4xl md:text-5xl font-black text-gray-900 mb-6 leading-tight animate-fade-in uppercase tracking-tight" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                                ТОРТИ З <span className="text-[#A0153E]">ДУШЕЮ</span> ТА <span className="text-[#FFD700]">ЛЮБОВ'Ю</span>
                             </h2>
 
                             <p className="text-lg text-gray-600 mb-10 leading-relaxed font-light animate-fade-in-delayed max-w-xl mx-auto">
