@@ -53,63 +53,65 @@ function Home() {
 
     return (
         <div className="min-h-screen bg-[#F9F4EE]">
-            {/* Premium Deep Burgundy Hero Section with Warm Glow */}
-            <section className="relative min-h-[70vh] lg:min-h-[75vh] flex items-center overflow-hidden bg-gradient-to-br from-[#6E1224] to-[#4C0815]">
-                {/* Soft Warm Glow behind the cake */}
-                <div className="absolute top-1/2 right-0 -translate-y-1/2 w-[800px] h-[800px] bg-[#F5C24D]/10 rounded-full blur-[150px] pointer-events-none animate-pulse-slow"></div>
-                <div className="absolute top-1/4 -right-20 w-[600px] h-[600px] bg-[#E6A800]/5 rounded-full blur-[130px] pointer-events-none"></div>
+            {/* Premium Deep Burgundy Hero Section with Warm Glow - Boxed Version */}
+            <div className="w-full pt-1 md:pt-3 mb-3 px-4 md:px-8">
+                <section className="mx-auto max-w-[1400px] relative min-h-[70vh] lg:min-h-[75vh] flex items-center overflow-hidden rounded-[2.5rem] md:rounded-[4rem] shadow-[0_40px_80px_rgba(0,0,0,0.3)] bg-gradient-to-br from-[#6E1224] to-[#4C0815]">
+                    {/* Soft Warm Glow behind the cake */}
+                    <div className="absolute top-1/2 right-0 -translate-y-1/2 w-[800px] h-[800px] bg-[#F5C24D]/10 rounded-full blur-[150px] pointer-events-none animate-pulse-slow"></div>
+                    <div className="absolute top-1/4 -right-20 w-[600px] h-[600px] bg-[#E6A800]/5 rounded-full blur-[130px] pointer-events-none"></div>
 
-                <div className="container mx-auto px-4 md:px-8 relative z-10 py-6 md:py-10">
-                    <div className="flex flex-col lg:flex-row items-center justify-between gap-8 md:gap-12">
-                        {/* Text Content */}
-                        <div className="lg:w-[48%] text-left animate-fade-in order-2 lg:order-1 pt-1 md:pt-3 mb-3 px-4 md:px-8">
-                            <h1 className="text-3xl md:text-4xl lg:text-[54px] font-black text-white leading-[1.0] mb-4 tracking-tight" style={{ fontFamily: "'Oswald', sans-serif" }}>
-                                Торти на замовлення <br />
-                                в Києві —
-                            </h1>
-                            <div className="text-[#F5C24D] text-[22px] md:text-[28px] font-bold mb-6 tracking-wider uppercase drop-shadow-md" style={{ fontFamily: "'Dancing Script', cursive", fontStyle: 'normal' }}>
-                                Кондитерська майстерня Antreme
+                    <div className="container mx-auto px-4 md:px-8 relative z-10 py-6 md:py-10">
+                        <div className="flex flex-col lg:flex-row items-center justify-between gap-8 md:gap-12">
+                            {/* Text Content */}
+                            <div className="lg:w-[48%] text-left animate-fade-in order-2 lg:order-1 pt-1 md:pt-3 mb-3 px-4 md:px-8">
+                                <h1 className="text-3xl md:text-4xl lg:text-[54px] font-black text-white leading-[1.0] mb-4 tracking-tight" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                                    Торти на замовлення <br />
+                                    в Києві —
+                                </h1>
+                                <div className="text-[#F5C24D] text-[22px] md:text-[28px] font-bold mb-6 tracking-wider uppercase drop-shadow-md" style={{ fontFamily: "'Dancing Script', cursive", fontStyle: 'normal' }}>
+                                    Кондитерська майстерня Antreme
+                                </div>
+                                <p className="text-white/90 text-[15px] md:text-[17px] mb-8 leading-relaxed max-w-[540px] font-medium drop-shadow-sm">
+                                    Створюємо не просто десерти, а солодкі шедеври для ваших особливих моментів. Вишуканий дизайн та неперевершений смак у кожному шматочку.
+                                </p>
+
+                                <div className="flex flex-col sm:flex-row gap-4 md:gap-6 pt-2">
+                                    <button
+                                        onClick={handleQuickOrderDefault}
+                                        className="h-[56px] px-10 md:px-12 bg-gradient-to-r from-[#F5C24D] to-[#E6A800] hover:from-[#E6A800] hover:to-[#F5C24D] text-gray-950 font-extrabold uppercase tracking-widest text-[13px] rounded-full transition-all duration-300 shadow-[0_10px_30px_rgba(245,194,77,0.3)] hover:shadow-[0_15px_40px_rgba(245,194,77,0.5)] transform hover:scale-[1.03] active:scale-95 flex items-center justify-center text-center whitespace-nowrap"
+                                    >
+                                        Замовити торт
+                                    </button>
+                                    <Link
+                                        to="/cakes"
+                                        className="h-[56px] px-10 md:px-12 bg-[#C2183F] hover:bg-[#d11a48] text-white font-bold uppercase tracking-tight text-[13px] rounded-full transition-all duration-300 shadow-[0_10px_30px_rgba(194,24,63,0.2)] hover:shadow-[0_15px_40px_rgba(194,24,63,0.3)] transform hover:scale-[1.03] active:scale-95 border border-white/10 flex items-center justify-center text-center whitespace-nowrap"
+                                    >
+                                        Переглянути каталог
+                                    </Link>
+                                </div>
                             </div>
-                            <p className="text-white/90 text-[15px] md:text-[17px] mb-8 leading-relaxed max-w-[540px] font-medium drop-shadow-sm">
-                                Створюємо не просто десерти, а солодкі шедеври для ваших особливих моментів. Вишуканий дизайн та неперевершений смак у кожному шматочку.
-                            </p>
 
-                            <div className="flex flex-col sm:flex-row gap-4 md:gap-6 pt-2">
-                                <button
-                                    onClick={handleQuickOrderDefault}
-                                    className="h-[56px] px-10 md:px-12 bg-gradient-to-r from-[#F5C24D] to-[#E6A800] hover:from-[#E6A800] hover:to-[#F5C24D] text-gray-950 font-extrabold uppercase tracking-widest text-[13px] rounded-full transition-all duration-300 shadow-[0_10px_30px_rgba(245,194,77,0.3)] hover:shadow-[0_15px_40px_rgba(245,194,77,0.5)] transform hover:scale-[1.03] active:scale-95 flex items-center justify-center text-center whitespace-nowrap"
-                                >
-                                    Замовити торт
-                                </button>
-                                <Link
-                                    to="/cakes"
-                                    className="h-[56px] px-10 md:px-12 bg-[#C2183F] hover:bg-[#d11a48] text-white font-bold uppercase tracking-tight text-[13px] rounded-full transition-all duration-300 shadow-[0_10px_30px_rgba(194,24,63,0.2)] hover:shadow-[0_15px_40px_rgba(194,24,63,0.3)] transform hover:scale-[1.03] active:scale-95 border border-white/10 flex items-center justify-center text-center whitespace-nowrap"
-                                >
-                                    Переглянути каталог
-                                </Link>
+                            {/* Image Column */}
+                            <div className="lg:w-[58%] relative animate-fade-in-delayed flex justify-center lg:justify-end lg:-mr-12 order-1 lg:order-2">
+                                {/* Soft Glow behind cake */}
+                                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-[#F5C24D]/15 rounded-full blur-[100px] pointer-events-none"></div>
+
+                                <img
+                                    src={new URL('../assets/cake-optimized-1600.webp', import.meta.url).href}
+                                    alt="Преміальний торт Antreme"
+                                    className="w-[105%] lg:w-[115%] h-auto max-w-[550px] md:max-w-[700px] lg:max-w-[850px] drop-shadow-[0_50px_70px_rgba(0,0,0,0.7)] transform transition-all duration-1000 hover:scale-[1.10] lg:hover:translate-x-6 pointer-events-auto relative z-10"
+                                    style={{ filter: 'contrast(1.05) saturate(1.15)' }}
+                                    onError={(e) => {
+                                        e.target.onerror = null;
+                                        e.target.src = bannerImg;
+                                        e.target.className = "w-full h-full object-cover rounded-3xl opacity-30 grayscale";
+                                    }}
+                                />
                             </div>
-                        </div>
-
-                        {/* Image Column */}
-                        <div className="lg:w-[58%] relative animate-fade-in-delayed flex justify-center lg:justify-end lg:-mr-12 order-1 lg:order-2">
-                            {/* Soft Glow behind cake */}
-                            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-[#F5C24D]/15 rounded-full blur-[100px] pointer-events-none"></div>
-
-                            <img
-                                src={new URL('../assets/cake-optimized-1600.webp', import.meta.url).href}
-                                alt="Преміальний торт Antreme"
-                                className="w-[105%] lg:w-[115%] h-auto max-w-[550px] md:max-w-[700px] lg:max-w-[850px] drop-shadow-[0_50px_70px_rgba(0,0,0,0.7)] transform transition-all duration-1000 hover:scale-[1.10] lg:hover:translate-x-6 pointer-events-auto relative z-10"
-                                style={{ filter: 'contrast(1.05) saturate(1.15)' }}
-                                onError={(e) => {
-                                    e.target.onerror = null;
-                                    e.target.src = bannerImg;
-                                    e.target.className = "w-full h-full object-cover rounded-3xl opacity-30 grayscale";
-                                }}
-                            />
                         </div>
                     </div>
-                </div>
-            </section>
+                </section>
+            </div>
 
             {/* Product Category Cards */}
             <div className="container mx-auto px-6 py-10 bg-white" id="categories">
