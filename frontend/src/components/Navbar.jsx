@@ -27,8 +27,8 @@ function Navbar() {
 
     return (
         <nav className="sticky top-0 z-50 shadow-lg">
-            {/* Main Header - Premium Light Cream Background */}
-            <div className="bg-[#FAF3E0] w-full border-b border-amber-100/50">
+            {/* Main Header - Premium Warm Cream-Caramel Background */}
+            <div className="bg-[#F6E7D6] w-full border-b border-[#D39A5E]/20">
                 <div className="container mx-auto px-6 py-4">
                     <div className="container mx-auto px-4 md:px-6">
                         {/* Desktop Header Layout */}
@@ -55,7 +55,7 @@ function Navbar() {
                                 </div>
                                 <button
                                     type="submit"
-                                    className="w-10 h-[34px] bg-[#5a0020] hover:bg-black text-white flex items-center justify-center rounded-r-lg shadow-md active:scale-95 border-2 border-[#5a0020] hover:border-black transition-all flex-shrink-0"
+                                    className="w-10 h-[34px] bg-[#D39A5E] hover:bg-[#5a0020] text-white flex items-center justify-center rounded-r-lg shadow-md active:scale-95 border-2 border-[#D39A5E] hover:border-[#5a0020] transition-all flex-shrink-0"
                                 >
                                     <FaSearch className="text-sm" />
                                 </button>
@@ -75,16 +75,16 @@ function Navbar() {
                             <div className="flex items-center space-x-4 lg:space-x-6 flex-shrink-0">
                                 <div className="hidden lg:flex flex-col items-center">
                                     <div className="flex items-center space-x-3 mb-1">
-                                        <a href="https://www.instagram.com/liudmilaprikhodko" target="_blank" rel="noopener noreferrer" className="text-[#5a0020] hover:text-black transition-colors">
+                                        <a href="https://www.instagram.com/liudmilaprikhodko" target="_blank" rel="noopener noreferrer" className="text-[#D39A5E] hover:text-[#5a0020] transition-colors">
                                             <FaInstagram className="text-xl" />
                                         </a>
-                                        <a href="https://www.facebook.com/sveetdesert/" target="_blank" rel="noopener noreferrer" className="text-[#5a0020] hover:text-black transition-colors">
+                                        <a href="https://www.facebook.com/sveetdesert/" target="_blank" rel="noopener noreferrer" className="text-[#D39A5E] hover:text-[#5a0020] transition-colors">
                                             <FaFacebook className="text-xl" />
                                         </a>
-                                        <a href="https://t.me/antreeeme" target="_blank" rel="noopener noreferrer" className="text-[#5a0020] hover:text-black transition-colors">
+                                        <a href="https://t.me/antreeeme" target="_blank" rel="noopener noreferrer" className="text-[#D39A5E] hover:text-[#5a0020] transition-colors">
                                             <FaTelegram className="text-xl" />
                                         </a>
-                                        <a href="viber://chat?number=%2B380979081504" target="_blank" rel="noopener noreferrer" className="text-[#5a0020] hover:text-black transition-colors">
+                                        <a href="viber://chat?number=%2B380979081504" target="_blank" rel="noopener noreferrer" className="text-[#D39A5E] hover:text-[#5a0020] transition-colors">
                                             <FaViber className="text-xl" />
                                         </a>
                                     </div>
@@ -92,18 +92,18 @@ function Navbar() {
                                 </div>
 
                                 <div className="hidden xl:flex items-center">
-                                    <Link to={user ? "/account" : "/login"} className="text-[#5a0020] hover:text-black transition-colors p-2 rounded-full hover:bg-black/5" title={user ? "Особистий кабінет" : "Вхід"}>
+                                    <Link to={user ? "/account" : "/login"} className="text-[#D39A5E] hover:text-[#5a0020] transition-colors p-2 rounded-full hover:bg-black/5" title={user ? "Особистий кабінет" : "Вхід"}>
                                         <FiUser className="w-8 h-8" />
                                     </Link>
                                 </div>
 
-                                <Link to="/cart" className="relative group text-[#5a0020] hover:text-black transition-colors p-2 rounded-full hover:bg-black/5">
+                                <Link to="/cart" className="relative group text-[#D39A5E] hover:text-[#5a0020] transition-colors p-2 rounded-full hover:bg-black/5">
                                     <div className="relative">
                                         <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
                                         </svg>
                                         {cartCount > 0 && (
-                                            <span className="absolute -top-1 -right-1 bg-white text-[#5a0020] text-[10px] font-bold rounded-full h-5 w-5 flex items-center justify-center border-2 border-[#5a0020]">
+                                            <span className="absolute -top-1 -right-1 bg-[#5a0020] text-white text-[10px] font-bold rounded-full h-5 w-5 flex items-center justify-center border-2 border-white">
                                                 {cartCount}
                                             </span>
                                         )}
@@ -139,7 +139,7 @@ function Navbar() {
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
                                     </svg>
                                     {cartCount > 0 && (
-                                        <span className="absolute top-0 right-0 bg-white text-[#5a0020] text-[8px] font-bold rounded-full h-3.5 w-3.5 flex items-center justify-center border border-[#5a0020]">
+                                        <span className="absolute top-0 right-0 bg-[#5a0020] text-white text-[8px] font-bold rounded-full h-3.5 w-3.5 flex items-center justify-center border border-white">
                                             {cartCount}
                                         </span>
                                     )}
@@ -173,8 +173,8 @@ function Navbar() {
                     />
 
                     {/* Drawer */}
-                    <div className="fixed top-0 left-0 h-full bg-white z-50 shadow-2xl w-fit max-w-[85vw] transform transition-transform duration-300 md:hidden overflow-y-auto flex flex-col border-r-4 border-[#FAF3E0]">
-                        <div className="p-6 flex items-center justify-between border-b border-gray-100 bg-[#FAF3E0] sticky top-0 z-10">
+                    <div className="fixed top-0 left-0 h-full bg-white z-50 shadow-2xl w-fit max-w-[85vw] transform transition-transform duration-300 md:hidden overflow-y-auto flex flex-col border-r-4 border-[#F6E7D6]">
+                        <div className="p-6 flex items-center justify-between border-b border-gray-100 bg-[#F6E7D6] sticky top-0 z-10">
                             <div className="flex items-center gap-2">
                                 <img src={logo} alt="L" className="h-8 w-auto" />
                                 <span className="text-xl font-serif font-bold text-[#5a0020]">Antreme</span>

@@ -85,7 +85,7 @@ function CakeDetail() {
     const selectedFilling = FILLINGS.find(f => f.name === selectedFlavor);
 
     return (
-        <div className="min-h-screen bg-[#F9F8F1] text-gray-800 font-sans">
+        <div className="min-h-screen bg-[#F9F4EE] text-gray-800 font-sans">
             <SEOHead
                 title={cake.meta_title || `${cake.name} - Купити в Києві | Antreme`}
                 description={cake.meta_description || `Замовити торт ${cake.name}. ${cake.description?.slice(0, 100)}...`}
@@ -383,7 +383,7 @@ function CakeDetail() {
 
                                         <button
                                             onClick={() => setIsQuickOrderOpen(true)}
-                                            className="col-span-3 md:col-span-3 bg-[#FFF5CC] text-[#856404] font-bold text-[8px] md:text-[11px] uppercase tracking-widest border border-[#FFD966] hover:bg-[#FFF0B3] transition-all rounded-xl h-full flex items-center justify-center active:scale-95 whitespace-nowrap shadow-sm px-1"
+                                            className="col-span-3 md:col-span-3 bg-[#D39A5E] text-white font-bold text-[8px] md:text-[11px] uppercase tracking-widest hover:bg-[#b07d48] transition-all rounded-xl h-full flex items-center justify-center active:scale-95 whitespace-nowrap shadow-sm px-1"
                                         >
                                             1 Клік
                                         </button>
@@ -396,7 +396,7 @@ function CakeDetail() {
             </div>
 
             {/* Related Products Section */}
-            <div className="bg-[#F9F8F1] pb-16 md:pb-24">
+            <div className="bg-[#F9F4EE] pb-16 md:pb-24">
                 <div className="container mx-auto px-4 md:px-6 bg-white py-12 md:py-16 shadow-sm border border-gray-100 rounded-3xl">
                     <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-10">
                         <div>
