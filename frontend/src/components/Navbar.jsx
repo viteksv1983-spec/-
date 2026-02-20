@@ -150,8 +150,8 @@ function Navbar() {
                 </div>
             </div>
 
-            {/* Secondary Navigation (Categories) - Scrollable on Mobile - Hidden on Product Details (Mobile) */}
-            <div className={`bg-white border-t border-gray-100 py-2.5 md:py-4 overflow-x-auto scrollbar-hide ${isProductDetailPage ? 'hidden md:block' : ''}`}>
+            {/* Secondary Navigation (Categories) - Scrollable on Mobile - Hidden on Mobile altogether by user request */}
+            <div className={`bg-white border-t border-gray-100 py-2.5 md:py-4 overflow-x-auto scrollbar-hide hidden md:block`}>
                 <div className="container mx-auto px-4 md:px-6 flex items-center justify-start md:justify-center space-x-5 md:space-x-8 font-bold text-[10px] md:text-xs uppercase tracking-widest text-gray-800 flex-nowrap md:flex-wrap min-w-max">
                     <Link to="/holiday" className="text-[#a0742d] hover:text-[#5a0020] transition-all hover:-translate-y-0.5 whitespace-nowrap font-black border-r border-gray-100 pr-5 md:pr-8">Торти на замовлення</Link>
                     <Link to="/cakes?category=bento" className="hover:text-[#5a0020] transition-all hover:-translate-y-0.5 whitespace-nowrap">Бенто тортики</Link>
