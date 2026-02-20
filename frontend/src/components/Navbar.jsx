@@ -27,8 +27,8 @@ function Navbar() {
 
     return (
         <nav className="sticky top-0 z-50 shadow-lg">
-            {/* Main Header - Bright Amber Background */}
-            <div className="bg-amber-400 w-full">
+            {/* Main Header - Premium Light Cream Background */}
+            <div className="bg-[#FAF3E0] w-full border-b border-amber-100/50">
                 <div className="container mx-auto px-6 py-4">
                     <div className="container mx-auto px-4 md:px-6">
                         {/* Desktop Header Layout */}
@@ -173,8 +173,8 @@ function Navbar() {
                     />
 
                     {/* Drawer */}
-                    <div className="fixed top-0 left-0 h-full bg-white z-50 shadow-2xl w-fit max-w-[85vw] transform transition-transform duration-300 md:hidden overflow-y-auto flex flex-col border-r-4 border-amber-400">
-                        <div className="p-6 flex items-center justify-between border-b border-gray-100 bg-amber-400 sticky top-0 z-10">
+                    <div className="fixed top-0 left-0 h-full bg-white z-50 shadow-2xl w-fit max-w-[85vw] transform transition-transform duration-300 md:hidden overflow-y-auto flex flex-col border-r-4 border-[#FAF3E0]">
+                        <div className="p-6 flex items-center justify-between border-b border-gray-100 bg-[#FAF3E0] sticky top-0 z-10">
                             <div className="flex items-center gap-2">
                                 <img src={logo} alt="L" className="h-8 w-auto" />
                                 <span className="text-xl font-serif font-bold text-[#5a0020]">Antreme</span>
