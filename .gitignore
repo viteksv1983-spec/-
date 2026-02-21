@@ -12,8 +12,8 @@ dist-ssr/
 *.local
 
 # Database
-backend/sql_app.db
-sql_app.db
+# backend/sql_app.db
+# sql_app.db
 
 # IDE
 .vscode/
