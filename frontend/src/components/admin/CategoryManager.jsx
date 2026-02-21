@@ -71,7 +71,7 @@ export default function CategoryManager() {
     );
 
     return (
-        <div className="space-y-6">
+        <div className="space-y-6 max-w-5xl">
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
                 <div>
                     <h1 className="text-2xl font-bold text-gray-900">Керування категоріями</h1>
@@ -79,7 +79,7 @@ export default function CategoryManager() {
                 </div>
             </div>
 
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 md:gap-6">
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 md:gap-5">
                 {CATEGORIES.filter(c => !['bento', 'biscuit', 'mousse', 'wedding', 'cupcakes', 'gingerbread'].includes(c.slug) || c.slug === 'wedding').map((cat) => (
                     <div key={cat.slug} className="bg-white rounded-2xl md:rounded-3xl shadow-sm border border-gray-100 overflow-hidden group hover:shadow-md transition-shadow">
                         <div className="aspect-square md:aspect-video relative bg-gray-50 overflow-hidden">
@@ -95,12 +95,12 @@ export default function CategoryManager() {
                             )}
                         </div>
 
-                        <div className="p-2.5 md:p-4">
+                        <div className="p-2.5 md:p-3">
                             <div className="flex flex-col md:flex-row md:items-center justify-between mb-2 md:mb-3">
-                                <h3 className="font-bold text-gray-900 text-[10px] md:text-sm truncate uppercase tracking-tight text-center md:text-left leading-tight">{cat.name}</h3>
+                                <h3 className="font-bold text-gray-900 text-[10px] md:text-xs truncate uppercase tracking-tight text-center md:text-left leading-tight">{cat.name}</h3>
                             </div>
 
-                            <label className="flex items-center justify-center gap-1.5 md:gap-2 w-full px-2 py-1.5 md:px-4 md:py-2 bg-gray-50 hover:bg-vatsak-red hover:text-white rounded-lg md:rounded-xl text-gray-600 font-bold text-[9px] md:text-xs cursor-pointer transition-all border border-gray-100 uppercase tracking-widest text-center mt-auto">
+                            <label className="flex items-center justify-center gap-1.5 md:gap-2 w-full px-2 py-1.5 md:px-3 md:py-1.5 bg-gray-50 hover:bg-vatsak-red hover:text-white rounded-lg md:rounded-xl text-gray-600 font-bold text-[9px] md:text-[10px] cursor-pointer transition-all border border-gray-100 uppercase tracking-widest text-center mt-auto">
                                 <FiUpload className="w-3 h-3 hidden md:block" />
                                 <span>Змінити</span>
                                 <input

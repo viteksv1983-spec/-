@@ -67,12 +67,12 @@ export default function SEOPages() {
     if (loading) return <div>Завантаження...</div>;
 
     return (
-        <div>
-            <div className="flex justify-between items-center mb-6">
+        <div className="max-w-5xl">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
                 <h1 className="text-2xl font-bold">SEO Статичних Сторінок</h1>
                 <button
                     onClick={handleCreate}
-                    className="flex items-center gap-2 bg-vatsak-red text-white px-4 py-2 rounded-xl hover:bg-red-700 transition-colors"
+                    className="flex items-center justify-center gap-2 bg-vatsak-red text-white px-4 py-2 rounded-xl hover:bg-red-700 transition-colors shrink-0"
                 >
                     <FiPlus />
                     <span>Додати сторінку</span>
@@ -80,7 +80,7 @@ export default function SEOPages() {
             </div>
 
             {isEditing ? (
-                <form onSubmit={handleSave} className="bg-white rounded-xl shadow-sm border border-gray-200 p-8 max-w-2xl">
+                <form onSubmit={handleSave} className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 md:p-8">
                     <h2 className="text-xl font-bold mb-6">{editingPage.id ? 'Редагування' : 'Нова сторінка'}</h2>
 
                     <div className="space-y-4">
@@ -155,14 +155,14 @@ export default function SEOPages() {
                     </div>
                 </form>
             ) : (
-                <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
-                    <table className="w-full text-left text-sm text-gray-600">
+                <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-x-auto">
+                    <table className="w-full text-left text-sm text-gray-600 min-w-[600px]">
                         <thead className="bg-gray-50 text-gray-900 font-bold uppercase text-xs">
                             <tr>
                                 <th className="px-6 py-4">URL</th>
-                                <th className="px-6 py-4">Назва</th>
+                                <th className="px-6 py-4 hidden sm:table-cell">Назва</th>
                                 <th className="px-6 py-4">Title</th>
-                                <th className="px-6 py-4">H1</th>
+                                <th className="px-6 py-4 hidden md:table-cell">H1</th>
                                 <th className="px-6 py-4">Дії</th>
                             </tr>
                         </thead>
@@ -170,16 +170,16 @@ export default function SEOPages() {
                             {pages.map((page) => (
                                 <tr key={page.id} className="hover:bg-gray-50/50">
                                     <td className="px-6 py-4 font-mono text-xs">{page.route_path}</td>
-                                    <td className="px-6 py-4 font-medium text-gray-900">{page.name}</td>
-                                    <td className="px-6 py-4">{page.meta_title}</td>
-                                    <td className="px-6 py-4">{page.h1_heading}</td>
+                                    <td className="px-6 py-4 font-medium text-gray-900 hidden sm:table-cell">{page.name}</td>
+                                    <td className="px-6 py-4 truncate max-w-[150px] sm:max-w-[200px]" title={page.meta_title}>{page.meta_title}</td>
+                                    <td className="px-6 py-4 hidden md:table-cell">{page.h1_heading}</td>
                                     <td className="px-6 py-4">
                                         <button
                                             onClick={() => handleEdit(page)}
                                             className="inline-flex items-center gap-1 text-blue-600 hover:text-blue-800 font-medium transition-colors"
                                         >
                                             <FiEdit2 className="w-4 h-4" />
-                                            <span>Редагувати</span>
+                                            <span className="hidden sm:inline">Редагувати</span>
                                         </button>
                                     </td>
                                 </tr>
