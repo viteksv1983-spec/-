@@ -97,84 +97,165 @@ export default function Orders() {
                 </div>
             </div>
 
-            <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden max-w-5xl overflow-x-auto">
-                <table className="w-full text-left text-xs text-gray-600 min-w-[800px]">
-                    <thead className="bg-gray-50/50 text-gray-400 font-bold uppercase text-[10px] tracking-widest border-b border-gray-100">
-                        <tr>
-                            <th className="px-6 py-4 w-32">ID & Дата</th>
-                            <th className="px-6 py-4 w-44">Клієнт</th>
-                            <th className="px-6 py-4">Товари</th>
-                            <th className="px-6 py-4 w-36 text-center">Доставка</th>
-                            <th className="px-6 py-4 w-24 text-center">Сума</th>
-                            <th className="px-6 py-4 w-32 text-right">Статус</th>
-                            <th className="px-6 py-4 w-12"></th>
-                        </tr>
-                    </thead>
-                    <tbody className="divide-y divide-gray-50">
-                        {orders.map((order) => (
-                            <tr
-                                key={order.id}
-                                className="hover:bg-yellow-50/30 transition-all group cursor-pointer"
-                                onClick={() => setSelectedOrder(order)}
-                            >
-                                <td className="px-6 py-4">
-                                    <div className="font-bold text-gray-900 text-sm">#{order.id}</div>
-                                    <div className="flex items-center gap-1.5 text-[10px] text-gray-400 mt-0.5 font-medium uppercase tracking-wider">
-                                        {formatDate(order.created_at)}
-                                    </div>
-                                </td>
-                                <td className="px-6 py-4">
-                                    <div className="flex items-center gap-2">
-                                        <div className="w-8 h-8 bg-gray-50 rounded-lg flex items-center justify-center border border-gray-100 group-hover:bg-white transition-colors">
-                                            <FiUser className="w-4 h-4 text-gray-400" />
+            <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden max-w-5xl">
+                {/* Desktop Table View */}
+                <div className="hidden md:block overflow-x-auto">
+                    <table className="w-full text-left text-xs text-gray-600 min-w-[800px]">
+                        <thead className="bg-gray-50/50 text-gray-400 font-bold uppercase text-[10px] tracking-widest border-b border-gray-100">
+                            <tr>
+                                <th className="px-6 py-4 w-32">ID & Дата</th>
+                                <th className="px-6 py-4 w-44">Клієнт</th>
+                                <th className="px-6 py-4">Товари</th>
+                                <th className="px-6 py-4 w-36 text-center">Доставка</th>
+                                <th className="px-6 py-4 w-24 text-center">Сума</th>
+                                <th className="px-6 py-4 w-32 text-right">Статус</th>
+                                <th className="px-6 py-4 w-12"></th>
+                            </tr>
+                        </thead>
+                        <tbody className="divide-y divide-gray-50">
+                            {orders.map((order) => (
+                                <tr
+                                    key={order.id}
+                                    className="hover:bg-yellow-50/30 transition-all group cursor-pointer"
+                                    onClick={() => setSelectedOrder(order)}
+                                >
+                                    <td className="px-6 py-4">
+                                        <div className="font-bold text-gray-900 text-sm">#{order.id}</div>
+                                        <div className="flex items-center gap-1.5 text-[10px] text-gray-400 mt-0.5 font-medium uppercase tracking-wider">
+                                            {formatDate(order.created_at)}
                                         </div>
-                                        <div className="overflow-hidden">
-                                            <div className="font-bold text-gray-900 leading-tight truncate">{order.customer_name || 'Гість'}</div>
-                                            <div className="flex items-center gap-1 text-[10px] text-gray-400 mt-0.5 font-bold uppercase tracking-tight">
-                                                {order.customer_phone || '-'}
+                                    </td>
+                                    <td className="px-6 py-4">
+                                        <div className="flex items-center gap-2">
+                                            <div className="w-8 h-8 bg-gray-50 rounded-lg flex items-center justify-center border border-gray-100 group-hover:bg-white transition-colors">
+                                                <FiUser className="w-4 h-4 text-gray-400" />
                                             </div>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td className="px-6 py-4">
-                                    <div className="flex flex-col gap-1">
-                                        {order.items && order.items.slice(0, 2).map((item, idx) => (
-                                            <div key={idx} className="flex items-start gap-1.5 max-w-xs">
-                                                <div className="mt-1.5 w-1 h-1 bg-yellow-400 rounded-full flex-shrink-0"></div>
-                                                <div className="truncate font-bold text-gray-800 text-[11px] leading-tight">
-                                                    {item.cake?.name || `Торт #${item.cake_id}`}
-                                                    <span className="text-gray-400 ml-1 font-medium italic">×{item.quantity}</span>
+                                            <div className="overflow-hidden">
+                                                <div className="font-bold text-gray-900 leading-tight truncate">{order.customer_name || 'Гість'}</div>
+                                                <div className="flex items-center gap-1 text-[10px] text-gray-400 mt-0.5 font-bold uppercase tracking-tight">
+                                                    {order.customer_phone || '-'}
                                                 </div>
                                             </div>
-                                        ))}
-                                        {order.items && order.items.length > 2 && (
-                                            <div className="text-[9px] text-vatsak-red font-bold uppercase ml-2.5">
-                                                + ще {order.items.length - 2} тов.
-                                            </div>
-                                        )}
-                                    </div>
-                                </td>
-                                <td className="px-6 py-4 text-center">
-                                    <div className="flex flex-col items-center gap-1">
-                                        <div className={`text-[10px] font-bold uppercase tracking-widest px-2 py-0.5 rounded-full border ${order.delivery_method === 'uklon'
-                                            ? 'bg-blue-50 text-blue-600 border-blue-100'
-                                            : 'bg-green-50 text-green-600 border-green-100'
-                                            }`}>
-                                            {order.delivery_method === 'uklon' ? '🚕 Uklon' : '🏪 Самовивіз'}
                                         </div>
+                                    </td>
+                                    <td className="px-6 py-4">
+                                        <div className="flex flex-col gap-1">
+                                            {order.items && order.items.slice(0, 2).map((item, idx) => (
+                                                <div key={idx} className="flex items-start gap-1.5 max-w-xs">
+                                                    <div className="mt-1.5 w-1 h-1 bg-yellow-400 rounded-full flex-shrink-0"></div>
+                                                    <div className="truncate font-bold text-gray-800 text-[11px] leading-tight">
+                                                        {item.cake?.name || `Торт #${item.cake_id}`}
+                                                        <span className="text-gray-400 ml-1 font-medium italic">×{item.quantity}</span>
+                                                    </div>
+                                                </div>
+                                            ))}
+                                            {order.items && order.items.length > 2 && (
+                                                <div className="text-[9px] text-vatsak-red font-bold uppercase ml-2.5">
+                                                    + ще {order.items.length - 2} тов.
+                                                </div>
+                                            )}
+                                        </div>
+                                    </td>
+                                    <td className="px-6 py-4 text-center">
+                                        <div className="flex flex-col items-center gap-1">
+                                            <div className={`text-[10px] font-bold uppercase tracking-widest px-2 py-0.5 rounded-full border ${order.delivery_method === 'uklon'
+                                                ? 'bg-blue-50 text-blue-600 border-blue-100'
+                                                : 'bg-green-50 text-green-600 border-green-100'
+                                                }`}>
+                                                {order.delivery_method === 'uklon' ? '🚕 Uklon' : '🏪 Самовивіз'}
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td className="px-6 py-4 text-center">
+                                        <div className="inline-block px-1.5 py-0.5 bg-gray-50 rounded-lg border border-gray-100 group-hover:border-yellow-200 transition-colors">
+                                            <span className="font-bold text-gray-900 text-[13px]">{order.total_price}</span>
+                                            <span className="text-[9px] text-gray-400 ml-0.5">₴</span>
+                                        </div>
+                                    </td>
+                                    <td className="px-6 py-4 text-right" onClick={(e) => e.stopPropagation()}>
+                                        <select
+                                            value={order.status}
+                                            onChange={(e) => handleStatusChange(order.id, e.target.value)}
+                                            className={`px-2 py-1 rounded-lg text-[10px] font-bold uppercase tracking-wider border transition-all cursor-pointer focus:outline-none w-full ${order.status === 'completed'
+                                                ? 'bg-green-50 text-green-600 border-green-200'
+                                                : order.status === 'processing'
+                                                    ? 'bg-blue-50 text-blue-600 border-blue-200'
+                                                    : order.status === 'cancelled'
+                                                        ? 'bg-gray-50 text-gray-400 border-gray-200'
+                                                        : 'bg-amber-50 text-amber-600 border-amber-200'
+                                                }`}
+                                        >
+                                            <option value="pending">Очікує</option>
+                                            <option value="processing">В роботі</option>
+                                            <option value="completed">Виконано</option>
+                                            <option value="cancelled">Скасовано</option>
+                                        </select>
+                                    </td>
+                                    <td className="px-4 py-4 text-right">
+                                        <FiChevronRight className="w-4 h-4 text-gray-300 group-hover:text-yellow-400 group-hover:translate-x-1 transition-all" />
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
+
+                {/* Mobile Cards View */}
+                <div className="md:hidden divide-y divide-gray-100">
+                    {orders.map((order) => (
+                        <div key={order.id} className="p-4 bg-white hover:bg-yellow-50/20 active:bg-yellow-50/50 cursor-pointer" onClick={() => setSelectedOrder(order)}>
+                            <div className="flex justify-between items-start mb-2">
+                                <div>
+                                    <div className="font-bold text-gray-900 text-sm">#{order.id}</div>
+                                    <div className="text-[10px] text-gray-400 font-medium uppercase tracking-wider mt-0.5">
+                                        {formatDate(order.created_at)}
                                     </div>
-                                </td>
-                                <td className="px-6 py-4 text-center">
-                                    <div className="inline-block px-1.5 py-0.5 bg-gray-50 rounded-lg border border-gray-100 group-hover:border-yellow-200 transition-colors">
-                                        <span className="font-bold text-gray-900 text-[13px]">{order.total_price}</span>
-                                        <span className="text-[9px] text-gray-400 ml-0.5">₴</span>
-                                    </div>
-                                </td>
-                                <td className="px-6 py-4 text-right" onClick={(e) => e.stopPropagation()}>
+                                </div>
+                                <div className="text-right">
+                                    <span className="font-bold text-gray-900 text-sm">{order.total_price} ₴</span>
+                                </div>
+                            </div>
+
+                            {/* Mobile Image Thumbnails */}
+                            <div className="flex items-center gap-2 mb-3">
+                                <div className="flex -space-x-2 overflow-hidden py-1">
+                                    {order.items && order.items.slice(0, 3).map((item, idx) => (
+                                        <div key={idx} className="inline-block w-8 h-8 rounded-full border-2 border-white bg-gray-50 flex-shrink-0 relative overflow-hidden shadow-sm">
+                                            {item.cake?.image_url ? (
+                                                <img
+                                                    src={item.cake.image_url.startsWith('http') ? item.cake.image_url : `${api.defaults.baseURL}${item.cake.image_url}`}
+                                                    alt="cake"
+                                                    className="w-full h-full object-cover"
+                                                />
+                                            ) : (
+                                                <div className="w-full h-full bg-gray-100 flex items-center justify-center">
+                                                    <span className="text-[8px] font-bold text-gray-400">?</span>
+                                                </div>
+                                            )}
+                                        </div>
+                                    ))}
+                                </div>
+                                <div className="text-xs text-gray-500 font-medium italic">
+                                    {order.items?.length || 0} тов. {order.items?.length > 3 && <span className="text-vatsak-red font-bold">(+{order.items.length - 3})</span>}
+                                </div>
+                            </div>
+
+                            <div className="flex justify-between items-center mb-3">
+                                <div className="flex items-center gap-1.5">
+                                    <FiUser className="w-3.5 h-3.5 text-gray-400" />
+                                    <span className="text-xs font-bold text-gray-700 truncate max-w-[120px]">{order.customer_name || 'Гість'}</span>
+                                </div>
+                                <div className={`text-[8px] font-bold uppercase tracking-widest px-1.5 py-0.5 rounded border ${order.delivery_method === 'uklon' ? 'bg-blue-50 text-blue-600 border-blue-100' : 'bg-green-50 text-green-600 border-green-100'}`}>
+                                    {order.delivery_method === 'uklon' ? '🚕 Uklon' : '🏪 Самовивіз'}
+                                </div>
+                            </div>
+
+                            <div className="flex justify-end items-center">
+                                <div onClick={(e) => e.stopPropagation()}>
                                     <select
                                         value={order.status}
                                         onChange={(e) => handleStatusChange(order.id, e.target.value)}
-                                        className={`px-2 py-1 rounded-lg text-[10px] font-bold uppercase tracking-wider border transition-all cursor-pointer focus:outline-none w-full ${order.status === 'completed'
+                                        className={`px-2 py-1 rounded-md text-[9px] font-bold uppercase tracking-wider border transition-all cursor-pointer focus:outline-none ${order.status === 'completed'
                                             ? 'bg-green-50 text-green-600 border-green-200'
                                             : order.status === 'processing'
                                                 ? 'bg-blue-50 text-blue-600 border-blue-200'
@@ -188,21 +269,19 @@ export default function Orders() {
                                         <option value="completed">Виконано</option>
                                         <option value="cancelled">Скасовано</option>
                                     </select>
-                                </td>
-                                <td className="px-4 py-4 text-right">
-                                    <FiChevronRight className="w-4 h-4 text-gray-300 group-hover:text-yellow-400 group-hover:translate-x-1 transition-all" />
-                                </td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
-                {orders.length === 0 && (
-                    <div className="p-20 text-center">
-                        <div className="w-16 h-16 bg-gray-50 rounded-full flex items-center justify-center mx-auto mb-4 border border-gray-100">
-                            <FiPackage className="w-8 h-8 text-gray-300" />
+                                </div>
+                            </div>
                         </div>
-                        <h3 className="text-lg font-bold text-gray-900">Замовлень поки немає</h3>
-                        <p className="text-sm text-gray-400 mt-1">Як тільки з'явиться перше замовлення, воно відобразиться тут</p>
+                    ))}
+                </div>
+
+                {orders.length === 0 && (
+                    <div className="p-12 md:p-20 text-center">
+                        <div className="w-12 h-12 md:w-16 md:h-16 bg-gray-50 rounded-full flex items-center justify-center mx-auto mb-4 border border-gray-100">
+                            <FiPackage className="w-6 h-6 md:w-8 md:h-8 text-gray-300" />
+                        </div>
+                        <h3 className="text-base md:text-lg font-bold text-gray-900">Замовлень поки немає</h3>
+                        <p className="text-xs md:text-sm text-gray-400 mt-1">Як тільки з'явиться перше замовлення, воно відобразиться тут</p>
                     </div>
                 )}
             </div>

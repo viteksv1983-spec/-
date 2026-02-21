@@ -79,10 +79,10 @@ export default function CategoryManager() {
                 </div>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 md:gap-6">
                 {CATEGORIES.filter(c => !['bento', 'biscuit', 'mousse', 'wedding', 'cupcakes', 'gingerbread'].includes(c.slug) || c.slug === 'wedding').map((cat) => (
-                    <div key={cat.slug} className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden group hover:shadow-md transition-shadow">
-                        <div className="aspect-video relative bg-gray-50 overflow-hidden">
+                    <div key={cat.slug} className="bg-white rounded-2xl md:rounded-3xl shadow-sm border border-gray-100 overflow-hidden group hover:shadow-md transition-shadow">
+                        <div className="aspect-square md:aspect-video relative bg-gray-50 overflow-hidden">
                             <img
                                 src={getCategoryImage(cat.slug)}
                                 alt={cat.name}
@@ -90,20 +90,19 @@ export default function CategoryManager() {
                             />
                             {uploadingSlug === cat.slug && (
                                 <div className="absolute inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center">
-                                    <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-white"></div>
+                                    <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-white"></div>
                                 </div>
                             )}
                         </div>
 
-                        <div className="p-4">
-                            <div className="flex items-center justify-between mb-3">
-                                <h3 className="font-bold text-gray-900 text-sm truncate uppercase tracking-tight">{cat.name}</h3>
-                                <div className="text-[10px] font-mono text-gray-400">/{cat.slug}</div>
+                        <div className="p-2.5 md:p-4">
+                            <div className="flex flex-col md:flex-row md:items-center justify-between mb-2 md:mb-3">
+                                <h3 className="font-bold text-gray-900 text-[10px] md:text-sm truncate uppercase tracking-tight text-center md:text-left leading-tight">{cat.name}</h3>
                             </div>
 
-                            <label className="flex items-center justify-center gap-2 w-full px-4 py-2 bg-gray-50 hover:bg-vatsak-red hover:text-white rounded-xl text-gray-600 font-bold text-xs cursor-pointer transition-all border border-gray-100 uppercase tracking-widest">
-                                <FiUpload className="w-3.5 h-3.5" />
-                                <span>Змінити фото</span>
+                            <label className="flex items-center justify-center gap-1.5 md:gap-2 w-full px-2 py-1.5 md:px-4 md:py-2 bg-gray-50 hover:bg-vatsak-red hover:text-white rounded-lg md:rounded-xl text-gray-600 font-bold text-[9px] md:text-xs cursor-pointer transition-all border border-gray-100 uppercase tracking-widest text-center mt-auto">
+                                <FiUpload className="w-3 h-3 hidden md:block" />
+                                <span>Змінити</span>
                                 <input
                                     type="file"
                                     className="hidden"
