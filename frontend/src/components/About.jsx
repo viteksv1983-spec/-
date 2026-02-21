@@ -3,7 +3,7 @@ import { FaHeart, FaStar, FaAward } from 'react-icons/fa';
 
 function About() {
     return (
-        <div className="bg-[#FDFBF7] min-h-screen">
+        <div className="bg-[#F8F3EE] min-h-screen">
             {/* Hero Section */}
             <header className="relative h-[60vh] flex items-center justify-center overflow-hidden">
                 <img
@@ -76,7 +76,7 @@ function About() {
                                 Моя подорож у світ кондитерського мистецтва розпочалася як мрія, яка перетворилася на справу життя. Кожен торт для мене — це чисте полотно, на якому я втілюю ваші найсміливіші ідеї. Я особисто контролюю кожен етап створення десерту, щоб ви отримали ідеальний результат.
                             </p>
                             <div className="pt-4">
-                                <div className="inline-flex items-center gap-4 bg-[#FDFBF7] p-6 rounded-2xl border-l-8 border-[#5a0020] shadow-lg">
+                                <div className="inline-flex items-center gap-4 bg-[#F8F3EE] p-6 rounded-2xl border-l-8 border-[#5a0020] shadow-lg">
                                     <FaAward className="text-4xl text-amber-400" />
                                     <div>
                                         <h4 className="font-black text-[#5a0020]">Авторський підхід</h4>

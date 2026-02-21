@@ -26,9 +26,9 @@ function Navbar() {
     };
 
     return (
-        <nav className="sticky top-0 z-50 shadow-lg">
-            {/* Main Header - Very Light Premium Cream Background */}
-            <div className="bg-[#FDF8F3] w-full border-b border-gray-100">
+        <nav className="sticky top-0 z-50 shadow-md/50 transition-all duration-300">
+            {/* Main Header - Refined Cream Background matched to user request */}
+            <div className="bg-[#F3E2CF] w-full border-b border-[#C89B63]">
                 <div className="container mx-auto px-6 py-4">
                     <div className="container mx-auto px-4 md:px-6">
                         {/* Desktop Header Layout */}
@@ -54,7 +54,7 @@ function Navbar() {
                                     />
                                     <button
                                         type="submit"
-                                        className="absolute right-0 top-0 w-10 h-full bg-[#5a0020] text-white flex items-center justify-center rounded-r-md transition-colors hover:bg-black"
+                                        className="absolute right-0 top-0 w-10 h-full bg-[#6A1A24] text-white flex items-center justify-center rounded-r-md transition-colors hover:bg-[#80202c]"
                                     >
                                         <FaSearch className="text-sm" />
                                     </button>
@@ -63,28 +63,28 @@ function Navbar() {
 
                             {/* Desktop Links - Subtle & Dark */}
                             <div className="hidden xl:flex items-center space-x-5 font-bold text-[11px] uppercase tracking-tight text-gray-800 flex-shrink-0">
-                                <Link to="/about" className="hover:text-[#5a0020] transition-colors">Про нас</Link>
-                                <Link to="/delivery" className="hover:text-[#5a0020] transition-colors">Доставка та оплата</Link>
-                                <Link to="/gallery/photo" className="hover:text-[#5a0020] transition-colors">Фото</Link>
-                                <Link to="/gallery/video" className="hover:text-[#5a0020] transition-colors">Відео</Link>
-                                <Link to="/reviews" className="hover:text-[#5a0020] transition-colors">Відгуки</Link>
-                                <Link to="/blog" className="hover:text-[#5a0020] transition-colors">Блог</Link>
+                                <Link to="/about" className="hover:text-[#D39A5E] transition-colors">Про нас</Link>
+                                <Link to="/delivery" className="hover:text-[#D39A5E] transition-colors">Доставка та оплата</Link>
+                                <Link to="/gallery/photo" className="hover:text-[#D39A5E] transition-colors">Фото</Link>
+                                <Link to="/gallery/video" className="hover:text-[#D39A5E] transition-colors">Відео</Link>
+                                <Link to="/reviews" className="hover:text-[#D39A5E] transition-colors">Відгуки</Link>
+                                <Link to="/blog" className="hover:text-[#D39A5E] transition-colors">Блог</Link>
                             </div>
 
                             {/* Actions */}
                             <div className="flex items-center space-x-4 lg:space-x-6 flex-shrink-0">
                                 <div className="hidden lg:flex flex-col items-center">
                                     <div className="flex items-center space-x-3 mb-1">
-                                        <a href="https://www.instagram.com/liudmilaprikhodko" target="_blank" rel="noopener noreferrer" className="text-[#D39A5E] hover:text-[#5a0020] transition-colors">
+                                        <a href="https://www.instagram.com/liudmilaprikhodko" target="_blank" rel="noopener noreferrer" className="text-[#6A1A24] hover:text-[#5a0020] transition-colors">
                                             <FaInstagram className="text-xl" />
                                         </a>
-                                        <a href="https://www.facebook.com/sveetdesert/" target="_blank" rel="noopener noreferrer" className="text-[#D39A5E] hover:text-[#5a0020] transition-colors">
+                                        <a href="https://www.facebook.com/sveetdesert/" target="_blank" rel="noopener noreferrer" className="text-[#6A1A24] hover:text-[#5a0020] transition-colors">
                                             <FaFacebook className="text-xl" />
                                         </a>
-                                        <a href="https://t.me/antreeeme" target="_blank" rel="noopener noreferrer" className="text-[#D39A5E] hover:text-[#5a0020] transition-colors">
+                                        <a href="https://t.me/antreeeme" target="_blank" rel="noopener noreferrer" className="text-[#6A1A24] hover:text-[#5a0020] transition-colors">
                                             <FaTelegram className="text-xl" />
                                         </a>
-                                        <a href="viber://chat?number=%2B380979081504" target="_blank" rel="noopener noreferrer" className="text-[#D39A5E] hover:text-[#5a0020] transition-colors">
+                                        <a href="viber://chat?number=%2B380979081504" target="_blank" rel="noopener noreferrer" className="text-[#6A1A24] hover:text-[#5a0020] transition-colors">
                                             <FaViber className="text-xl" />
                                         </a>
                                     </div>
@@ -92,18 +92,18 @@ function Navbar() {
                                 </div>
 
                                 <div className="hidden xl:flex items-center">
-                                    <Link to={user ? "/account" : "/login"} className="text-[#D39A5E] hover:text-[#5a0020] transition-colors p-2 rounded-full hover:bg-black/5" title={user ? "Особистий кабінет" : "Вхід"}>
+                                    <Link to={user ? "/account" : "/login"} className="text-[#6A1A24] hover:text-[#5a0020] transition-colors p-2 rounded-full hover:bg-black/5" title={user ? "Особистий кабінет" : "Вхід"}>
                                         <FiUser className="w-8 h-8" />
                                     </Link>
                                 </div>
 
-                                <Link to="/cart" className="relative group text-[#D39A5E] hover:text-[#5a0020] transition-colors p-2 rounded-full hover:bg-black/5">
+                                <Link to="/cart" className="relative group text-[#6A1A24] hover:text-[#5a0020] transition-colors p-2 rounded-full hover:bg-black/5">
                                     <div className="relative">
                                         <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
                                         </svg>
                                         {cartCount > 0 && (
-                                            <span className="absolute -top-1 -right-1 bg-[#5a0020] text-white text-[10px] font-bold rounded-full h-5 w-5 flex items-center justify-center border-2 border-white">
+                                            <span className="absolute -top-1 -right-1 bg-[#6A1A24] text-white text-[10px] font-bold rounded-full h-5 w-5 flex items-center justify-center border-2 border-white">
                                                 {cartCount}
                                             </span>
                                         )}
@@ -112,54 +112,94 @@ function Navbar() {
                             </div>
                         </div>
 
-                        {/* Ultra-Compact Mobile Header Layout (Rozetka Style) */}
-                        <div className="md:hidden flex items-center justify-between py-1.5">
-                            <div className="flex items-center gap-2">
-                                <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="text-[#5a0020] p-1 ml-1">
-                                    <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d={isMenuOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16M4 18h16"} />
-                                    </svg>
-                                </button>
-                                <Link to="/" className="flex items-center gap-1.5">
-                                    <img src={logo} alt="L" className="h-8 w-auto" />
-                                    <span className="text-lg font-serif font-bold text-[#5a0020] tracking-tighter">Antreme</span>
-                                </Link>
-                            </div>
-                            <div className="flex items-center gap-2 mr-2">
-                                <a href="tel:0979081504" className="text-[#5a0020] p-1">
-                                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
-                                    </svg>
-                                </a>
-                                <Link to={user ? "/account" : "/login"} className="text-[#5a0020] p-1" title={user ? "Особистий кабінет" : "Вхід"}>
-                                    <FiUser className="w-5 h-5" />
-                                </Link>
-                                <Link to="/cart" className="relative p-1 text-[#5a0020]">
-                                    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
-                                    </svg>
-                                    {cartCount > 0 && (
-                                        <span className="absolute top-0 right-0 bg-[#5a0020] text-white text-[8px] font-bold rounded-full h-3.5 w-3.5 flex items-center justify-center border border-white">
-                                            {cartCount}
-                                        </span>
-                                    )}
-                                </Link>
+                        {/* Мобильная шапка: Логотип + Бренд + Телефон/Соцсети */}
+                        <div className="md:hidden flex items-center justify-between py-2">
+                            {/* Логотип + Бренд */}
+                            <Link to="/" className="flex items-center gap-2">
+                                <img src={logo} alt="Antreme" className="h-9 w-auto" />
+                                <div className="flex flex-col leading-none">
+                                    <span className="text-[8px] text-[#5a0020]/70 uppercase tracking-wider font-medium">Кондитерська майстерня</span>
+                                    <span className="text-[17px] font-serif font-bold text-[#6A1A24] tracking-tighter">Antreme</span>
+                                </div>
+                            </Link>
+                            {/* Правая часть: соцсети + телефон */}
+                            <div className="flex flex-col items-end gap-0.5">
+                                <div className="flex items-center gap-2">
+                                    <a href="https://www.instagram.com/liudmilaprikhodko" target="_blank" rel="noopener noreferrer" className="text-[#6A1A24]">
+                                        <FaInstagram className="text-[15px]" />
+                                    </a>
+                                    <a href="https://www.facebook.com/sveetdesert/" target="_blank" rel="noopener noreferrer" className="text-[#6A1A24]">
+                                        <FaFacebook className="text-[15px]" />
+                                    </a>
+                                    <a href="https://t.me/antreeeme" target="_blank" rel="noopener noreferrer" className="text-[#6A1A24]">
+                                        <FaTelegram className="text-[15px]" />
+                                    </a>
+                                </div>
+                                <a href="tel:0979081504" className="font-extrabold text-[#5a0020] text-[13px] tracking-tight">097 908 15 04</a>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            {/* Secondary Navigation (Categories) - Scrollable on Mobile - Hidden on Mobile altogether by user request */}
-            <div className={`bg-white border-t border-gray-100 py-2.5 md:py-4 overflow-x-auto scrollbar-hide hidden md:block`}>
-                <div className="container mx-auto px-4 md:px-6 flex items-center justify-start md:justify-center space-x-6 md:space-x-12 font-bold text-[11px] md:text-[12px] uppercase tracking-widest flex-nowrap md:flex-wrap min-w-max">
-                    <Link to="/holiday" className="text-[#a0153e] hover:text-[#5a0020] transition-all whitespace-nowrap font-black">Торти на замовлення</Link>
-                    <Link to="/cakes?category=bento" className="text-gray-900 hover:text-[#a0153e] transition-all whitespace-nowrap">Бенто тортики</Link>
-                    <Link to="/cakes?category=biscuit" className="text-gray-900 hover:text-[#a0153e] transition-all whitespace-nowrap">Бісквітні торти</Link>
-                    <Link to="/cakes?category=mousse" className="text-gray-900 hover:text-[#a0153e] transition-all whitespace-nowrap">Мусові торти</Link>
-                    <Link to="/cakes?category=cupcakes" className="text-gray-900 hover:text-[#a0153e] transition-all whitespace-nowrap">Капкейки</Link>
-                    <Link to="/cakes?category=gingerbread" className="text-gray-900 hover:text-[#a0153e] transition-all whitespace-nowrap">Імбирні пряники</Link>
-                    <Link to="/fillings" className="text-gray-900 hover:text-[#a0153e] transition-all whitespace-nowrap">Начинки</Link>
+            {/* Secondary Navigation (Categories) — десктоп: полная полоса, мобильный: активная категория + иконки */}
+
+            {/* Десктоп версия */}
+            <div className="bg-white border-t border-gray-100 py-4 overflow-x-auto scrollbar-hide hidden md:block">
+                <div className="container mx-auto px-4 md:px-6 flex items-center justify-center space-x-8 md:space-x-12 font-bold text-[12px] uppercase tracking-widest flex-nowrap">
+                    <Link to="/holiday" className={`transition-all whitespace-nowrap font-black border-b-2 pb-0.5 ${location.pathname === '/holiday' ? 'text-[#D8A055] border-[#D8A055]' : 'text-gray-900 border-transparent hover:text-[#D8A055] hover:border-[#D8A055]'}`}>Торти на замовлення</Link>
+                    <Link to="/cakes?category=bento" className={`transition-all whitespace-nowrap border-b-2 pb-0.5 ${location.search.includes('category=bento') ? 'text-[#D8A055] font-black border-[#D8A055]' : 'text-gray-900 border-transparent hover:text-[#D8A055]'}`}>Бенто тортики</Link>
+                    <Link to="/cakes?category=biscuit" className={`transition-all whitespace-nowrap border-b-2 pb-0.5 ${location.search.includes('category=biscuit') ? 'text-[#D8A055] font-black border-[#D8A055]' : 'text-gray-900 border-transparent hover:text-[#D8A055]'}`}>Бісквітні торти</Link>
+                    <Link to="/cakes?category=mousse" className={`transition-all whitespace-nowrap border-b-2 pb-0.5 ${location.search.includes('category=mousse') ? 'text-[#D8A055] font-black border-[#D8A055]' : 'text-gray-900 border-transparent hover:text-[#D8A055]'}`}>Мусові торти</Link>
+                    <Link to="/cakes?category=cupcakes" className={`transition-all whitespace-nowrap border-b-2 pb-0.5 ${location.search.includes('category=cupcakes') ? 'text-[#D8A055] font-black border-[#D8A055]' : 'text-gray-900 border-transparent hover:text-[#D8A055]'}`}>Капкейки</Link>
+                    <Link to="/cakes?category=gingerbread" className={`transition-all whitespace-nowrap border-b-2 pb-0.5 ${location.search.includes('category=gingerbread') ? 'text-[#D8A055] font-black border-[#D8A055]' : 'text-gray-900 border-transparent hover:text-[#D8A055]'}`}>Імбирні пряники</Link>
+                    <Link to="/fillings" className={`transition-all whitespace-nowrap border-b-2 pb-0.5 ${location.pathname === '/fillings' ? 'text-[#D8A055] font-black border-[#D8A055]' : 'text-gray-900 border-transparent hover:text-[#D8A055]'}`}>Начинки</Link>
+                </div>
+            </div>
+
+            {/* Мобильная вторичная навигация — активная категория + иконки */}
+            <div className="md:hidden bg-white border-t border-gray-100">
+                <div className="flex items-center justify-between px-3 py-2">
+                    {/* Активная категория — прокручиваемая */}
+                    <div className="flex-1 overflow-x-auto scrollbar-hide">
+                        <div className="flex items-center gap-4 font-bold text-[11px] uppercase tracking-widest min-w-max pr-3">
+                            <Link
+                                to="/holiday"
+                                className={`whitespace-nowrap border-b-2 pb-0.5 transition-colors ${location.pathname === '/holiday' || location.pathname === '/' ? 'text-[#D8A055] border-[#D8A055] font-black' : 'text-gray-700 border-transparent'}`}
+                            >
+                                Торти на замовлення
+                            </Link>
+                            <Link to="/cakes?category=bento" className={`whitespace-nowrap border-b-2 pb-0.5 ${location.search.includes('category=bento') ? 'text-[#D8A055] border-[#D8A055] font-black' : 'text-gray-500 border-transparent'}`}>Бенто</Link>
+                            <Link to="/cakes?category=biscuit" className={`whitespace-nowrap border-b-2 pb-0.5 ${location.search.includes('category=biscuit') ? 'text-[#D8A055] border-[#D8A055] font-black' : 'text-gray-500 border-transparent'}`}>Бісквітні</Link>
+                            <Link to="/cakes?category=mousse" className={`whitespace-nowrap border-b-2 pb-0.5 ${location.search.includes('category=mousse') ? 'text-[#D8A055] border-[#D8A055] font-black' : 'text-gray-500 border-transparent'}`}>Мусові</Link>
+                            <Link to="/cakes?category=cupcakes" className={`whitespace-nowrap border-b-2 pb-0.5 ${location.search.includes('category=cupcakes') ? 'text-[#D8A055] border-[#D8A055] font-black' : 'text-gray-500 border-transparent'}`}>Капкейки</Link>
+                            <Link to="/fillings" className={`whitespace-nowrap border-b-2 pb-0.5 ${location.pathname === '/fillings' ? 'text-[#D8A055] border-[#D8A055] font-black' : 'text-gray-500 border-transparent'}`}>Начинки</Link>
+                        </div>
+                    </div>
+                    {/* Иконки справа */}
+                    <div className="flex items-center gap-1.5 flex-shrink-0 ml-2 border-l border-gray-100 pl-2">
+                        {/* Поиск */}
+                        <button onClick={() => { setIsMenuOpen(false); navigate('/cakes'); }} className="text-[#6A1A24] p-1.5">
+                            <FaSearch className="text-[14px]" />
+                        </button>
+                        {/* Корзина */}
+                        <Link to="/cart" className="relative text-[#6A1A24] p-1.5">
+                            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
+                            </svg>
+                            {cartCount > 0 && (
+                                <span className="absolute top-0.5 right-0.5 bg-[#6A1A24] text-white text-[7px] font-bold rounded-full h-3 w-3 flex items-center justify-center">
+                                    {cartCount}
+                                </span>
+                            )}
+                        </Link>
+                        {/* Бургер */}
+                        <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="text-[#6A1A24] p-1.5">
+                            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d={isMenuOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16M4 18h16"} />
+                            </svg>
+                        </button>
+                    </div>
                 </div>
             </div>
 
@@ -186,35 +226,89 @@ function Navbar() {
                             </button>
                         </div>
 
-                        <div className="px-8 py-8 flex flex-col space-y-6 font-bold uppercase tracking-widest text-[#5a0020]">
-                            <Link to="/holiday" className="text-[#a0742d] hover:translate-x-2 transition-transform inline-block font-black" onClick={() => setIsMenuOpen(false)}>Торти на замовлення</Link>
-                            <Link to="/cakes?category=bento" className="hover:translate-x-2 transition-transform inline-block" onClick={() => setIsMenuOpen(false)}>Бенто тортики</Link>
-                            <Link to="/cakes?category=biscuit" className="hover:translate-x-2 transition-transform inline-block" onClick={() => setIsMenuOpen(false)}>Бісквітні торти</Link>
-                            <Link to="/cakes?category=mousse" className="hover:translate-x-2 transition-transform inline-block" onClick={() => setIsMenuOpen(false)}>Мусові торти</Link>
-                            <Link to="/cakes?category=cupcakes" className="hover:translate-x-2 transition-transform inline-block" onClick={() => setIsMenuOpen(false)}>Капкейки</Link>
-                            <Link to="/cakes?category=gingerbread" className="hover:translate-x-2 transition-transform inline-block" onClick={() => setIsMenuOpen(false)}>Імбирні пряники</Link>
-                            <Link to="/fillings" className="hover:translate-x-2 transition-transform inline-block" onClick={() => setIsMenuOpen(false)}>Начинки</Link>
-                            <Link to="/delivery" className="hover:translate-x-2 transition-transform inline-block" onClick={() => setIsMenuOpen(false)}>Доставка</Link>
-                            <Link to="/gallery/photo" className="hover:translate-x-2 transition-transform inline-block" onClick={() => setIsMenuOpen(false)}>Фото</Link>
-                            <Link to="/gallery/video" className="hover:translate-x-2 transition-transform inline-block" onClick={() => setIsMenuOpen(false)}>Відео</Link>
-                            <Link to="/reviews" className="hover:translate-x-2 transition-transform inline-block" onClick={() => setIsMenuOpen(false)}>Відгуки</Link>
-                            <Link to="/blog" className="hover:translate-x-2 transition-transform inline-block" onClick={() => setIsMenuOpen(false)}>Блог</Link>
-                            <Link to="/about" className="hover:translate-x-2 transition-transform inline-block" onClick={() => setIsMenuOpen(false)}>Про нас</Link>
+                        <div className="px-6 py-6 flex flex-col flex-1">
+                            {/* === Категорії товарів === */}
+                            <div className="mb-5">
+                                <div className="text-[10px] uppercase tracking-[0.2em] text-[#a0742d]/60 font-black mb-3 px-2">Каталог</div>
+                                <div className="rounded-xl py-2 px-1">
+                                    <Link to="/holiday" className="flex items-center gap-2 px-3 py-2.5 text-[13px] font-black uppercase tracking-wider text-[#5a0020] hover:bg-[#F3E2CF]/60 rounded-lg transition-colors" onClick={() => setIsMenuOpen(false)}>
+                                        🎂 Торти на замовлення
+                                    </Link>
+                                    <Link to="/cakes?category=bento" className="flex items-center gap-2 px-3 py-2.5 text-[13px] font-bold uppercase tracking-wider text-[#a0742d] hover:bg-[#F3E2CF]/60 rounded-lg transition-colors" onClick={() => setIsMenuOpen(false)}>
+                                        🍰 Бенто тортики
+                                    </Link>
+                                    <Link to="/cakes?category=biscuit" className="flex items-center gap-2 px-3 py-2.5 text-[13px] font-bold uppercase tracking-wider text-[#a0742d] hover:bg-[#F3E2CF]/60 rounded-lg transition-colors" onClick={() => setIsMenuOpen(false)}>
+                                        🧁 Бісквітні торти
+                                    </Link>
+                                    <Link to="/cakes?category=mousse" className="flex items-center gap-2 px-3 py-2.5 text-[13px] font-bold uppercase tracking-wider text-[#a0742d] hover:bg-[#F3E2CF]/60 rounded-lg transition-colors" onClick={() => setIsMenuOpen(false)}>
+                                        🍮 Мусові торти
+                                    </Link>
+                                    <Link to="/cakes?category=wedding" className="flex items-center gap-2 px-3 py-2.5 text-[13px] font-bold uppercase tracking-wider text-[#a0742d] hover:bg-[#F3E2CF]/60 rounded-lg transition-colors" onClick={() => setIsMenuOpen(false)}>
+                                        💍 Весільні торти
+                                    </Link>
+                                    <Link to="/cakes?category=kids" className="flex items-center gap-2 px-3 py-2.5 text-[13px] font-bold uppercase tracking-wider text-[#a0742d] hover:bg-[#F3E2CF]/60 rounded-lg transition-colors" onClick={() => setIsMenuOpen(false)}>
+                                        🧸 Дитячі торти
+                                    </Link>
+                                    <Link to="/cakes?category=birthday" className="flex items-center gap-2 px-3 py-2.5 text-[13px] font-bold uppercase tracking-wider text-[#a0742d] hover:bg-[#F3E2CF]/60 rounded-lg transition-colors" onClick={() => setIsMenuOpen(false)}>
+                                        🎉 На День народження
+                                    </Link>
+                                    <Link to="/cakes?category=anniversary" className="flex items-center gap-2 px-3 py-2.5 text-[13px] font-bold uppercase tracking-wider text-[#a0742d] hover:bg-[#F3E2CF]/60 rounded-lg transition-colors" onClick={() => setIsMenuOpen(false)}>
+                                        🥂 На ювілей
+                                    </Link>
+                                    <Link to="/cakes?category=cupcakes" className="flex items-center gap-2 px-3 py-2.5 text-[13px] font-bold uppercase tracking-wider text-[#a0742d] hover:bg-[#F3E2CF]/60 rounded-lg transition-colors" onClick={() => setIsMenuOpen(false)}>
+                                        🧁 Капкейки
+                                    </Link>
+                                    <Link to="/cakes?category=gingerbread" className="flex items-center gap-2 px-3 py-2.5 text-[13px] font-bold uppercase tracking-wider text-[#a0742d] hover:bg-[#F3E2CF]/60 rounded-lg transition-colors" onClick={() => setIsMenuOpen(false)}>
+                                        🍪 Імбирні пряники
+                                    </Link>
+                                    <Link to="/fillings" className="flex items-center gap-2 px-3 py-2.5 text-[13px] font-bold uppercase tracking-wider text-[#a0742d] hover:bg-[#F3E2CF]/60 rounded-lg transition-colors" onClick={() => setIsMenuOpen(false)}>
+                                        🫐 Начинки
+                                    </Link>
+                                </div>
+                            </div>
+
+                            {/* === Розділова лінія === */}
+                            <div className="border-t border-gray-200/80 my-1"></div>
+
+                            {/* === Інформація === */}
+                            <div className="mt-4">
+                                <div className="text-[10px] uppercase tracking-[0.2em] text-gray-400 font-black mb-3 px-2">Інформація</div>
+                                <div className="flex flex-col gap-1 px-1">
+                                    <Link to="/delivery" className="flex items-center gap-2 px-3 py-2.5 text-[13px] font-semibold text-gray-700 hover:bg-gray-50 rounded-lg transition-colors" onClick={() => setIsMenuOpen(false)}>
+                                        🚚 Доставка та оплата
+                                    </Link>
+                                    <Link to="/gallery/photo" className="flex items-center gap-2 px-3 py-2.5 text-[13px] font-semibold text-gray-700 hover:bg-gray-50 rounded-lg transition-colors" onClick={() => setIsMenuOpen(false)}>
+                                        📸 Фото
+                                    </Link>
+                                    <Link to="/gallery/video" className="flex items-center gap-2 px-3 py-2.5 text-[13px] font-semibold text-gray-700 hover:bg-gray-50 rounded-lg transition-colors" onClick={() => setIsMenuOpen(false)}>
+                                        🎬 Відео
+                                    </Link>
+                                    <Link to="/reviews" className="flex items-center gap-2 px-3 py-2.5 text-[13px] font-semibold text-gray-700 hover:bg-gray-50 rounded-lg transition-colors" onClick={() => setIsMenuOpen(false)}>
+                                        ⭐ Відгуки
+                                    </Link>
+                                    <Link to="/blog" className="flex items-center gap-2 px-3 py-2.5 text-[13px] font-semibold text-gray-700 hover:bg-gray-50 rounded-lg transition-colors" onClick={() => setIsMenuOpen(false)}>
+                                        📝 Блог
+                                    </Link>
+                                    <Link to="/about" className="flex items-center gap-2 px-3 py-2.5 text-[13px] font-semibold text-gray-700 hover:bg-gray-50 rounded-lg transition-colors" onClick={() => setIsMenuOpen(false)}>
+                                        💛 Про нас
+                                    </Link>
+                                </div>
+                            </div>
                         </div>
 
                         <div className="mt-auto p-8 border-t border-gray-100 flex flex-col gap-6 bg-gray-50/50">
-                            <a href="tel:0979081504" className="text-lg font-black text-[#5a0020] hover:text-black transition-colors">097 908 15 04</a>
+                            <a href="tel:0979081504" className="text-lg font-black text-[#D39A5E] hover:text-black transition-colors">097 908 15 04</a>
                             <div className="flex gap-6 items-center">
-                                <a href="https://www.instagram.com/liudmilaprikhodko" target="_blank" rel="noopener noreferrer" className="text-2xl text-[#5a0020] hover:scale-110 transition-transform">
+                                <a href="https://www.instagram.com/liudmilaprikhodko" target="_blank" rel="noopener noreferrer" className="text-2xl text-[#D39A5E] hover:scale-110 transition-transform">
                                     <FaInstagram />
                                 </a>
-                                <a href="https://t.me/antreeeme" target="_blank" rel="noopener noreferrer" className="text-2xl text-[#5a0020] hover:scale-110 transition-transform">
+                                <a href="https://t.me/antreeeme" target="_blank" rel="noopener noreferrer" className="text-2xl text-[#D39A5E] hover:scale-110 transition-transform">
                                     <FaTelegram />
                                 </a>
-                                <a href="viber://chat?number=%2B380979081504" target="_blank" rel="noopener noreferrer" className="text-2xl text-[#5a0020] hover:scale-110 transition-transform">
+                                <a href="viber://chat?number=%2B380979081504" target="_blank" rel="noopener noreferrer" className="text-2xl text-[#D39A5E] hover:scale-110 transition-transform">
                                     <FaViber />
                                 </a>
-                                <a href="https://www.facebook.com/sveetdesert/" target="_blank" rel="noopener noreferrer" className="text-2xl text-[#5a0020] hover:scale-110 transition-transform">
+                                <a href="https://www.facebook.com/sveetdesert/" target="_blank" rel="noopener noreferrer" className="text-2xl text-[#D39A5E] hover:scale-110 transition-transform">
                                     <FaFacebook />
                                 </a>
                             </div>

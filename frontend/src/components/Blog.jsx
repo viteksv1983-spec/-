@@ -78,7 +78,7 @@ const BLOG_POSTS = [
 
 function Blog() {
     return (
-        <div className="bg-gray-50 min-h-screen pb-20">
+        <div className="bg-[#F8F3EE] min-h-screen pb-20">
             {/* Hero Section */}
             <div className="bg-amber-400 py-16 md:py-24 relative overflow-hidden">
                 <div className="absolute top-0 left-0 w-64 h-64 bg-white/10 blur-[100px] -translate-y-1/2 -translate-x-1/2 rounded-full"></div>

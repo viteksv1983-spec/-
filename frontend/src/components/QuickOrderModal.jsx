@@ -61,8 +61,8 @@ const QuickOrderModal = ({
                     &times;
                 </button>
                 <div className="text-center mb-6">
-                    <div className="w-16 h-16 bg-green-50 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <svg className="w-8 h-8 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <div className="w-16 h-16 bg-[#F6E7D6] rounded-full flex items-center justify-center mx-auto mb-4">
+                        <svg className="w-8 h-8 text-[#D39A5E]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
                         </svg>
                     </div>
@@ -92,7 +92,7 @@ const QuickOrderModal = ({
                                 Ваше Ім'я
                             </label>
                             <input
-                                className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm text-gray-800 focus:outline-none focus:ring-2 focus:ring-green-500/20 focus:border-green-500 transition-all"
+                                className="w-full bg-[#f8f9fa] border border-gray-100 rounded-xl px-4 py-3 text-sm text-gray-800 focus:outline-none focus:ring-2 focus:ring-[#D39A5E]/20 focus:border-[#D39A5E] transition-all"
                                 id="name"
                                 type="text"
                                 placeholder="Олександр"
@@ -106,7 +106,7 @@ const QuickOrderModal = ({
                                 Номер телефону
                             </label>
                             <input
-                                className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm text-gray-800 focus:outline-none focus:ring-2 focus:ring-green-500/20 focus:border-green-500 transition-all"
+                                className="w-full bg-[#f8f9fa] border border-gray-100 rounded-xl px-4 py-3 text-sm text-gray-800 focus:outline-none focus:ring-2 focus:ring-[#D39A5E]/20 focus:border-[#D39A5E] transition-all"
                                 id="phone"
                                 type="tel"
                                 placeholder="+38 (___) ___ __ __"
@@ -117,7 +117,7 @@ const QuickOrderModal = ({
                         </div>
 
                         <button
-                            className={`w-full bg-green-500 hover:bg-green-600 text-white font-bold py-4 rounded-xl shadow-lg shadow-green-200 transition-all active:scale-95 flex items-center justify-center gap-2 ${loading ? 'opacity-50 cursor-not-allowed' : ''}`}
+                            className={`w-full bg-[#D39A5E] hover:bg-[#b07d48] text-white font-bold py-4 rounded-xl shadow-lg shadow-[#D39A5E]/20 transition-all active:scale-95 flex items-center justify-center gap-2 ${loading ? 'opacity-50 cursor-not-allowed' : ''}`}
                             type="submit"
                             disabled={loading}
                         >

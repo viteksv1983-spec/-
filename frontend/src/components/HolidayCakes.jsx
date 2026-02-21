@@ -49,13 +49,13 @@ function HolidayCakes() {
 
     if (loading) {
         return (
-            <div className="min-h-screen flex items-center justify-center bg-[#fdfaf5]">
+            <div className="min-h-screen flex items-center justify-center bg-[#F8F3EE]">
                 <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#7b002c]"></div>
             </div>
         );
     }
     return (
-        <div className="min-h-screen bg-[#fdfaf5] py-12 md:py-20 px-4">
+        <div className="bg-[#F8F3EE] min-h-screen py-16">
             <div className="container mx-auto max-w-6xl text-center">
                 <h1 className="text-3xl md:text-5xl font-black text-gray-900 uppercase tracking-tighter mb-12 md:mb-16" style={{ fontFamily: "'Oswald', sans-serif" }}>
                     ТОРТИ ДЛЯ СВЯТА
