@@ -29,8 +29,8 @@ function Login() {
     };
 
     return (
-        <div className="min-h-screen flex items-center justify-center bg-[#F8F3EE] py-12 px-4 sm:px-6 lg:px-8">
-            <div className="max-w-md w-full space-y-8 bg-[#F8F3EE] p-10 shadow-2xl border-t-4 border-vatsak-red relative overflow-hidden">
+        <div className="min-h-screen flex items-center justify-center bg-[#FDFBF7] py-12 px-4 sm:px-6 lg:px-8">
+            <div className="max-w-md w-full space-y-8 bg-[#FDFBF7] p-10 shadow-2xl border-t-4 border-vatsak-red relative overflow-hidden">
                 <div className="absolute top-0 left-0 -mt-4 -ml-4 w-24 h-24 bg-vatsak-gold opacity-10 rounded-full blur-2xl"></div>
                 <div>
                     <h2 className="mt-6 text-center text-4xl font-serif font-bold text-gray-900 tracking-tight">

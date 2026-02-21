@@ -32,6 +32,7 @@ import ProductEdit from './components/admin/ProductEdit';
 import PageEditor from './components/admin/PageEditor';
 import CategoryManager from './components/admin/CategoryManager';
 import SEOPages from './components/admin/SEOPages';
+import TelegramSettings from './components/admin/TelegramSettings';
 
 function App() {
   return (
@@ -67,6 +68,7 @@ function App() {
                 <Route path="products/edit/:id" element={<ProductEdit />} />
                 <Route path="seo" element={<PageEditor />} />
                 <Route path="categories" element={<CategoryManager />} />
+                <Route path="telegram" element={<TelegramSettings />} />
               </Route>
             </Route>
           </Routes>

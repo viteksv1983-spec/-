@@ -1,5 +1,5 @@
-import React, { useEffect, useState, useContext } from 'react';
-import { useParams, Link, useNavigate } from 'react-router-dom';
+import React, { useEffect, useState, useContext, useRef } from 'react';
+import { useParams, Link } from 'react-router-dom';
 import api from '../api';
 import { CartContext } from '../context/CartContext';
 import { FILLINGS } from '../constants/fillings';
@@ -19,8 +19,13 @@ function CakeDetail() {
     const { addToCart } = useContext(CartContext);
     const [isQuickOrderOpen, setIsQuickOrderOpen] = useState(false);
     const [deliveryMethod, setDeliveryMethod] = useState('pickup');
+    const [isWished, setIsWished] = useState(false);
+    const [showStickyBar, setShowStickyBar] = useState(false);
+    const orderSectionRef = useRef(null);
 
-    // Default date to today + 3 days for the input value
+    // Track recently viewed + get carousel data
+    useTrackViewed(cake?.id);
+    const { popular, recommended, recentlyViewed } = useCarouselData(cake?.id);
 
     useEffect(() => {
         api.get(`/cakes/${id}`)
@@ -29,11 +34,44 @@ function CakeDetail() {
                 if (response.data.fillings && response.data.fillings.length > 0) {
                     setSelectedFlavor(response.data.fillings[0].name);
                 }
+                // Check wishlist
+                try {
+                    const wl = JSON.parse(localStorage.getItem('wishlist') || '[]');
+                    setIsWished(wl.includes(response.data.id));
+                } catch { }
             })
             .catch(error => {
                 console.error("Error fetching cake details", error);
             });
     }, [id]);
+
+    // IntersectionObserver: show sticky bar when order section is NOT visible
+    useEffect(() => {
+        const el = orderSectionRef.current;
+        if (!el) return;
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                setShowStickyBar(!entry.isIntersecting);
+            },
+            { threshold: 0.1 }
+        );
+        observer.observe(el);
+        return () => observer.disconnect();
+    }, [cake]);
+
+    const toggleWishlist = () => {
+        try {
+            const wl = JSON.parse(localStorage.getItem('wishlist') || '[]');
+            let next;
+            if (wl.includes(cake.id)) {
+                next = wl.filter(i => i !== cake.id);
+            } else {
+                next = [...wl, cake.id];
+            }
+            localStorage.setItem('wishlist', JSON.stringify(next));
+            setIsWished(!isWished);
+        } catch { }
+    };
 
     const handleAddToCart = () => {
         const CAKE_CATEGORIES = ['bento', 'biscuit', 'wedding', 'mousse', 'Торти', 'cake'];
@@ -53,13 +91,12 @@ function CakeDetail() {
         const defaultDate = date.toISOString().split('T')[0];
 
         addToCart(itemToAdd, quantity, flavor, selectedWeight, defaultDate, deliveryMethod);
-        alert(`${quantity} x ${cake.name} (${selectedWeight} кг) ${flavor ? `(${flavor}) ` : ''}додано в кошик!`);
     };
 
     if (!cake) {
         return (
-            <div className="min-h-screen flex justify-center items-center bg-gray-50">
-                <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-vatsak-red"></div>
+            <div className="min-h-screen flex justify-center items-center bg-white">
+                <div className="animate-spin rounded-full h-14 w-14 border-4 border-[#E8C064]/30 border-t-[#E8C064]"></div>
             </div>
         );
     }
@@ -82,10 +119,18 @@ function CakeDetail() {
         }
     };
 
-    const selectedFilling = FILLINGS.find(f => f.name === selectedFlavor);
+    const weightOptions = [
+        { value: 0.5, label: '0.5 кг (2-3 порції)' },
+        { value: 1, label: '1 кг (4-6 порцій)' },
+        { value: 1.5, label: '1.5 кг (6-8 порцій)' },
+        { value: 2, label: '2 кг (8-12 порцій)' },
+        { value: 3, label: '3 кг (12-18 порцій)' },
+    ];
+
+    const isCakeCategory = ['bento', 'biscuit', 'wedding', 'mousse', 'Торти', 'cake'].includes(cake.category);
 
     return (
-        <div className="min-h-screen bg-[#F8F3EE] text-gray-800 font-sans">
+        <div className="min-h-screen bg-white text-gray-900">
             <SEOHead
                 title={cake.meta_title || `${cake.name} - Купити в Києві | Antreme`}
                 description={cake.meta_description || `Замовити торт ${cake.name}. ${cake.description?.slice(0, 100)}...`}
@@ -101,141 +146,133 @@ function CakeDetail() {
                 </script>
             </Helmet>
 
-            {/* Breadcrumb Section - Luxury Style */}
-            <div className="bg-white/80 py-4 border-b border-gray-50 sticky top-0 z-40 backdrop-blur-xl">
-                <div className="container mx-auto px-4 md:px-8">
-                    <p className="text-gray-400 text-[10px] md:text-xs uppercase tracking-[0.2em] font-black">
-                        <Link to="/" className="hover:text-[#7A0019] transition-colors">ГОЛОВНА</Link> <span className="mx-2 text-gray-200">/</span>
-                        <Link to="/cakes" className="hover:text-[#7A0019] transition-colors">КАТАЛОГ</Link> <span className="mx-2 text-gray-200">/</span>
-                        <span className="text-gray-900">{cake.name}</span>
+            {/* Breadcrumb */}
+            <div className="bg-white border-b border-gray-100 sticky top-0 z-40">
+                <div className="max-w-6xl mx-auto px-4 py-3">
+                    <p className="text-gray-400 text-[10px] md:text-xs uppercase tracking-[0.15em] font-bold">
+                        <Link to="/" className="hover:text-[#7A0019] transition-colors">Головна</Link>
+                        <span className="mx-2 text-gray-200">/</span>
+                        <Link to="/cakes" className="hover:text-[#7A0019] transition-colors">Каталог</Link>
+                        <span className="mx-2 text-gray-200">/</span>
+                        <span className="text-gray-600">{cake.name}</span>
                     </p>
                 </div>
             </div>
 
-            <div className="container mx-auto px-4 md:px-8 py-8 md:py-16 min-h-screen">
-                {/* Product Title for Mobile - Luxury Focus */}
-                <div className="lg:hidden mb-6">
-                    <div className="text-[#7A0019] text-[10px] font-black uppercase tracking-[0.3em] mb-2 text-center">PREMIUM QUALITY</div>
-                    <h1 className="text-3xl font-black text-gray-900 leading-none uppercase tracking-tighter text-center" style={{ fontFamily: "'Oswald', sans-serif" }}>
-                        {cake.name}
-                    </h1>
-                </div>
+            <div className="max-w-6xl mx-auto px-4 md:px-8 py-6 md:py-12">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-start">
 
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-start">
-
-                    {/* Left Column (Image + Tabs) */}
-                    <div className="lg:col-span-6 flex flex-col">
-                        <div className="bg-gradient-to-b from-[#FDFBF7] to-white rounded-[3rem] md:rounded-[4rem] relative group overflow-hidden mb-8 md:mb-16 shadow-[0_30px_70px_rgba(0,0,0,0.05)] border border-gray-50 aspect-square flex items-center justify-center p-4">
-                            {/* Brand Accent */}
-                            <div className="absolute top-8 left-8 z-20">
-                                <div className="text-[#7A0019] font-black italic text-sm md:text-base tracking-tighter leading-none opacity-40">
-                                    ANTREME
+                    {/* ===== LEFT: Image ===== */}
+                    <div className="relative">
+                        {/* Mobile-only title + stars above photo */}
+                        <h1 className="lg:hidden text-2xl font-black text-gray-900 uppercase tracking-tight leading-tight mb-2 text-center"
+                            style={{ fontFamily: "'Oswald', sans-serif" }}>
+                            {cake.name}
+                        </h1>
+                        <div className="lg:hidden flex items-center justify-between mb-4 px-1">
+                            <div className="flex items-center gap-1.5">
+                                <div className="flex">
+                                    {[1, 2, 3, 4, 5].map(i => (
+                                        <svg key={i} className="w-3.5 h-3.5 text-[#E8C064] fill-current" viewBox="0 0 20 20">
+                                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                                        </svg>
+                                    ))}
                                 </div>
+                                <span className="text-xs text-gray-500 font-medium">7 відгуків</span>
                             </div>
+                            <span className="text-gray-300">·</span>
+                            <span className="text-xs text-gray-400 font-medium">Код: {cake.id + 1000}</span>
+                        </div>
+                        <div className="bg-[#faf8f5] rounded-3xl aspect-[3/4] md:aspect-auto md:min-h-[500px] lg:min-h-[600px] flex items-center justify-center p-3 md:p-6 relative overflow-hidden group border border-gray-100">
+                            {/* Brand watermark */}
+                            <div className="absolute top-6 left-6 text-[#7A0019] font-black italic text-xs tracking-tighter opacity-30">ANTREME</div>
 
-                            {/* Main Image */}
-                            <div className="w-full h-full p-2 md:p-10">
-                                {cake.image_url && (
-                                    <img
-                                        src={cake.image_url.startsWith('http') ? cake.image_url : `${api.defaults.baseURL}${cake.image_url}`}
-                                        alt={cake.name}
-                                        className="w-full h-full object-contain transform group-hover:scale-105 transition-transform duration-1000 drop-shadow-2xl"
-                                    />
-                                )}
-                            </div>
+                            {cake.image_url && (
+                                <img
+                                    src={cake.image_url.startsWith('http') ? cake.image_url : `${api.defaults.baseURL}${cake.image_url}`}
+                                    alt={cake.name}
+                                    className="w-full h-full object-contain drop-shadow-xl group-hover:scale-105 transition-transform duration-700"
+                                />
+                            )}
                         </div>
 
-                        {/* Top Info Block for Mobile (Weight, Term) */}
-                        <div className="lg:hidden mb-4 grid grid-cols-2 gap-2">
-                            <div className="bg-[#f8f9fa]/50 p-3 rounded-xl flex flex-col items-center justify-center text-center">
-                                <span className="text-[9px] text-gray-400 uppercase tracking-widest font-bold mb-0.5">Вага</span>
+                        {/* Mobile: Weight + Term quick info */}
+                        <div className="lg:hidden mt-3 grid grid-cols-2 gap-2">
+                            <div className="bg-gray-50 rounded-xl p-3 text-center">
+                                <span className="text-[9px] text-gray-400 uppercase tracking-widest font-bold block mb-0.5">Вага</span>
                                 <span className="text-xs font-bold text-gray-900">{Math.round(cake.weight || 450)} г</span>
-                                <div className="flex items-center gap-1 mt-0.5 opacity-80">
-                                    <span className="w-1 h-1 bg-green-500 rounded-full animate-pulse"></span>
-                                    <span className="text-[7px] font-bold text-green-600 uppercase tracking-widest whitespace-nowrap">Можливе замовлення</span>
-                                </div>
                             </div>
-                            <div className="bg-[#f8f9fa]/50 p-3 rounded-xl flex flex-col items-center justify-center text-center">
-                                <span className="text-[9px] text-gray-400 uppercase tracking-widest font-bold mb-0.5">Термін</span>
+                            <div className="bg-gray-50 rounded-xl p-3 text-center">
+                                <span className="text-[9px] text-gray-400 uppercase tracking-widest font-bold block mb-0.5">Термін</span>
                                 <span className="text-xs font-bold text-gray-900">{cake.shelf_life || '48 годин'}</span>
                             </div>
                         </div>
 
-                        {/* Tabs Section - Luxury Underline Style */}
-                        <div className="pt-4">
-                            <div className="flex gap-10 mb-8 border-b border-gray-100 overflow-x-auto pb-1 no-scrollbar justify-center md:justify-start">
+                        {/* Tabs Section below image */}
+                        <div className="mt-6 md:mt-10">
+                            <div className="flex gap-6 md:gap-10 mb-6 border-b border-gray-100 overflow-x-auto pb-1 no-scrollbar">
                                 {['description', 'ingredients', 'delivery', 'reviews'].map((tab) => (
                                     <button
                                         key={tab}
                                         onClick={() => setActiveTab(tab)}
-                                        className={`pb-4 text-[11px] md:text-xs font-black uppercase tracking-[0.2em] whitespace-nowrap transition-all relative ${activeTab === tab
-                                            ? 'text-gray-900'
-                                            : 'text-gray-400 hover:text-gray-600'
-                                            }`}
+                                        className={`pb-3 text-[10px] md:text-xs font-black uppercase tracking-[0.15em] whitespace-nowrap transition-all relative ${activeTab === tab ? 'text-gray-900' : 'text-gray-400 hover:text-gray-600'}`}
                                     >
                                         {tab === 'description' ? 'Опис' : tab === 'ingredients' ? 'Склад' : tab === 'delivery' ? 'Доставка' : 'Відгуки'}
                                         {activeTab === tab && (
-                                            <div className="absolute bottom-0 left-0 w-full h-0.5 bg-[#7A0019] animate-width-expand"></div>
+                                            <div className="absolute bottom-0 left-0 w-full h-0.5 bg-[#E8C064]" />
                                         )}
                                     </button>
                                 ))}
                             </div>
 
-                            <div className="text-gray-600 leading-relaxed text-sm animate-fade-in">
+                            <div className="text-gray-600 leading-relaxed text-sm">
                                 {activeTab === 'description' && (
                                     <div className="space-y-4">
                                         <p>{cake.description}</p>
-                                        <div className="grid grid-cols-2 gap-4 bg-gray-50 p-4 rounded-xl">
+                                        <div className="grid grid-cols-2 gap-3 bg-gray-50 p-4 rounded-xl">
                                             {cake.weight && (<div><span className="text-gray-400 block text-xs uppercase tracking-wider mb-1">Вага</span><span className="font-semibold text-gray-900">{Math.round(cake.weight)} г</span></div>)}
                                             {cake.shelf_life && (<div><span className="text-gray-400 block text-xs uppercase tracking-wider mb-1">Термін</span><span className="font-semibold text-gray-900">{cake.shelf_life}</span></div>)}
                                         </div>
                                     </div>
                                 )}
-
                                 {activeTab === 'ingredients' && (
                                     <div className="space-y-4">
-                                        <div className="bg-yellow-50/50 p-5 rounded-2xl border border-yellow-100/50">
-                                            <h4 className="font-bold text-gray-900 mb-2 flex items-center gap-2">
-                                                <svg className="w-5 h-5 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+                                        <div className="bg-yellow-50/60 p-4 rounded-xl border border-yellow-100/50">
+                                            <h4 className="font-bold text-gray-900 mb-2 flex items-center gap-2 text-sm">
+                                                <svg className="w-4 h-4 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" /></svg>
                                                 Натуральний склад
                                             </h4>
-                                            <p className="text-gray-700 italic">Ми використовуємо тільки свіжі та якісні інгредієнти: справжнє вершкове масло, натуральні вершки та добірні фрукти.</p>
+                                            <p className="text-gray-600 text-sm italic">Тільки свіжі та якісні інгредієнти найвищої якості.</p>
                                         </div>
-                                        <p className="pl-2 border-l-2 border-gray-100">{cake.ingredients || 'Інформація про склад уточнюється.'}</p>
+                                        <p className="pl-3 border-l-2 border-gray-100">{cake.ingredients || 'Інформація про склад уточнюється.'}</p>
                                     </div>
                                 )}
-
                                 {activeTab === 'delivery' && (
-                                    <div className="space-y-6">
-                                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                            <div className="p-4 border border-gray-100 rounded-2xl hover:border-vatsak-red/30 transition-colors bg-white shadow-sm">
-                                                <div className="w-10 h-10 bg-red-50 rounded-xl flex items-center justify-center mb-3">
-                                                    <svg className="w-6 h-6 text-vatsak-red" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
-                                                </div>
-                                                <h4 className="font-bold text-gray-900 mb-1">Самовивіз</h4>
-                                                <p className="text-xs text-gray-500">Безкоштовно з кондитерської</p>
+                                    <div className="space-y-4">
+                                        <div className="grid grid-cols-2 gap-3">
+                                            <div className="p-4 border border-gray-100 rounded-xl bg-white">
+                                                <div className="text-lg mb-2">🏪</div>
+                                                <h4 className="font-bold text-gray-900 text-sm mb-1">Самовивіз</h4>
+                                                <p className="text-xs text-gray-500">Безкоштовно</p>
                                             </div>
-                                            <div className="p-4 border border-gray-100 rounded-2xl hover:border-vatsak-red/30 transition-colors bg-white shadow-sm">
-                                                <div className="w-10 h-10 bg-red-50 rounded-xl flex items-center justify-center mb-3">
-                                                    <svg className="w-6 h-6 text-vatsak-red" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                                                </div>
-                                                <h4 className="font-bold text-gray-900 mb-1">Доставка Taxi</h4>
-                                                <p className="text-xs text-gray-500">За тарифами перевізника</p>
+                                            <div className="p-4 border border-gray-100 rounded-xl bg-white">
+                                                <div className="text-lg mb-2">🚕</div>
+                                                <h4 className="font-bold text-gray-900 text-sm mb-1">Доставка</h4>
+                                                <p className="text-xs text-gray-500">За тарифами</p>
                                             </div>
                                         </div>
-                                        <p className="text-xs text-gray-400 italic bg-gray-50 p-3 rounded-lg border-l-4 border-gray-200">Зверніть увагу: ми рекомендуємо замовляти торти за 2-3 дні до вашої події для гарантії наявності всіх інгредієнтів.</p>
+                                        <p className="text-xs text-gray-400 italic bg-gray-50 p-3 rounded-lg">Рекомендуємо замовляти за 2-3 дні до події.</p>
                                     </div>
                                 )}
-
                                 {activeTab === 'reviews' && (
-                                    <div className="space-y-6 animate-fade-in">
-                                        <div className="flex items-center justify-between mb-2">
-                                            <h4 className="font-bold text-gray-900">Відгуки клієнтів</h4>
-                                            <button className="text-xs font-bold text-vatsak-red hover:underline uppercase tracking-wide">Додати відгук</button>
+                                    <div className="space-y-4">
+                                        <div className="flex items-center justify-between">
+                                            <h4 className="font-bold text-gray-900 text-sm">Відгуки клієнтів</h4>
+                                            <button className="text-xs font-bold text-[#7A0019] hover:underline uppercase tracking-wide">Додати відгук</button>
                                         </div>
-                                        <div className="bg-gray-50 p-6 rounded-2xl flex flex-col items-center justify-center text-center py-12 border border-gray-100 italic text-gray-400">
-                                            <svg className="w-12 h-12 mb-4 opacity-20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"></path></svg>
-                                            Поки що немає відгуків. Будьте першим, хто поділиться враженнями!
+                                        <div className="bg-gray-50 p-8 rounded-xl text-center text-gray-400 italic text-sm border border-gray-100">
+                                            <svg className="w-10 h-10 mb-3 mx-auto opacity-20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" /></svg>
+                                            Поки що немає відгуків. Будьте першим!
                                         </div>
                                     </div>
                                 )}
@@ -243,152 +280,233 @@ function CakeDetail() {
                         </div>
                     </div>
 
-                    {/* Right Column (Info Section) - High Impact Layout */}
-                    <div className="lg:col-span-6 flex flex-col">
-                        <div className="mb-8 hidden lg:block">
-                            <div className="text-[#7A0019] text-xs font-black uppercase tracking-[0.3em] mb-4">CONFECTIONERY MASTERPIECE</div>
-                            <h1 className="text-4xl md:text-6xl font-black text-gray-900 mb-6 leading-none uppercase tracking-tighter" style={{ fontFamily: "'Oswald', sans-serif" }}>
-                                {cake.name}
-                            </h1>
-                        </div>
+                    {/* ===== RIGHT: Product Info ===== */}
+                    <div className="flex flex-col">
 
-                        <div className="flex items-center justify-between lg:justify-start lg:gap-10 mb-10 pb-6 border-b border-gray-100">
-                            <div className="flex items-center gap-2">
-                                <div className="flex text-[#FFD700]">
+                        {/* Product Name (desktop only — mobile version is above the image) */}
+                        <h1 className="hidden lg:block text-4xl font-black text-gray-900 uppercase tracking-tight leading-tight mb-4"
+                            style={{ fontFamily: "'Oswald', sans-serif" }}>
+                            {cake.name}
+                        </h1>
+
+                        {/* Stars + Reviews + Code + Heart row */}
+                        <div className="flex items-center gap-3 mb-6 flex-wrap">
+                            <div className="flex items-center gap-1.5">
+                                <div className="flex">
                                     {[1, 2, 3, 4, 5].map(i => (
-                                        <svg key={i} className="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" /></svg>
+                                        <svg key={i} className="w-4 h-4 text-[#E8C064] fill-current" viewBox="0 0 20 20">
+                                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                                        </svg>
                                     ))}
                                 </div>
-                                <span className="text-[10px] font-black text-gray-400 tracking-widest uppercase mt-0.5">7 ВІДГУКІВ</span>
+                                <span className="text-xs text-gray-500 font-medium">7 відгуків</span>
                             </div>
-                            <button className="w-12 h-12 rounded-2xl border border-gray-100 flex items-center justify-center text-[#7A0019] hover:bg-[#7A0019] hover:text-white transition-all shadow-sm">
-                                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
+                            <span className="text-gray-300">·</span>
+                            <span className="text-xs text-gray-400 font-medium">Код: {cake.id + 1000}</span>
+
+                            {/* Heart wishlist button */}
+                            <button onClick={toggleWishlist} className="ml-auto w-10 h-10 rounded-full border border-gray-200 flex items-center justify-center hover:border-[#E8C064] transition-colors">
+                                <svg className="w-5 h-5" viewBox="0 0 24 24"
+                                    fill={isWished ? '#E8C064' : 'none'}
+                                    stroke={isWished ? '#E8C064' : '#ccc'}
+                                    strokeWidth="2">
+                                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+                                </svg>
                             </button>
                         </div>
 
-                        <div className="mb-10">
-                            <div className="flex items-center justify-between mb-8">
-                                <div className="text-5xl md:text-7xl font-black text-gray-900 flex items-baseline leading-none">
-                                    {displayPrice} <span className="text-xl md:text-3xl font-bold text-gray-400 ml-3">₴</span>
-                                </div>
-                                <div className="flex flex-col items-end">
-                                    <div className="flex items-center gap-2 bg-green-50 px-4 py-2 rounded-full border border-green-100 mb-2">
-                                        <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
-                                        <span className="text-[10px] text-green-700 font-black uppercase tracking-widest">В НАЯВНОСТІ</span>
+                        {/* ===== PRICE (prominent, top) ===== */}
+                        <div className="flex items-center justify-between mb-8 pb-6 border-b border-gray-100">
+                            <div className="flex items-baseline gap-2">
+                                <span className="text-4xl md:text-5xl font-black text-gray-900 leading-none"
+                                    style={{ fontFamily: "'Oswald', sans-serif" }}>
+                                    {displayPrice}
+                                </span>
+                                <span className="text-lg md:text-xl text-gray-400 font-bold">₴</span>
+                            </div>
+                            <div className="flex items-center gap-1.5 bg-green-50 px-3 py-1.5 rounded-full border border-green-100">
+                                <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
+                                <span className="text-[10px] md:text-xs text-green-700 font-bold uppercase tracking-wider">Є в наявності</span>
+                            </div>
+                        </div>
+
+                        {/* ===== SELECTORS ===== */}
+                        <div className="space-y-5">
+
+                            {/* Weight dropdown */}
+                            <div>
+                                <label className="text-xs font-bold text-gray-500 uppercase tracking-wider mb-2 block">Вага</label>
+                                <div className="relative">
+                                    <select
+                                        value={selectedWeight}
+                                        onChange={(e) => setSelectedWeight(Number(e.target.value))}
+                                        className="w-full bg-white border-2 border-gray-200 rounded-xl px-4 py-3.5 text-gray-900 font-bold appearance-none focus:outline-none focus:border-[#E8C064] transition-all cursor-pointer text-sm"
+                                    >
+                                        {weightOptions.map(w => (
+                                            <option key={w.value} value={w.value}>{w.label}</option>
+                                        ))}
+                                    </select>
+                                    <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-gray-400">
+                                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" /></svg>
                                     </div>
-                                    <div className="text-[10px] font-bold text-gray-400 uppercase tracking-widest leading-none">Код: {cake.id + 1000}</div>
                                 </div>
                             </div>
 
-                            <div className="space-y-10">
-                                {/* Weight Selection - Chips Style */}
+                            {/* Flavor dropdown */}
+                            {isCakeCategory && (
                                 <div>
-                                    <div className="flex items-center justify-between mb-4">
-                                        <h3 className="text-[10px] font-black text-gray-400 uppercase tracking-[0.2em]">ОБЕРІТЬ ВАГУ (КГ)</h3>
-                                    </div>
-                                    <div className="grid grid-cols-3 md:grid-cols-5 gap-3">
-                                        {[1, 1.5, 2, 3, 5].map((w) => (
-                                            <button
-                                                key={w}
-                                                onClick={() => setSelectedWeight(w)}
-                                                className={`h-14 rounded-2xl font-black text-sm transition-all border-2 flex items-center justify-center ${selectedWeight === w
-                                                    ? 'bg-[#7A0019] border-[#7A0019] text-white shadow-lg shadow-red-900/20'
-                                                    : 'bg-white border-gray-100 text-gray-900 hover:border-gray-200'
-                                                    }`}
-                                            >
-                                                {w}
-                                            </button>
-                                        ))}
-                                    </div>
-                                </div>
-
-                                {/* Flavor Selection - Premium Grid */}
-                                {['bento', 'biscuit', 'wedding', 'mousse', 'Торти', 'cake'].includes(cake.category) && (
-                                    <div>
-                                        <h3 className="text-[10px] font-black text-gray-400 mb-4 uppercase tracking-[0.2em]">ОБЕРІТЬ НАЧИНКУ</h3>
-                                        <div className="grid grid-cols-2 md:grid-cols-2 gap-3 max-h-[300px] overflow-y-auto pr-2 custom-scrollbar">
-                                            {FILLINGS.map((filling) => (
-                                                <button
-                                                    key={filling.id}
-                                                    onClick={() => setSelectedFlavor(filling.name)}
-                                                    className={`p-4 rounded-[1.5rem] border-2 text-left transition-all ${selectedFlavor === filling.name
-                                                        ? 'bg-[#FDFBF7] border-[#7A0019] shadow-md'
-                                                        : 'bg-white border-gray-50 hover:border-gray-200'
-                                                        }`}
-                                                >
-                                                    <div className={`text-[11px] font-black uppercase tracking-wider mb-1 ${selectedFlavor === filling.name ? 'text-[#7A0019]' : 'text-gray-900'}`}>{filling.name}</div>
-                                                    <div className="text-[10px] text-gray-400 leading-tight">Неймовірний смак</div>
-                                                </button>
-                                            ))}
-                                        </div>
-                                    </div>
-                                )}
-
-                                {/* Delivery Method Selector */}
-                                <div className="mt-6">
-                                    <h3 className="text-[10px] font-medium text-gray-400 mb-1.5 uppercase tracking-wider">Спосіб отримання</h3>
+                                    <label className="text-xs font-bold text-gray-500 uppercase tracking-wider mb-2 block">Смак (начинка)</label>
                                     <div className="relative">
                                         <select
-                                            value={deliveryMethod}
-                                            onChange={(e) => setDeliveryMethod(e.target.value)}
-                                            className="w-full bg-[#f8f9fa] border border-gray-100 rounded-xl px-4 py-3 text-gray-900 font-bold appearance-none focus:outline-none focus:ring-2 focus:ring-yellow-400/10 focus:border-yellow-400 transition-all cursor-pointer text-xs shadow-sm"
+                                            value={selectedFlavor}
+                                            onChange={(e) => setSelectedFlavor(e.target.value)}
+                                            className="w-full bg-white border-2 border-gray-200 rounded-xl px-4 py-3.5 text-gray-900 font-bold appearance-none focus:outline-none focus:border-[#E8C064] transition-all cursor-pointer text-sm"
                                         >
-                                            <option value="pickup">🏪 Самовивіз</option>
-                                            <option value="uklon">🚕 Доставка Uklon</option>
+                                            {FILLINGS.map(f => (
+                                                <option key={f.id} value={f.name}>{f.name}</option>
+                                            ))}
                                         </select>
                                         <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-gray-400">
-                                            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg>
+                                            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" /></svg>
                                         </div>
                                     </div>
                                 </div>
+                            )}
 
-
-                                {/* Actions - High Intensity Buttons */}
-                                <div className="mt-10 pb-20">
-                                    <div className="grid grid-cols-1 md:grid-cols-12 gap-4 h-auto md:h-16">
-                                        <div className="col-span-full md:col-span-2 flex items-center bg-gray-50 rounded-2xl h-16 md:h-full p-2">
-                                            <button onClick={() => setQuantity(Math.max(1, quantity - 1))} className="flex-1 h-full flex items-center justify-center text-gray-400 transition-colors active:scale-95"><span className="text-2xl font-light">–</span></button>
-                                            <div className="flex-1 text-center text-gray-900 font-black text-lg">{quantity}</div>
-                                            <button onClick={() => setQuantity(quantity + 1)} className="flex-1 h-full flex items-center justify-center text-gray-400 transition-colors active:scale-95"><span className="text-2xl font-light">+</span></button>
-                                        </div>
-
-                                        <button
-                                            onClick={handleAddToCart}
-                                            className="col-span-full md:col-span-6 bg-[#7A0019] text-white font-black uppercase tracking-[0.2em] text-xs hover:bg-[#9C142B] transition-all rounded-[1.5rem] h-16 md:h-full flex items-center justify-center gap-3 shadow-xl shadow-red-900/10 active:scale-95"
-                                        >
-                                            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
-                                            ДОДАТИ В КОШИК
-                                        </button>
-
-                                        <button
-                                            onClick={() => setIsQuickOrderOpen(true)}
-                                            className="col-span-full md:col-span-4 bg-[#FFD700] text-[#7A0019] font-black uppercase tracking-[0.1em] text-xs hover:bg-[#FFC800] transition-all rounded-[1.5rem] h-16 md:h-full flex items-center justify-center shadow-xl active:scale-95"
-                                        >
-                                            ШВИДКЕ ЗАМОВЛЕННЯ
-                                        </button>
+                            {/* Delivery Method dropdown */}
+                            <div>
+                                <label className="text-xs font-bold text-gray-500 uppercase tracking-wider mb-2 block">Спосіб отримання</label>
+                                <div className="relative">
+                                    <select
+                                        value={deliveryMethod}
+                                        onChange={(e) => setDeliveryMethod(e.target.value)}
+                                        className="w-full bg-white border-2 border-gray-200 rounded-xl px-4 py-3.5 text-gray-900 font-bold appearance-none focus:outline-none focus:border-[#E8C064] transition-all cursor-pointer text-sm"
+                                    >
+                                        <option value="pickup">🏪 Самовивіз</option>
+                                        <option value="uklon">🚕 Доставка Uklon</option>
+                                    </select>
+                                    <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-gray-400">
+                                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" /></svg>
                                     </div>
                                 </div>
+                            </div>
+                        </div>
+
+                        {/* ===== QUANTITY + ACTION BUTTONS ===== */}
+                        <div ref={orderSectionRef} className="mt-8 flex items-center gap-3">
+                            {/* Quantity selector */}
+                            <div className="flex items-center border-2 border-gray-200 rounded-xl h-12 md:h-14 overflow-hidden shrink-0">
+                                <button
+                                    onClick={() => setQuantity(Math.max(1, quantity - 1))}
+                                    className="w-11 md:w-12 h-full flex items-center justify-center text-gray-500 hover:bg-gray-50 active:scale-95 transition-all text-xl font-light"
+                                >–</button>
+                                <div className="w-10 md:w-12 text-center text-gray-900 font-black text-base">{quantity}</div>
+                                <button
+                                    onClick={() => setQuantity(quantity + 1)}
+                                    className="w-11 md:w-12 h-full flex items-center justify-center text-gray-500 hover:bg-gray-50 active:scale-95 transition-all text-xl font-light"
+                                >+</button>
+                            </div>
+
+                            {/* BUY button */}
+                            <button
+                                onClick={handleAddToCart}
+                                className="flex-1 h-12 md:h-14 bg-[#E8C064] hover:bg-[#D4A83C] text-white rounded-xl font-black uppercase tracking-wider text-xs md:text-sm flex items-center justify-center gap-2 shadow-md active:scale-95 transition-all"
+                            >
+                                <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                                    <circle cx="9" cy="21" r="1" />
+                                    <circle cx="20" cy="21" r="1" />
+                                    <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
+                                </svg>
+                                Купити
+                            </button>
+
+                            {/* Quick Order button */}
+                            <button
+                                onClick={() => setIsQuickOrderOpen(true)}
+                                className="h-12 md:h-14 px-5 md:px-6 border-2 border-[#E8C064] text-[#7A0019] rounded-xl font-black uppercase tracking-wider text-xs md:text-sm hover:bg-[#FFF8E7] active:scale-95 transition-all whitespace-nowrap shrink-0"
+                            >
+                                1 клік
+                            </button>
+                        </div>
+
+                        {/* Desktop weight/term info */}
+                        <div className="hidden lg:grid grid-cols-2 gap-3 mt-8">
+                            <div className="bg-gray-50 rounded-xl p-4">
+                                <span className="text-[10px] text-gray-400 uppercase tracking-widest font-bold block mb-1">Базова вага</span>
+                                <span className="text-sm font-bold text-gray-900">{Math.round(cake.weight || 450)} г</span>
+                            </div>
+                            <div className="bg-gray-50 rounded-xl p-4">
+                                <span className="text-[10px] text-gray-400 uppercase tracking-widest font-bold block mb-1">Термін зберігання</span>
+                                <span className="text-sm font-bold text-gray-900">{cake.shelf_life || '48 годин'}</span>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            {/* Related Products Section - Masterpiece Style */}
-            <div className="bg-white pb-32">
-                <div className="container mx-auto px-4 md:px-8">
-                    <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
-                        <div>
-                            <div className="text-[#7A0019] text-xs font-black uppercase tracking-[0.3em] mb-3">MORE MASTERPIECES</div>
-                            <h2 className="text-4xl md:text-5xl font-black text-gray-900 tracking-tighter uppercase leading-none" style={{ fontFamily: "'Oswald', sans-serif" }}>
-                                ВАМ ТАКОЖ СПОДОБАЄТЬСЯ
-                            </h2>
-                        </div>
-                        <Link to="/cakes" className="text-xs font-black border-b-2 border-[#7A0019] text-[#7A0019] pb-1 hover:text-[#9C142B] hover:border-[#9C142B] transition-all uppercase tracking-[0.2em] whitespace-nowrap">
-                            ВЕСЬ КАТАЛОГ
-                        </Link>
+            {/* ===== BOTTOM SECTIONS: Categories + Carousels ===== */}
+            <div className="bg-white pb-20 md:pb-32">
+                <div className="max-w-6xl mx-auto px-4 md:px-8">
+
+                    {/* Categories strip */}
+                    <CategoriesStrip currentCategory={cake.category} />
+
+                    {/* Popular Products carousel */}
+                    <ProductCarousel
+                        title="Популярні товари"
+                        subtitle="Хіти продажів"
+                        cakes={popular}
+                        linkTo="/cakes"
+                        linkText="Всі товари"
+                    />
+
+                    {/* Recently Viewed carousel */}
+                    <ProductCarousel
+                        title="Ви переглядали"
+                        subtitle="Нещодавно"
+                        cakes={recentlyViewed}
+                    />
+
+                    {/* Recommended carousel */}
+                    <ProductCarousel
+                        title="Рекомендовані"
+                        subtitle="Вам сподобається"
+                        cakes={recommended}
+                        linkTo="/cakes"
+                        linkText="Весь каталог"
+                    />
+                </div>
+            </div>
+
+            {/* ===== STICKY BOTTOM BAR ===== */}
+            <div
+                className={`fixed bottom-0 left-0 right-0 z-50 bg-white border-t border-gray-200 shadow-[0_-4px_20px_rgba(0,0,0,0.1)] transition-transform duration-300 ${showStickyBar ? 'translate-y-0' : 'translate-y-full'}`}
+            >
+                <div className="max-w-6xl mx-auto px-4 py-3 flex items-center gap-3">
+                    {/* Price */}
+                    <div className="flex items-baseline gap-1 shrink-0">
+                        <span className="text-xl md:text-2xl font-black text-gray-900 leading-none" style={{ fontFamily: "'Oswald', sans-serif" }}>{displayPrice}</span>
+                        <span className="text-sm text-gray-400 font-bold">₴</span>
                     </div>
-                    <RelatedProducts currentCakeId={cake.id} category={cake.category} />
+
+                    {/* Heart */}
+                    <button onClick={toggleWishlist} className="w-10 h-10 rounded-full border border-gray-200 flex items-center justify-center shrink-0 hover:border-[#E8C064] transition-colors">
+                        <svg className="w-5 h-5" viewBox="0 0 24 24" fill={isWished ? '#E8C064' : 'none'} stroke={isWished ? '#E8C064' : '#ccc'} strokeWidth="2">
+                            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+                        </svg>
+                    </button>
+
+                    {/* Buy button */}
+                    <button
+                        onClick={handleAddToCart}
+                        className="flex-1 h-11 bg-[#E8C064] hover:bg-[#D4A83C] text-white rounded-xl font-black uppercase tracking-wider text-xs flex items-center justify-center gap-2 shadow-md active:scale-95 transition-all"
+                    >
+                        <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                            <circle cx="9" cy="21" r="1" /><circle cx="20" cy="21" r="1" />
+                            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
+                        </svg>
+                        Купити
+                    </button>
                 </div>
             </div>
 
@@ -410,101 +528,198 @@ function CakeDetail() {
     );
 }
 
-// Sub-component for Related Products
-function RelatedProducts({ currentCakeId, category }) {
-    const [related, setRelated] = useState([]);
+// Sub-components for carousels
+function ProductCarousel({ title, subtitle, cakes, linkTo, linkText }) {
+    const scrollRef = React.useRef(null);
     const { addToCart } = useContext(CartContext);
-    const navigate = useNavigate();
 
-    // Local state for simplified UI in related section
+    const scroll = (dir) => {
+        if (!scrollRef.current) return;
+        const amount = dir === 'left' ? -280 : 280;
+        scrollRef.current.scrollBy({ left: amount, behavior: 'smooth' });
+    };
 
+    if (!cakes || cakes.length === 0) return null;
+
+    return (
+        <div className="mb-12 md:mb-16">
+            <div className="flex items-end justify-between mb-5 md:mb-8">
+                <div>
+                    {subtitle && <div className="text-[#E8C064] text-[10px] md:text-xs font-black uppercase tracking-[0.2em] mb-1">{subtitle}</div>}
+                    <h2 className="text-xl md:text-3xl font-black text-gray-900 tracking-tight uppercase leading-none" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                        {title}
+                    </h2>
+                </div>
+                <div className="flex items-center gap-2">
+                    {/* Scroll arrows */}
+                    <button onClick={() => scroll('left')} className="hidden md:flex w-9 h-9 rounded-full border border-gray-200 items-center justify-center hover:border-[#E8C064] transition-colors">
+                        <svg className="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" /></svg>
+                    </button>
+                    <button onClick={() => scroll('right')} className="hidden md:flex w-9 h-9 rounded-full border border-gray-200 items-center justify-center hover:border-[#E8C064] transition-colors">
+                        <svg className="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" /></svg>
+                    </button>
+                    {linkTo && (
+                        <Link to={linkTo} className="text-[10px] md:text-xs font-black border-b-2 border-[#E8C064] text-[#7A0019] pb-0.5 hover:text-[#9C142B] transition-all uppercase tracking-wider whitespace-nowrap ml-2">
+                            {linkText || 'Всі'}
+                        </Link>
+                    )}
+                </div>
+            </div>
+
+            <div
+                ref={scrollRef}
+                className="flex gap-2.5 md:gap-4 overflow-x-auto no-scrollbar scroll-smooth pb-2 -mx-4 px-4 md:-mx-0 md:px-0"
+                style={{ scrollSnapType: 'x mandatory' }}
+            >
+                {cakes.map((cake) => (
+                    <div key={cake.id} className="shrink-0 w-[42vw] md:w-[220px] lg:w-[240px]" style={{ scrollSnapAlign: 'start' }}>
+                        <ProductCard cake={cake} addToCart={addToCart} />
+                    </div>
+                ))}
+            </div>
+        </div>
+    );
+}
+
+function ProductCard({ cake, addToCart }) {
+    return (
+        <div className="group bg-white rounded-2xl border border-gray-100 shadow-[0_2px_12px_rgba(0,0,0,0.06)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.1)] transition-all duration-300 flex flex-col h-full overflow-hidden">
+            <div className="p-2.5 md:p-4 flex flex-col h-full">
+                <Link to={`/cakes/${cake.id}`}>
+                    <h3 className="text-[10px] md:text-[13px] font-black text-gray-900 uppercase tracking-tight leading-tight line-clamp-2 min-h-[1.8rem] md:min-h-[2.2rem] text-center mb-1 group-hover:text-[#7A0019] transition-colors"
+                        style={{ fontFamily: "'Oswald', sans-serif" }}>
+                        {cake.name}
+                    </h3>
+                </Link>
+
+                <Link to={`/cakes/${cake.id}`} className="relative w-full aspect-square mb-1.5 md:mb-2 block">
+                    <div className="w-full h-full flex items-center justify-center p-1.5">
+                        {cake.image_url && (
+                            <img
+                                src={cake.image_url.startsWith('http') ? cake.image_url : `${api.defaults.baseURL}${cake.image_url}`}
+                                alt={cake.name}
+                                className="w-full h-full object-contain drop-shadow-md group-hover:scale-105 transition-transform duration-500"
+                                loading="lazy"
+                            />
+                        )}
+                    </div>
+                </Link>
+
+                <div className="flex items-center justify-center gap-0.5 mb-1">
+                    {[1, 2, 3, 4, 5].map(s => (
+                        <svg key={s} className="w-2.5 h-2.5 md:w-3 md:h-3 text-[#E8C064]" viewBox="0 0 20 20" fill="currentColor">
+                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                        </svg>
+                    ))}
+                </div>
+
+                <div className="mt-auto flex items-center justify-between gap-1">
+                    <div className="flex items-baseline gap-0.5 shrink-0">
+                        <span className="text-[16px] md:text-[20px] font-black text-gray-900 leading-none" style={{ fontFamily: "'Oswald', sans-serif" }}>{cake.price}</span>
+                        <span className="text-[9px] md:text-[11px] text-gray-400 font-bold">₴</span>
+                    </div>
+                    <button
+                        onClick={() => {
+                            const date = new Date();
+                            date.setDate(date.getDate() + 3);
+                            const defaultDate = date.toISOString().split('T')[0];
+                            const CAKE_CATEGORIES = ['bento', 'biscuit', 'wedding', 'mousse', 'Торти', 'cake'];
+                            const defaultFlavor = (cake && CAKE_CATEGORIES.includes(cake.category) && FILLINGS.length > 0) ? FILLINGS[0].name : null;
+                            addToCart(cake, 1, defaultFlavor, null, defaultDate, 'pickup');
+                        }}
+                        className="w-7 h-7 md:w-9 md:h-9 flex-shrink-0 bg-[#E8C064] hover:bg-[#D4A83C] text-white rounded-lg md:rounded-xl flex items-center justify-center active:scale-95 transition-all shadow-sm"
+                    >
+                        <svg className="w-3.5 h-3.5 md:w-4 md:h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                            <circle cx="9" cy="21" r="1" /><circle cx="20" cy="21" r="1" />
+                            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    );
+}
+
+// Categories strip component
+function CategoriesStrip({ currentCategory }) {
+    const mainCategories = [
+        { slug: 'bento', name: 'Бенто', icon: '🧁' },
+        { slug: 'biscuit', name: 'Бісквітні', icon: '🎂' },
+        { slug: 'mousse', name: 'Мусові', icon: '🍰' },
+        { slug: 'wedding', name: 'Весільні', icon: '💒' },
+        { slug: 'cupcakes', name: 'Капкейки', icon: '🧁' },
+        { slug: 'gingerbread', name: 'Пряники', icon: '🍪' },
+        { slug: 'birthday', name: 'День народж.', icon: '🎉' },
+        { slug: 'kids', name: 'Дитячі', icon: '🎈' },
+    ];
+
+    return (
+        <div className="mb-10 md:mb-14">
+            <div className="flex gap-2 md:gap-3 overflow-x-auto no-scrollbar pb-1 -mx-4 px-4 md:-mx-0 md:px-0">
+                {mainCategories.map(cat => (
+                    <Link
+                        key={cat.slug}
+                        to={`/cakes?category=${cat.slug}`}
+                        className={`shrink-0 flex items-center gap-1.5 md:gap-2 h-9 md:h-10 px-3.5 md:px-5 rounded-full text-[10px] md:text-xs font-bold uppercase tracking-wider transition-all border-2 active:scale-95 ${currentCategory === cat.slug
+                            ? 'bg-[#7A0019] border-[#7A0019] text-white shadow-md'
+                            : 'bg-white border-gray-200 text-gray-600 hover:border-[#E8C064] hover:text-[#7A0019]'
+                            }`}
+                    >
+                        <span className="text-sm md:text-base">{cat.icon}</span>
+                        {cat.name}
+                    </Link>
+                ))}
+            </div>
+        </div>
+    );
+}
+
+// Hook to manage carousel data
+function useCarouselData(currentCakeId) {
+    const [popular, setPopular] = useState([]);
+    const [recommended, setRecommended] = useState([]);
+    const [recentlyViewed, setRecentlyViewed] = useState([]);
 
     useEffect(() => {
         api.get('/cakes/')
             .then(res => {
                 const allCakes = res.data;
                 const others = allCakes.filter(c => c.id !== currentCakeId);
-                const shuffled = others.sort(() => 0.5 - Math.random());
-                setRelated(shuffled.slice(0, 4));
+
+                // Popular: top 8 by pseudo-popularity (could be replaced with real data)
+                const pop = [...others].sort((a, b) => b.price - a.price).slice(0, 8);
+                setPopular(pop);
+
+                // Recommended: random 8
+                const rec = [...others].sort(() => 0.5 - Math.random()).slice(0, 8);
+                setRecommended(rec);
+
+                // Recently viewed from localStorage
+                try {
+                    const ids = JSON.parse(localStorage.getItem('recentlyViewed') || '[]');
+                    const viewed = ids.map(id => allCakes.find(c => c.id === id)).filter(Boolean).filter(c => c.id !== currentCakeId);
+                    setRecentlyViewed(viewed.slice(0, 8));
+                } catch { }
             })
-            .catch(err => console.error("Failed to load related products", err));
+            .catch(err => console.error("Failed to load products", err));
     }, [currentCakeId]);
 
-    if (related.length === 0) return null;
+    return { popular, recommended, recentlyViewed };
+}
 
-    return (
-        <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-8">
-            {related.map(cake => (
-                <div key={cake.id} className="group relative bg-white flex flex-col rounded-[2.5rem] shadow-md hover:shadow-2xl hover:shadow-amber-900/15 transition-all duration-500 border border-gray-100 overflow-hidden h-full">
-                    {/* 1. Title & Badge (Top) */}
-                    <div className="p-3 md:p-6 pb-1 md:pb-2 text-center relative z-10">
-                        <div className="flex flex-col items-center justify-center gap-1 mb-1 md:mb-2 text-center">
-                            <div className="flex items-center justify-center gap-1 md:gap-1.5 opacity-80">
-                                <span className="w-1 md:w-1.5 h-1 md:h-1.5 bg-green-500 rounded-full animate-pulse"></span>
-                                <span className="text-[7px] md:text-[8px] font-bold text-green-600 uppercase tracking-widest whitespace-nowrap">Можливе замовлення</span>
-                            </div>
-                        </div>
-                        <Link to={`/cakes/${cake.id}`} className="block">
-                            <h3 className="text-[13px] md:text-sm font-bold text-gray-800 uppercase tracking-tight leading-tight line-clamp-2 min-h-[2.2rem] md:min-h-[2.5rem] group-hover:text-vatsak-red transition-colors duration-300" style={{ fontFamily: "'Oswald', sans-serif" }}>
-                                {cake.name}
-                            </h3>
-                        </Link>
-                    </div>
-
-                    {/* 2. Image Area (Middle) */}
-                    <Link to={`/cakes/${cake.id}`} className="relative block overflow-hidden mx-4 rounded-[2rem] bg-gradient-to-b from-[#FDFBF7] to-white aspect-square flex items-center justify-center p-4">
-                        <div className="absolute top-4 left-4 z-20">
-                            <div className="bg-[#7A0019] text-white text-[9px] font-black uppercase w-10 h-10 rounded-full flex items-center justify-center shadow-lg border-2 border-white/20 tracking-tighter">
-                                HIT
-                            </div>
-                        </div>
-
-                        <div className="w-full h-full flex items-center justify-center group-hover:scale-105 transition-transform duration-700">
-                            <img
-                                src={cake.image_url && cake.image_url.startsWith('http') ? cake.image_url : `${api.defaults.baseURL}${cake.image_url}`}
-                                alt={cake.name}
-                                className="w-full h-full object-contain drop-shadow-2xl"
-                                loading="lazy"
-                            />
-                        </div>
-                    </Link>
-
-                    {/* 3. Info Area (Bottom) */}
-                    <div className="p-6 pt-4 mt-auto text-center">
-                        <Link to={`/cakes/${cake.id}`}>
-                            <h3 className="text-sm md:text-base font-black text-gray-900 uppercase tracking-tight leading-tight line-clamp-2 min-h-[2.5rem] group-hover:text-[#7A0019] transition-colors duration-300 mb-4" style={{ fontFamily: "'Oswald', sans-serif" }}>
-                                {cake.name}
-                            </h3>
-                        </Link>
-
-                        <div className="flex flex-col items-center justify-center gap-4">
-                            <div className="text-xl md:text-2xl font-black text-gray-900 leading-none">
-                                {cake.price} <span className="text-xs text-gray-400 ml-1">₴</span>
-                            </div>
-
-                            <div className="flex items-center gap-2 w-full">
-                                <button
-                                    onClick={() => {
-                                        const date = new Date();
-                                        date.setDate(date.getDate() + 3);
-                                        const defaultDate = date.toISOString().split('T')[0];
-                                        addToCart(cake, 1, null, null, defaultDate, 'pickup');
-                                        alert(`${cake.name} додано в кошик!`);
-                                    }}
-                                    className="flex-1 h-12 bg-[#7A0019] text-white rounded-xl font-black uppercase tracking-widest text-[9px] hover:bg-[#9C142B] transition-all shadow-md active:scale-95"
-                                >
-                                    ЗАМОВИТИ
-                                </button>
-                                <button className="w-12 h-12 bg-[#FFD700] text-[#7A0019] rounded-xl flex items-center justify-center hover:bg-[#FFC800] transition-all shadow-md active:scale-95">
-                                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M12 4v16m8-8H4"></path></svg>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            ))}
-        </div>
-    );
+// Track recently viewed
+function useTrackViewed(cakeId) {
+    useEffect(() => {
+        if (!cakeId) return;
+        try {
+            let ids = JSON.parse(localStorage.getItem('recentlyViewed') || '[]');
+            ids = ids.filter(id => id !== cakeId);
+            ids.unshift(cakeId);
+            ids = ids.slice(0, 20);
+            localStorage.setItem('recentlyViewed', JSON.stringify(ids));
+        } catch { }
+    }, [cakeId]);
 }
 
 export default CakeDetail;
+

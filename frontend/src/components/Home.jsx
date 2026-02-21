@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import api from '../api';
 import logo from '../assets/logo.png';
 import { CartContext } from '../context/CartContext';
@@ -12,6 +12,7 @@ import biscuitImg from '../assets/category-biscuit.png';
 import mousseImg from '../assets/category-mousse.png';
 
 import { CATEGORIES } from '../constants/categories';
+import { FILLINGS } from '../constants/fillings';
 
 const blockStyles = [
     { bg: 'bg-[#FFF0F5]', border: 'border-pink-100', shadow: 'shadow-[0_8px_30px_rgba(160,21,62,0.06)] hover:shadow-[0_15px_40px_rgba(160,21,62,0.12)]' },
@@ -63,6 +64,11 @@ function Home() {
     const [selectedCakeForQuickOrder, setSelectedCakeForQuickOrder] = useState(null);
 
     // Filter functions for buttons (mapped to categories)
+    const handleAddToCart = (cake) => {
+        const CAKE_CATEGORIES = ['bento', 'biscuit', 'wedding', 'mousse', 'Торти', 'cake'];
+        const defaultFlavor = (cake && CAKE_CATEGORIES.includes(cake.category) && FILLINGS.length > 0) ? FILLINGS[0].name : null;
+        addToCart(cake, 1, defaultFlavor, null, null, 'pickup');
+    };
     const handleQuickOrderDefault = () => {
         // Find first cake for quick order if none selected
         if (featuredCakes.length > 0) {
@@ -78,10 +84,14 @@ function Home() {
         date.setDate(date.getDate() + 3);
         const defaultDate = date.toISOString().split('T')[0];
 
+        const CAKE_CATEGORIES = ['bento', 'biscuit', 'wedding', 'mousse', 'Торти', 'cake'];
+        const defaultFlavor = (cake && CAKE_CATEGORIES.includes(cake.category) && FILLINGS.length > 0) ? FILLINGS[0].name : null;
+
         setSelectedCakeForQuickOrder({
             ...cake,
             deliveryDate: defaultDate,
-            deliveryMethod: 'pickup'
+            deliveryMethod: 'pickup',
+            flavor: defaultFlavor
         });
         setIsQuickOrderOpen(true);
     };
@@ -111,7 +121,7 @@ function Home() {
     }, []);
 
     return (
-        <div className="min-h-screen bg-[#F8F3EE]">
+        <div className="min-h-screen bg-[#FDFBF7]">
             {/* ====== HERO SECTION ====== */}
             <div className="w-full pt-2 md:pt-4 mb-4 md:mb-6 px-4 md:px-10">
                 <section
@@ -257,7 +267,7 @@ function Home() {
                         const desc = categoryDescriptions[cat.slug] || 'Ексклюзивні торти\nна замовлення';
 
                         return (
-                            <div key={cat.slug} className={`group relative flex flex-row items-center ${style.bg} rounded-[1.5rem] md:rounded-[2rem] ${style.shadow} transition-all duration-500 overflow-visible ${style.border} border hover:-translate-y-1 min-h-[130px] md:min-h-[160px]`}>
+                            <div key={cat.slug} className={`group relative flex flex-row items-center ${style.bg} rounded-[1.5rem] md:rounded-[2rem] ${style.shadow} transition-all duration-500 overflow-visible ${style.border} border hover:-translate-y-1 min-h-[130px] md:min-h-[160px] `}>
                                 <div className="flex-1 px-5 md:px-7 py-5 md:py-7 z-10 w-[60%]">
                                     <h3 className="text-[17px] md:text-[20px] lg:text-[22px] font-black text-gray-900 mb-1.5 uppercase tracking-tight leading-tight" style={{ fontFamily: "'Oswald', sans-serif" }}>
                                         {cat.name}
@@ -279,38 +289,36 @@ function Home() {
             </div>
 
             {/* Visual Impact Section - Premium Value Proportions */}
-            <div className="container mx-auto px-4 md:px-8 mb-32">
-                <div className="relative bg-white py-20 md:py-28 overflow-hidden rounded-[4rem] border border-gray-50 shadow-[0_20px_50px_rgba(0,0,0,0.03)]">
-                    <div className="container mx-auto px-6 relative z-10">
-                        <div className="max-w-5xl mx-auto text-center">
-                            <h2 className="text-5xl md:text-8xl lg:text-[110px] font-black mb-10 leading-none uppercase tracking-tighter" style={{ fontFamily: "'Oswald', sans-serif" }}>
-                                <span className="text-[#FFD700] block md:inline translate-y-2 drop-shadow-sm">СМАК</span>
-                                <span className="text-gray-100 mx-4 hidden md:inline">/</span>
-                                <span className="text-[#FFD700] block md:inline drop-shadow-sm">ЯКІСТЬ</span>
-                                <span className="text-gray-100 mx-4 hidden md:inline">/</span>
-                                <span className="text-[#FFD700] block md:inline -translate-y-2 drop-shadow-sm">ЦІНА</span>
-                            </h2>
-                            <div className="flex items-center justify-center gap-4 text-gray-400">
-                                <div className="h-[1px] w-12 bg-gray-200"></div>
-                                <p className="text-xl md:text-3xl font-medium italic text-gray-500" style={{ fontFamily: "'Dancing Script', cursive" }}>
-                                    це наші головні цінності
-                                </p>
-                                <div className="h-[1px] w-12 bg-gray-200"></div>
-                            </div>
+            <div className="relative py-24 md:py-36 overflow-hidden bg-[#FDFBF7]">
+                <div className="container mx-auto px-6 relative z-10">
+                    <div className="max-w-5xl mx-auto text-center">
+                        <div className="text-xs font-bold uppercase tracking-[0.3em] text-[#E8C064] mb-6">Наші принципи</div>
+                        <h2 className="text-5xl md:text-8xl lg:text-[110px] font-black mb-10 leading-none uppercase tracking-tighter" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                            <span className="text-[#E8C064] block md:inline">СМАК</span>
+                            <span className="text-gray-300 mx-4 hidden md:inline">/</span>
+                            <span className="text-gray-900 block md:inline">ЯКІСТЬ</span>
+                            <span className="text-gray-300 mx-4 hidden md:inline">/</span>
+                            <span className="text-[#E8C064] block md:inline">ЦІНА</span>
+                        </h2>
+                        <div className="flex items-center justify-center gap-4">
+                            <div className="h-[1px] w-12 bg-[#E8C064]/40"></div>
+                            <p className="text-xl md:text-3xl font-medium italic text-gray-400" style={{ fontFamily: "'Dancing Script', cursive" }}>
+                                це наші головні цінності
+                            </p>
+                            <div className="h-[1px] w-12 bg-[#E8C064]/40"></div>
                         </div>
                     </div>
                 </div>
             </div>
 
             {/* About Section - Confectioner Spotlight */}
-            <div className="relative bg-gradient-to-br from-[#f8f9fa] via-[#fff] to-[#f8f9fa] py-24 overflow-hidden">
-                <div className="container mx-auto px-6 relative z-10 bg-white shadow-sm py-16">
+            <div className="relative py-24 overflow-hidden bg-[#FDFBF7]">
+                <div className="container mx-auto px-6 relative z-10">
                     <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
                         {/* Image Column */}
                         <div className="w-full lg:w-1/2 animate-fade-in-delayed">
                             <div className="relative group">
-                                <div className="absolute -inset-4 bg-gradient-to-r from-vatsak-gold to-vatsak-red rounded-[2rem] opacity-20 group-hover:opacity-40 blur-xl transition duration-500"></div>
-                                <div className="relative rounded-[2rem] overflow-hidden shadow-2xl transform transition duration-500 group-hover:scale-[1.02]">
+                                <div className="relative rounded-[2rem] overflow-hidden shadow-xl transform transition duration-500 group-hover:scale-[1.02] border border-gray-100">
                                     <img
                                         src="/images/confectioner.jpg"
                                         alt="Наш кондитер"
@@ -321,13 +329,13 @@ function Home() {
                                                 e.target.src = "/images/confectioner.jpg.jpg";
                                             } else {
                                                 e.target.onerror = null;
-                                                e.target.src = "https://placehold.co/600x800?text=Фото+Кондитера";
+                                                e.target.src = "https://placehold.co/600x800/FDFBF7/7A0019?text=Кондитер";
                                             }
                                         }}
                                     />
                                     <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-8">
                                         <h3 className="text-white text-2xl font-bold" style={{ fontFamily: "'Oswald', sans-serif" }}>Людмила Приходько</h3>
-                                        <p className="text-vatsak-gold font-medium">Шеф-кондитер</p>
+                                        <p className="text-[#E8C064] font-medium">Шеф-кондитер</p>
                                     </div>
                                 </div>
                             </div>
@@ -335,78 +343,59 @@ function Home() {
 
                         {/* Content Column */}
                         <div className="w-full lg:w-1/2 relative flex flex-col items-center text-center">
-                            {/* Decorative Logo Background */}
-                            <div className="absolute -top-10 -right-10 opacity-[0.03] select-none pointer-events-none hidden lg:block">
-                                <img src={logo} alt="" className="w-80 h-auto" />
-                            </div>
-
-                            <div className="mb-2 animate-fade-in">
-                                <img src={logo} alt="ANTREME Logo" className="w-[450px] h-auto object-contain" />
+                            <div className="mb-4 animate-fade-in">
+                                <img src={logo} alt="ANTREME Logo" className="w-[380px] h-auto object-contain" />
                             </div>
 
                             <h2 className="text-4xl md:text-5xl font-black text-gray-900 mb-6 leading-tight animate-fade-in uppercase tracking-tight" style={{ fontFamily: "'Oswald', sans-serif" }}>
-                                ТОРТИ З <span className="text-[#7A0019]">ДУШЕЮ</span> ТА <span className="text-[#FFD700]">ЛЮБОВ'Ю</span>
+                                ТОРТИ З <span className="text-[#7A0019]">ДУШЕЮ</span> ТА <span className="text-[#E8C064]">ЛЮБОВ'Ю</span>
                             </h2>
 
-                            <p className="text-lg text-gray-600 mb-10 leading-relaxed font-light animate-fade-in-delayed max-w-xl mx-auto">
+                            <p className="text-lg text-gray-500 mb-10 leading-relaxed font-light animate-fade-in-delayed max-w-xl mx-auto italic">
                                 "Я створюю торти з любов'ю та увагою до кожної деталі. Кожен десерт — це маленька історія, виготовлена індивідуально з натуральних інгредієнтів найвищої якості. Моя мета — зробити ваше свято незабутнім."
                             </p>
 
-                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 text-left">
-                                <div className="flex items-start gap-4 p-4 rounded-xl hover:bg-white hover:shadow-lg transition-all duration-300 group">
-                                    <div className="w-12 h-12 rounded-full bg-red-50 flex items-center justify-center text-2xl group-hover:scale-110 transition-transform text-vatsak-red">✨</div>
-                                    <div>
-                                        <h4 className="font-bold text-gray-900 mb-1">Ручна робота</h4>
-                                        <p className="text-sm text-gray-500">Унікальний дизайн для кожного</p>
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-left w-full">
+                                {[
+                                    { icon: '✨', color: '#FFF8E7', title: 'Ручна робота', sub: 'Унікальний дизайн для кожного' },
+                                    { icon: '🌿', color: '#F0FFF4', title: 'Натуральність', sub: 'Тільки свіжі інгредієнти' },
+                                    { icon: '💝', color: '#FFF5F5', title: "З любов'ю", sub: 'Вкладаю душу в кожен торт' },
+                                    { icon: '💎', color: '#F0F5FF', title: 'Якість', sub: 'Бездоганний смак та вигляд' },
+                                ].map((item, i) => (
+                                    <div key={i} className="flex items-start gap-4 p-4 rounded-2xl transition-all duration-300 bg-white border border-gray-100 shadow-sm hover:shadow-md">
+                                        <div className="w-12 h-12 rounded-full flex items-center justify-center text-2xl flex-shrink-0" style={{ background: item.color }}>{item.icon}</div>
+                                        <div>
+                                            <h4 className="font-bold text-gray-900 mb-1">{item.title}</h4>
+                                            <p className="text-sm text-gray-500">{item.sub}</p>
+                                        </div>
                                     </div>
-                                </div>
-                                <div className="flex items-start gap-4 p-4 rounded-xl hover:bg-white hover:shadow-lg transition-all duration-300 group">
-                                    <div className="w-12 h-12 rounded-full bg-amber-50 flex items-center justify-center text-2xl group-hover:scale-110 transition-transform text-vatsak-gold">🌿</div>
-                                    <div>
-                                        <h4 className="font-bold text-gray-900 mb-1">Натуральність</h4>
-                                        <p className="text-sm text-gray-500">Тільки свіжі інгредієнти</p>
-                                    </div>
-                                </div>
-                                <div className="flex items-start gap-4 p-4 rounded-xl hover:bg-white hover:shadow-lg transition-all duration-300 group">
-                                    <div className="w-12 h-12 rounded-full bg-pink-50 flex items-center justify-center text-2xl group-hover:scale-110 transition-transform text-pink-500">💝</div>
-                                    <div>
-                                        <h4 className="font-bold text-gray-900 mb-1">З любов'ю</h4>
-                                        <p className="text-sm text-gray-500">Вкладаю душу в кожен торт</p>
-                                    </div>
-                                </div>
-                                <div className="flex items-start gap-4 p-4 rounded-xl hover:bg-white hover:shadow-lg transition-all duration-300 group">
-                                    <div className="w-12 h-12 rounded-full bg-blue-50 flex items-center justify-center text-2xl group-hover:scale-110 transition-transform text-blue-500">💎</div>
-                                    <div>
-                                        <h4 className="font-bold text-gray-900 mb-1">Якість</h4>
-                                        <p className="text-sm text-gray-500">Бездоганний смак та вигляд</p>
-                                    </div>
-                                </div>
+                                ))}
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            {/* Holiday Cakes Promo Section - Modern & Clean */}
-            <section className="py-20 md:py-32 bg-white overflow-hidden">
+            {/* Holiday Cakes Promo Section - Dark Premium */}
+            <section className="py-20 md:py-32 overflow-hidden bg-[#FDFBF7]">
                 <div className="container mx-auto px-4 md:px-8">
-                    <Link to="/holiday" className="group block relative overflow-hidden rounded-[4rem] bg-[#FDFBF7] border border-gray-50 shadow-2xl shadow-gray-100">
+                    <Link to="/holiday" className="group block relative overflow-hidden rounded-3xl md:rounded-[3rem] border border-gray-100 hover:border-[#E8C064]/40 transition-all duration-500 bg-white shadow-[0_4px_30px_rgba(0,0,0,0.08)] hover:shadow-[0_8px_40px_rgba(0,0,0,0.12)]">
                         <div className="flex flex-col md:flex-row items-center">
                             {/* Text Content */}
                             <div className="w-full md:w-1/2 p-8 md:p-20 text-center md:text-left z-10 flex flex-col justify-center">
                                 <div className="mb-4">
-                                    <span className="inline-block px-4 py-1.5 bg-[#7b002c] text-white text-[10px] md:text-xs font-black uppercase tracking-[0.2em] rounded-full">
+                                    <span className="inline-block px-4 py-1.5 bg-[#7A0019] text-white text-[10px] md:text-xs font-black uppercase tracking-[0.2em] rounded-full">
                                         Нова Колекція
                                     </span>
                                 </div>
                                 <h2 className="text-3xl md:text-6xl font-black text-gray-900 uppercase tracking-tighter leading-none mb-6" style={{ fontFamily: "'Oswald', sans-serif" }}>
                                     Торти для вашого <br />
-                                    <span className="text-[#a0742d] drop-shadow-sm">особливого свята</span>
+                                    <span className="text-[#7A0019]">особливого свята</span>
                                 </h2>
-                                <p className="text-gray-600 text-sm md:text-lg mb-8 md:mb-12 max-w-md font-medium leading-relaxed">
+                                <p className="text-gray-500 text-sm md:text-lg mb-8 md:mb-12 max-w-md font-medium leading-relaxed">
                                     Від бенто-тортів до величних весільних шедеврів. Оберіть ідеальну категорію для вашої незабутньої події.
                                 </p>
-                                <div className="inline-flex items-center justify-center md:justify-start gap-3 bg-[#7b002c] text-white px-8 md:px-10 py-4 md:py-5 rounded-2xl font-black uppercase tracking-widest text-xs md:text-sm hover:bg-black transition-all shadow-lg hover:shadow-[#7b002c]/20 active:scale-95 group/btn w-fit mx-auto md:mx-0">
+                                <div className="inline-flex items-center justify-center md:justify-start gap-3 bg-[#7A0019] text-white px-8 md:px-10 py-4 md:py-5 rounded-2xl font-black uppercase tracking-widest text-xs md:text-sm hover:bg-[#5a0014] transition-all shadow-md active:scale-95 group/btn w-fit mx-auto md:mx-0">
                                     Відкрити каталог
                                     <svg className="w-5 h-5 transition-transform group-hover/btn:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
@@ -415,12 +404,11 @@ function Home() {
                             </div>
 
                             {/* Image Grid / Visual */}
-                            <div className="w-full md:w-1/2 h-[300px] md:h-[650px] relative overflow-hidden order-first md:order-last">
-                                <div className="absolute inset-0 bg-gradient-to-r from-amber-50 via-transparent to-transparent z-10 hidden md:block"></div>
+                            <div className="w-full md:w-1/2 h-[300px] md:h-[650px] relative overflow-hidden order-first md:order-last rounded-t-3xl md:rounded-t-none md:rounded-r-3xl">
                                 <img
                                     src="https://images.unsplash.com/photo-1535141192574-5d4897c12636?auto=format&fit=crop&q=80&w=1000"
                                     alt="Holiday Cakes"
-                                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-[2000ms] ease-out shadow-inner"
+                                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-[2000ms] ease-out"
                                 />
                                 <div className="absolute inset-0 bg-black/5 group-hover:bg-transparent transition-colors duration-500"></div>
                             </div>
@@ -430,128 +418,318 @@ function Home() {
             </section>
 
             {/* Featured Products */}
-            {/* Featured Products */}
-            <div className="container mx-auto px-6 pt-10 md:pt-20 pb-16 md:pb-20 bg-white shadow-sm">
-                <div className="text-center mb-6 md:mb-12 animate-fade-in">
-                    <div className="text-sm text-amber-700 mb-1 uppercase tracking-widest">Популярні</div>
-                    <h2 className="text-3xl md:text-5xl font-bold text-gray-800 mb-2 md:mb-4" style={{ fontFamily: "'Oswald', sans-serif" }}>
-                        Обирають найчастіше
-                    </h2>
-                </div>
+            <div className="relative pt-10 md:pt-20 pb-16 md:pb-20 overflow-hidden bg-[#FDFBF7]">
+                <div className="container mx-auto px-6 relative z-10">
+                    <div className="text-center mb-8 md:mb-14 animate-fade-in">
+                        <div className="text-xs font-bold uppercase tracking-[0.3em] text-[#E8C064] mb-3">Популярні</div>
+                        <h2 className="text-3xl md:text-5xl font-black text-gray-900 mb-2 md:mb-4" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                            Обирають найчастіше
+                        </h2>
+                        <div className="w-16 h-1 bg-[#E8C064] mx-auto mt-4 rounded-full" />
+                    </div>
 
-                {featuredCakes.length > 0 ? (
-                    <>
-                        <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2 md:gap-4">
-                            {featuredCakes.map((cake, index) => (
-                                <div
-                                    key={cake.id}
-                                    className="group flex flex-col bg-white rounded-[2rem] shadow-[0_8px_24px_rgba(0,0,0,0.06)] hover:shadow-[0_12px_32px_rgba(0,0,0,0.1)] transition-all duration-500 border border-gray-100 p-5 md:p-6 pb-6 md:pb-8 h-full animate-fade-in-stagger"
-                                    style={{ animationDelay: `${index * 100}ms` }}
-                                >
-                                    {/* Image Container */}
-                                    <Link to={`/cakes/${cake.id}`} className="relative w-full aspect-square mb-4 flex items-center justify-center">
-                                        <div className="absolute inset-0 bg-[#f8f5f2] rounded-full scale-90 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-
-                                        {/* Badges - Circular maroon style */}
-                                        <div className="absolute top-0 left-0 flex flex-col gap-2 z-20 pointer-events-none">
-                                            {index === 0 && (
-                                                <div className="bg-[#7b002c] text-white text-[7px] md:text-[9px] font-black uppercase w-8 h-8 md:w-10 md:h-10 rounded-full flex items-center justify-center shadow-lg border-2 border-white tracking-tighter">
-                                                    Хіт
-                                                </div>
-                                            )}
-                                        </div>
-
-                                        <div className="w-full h-full flex items-center justify-center relative z-10 p-2">
-                                            {cake.image_url && (
-                                                <img
-                                                    src={cake.image_url.startsWith('http') ? cake.image_url : `${api.defaults.baseURL}${cake.image_url}`}
-                                                    alt={cake.name}
-                                                    className="w-full h-full object-contain drop-shadow-xl transform group-hover:scale-105 transition-transform duration-500"
-                                                />
-                                            )}
-                                        </div>
-                                    </Link>
-
-                                    {/* Content Section */}
-                                    <div className="flex flex-col flex-grow text-center items-center justify-between">
-                                        <div className="w-full">
-                                            <Link to={`/cakes/${cake.id}`}>
-                                                <h3 className="text-[14px] md:text-[16px] font-black text-[#2e1a22] uppercase tracking-wide leading-snug line-clamp-2 min-h-[2.5rem] group-hover:text-[#7b2c3d] transition-colors duration-300">
-                                                    {cake.name}
-                                                </h3>
-                                            </Link>
-                                        </div>
-
-                                        {/* Price & Action Section */}
-                                        <div className="w-full flex-col flex items-center mt-3">
-                                            <div className="text-[22px] md:text-[26px] font-black text-[#4a1c28] flex items-baseline justify-center mb-4 leading-none">
-                                                {cake.price} <span className="text-[12px] md:text-[14px] font-bold text-gray-500 ml-1.5 uppercase">грн</span>
+                    {featuredCakes.length > 0 ? (
+                        <>
+                            <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 md:gap-5">
+                                {featuredCakes.map((cake, index) => (
+                                    <div
+                                        key={cake.id}
+                                        className="group flex flex-col bg-white rounded-2xl md:rounded-3xl transition-all duration-300 border border-gray-100 p-4 md:p-5 pb-5 md:pb-6 h-full animate-fade-in-stagger hover:-translate-y-1 shadow-[0_4px_20px_rgba(0,0,0,0.06)] hover:shadow-[0_8px_30px_rgba(0,0,0,0.1)]"
+                                        style={{ animationDelay: `${index * 100}ms` }}
+                                    >
+                                        {/* Image Container */}
+                                        <Link to={`/cakes/${cake.id}`} className="relative w-full aspect-square mb-4 flex items-center justify-center">
+                                            {/* Badges */}
+                                            <div className="absolute top-0 left-0 flex flex-col gap-2 z-20 pointer-events-none">
+                                                {index === 0 && (
+                                                    <div className="bg-[#7A0019] text-white text-[7px] md:text-[9px] font-black uppercase w-8 h-8 md:w-10 md:h-10 rounded-full flex items-center justify-center shadow-md border-2 border-white tracking-tighter">
+                                                        Хіт
+                                                    </div>
+                                                )}
                                             </div>
 
-                                            <div className="flex items-center gap-2 w-full justify-center">
-                                                <button
-                                                    onClick={(e) => {
-                                                        e.preventDefault();
-                                                        handleQuickOrder(cake);
-                                                    }}
-                                                    className="flex-1 h-10 md:h-12 bg-[#6A1A24] hover:bg-[#8B2332] text-white font-bold uppercase tracking-wider text-[9px] md:text-[11px] rounded-[10px] md:rounded-xl transition-all duration-300 active:scale-95"
-                                                >
-                                                    Швидке замовлення
-                                                </button>
-                                                <button
-                                                    onClick={(e) => {
-                                                        e.preventDefault();
-                                                        addToCart(cake);
-                                                    }}
-                                                    className="w-10 h-10 md:w-12 md:h-12 flex-shrink-0 bg-[#E8C064] hover:bg-[#F2D078] text-[#4a1c28] rounded-[10px] md:rounded-xl flex items-center justify-center transition-all active:scale-95 group/cart"
-                                                >
-                                                    <svg className="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M12 4v16m8-8H4"></path>
-                                                    </svg>
-                                                </button>
+                                            <div className="w-full h-full flex items-center justify-center relative z-10 p-2">
+                                                {cake.image_url && (
+                                                    <img
+                                                        src={cake.image_url.startsWith('http') ? cake.image_url : `${api.defaults.baseURL}${cake.image_url}`}
+                                                        alt={cake.name}
+                                                        className="w-full h-full object-contain drop-shadow-lg transform group-hover:scale-105 transition-transform duration-500"
+                                                    />
+                                                )}
+                                            </div>
+                                        </Link>
+
+                                        {/* Content Section */}
+                                        <div className="flex flex-col flex-grow text-center items-center justify-between">
+                                            <div className="w-full">
+                                                <Link to={`/cakes/${cake.id}`}>
+                                                    <h3 className="text-[14px] md:text-[16px] font-black text-gray-900 uppercase tracking-wide leading-snug line-clamp-2 min-h-[2.5rem] group-hover:text-[#7A0019] transition-colors duration-300">
+                                                        {cake.name}
+                                                    </h3>
+                                                </Link>
+                                            </div>
+
+                                            {/* Price & Action Section */}
+                                            <div className="w-full flex-col flex items-center mt-3">
+                                                <div className="text-[22px] md:text-[26px] font-black text-[#E8C064] flex items-baseline justify-center mb-4 leading-none">
+                                                    {cake.price} <span className="text-[12px] md:text-[14px] font-bold text-gray-400 ml-1.5 uppercase">грн</span>
+                                                </div>
+
+                                                <div className="flex items-center gap-2 w-full justify-center">
+                                                    <button
+                                                        onClick={(e) => {
+                                                            e.preventDefault();
+                                                            handleQuickOrder(cake);
+                                                        }}
+                                                        className="flex-1 h-10 md:h-12 bg-[#7A0019] hover:bg-[#9C142B] text-white font-bold uppercase tracking-wider text-[9px] md:text-[11px] rounded-[10px] md:rounded-xl transition-all duration-300 active:scale-95"
+                                                    >
+                                                        Швидке замовлення
+                                                    </button>
+                                                    <button
+                                                        onClick={(e) => {
+                                                            e.preventDefault();
+                                                            handleAddToCart(cake);
+                                                        }}
+                                                        className="w-10 h-10 md:w-12 md:h-12 flex-shrink-0 bg-[#E8C064] hover:bg-[#D4A83C] text-white rounded-[10px] md:rounded-xl flex items-center justify-center transition-all active:scale-95 group/cart"
+                                                    >
+                                                        <svg className="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M12 4v16m8-8H4"></path>
+                                                        </svg>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                            <div className="text-center mt-12 animate-fade-in-delayed">
+                                <Link to="/cakes" className="group inline-flex items-center gap-3 px-12 py-5 font-black uppercase text-sm tracking-wider transition-all hover:scale-105 duration-300 rounded-full bg-[#E8C064] hover:bg-[#D4A83C] text-white shadow-md">
+                                    Всі пропозиції
+                                    <span className="group-hover:translate-x-2 transition-transform duration-300">→</span>
+                                </Link>
+                            </div>
+                        </>
+                    ) : (
+                        <div className="flex flex-col items-center justify-center py-20">
+                            <div className="w-12 h-12 border-4 border-[#7A0019]/20 border-t-[#7A0019] rounded-full animate-spin mb-4"></div>
+                            <div className="text-gray-500 font-medium tracking-wider text-sm animate-pulse uppercase">Завантаження шедеврів...</div>
+                        </div>
+                    )}
+                </div>
+            </div>
+
+            {/* Call to Action Banner - Premium Dark */}
+            <div className="relative py-24 md:py-36 overflow-hidden bg-[#7A0019] rounded-3xl mx-4 md:mx-8 mb-8">
+                <div className="container mx-auto px-6 text-center relative z-10">
+                    <div className="text-xs font-bold uppercase tracking-[0.3em] text-[#E8C064] mb-5">Antreme</div>
+                    <h3 className="text-4xl md:text-6xl font-black mb-5 animate-fade-in tracking-tight text-white uppercase" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                        ГОТОВІ ЗАМОВИТИ <span className="text-[#E8C064]">ТОРТ МРІЇ?</span>
+                    </h3>
+                    <p className="text-xl mb-10 text-white/65 italic max-w-2xl mx-auto animate-fade-in-delayed" style={{ fontFamily: "'Dancing Script', cursive" }}>
+                        Дозвольте собі шматочок справжнього щастя. Оберіть свій ідеальний смак прямо зараз.
+                    </p>
+                    <div className="flex flex-col sm:flex-row gap-5 justify-center animate-fade-in-delayed">
+                        <a href="tel:0979081504" className="inline-flex items-center gap-2 px-10 py-4 font-black text-sm uppercase tracking-widest rounded-full transition-all hover:scale-105 border border-white/30 text-white hover:border-white/60 hover:bg-white/10">
+                            📞 097 908 15 04
+                        </a>
+                        <Link to="/cakes" className="inline-block px-12 py-4 font-black text-sm uppercase tracking-widest rounded-full transition-all hover:scale-105 bg-[#E8C064] hover:bg-[#D4A83C] text-white shadow-md">
+                            Обрати Торт
+                        </Link>
+                    </div>
+                </div>
+            </div>
+
+            {/* ===== DELIVERY MAP SECTION ===== */}
+            <div className="bg-[#FDFBF7] py-16 md:py-24">
+                <div className="container mx-auto px-4 md:px-8">
+                    {/* Section Header */}
+                    <div className="text-center mb-10 md:mb-14">
+                        <div className="text-xs font-bold uppercase tracking-[0.3em] text-[#E8C064] mb-3">Доставка</div>
+                        <h2 className="text-3xl md:text-5xl font-black text-gray-900 uppercase tracking-tight mb-3" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                            Доставляємо у <span className="text-[#7A0019]">всі райони Києва</span>
+                        </h2>
+                        <p className="text-gray-500 text-sm md:text-base max-w-xl mx-auto">
+                            Швидка та бережна доставка вашого торту на таксі — у будь-який район міста
+                        </p>
+                    </div>
+
+                    <div className="flex flex-col lg:flex-row gap-6 md:gap-8 max-w-6xl mx-auto">
+                        {/* Map */}
+                        <div className="w-full lg:w-3/5 rounded-2xl md:rounded-3xl overflow-hidden border border-gray-100 shadow-[0_4px_20px_rgba(0,0,0,0.06)] bg-white" style={{ minHeight: '400px' }}>
+                            <iframe
+                                title="Доставка по Києву"
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d162757.45277145904!2d30.39475415!3d50.4016355!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40d4cf4ee15a4505%3A0x764931d2170146fe!2z0JrQuNC10LIsINCj0LrRgNCw0LjQvdCwLCAwMjAwMA!5e0!3m2!1suk!2sua!4v1700000000000!5m2!1suk!2sua"
+                                width="100%"
+                                height="100%"
+                                style={{ border: 0, minHeight: '400px' }}
+                                allowFullScreen=""
+                                loading="lazy"
+                                referrerPolicy="no-referrer-when-downgrade"
+                            />
+                        </div>
+
+                        {/* Info Cards */}
+                        <div className="w-full lg:w-2/5 flex flex-col gap-4">
+                            {/* Taxi delivery card */}
+                            <div className="bg-white rounded-2xl p-6 border border-gray-100 shadow-[0_4px_20px_rgba(0,0,0,0.06)] flex-1">
+                                <div className="flex items-center gap-3 mb-4">
+                                    <div className="w-12 h-12 rounded-xl bg-[#FFF8E7] flex items-center justify-center text-2xl">🚕</div>
+                                    <div>
+                                        <h3 className="font-black text-gray-900 uppercase text-sm tracking-wide" style={{ fontFamily: "'Oswald', sans-serif" }}>Доставка на таксі</h3>
+                                        <p className="text-xs text-gray-400">По всьому Києву</p>
+                                    </div>
+                                </div>
+                                <p className="text-gray-500 text-sm leading-relaxed mb-3">
+                                    Ви сплачуєте лише вартість поїздки таксі. Кондитер особисто передає торт водію з інструкціями щодо бережного перевезення.
+                                </p>
+                                <div className="flex items-center gap-2 text-[#E8C064] font-black text-sm">
+                                    <span>⏱</span> 30–90 хвилин по місту
+                                </div>
+                            </div>
+
+                            {/* Pickup card */}
+                            <div className="bg-white rounded-2xl p-6 border border-gray-100 shadow-[0_4px_20px_rgba(0,0,0,0.06)] flex-1">
+                                <div className="flex items-center gap-3 mb-4">
+                                    <div className="w-12 h-12 rounded-xl bg-[#F0FFF4] flex items-center justify-center text-2xl">🏪</div>
+                                    <div>
+                                        <h3 className="font-black text-gray-900 uppercase text-sm tracking-wide" style={{ fontFamily: "'Oswald', sans-serif" }}>Самовивіз</h3>
+                                        <p className="text-xs text-[#22c55e] font-bold">Безкоштовно</p>
+                                    </div>
+                                </div>
+                                <p className="text-gray-500 text-sm leading-relaxed">
+                                    Забрати у зручний для вас час за адресою:<br />
+                                    <span className="text-gray-900 font-semibold">вул. Харківське шосе, 180/21</span>
+                                </p>
+                            </div>
+
+                            {/* Advantages strip */}
+                            <div className="grid grid-cols-3 gap-3">
+                                {[
+                                    { icon: '❄️', label: 'Термопакет' },
+                                    { icon: '🎂', label: 'Бережно' },
+                                    { icon: '📍', label: 'Всі райони' },
+                                ].map((a, i) => (
+                                    <div key={i} className="bg-white rounded-xl p-3 border border-gray-100 shadow-sm text-center">
+                                        <div className="text-xl mb-1">{a.icon}</div>
+                                        <div className="text-[10px] md:text-xs font-bold text-gray-600 uppercase tracking-wider">{a.label}</div>
+                                    </div>
+                                ))}
+                            </div>
+
+                            {/* CTA */}
+                            <Link to="/delivery" className="block text-center bg-[#7A0019] hover:bg-[#5a0014] text-white font-black uppercase tracking-widest text-xs md:text-sm py-4 rounded-2xl transition-all active:scale-95 shadow-md">
+                                Детальніше про доставку →
+                            </Link>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {/* ===== INSTAGRAM REVIEWS CAROUSEL ===== */}
+            <div className="bg-[#FDFBF7] py-16 md:py-24 overflow-hidden">
+                <div className="max-w-7xl mx-auto px-4 md:px-8">
+                    {/* Section Header */}
+                    <div className="text-center mb-10 md:mb-14">
+                        <div className="flex items-center justify-center gap-3 mb-3">
+                            {/* Instagram gradient icon */}
+                            <div className="w-10 h-10 md:w-12 md:h-12 rounded-xl flex items-center justify-center" style={{ background: 'linear-gradient(135deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888)' }}>
+                                <svg className="w-5 h-5 md:w-6 md:h-6 fill-white" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 1.366.062 2.633.332 3.608 1.308.975.975 1.245 2.242 1.308 3.608.058 1.266.07 1.646.07 4.85s-.012 3.584-.07 4.85c-.062 1.366-.332 2.633-1.308 3.608-.975.975-2.242 1.245-3.608 1.308-1.266.058-1.646.07-4.85.07s-3.584-.012-4.85-.07c-1.366-.062-2.633-.332-3.608-1.308-.975-.975-1.245-2.242-1.308-3.608-.058-1.266-.07-1.646-.07-4.85s.012-3.584.07-4.85c.062-1.366.332-2.633 1.308-3.608.975-.975 2.242-1.245 3.608-1.308 1.266-.058 1.646-.07 4.85-.07zm0-2.163c-3.259 0-3.667.014-4.947.072-1.277.058-2.148.262-2.91.56a5.89 5.89 0 00-2.126 1.384 5.89 5.89 0 00-1.383 2.127c-.298.762-.502 1.633-.561 2.91-.057 1.28-.072 1.688-.072 4.947s.015 3.667.072 4.947c.059 1.277.263 2.148.561 2.91a5.89 5.89 0 001.383 2.127 5.89 5.89 0 002.127 1.383c.762.298 1.633.502 2.91.561 1.28.057 1.688.072 4.947.072s3.667-.015 4.947-.072c1.277-.059 2.148-.263 2.91-.561a5.89 5.89 0 002.127-1.383 5.89 5.89 0 001.383-2.127c.298-.762.502-1.633.561-2.91.057-1.28.072-1.688.072-4.947s-.015-3.667-.072-4.947c-.059-1.277-.263-2.148-.561-2.91a5.89 5.89 0 00-1.383-2.127 5.89 5.89 0 00-2.127-1.383c-.762-.298-1.633-.502-2.91-.561-1.28-.057-1.688-.072-4.947-.072zM12 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" /></svg>
+                            </div>
+                        </div>
+                        <h2 className="text-2xl md:text-4xl font-black text-gray-900 uppercase tracking-tight mb-2" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                            Відгуки клієнтів
+                        </h2>
+                        <p className="text-gray-400 text-sm md:text-base italic" style={{ fontFamily: "'Dancing Script', cursive" }}>
+                            Реальні відгуки з Instagram та месенджерів
+                        </p>
+                    </div>
+
+                    {/* Stories Row — horizontal scroll */}
+                    <div className="flex gap-4 md:gap-5 overflow-x-auto no-scrollbar pb-6 -mx-4 px-4 md:-mx-0 md:px-0 mb-8 md:mb-12 justify-center">
+                        {[
+                            { id: 1, title: "Єдиноріг", thumb: "/reviews/review_1.jpg" },
+                            { id: 2, title: "Ми разом", thumb: "/reviews/review_2.jpg" },
+                            { id: 3, title: "Капкейки", thumb: "/reviews/review_3.jpg" },
+                            { id: 4, title: "Річниця", thumb: "/reviews/review_4.jpg" },
+                            { id: 5, title: "Відгук", thumb: "/reviews/review_5.jpg" },
+                            { id: 6, title: "Pokemon", thumb: "/reviews/review_6.jpg" },
+                            { id: 7, title: "Перфект", thumb: "/reviews/review_7.jpg" },
+                        ].map(story => (
+                            <Link to="/reviews" key={story.id} className="shrink-0 flex flex-col items-center gap-1.5 group">
+                                <div className="w-16 h-16 md:w-20 md:h-20 rounded-full p-[3px] group-hover:scale-110 transition-transform duration-300" style={{ background: 'linear-gradient(135deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888)' }}>
+                                    <div className="w-full h-full rounded-full border-2 border-white overflow-hidden">
+                                        <img src={story.thumb} alt={story.title} className="w-full h-full object-cover" />
+                                    </div>
+                                </div>
+                                <span className="text-[9px] md:text-[10px] font-bold text-gray-500 uppercase tracking-wider text-center leading-tight max-w-[70px] line-clamp-1">{story.title}</span>
+                            </Link>
+                        ))}
+                    </div>
+
+                    {/* Review Cards Carousel */}
+                    <div className="relative">
+                        {/* Scroll arrows (desktop) */}
+                        <button onClick={() => document.getElementById('reviewsCarousel')?.scrollBy({ left: -360, behavior: 'smooth' })} className="hidden md:flex absolute -left-4 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-white shadow-lg border border-gray-100 items-center justify-center hover:shadow-xl hover:border-[#E8C064] transition-all">
+                            <svg className="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" /></svg>
+                        </button>
+                        <button onClick={() => document.getElementById('reviewsCarousel')?.scrollBy({ left: 360, behavior: 'smooth' })} className="hidden md:flex absolute -right-4 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-white shadow-lg border border-gray-100 items-center justify-center hover:shadow-xl hover:border-[#E8C064] transition-all">
+                            <svg className="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" /></svg>
+                        </button>
+
+                        <div id="reviewsCarousel" className="flex gap-4 md:gap-5 overflow-x-auto no-scrollbar scroll-smooth pb-2 -mx-4 px-4 md:-mx-0 md:px-0" style={{ scrollSnapType: 'x mandatory' }}>
+                            {[
+                                { id: 1, text: "Смакуємо торт))) цей смак неймовірний, торт не мокрий а саме так як має бути. Все до смаку. Дякуємо ❤️", author: "Ольга" },
+                                { id: 2, text: "Людочка, Ви, як завжди, на висоті! Торт неперевершений. Смак просто 🔥 всі в захваті!", author: "Наталія" },
+                                { id: 3, text: "Дякуємо за неймовірно смачний тортик ❤️ і чудове свято!", author: "Катерина" },
+                                { id: 4, text: "Дуже смачно 😍 Дякуємо Вам за свято! Торт був просто неймовірний!", author: "Марина" },
+                                { id: 5, text: "Тортик був на смак просто неймовірний, на дууууже смачний 😊 Дякуємо!", author: "Тетяна" },
+                                { id: 6, text: "Дуже дякую за ту красоту і смакоту 🔥🔥🔥 просто неперевершена ✨✨✨", author: "Ірина" },
+                                { id: 7, text: "Тортик неймовірний! Батьки прослезились! Це так гарно! ❤️❤️", author: "Андрій" },
+                                { id: 8, text: "Торт був неймовірно смачний і красивий, як завжди на протязі багатьох років ❤️", author: "Олена" },
+                            ].map(review => (
+                                <div key={review.id} className="shrink-0 w-[80vw] md:w-[340px] lg:w-[360px]" style={{ scrollSnapAlign: 'start' }}>
+                                    <div className="bg-white rounded-2xl md:rounded-3xl p-5 md:p-7 shadow-[0_4px_20px_rgba(0,0,0,0.06)] hover:shadow-[0_8px_30px_rgba(0,0,0,0.1)] transition-all duration-300 h-full flex flex-col border border-gray-50">
+                                        {/* Quote icon */}
+                                        <div className="text-[#E8C064]/30 text-4xl font-serif leading-none mb-2 select-none">"</div>
+
+                                        {/* Stars */}
+                                        <div className="flex items-center gap-0.5 mb-3">
+                                            {[1, 2, 3, 4, 5].map(s => (
+                                                <svg key={s} className="w-3.5 h-3.5 text-[#E8C064]" viewBox="0 0 20 20" fill="currentColor">
+                                                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                                                </svg>
+                                            ))}
+                                        </div>
+
+                                        {/* Text */}
+                                        <p className="text-gray-700 text-sm md:text-[15px] leading-relaxed mb-5 flex-1 italic">
+                                            {review.text}
+                                        </p>
+
+                                        {/* Author */}
+                                        <div className="flex items-center gap-3 pt-4 border-t border-gray-100">
+                                            <div className="w-9 h-9 rounded-full bg-[#7A0019] text-white flex items-center justify-center font-black text-sm shadow-sm">
+                                                {review.author[0]}
+                                            </div>
+                                            <div>
+                                                <div className="text-xs font-bold text-gray-900">{review.author}</div>
+                                                <div className="text-[10px] text-gray-400 font-medium flex items-center gap-1">
+                                                    <svg className="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg>
+                                                    Перевірений покупець
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             ))}
                         </div>
-                        <div className="text-center mt-12 animate-fade-in-delayed">
-                            <Link to="/cakes" className="group inline-block bg-gradient-to-r from-[#ffd700] to-[#ffed4e] text-gray-900 px-12 py-5 font-bold uppercase text-sm tracking-wider hover:from-[#ffed4e] hover:to-[#ffd700] transition-all shadow-xl hover:shadow-2xl transform hover:scale-105 duration-300">
-                                <span className="flex items-center justify-center gap-2">
-                                    Всі пропозиції
-                                    <span className="group-hover:translate-x-2 transition-transform duration-300">→</span>
-                                </span>
-                            </Link>
-                        </div>
-                    </>
-                ) : (
-                    <div className="flex flex-col items-center justify-center py-20">
-                        <div className="w-12 h-12 border-4 border-[#7b002c]/20 border-t-[#7b002c] rounded-full animate-spin mb-4"></div>
-                        <div className="text-gray-500 font-medium tracking-wider text-sm animate-pulse uppercase">Завантаження шедеврів...</div>
                     </div>
-                )}
-            </div>
 
-            {/* Call to Action Banner - Caramel/Sand style */}
-            <div className="relative bg-[#D39A5E] text-gray-900 py-20 overflow-hidden border-y border-[#D39A5E]/10 shadow-sm">
-                <div className="absolute inset-0 opacity-10">
-                    <div className="absolute top-10 left-10 text-6xl animate-float">🎂</div>
-                    <div className="absolute bottom-10 right-10 text-6xl animate-float-delayed">🧁</div>
-                </div>
-
-                <div className="container mx-auto px-6 text-center relative z-10">
-                    <h3 className="text-3xl md:text-5xl font-black mb-4 animate-fade-in tracking-tight text-white drop-shadow-sm" style={{ fontFamily: "'Oswald', sans-serif" }}>
-                        ГОТОВІ ЗАМОВИТИ ТОРТ МРІЇ?
-                    </h3>
-                    <p className="text-xl mb-10 text-white opacity-90 italic max-w-2xl mx-auto animate-fade-in-delayed" style={{ fontFamily: "'Dancing Script', cursive" }}>
-                        Дозвольте собі шматочок справжнього щастя. Оберіть свій ідеальний смак прямо зараз.
-                    </p>
-                    <div className="flex flex-col sm:flex-row gap-6 justify-center animate-fade-in-delayed">
-                        <a href="tel:0979081504" className="inline-block bg-white text-gray-800 px-12 py-4 font-bold uppercase text-[10px] tracking-[0.2em] transition-all shadow-xl hover:shadow-gray-200 transform hover:-translate-y-1 hover:scale-105 border border-gray-100">
-                            📞 Телефонувати
-                        </a>
-                        <Link to="/cakes" className="inline-block bg-[#ffcc00] text-gray-900 px-12 py-4 font-bold uppercase text-[10px] tracking-[0.2em] hover:bg-[#ffdb4d] transition-all shadow-xl hover:shadow-[#ffcc00]/30 transform hover:-translate-y-1 hover:scale-105">
-                            Обрати Торт
+                    {/* CTA link */}
+                    <div className="text-center mt-8 md:mt-10">
+                        <Link to="/reviews" className="inline-flex items-center gap-2 text-[#7A0019] font-black text-xs uppercase tracking-wider border-b-2 border-[#E8C064] pb-1 hover:text-[#9C142B] transition-all">
+                            Всі відгуки
+                            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" /></svg>
                         </Link>
                     </div>
                 </div>
@@ -624,6 +802,7 @@ function Home() {
                 cake={selectedCakeForQuickOrder}
                 deliveryDate={selectedCakeForQuickOrder?.deliveryDate}
                 deliveryMethod={selectedCakeForQuickOrder?.deliveryMethod}
+                flavor={selectedCakeForQuickOrder?.flavor}
             />
         </div >
     );

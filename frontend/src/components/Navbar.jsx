@@ -37,7 +37,7 @@ function Navbar() {
                             <Link to="/" className="flex items-center gap-3 flex-shrink-0 group">
                                 <img src={logo} alt="ANTREME" className="h-16 md:h-20 w-auto object-contain group-hover:scale-105 transition-transform duration-300" />
                                 <div className="flex flex-col">
-                                    <span className="text-[#5a0020]/80 text-[10px] md:text-xs uppercase tracking-widest font-medium">Кондитерська мастерня</span>
+                                    <span className="text-[#5a0020]/80 text-[10px] md:text-xs uppercase tracking-widest font-medium">Кондитерська майстерня</span>
                                     <span className="text-2xl md:text-3xl font-serif font-bold text-[#5a0020] leading-none tracking-wide group-hover:text-black transition-colors duration-300">Antreme</span>
                                 </div>
                             </Link>

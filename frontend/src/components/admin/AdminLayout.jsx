@@ -3,7 +3,7 @@ import { Link, useLocation, Outlet } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import {
     FiShoppingBag, FiPackage, FiLayers, FiLogOut, FiHome,
-    FiMenu, FiX, FiChevronDown, FiChevronRight, FiGrid, FiImage
+    FiMenu, FiX, FiChevronDown, FiChevronRight, FiGrid, FiImage, FiMessageCircle
 } from 'react-icons/fi';
 import { CATEGORIES } from '../../constants/categories';
 
@@ -210,6 +210,18 @@ export default function AdminLayout() {
                     >
                         <FiLayers className="w-5 h-5" />
                         <span>Редактор сторінок</span>
+                    </Link>
+
+                    <Link
+                        to="/admin/telegram"
+                        onClick={() => setIsSidebarOpen(false)}
+                        className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all ${isActive('/admin/telegram')
+                            ? 'bg-vatsak-red text-white shadow-md shadow-red-100 font-medium'
+                            : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
+                            }`}
+                    >
+                        <FiMessageCircle className="w-5 h-5" />
+                        <span>Telegram Сповіщення</span>
                     </Link>
                 </nav>
 

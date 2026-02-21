@@ -32,6 +32,13 @@ function Cart() {
             return;
         }
 
+        const phoneRegex = /^(\+?380|0)\d{9}$/;
+        if (!phoneRegex.test(customerDetails.phone.replace(/[\s\-\(\)]/g, ''))) {
+            setError('Будь ласка, введіть коректний номер телефону (наприклад, 0501234567 або +380501234567).');
+            setIsCheckingOut(false);
+            return;
+        }
+
         try {
             const firstItem = cartItems[0];
             const orderData = {
@@ -105,31 +112,31 @@ function Cart() {
             <div className="max-w-6xl mx-auto">
                 <h1 className="text-3xl font-extrabold text-gray-900 mb-8 uppercase tracking-wide border-b-2 border-vatsak-gold pb-4 inline-block">Кошик покупок</h1>
 
-                {error && (
-                    <div className="bg-red-50 border-l-4 border-vatsak-red p-4 mb-6">
-                        <p className="text-red-700">{error}</p>
-                    </div>
-                )}
+                {/* Error message moved down closer to the checkout button */}
 
                 <div className="bg-white shadow-xl overflow-hidden border-t-4 border-vatsak-red">
                     <ul className="divide-y divide-gray-100">
                         {cartItems.map((item) => (
-                            <li key={`${item.id}-${item.flavor}`} className="p-6 sm:flex sm:items-center hover:bg-gray-50 transition-colors">
+                            <li key={`${item.id}-${item.flavor}-${item.weight}`} className="p-6 sm:flex sm:items-center hover:bg-gray-50 transition-colors">
                                 <div className="h-24 w-24 flex-shrink-0 overflow-hidden border border-gray-200 bg-white shadow-sm rounded-xl">
-                                    {item.image_url && (
-                                        <img
-                                            src={item.image_url.startsWith('http') ? item.image_url : `${api.defaults.baseURL}${item.image_url}`}
-                                            alt={item.name}
-                                            className="h-full w-full object-cover object-center"
-                                        />
-                                    )}
+                                    <Link to={`/cakes/${item.id}`} state={{ fromCategory: item.category }} className="hover:opacity-80 transition-opacity block h-full w-full">
+                                        {item.image_url && (
+                                            <img
+                                                src={item.image_url.startsWith('http') ? item.image_url : `${api.defaults.baseURL}${item.image_url}`}
+                                                alt={item.name}
+                                                className="h-full w-full object-cover object-center"
+                                            />
+                                        )}
+                                    </Link>
                                 </div>
 
                                 <div className="ml-4 flex-1 flex flex-col sm:ml-6">
                                     <div>
                                         <div className="flex justify-between text-base font-medium text-gray-900">
                                             <div>
-                                                <h3 className="uppercase tracking-wide font-bold text-lg">{item.name}</h3>
+                                                <Link to={`/cakes/${item.id}`} state={{ fromCategory: item.category }} className="hover:text-vatsak-red transition-colors inline-block text-gray-900">
+                                                    <h3 className="uppercase tracking-wide font-bold text-lg">{item.name}</h3>
+                                                </Link>
                                                 {item.flavor && (
                                                     <p className="text-sm text-vatsak-red font-bold mt-1 uppercase tracking-wider flex items-center gap-2">
                                                         <span className="w-1.5 h-1.5 bg-vatsak-red rounded-full"></span>
@@ -230,6 +237,13 @@ function Cart() {
                                 </div>
                             </div>
                         </div>
+
+                        {/* Error message moved here, right above the button */}
+                        {error && (
+                            <div className="bg-red-50 border-2 border-vatsak-red rounded-xl p-4 mb-6 text-center animate-pulse">
+                                <p className="text-red-700 font-bold">{error}</p>
+                            </div>
+                        )}
 
                         <button
                             onClick={handleCheckout}

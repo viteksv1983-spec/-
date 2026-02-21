@@ -186,18 +186,55 @@ def read_cake(cake_id: int, db: Session = Depends(get_db)):
     return db_cake
 
 
+
 # Validating requests installation
 import requests
 
-# Telegram Configuration
-TELEGRAM_BOT_TOKEN = "7564033230:AAHiF7g4aXN-T0d-XJqP9QzC6YI5WqX9n90" # TODO: Move to env vars
-TELEGRAM_CHAT_ID = "-4758367634" # TODO: Move to env vars
+# --- Telegram notification system (DB-based) ---
+def get_telegram_settings(db: Session):
+    settings = db.query(models.TelegramSettings).filter(models.TelegramSettings.id == 1).first()
+    if not settings:
+        # Create default with user's token
+        settings = models.TelegramSettings(
+            id=1,
+            bot_token="8339223589:AAFAdjKe9VTuWwye3HNJsQW_IIwDSxmrnMo",
+            chat_id_1="428760780",
+            label_1="Viktor",
+            is_active=True
+        )
+        db.add(settings)
+        db.commit()
+        db.refresh(settings)
+    return settings
 
-def send_telegram_notification(message: str):
+def send_telegram_notification(message: str, db: Session = None):
     try:
-        url = f"https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}/sendMessage"
-        data = {"chat_id": TELEGRAM_CHAT_ID, "text": message, "parse_mode": "HTML"}
-        requests.post(url, json=data, timeout=5)
+        if db is None:
+            db_gen = get_db()
+            db = next(db_gen)
+            close_after = True
+        else:
+            close_after = False
+
+        settings = get_telegram_settings(db)
+        if not settings.is_active or not settings.bot_token:
+            return
+
+        url = f"https://api.telegram.org/bot{settings.bot_token}/sendMessage"
+        chat_ids = []
+        if settings.chat_id_1 and settings.is_active_1:
+            chat_ids.append(settings.chat_id_1)
+        if settings.chat_id_2 and settings.is_active_2:
+            chat_ids.append(settings.chat_id_2)
+        if settings.chat_id_3 and settings.is_active_3:
+            chat_ids.append(settings.chat_id_3)
+
+        for chat_id in chat_ids:
+            data = {"chat_id": chat_id, "text": message, "parse_mode": "HTML"}
+            requests.post(url, json=data, timeout=5)
+
+        if close_after:
+            db.close()
     except Exception as e:
         print(f"Failed to send Telegram notification: {e}")
 
@@ -209,17 +246,28 @@ def create_order(order: schemas.OrderCreate, db: Session = Depends(get_db), curr
     # Creating order
     db_order = crud.create_order(db=db, order=order, user_id=user_id)
     
-    # Send Telegram Notification
     msg = f"<b>Нове замовлення! (Кошик)</b>\n"
-    msg += f"Сума: {db_order.total_price} грн\n"
+    msg += f"🆔 Номер замовлення: №{db_order.id}\n\n"
+    msg += f"👤 <b>Клієнт:</b>\n"
     msg += f"Ім'я: {order.customer_name}\n"
     msg += f"Телефон: {order.customer_phone}\n"
-    if current_user:
-        msg += f"Клієнт (Email): {current_user.email}\n"
-    else:
-        msg += f"Тип: Гостьове замовлення\n"
+    msg += f"Тип обліковки: {'Зареєстрований' if current_user else 'Гість'}\n\n"
+    msg += f"🚚 <b>Доставка:</b>\n"
+    msg += f"Спосіб: {order.delivery_method or 'Не вказано'}\n"
+    msg += f"Дата (на коли): {order.delivery_date or 'Не вказано'}\n\n"
+    msg += f"📦 <b>Товари:</b>\n"
+    for item in order.items:
+        cake = crud.get_cake(db, item.cake_id)
+        cake_name = cake.name if cake else f"ID {item.cake_id}"
+        msg += f"- {cake_name} ({item.quantity} шт)\n"
+        if item.weight:
+            msg += f"  Вага: {item.weight} кг\n"
+        if item.flavor:
+            msg += f"  Начинка: {item.flavor}\n"
+            
+    msg += f"\n💰 <b>Всього:</b> {db_order.total_price} грн\n"
     
-    send_telegram_notification(msg)
+    send_telegram_notification(msg, db)
     
     return db_order
 
@@ -250,17 +298,23 @@ def create_quick_order(order: schemas.QuickOrderCreate, db: Session = Depends(ge
     cake_name = cake.name if cake else "Unknown Cake"
     
     msg = f"<b>Нове замовлення! (В 1 клік)</b>\n"
-    msg += f"Товар: {cake_name}\n"
+    msg += f"🆔 Номер замовлення: №{db_order.id}\n\n"
+    msg += f"👤 <b>Клієнт:</b>\n"
     msg += f"Ім'я: {order.customer_name}\n"
-    msg += f"Телефон: {order.customer_phone}\n"
-    msg += f"Кількість: {order.quantity}\n"
+    msg += f"Телефон: {order.customer_phone}\n\n"
+    msg += f"🚚 <b>Доставка:</b>\n"
+    msg += f"Спосіб: {order.delivery_method or 'Не вказано'}\n"
+    msg += f"Дата (на коли): {order.delivery_date or 'Не вказано'}\n\n"
+    msg += f"📦 <b>Товари:</b>\n"
+    msg += f"- {cake_name} ({order.quantity} шт)\n"
     if order.weight:
-        msg += f"Вага: {order.weight} кг\n"
+        msg += f"  Вага: {order.weight} кг\n"
     if order.flavor:
-        msg += f"Начинка: {order.flavor}\n"
-    msg += f"Сума: {db_order.total_price} грн\n"
+        msg += f"  Начинка: {order.flavor}\n"
         
-    send_telegram_notification(msg)
+    msg += f"\n💰 <b>Всього:</b> {db_order.total_price} грн\n"
+        
+    send_telegram_notification(msg, db)
     
     return db_order
 
@@ -324,6 +378,26 @@ def read_orders(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
 @app.get("/")
 def read_root():
     return {"message": "Welcome to Cake Shop API"}
+
+# --- Telegram Admin Endpoints ---
+@app.get("/admin/telegram", response_model=schemas.TelegramSettings)
+def get_telegram_settings_endpoint(db: Session = Depends(get_db), current_user: schemas.User = Depends(get_current_user)):
+    return get_telegram_settings(db)
+
+@app.put("/admin/telegram", response_model=schemas.TelegramSettings)
+def update_telegram_settings_endpoint(settings_update: schemas.TelegramSettingsUpdate, db: Session = Depends(get_db), current_user: schemas.User = Depends(get_current_user)):
+    settings = get_telegram_settings(db)
+    update_data = settings_update.model_dump(exclude_unset=True)
+    for key, value in update_data.items():
+        setattr(settings, key, value)
+    db.commit()
+    db.refresh(settings)
+    return settings
+
+@app.post("/admin/telegram/test")
+def test_telegram(db: Session = Depends(get_db), current_user: schemas.User = Depends(get_current_user)):
+    send_telegram_notification("\u2705 Тестове повідомлення від Antreme!", db)
+    return {"message": "Test notification sent"}
 
 from backend import seed
 

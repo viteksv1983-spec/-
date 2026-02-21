@@ -44,7 +44,17 @@ def create_order(db: Session, order: schemas.OrderCreate, user_id: Optional[int]
         if not cake:
             # In a real app, raise HTTPException here or handle gracefully
             continue 
-        total_price += cake.price * item.quantity # Note: In a real app we would recalculate based on weight here too
+            
+        # Calculate price based on weight
+        base_weight_kg = cake.weight if cake.weight is not None else 1
+        if base_weight_kg > 10:
+            base_weight_kg = base_weight_kg / 1000
+            
+        price_per_kg = cake.price / base_weight_kg
+        item_weight = item.weight if item.weight is not None else base_weight_kg
+        item_price = round(price_per_kg * item_weight)
+        
+        total_price += item_price * item.quantity
         db_items.append(models.OrderItem(cake_id=item.cake_id, quantity=item.quantity, flavor=item.flavor, weight=item.weight))
 
     # Create Order
@@ -95,16 +105,16 @@ def create_quick_order(db: Session, order: schemas.QuickOrderCreate):
     if not cake:
         return None
     
-    # Calculate total price (simplified for quick order, assuming base price * quantity)
-    # In a real scenario, weight would factor in if it differs from base.
-    # For now, let's assume price is per item or calculate if weight is provided.
-    price = cake.price
-    if order.weight:
-        # If weight is provided, we might need logic to calculate price based on weight
-        # For this MVP, let's just use the cake price * quantity
-        pass
+    # Calculate total price accounting for weight
+    base_weight_kg = cake.weight if cake.weight is not None else 1
+    if base_weight_kg > 10:
+        base_weight_kg = base_weight_kg / 1000
         
-    total_price = price * order.quantity
+    price_per_kg = cake.price / base_weight_kg
+    item_weight = order.weight if order.weight is not None else base_weight_kg
+    item_price = round(price_per_kg * item_weight)
+    
+    total_price = item_price * order.quantity
 
     # Create Order
     from datetime import datetime

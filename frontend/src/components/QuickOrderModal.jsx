@@ -21,6 +21,12 @@ const QuickOrderModal = ({
         e.preventDefault();
         setLoading(true);
         setMessage('');
+        const phoneRegex = /^(\+?380|0)\d{9}$/;
+        if (!phoneRegex.test(phone.replace(/[\s\-\(\)]/g, ''))) {
+            setMessage('Будь ласка, введіть коректний номер телефону (наприклад, +380501234567 або 0501234567).');
+            setLoading(false);
+            return;
+        }
 
         try {
             await api.post('/orders/quick', {
