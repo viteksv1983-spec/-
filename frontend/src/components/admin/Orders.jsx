@@ -217,10 +217,10 @@ export default function Orders() {
                             </div>
 
                             {/* Mobile Image Thumbnails */}
-                            <div className="flex items-center gap-2 mb-3">
-                                <div className="flex -space-x-2 overflow-hidden py-1">
-                                    {order.items && order.items.slice(0, 3).map((item, idx) => (
-                                        <div key={idx} className="inline-block w-8 h-8 rounded-full border-2 border-white bg-gray-50 flex-shrink-0 relative overflow-hidden shadow-sm">
+                            <div className="flex flex-col gap-2 mb-4">
+                                {order.items && order.items.slice(0, 2).map((item, idx) => (
+                                    <div key={idx} className="flex items-center gap-3">
+                                        <div className="w-10 h-10 rounded-xl bg-gray-50 flex-shrink-0 relative overflow-hidden shadow-sm border border-gray-100">
                                             {item.cake?.image_url ? (
                                                 <img
                                                     src={item.cake.image_url.startsWith('http') ? item.cake.image_url : `${api.defaults.baseURL}${item.cake.image_url}`}
@@ -229,15 +229,21 @@ export default function Orders() {
                                                 />
                                             ) : (
                                                 <div className="w-full h-full bg-gray-100 flex items-center justify-center">
-                                                    <span className="text-[8px] font-bold text-gray-400">?</span>
+                                                    <span className="text-[10px] font-bold text-gray-400">?</span>
                                                 </div>
                                             )}
                                         </div>
-                                    ))}
-                                </div>
-                                <div className="text-xs text-gray-500 font-medium italic">
-                                    {order.items?.length || 0} тов. {order.items?.length > 3 && <span className="text-vatsak-red font-bold">(+{order.items.length - 3})</span>}
-                                </div>
+                                        <div className="flex-1 min-w-0">
+                                            <div className="text-xs font-bold text-gray-900 truncate">{item.cake?.name || `Торт #${item.cake_id}`}</div>
+                                            <div className="text-[10px] text-gray-400 font-medium italic mt-0.5">{item.quantity} шт.</div>
+                                        </div>
+                                    </div>
+                                ))}
+                                {order.items && order.items.length > 2 && (
+                                    <div className="text-[10px] text-vatsak-red font-bold uppercase tracking-wider pl-1.5 mt-1">
+                                        + ще {order.items.length - 2} тов.
+                                    </div>
+                                )}
                             </div>
 
                             <div className="flex justify-between items-center mb-3">
