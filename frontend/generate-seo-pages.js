@@ -78,9 +78,9 @@ routes.forEach(route => {
     // Inject SEO tags
     let html = baseHtml;
 
-    // Replace title
+    // Replace title (using [\s\S]*? to match across newlines)
     html = html.replace(
-        /<title>.*?<\/title>/,
+        /<title>[\s\S]*?<\/title>/,
         `<title>${route.title}</title>`
     );
 
@@ -92,10 +92,10 @@ routes.forEach(route => {
   <meta property="og:description" content="${route.description}" />
   <meta property="og:url" content="${fullUrl}" />
   <meta name="twitter:title" content="${route.title}" />
-  <meta name="twitter:description" content="${route.description}" />`;
+  <meta name="twitter:description" content="${route.description}" />\n</head>`;
 
-    // Inject right after <head>
-    html = html.replace('<head>', `<head>${metaTags}`);
+    // Inject right before </head> instead of <head>
+    html = html.replace('</head>', metaTags);
 
     const filePath = path.join(folderPath, 'index.html');
     fs.writeFileSync(filePath, html);
