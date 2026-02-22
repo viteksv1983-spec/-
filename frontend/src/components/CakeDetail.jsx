@@ -209,7 +209,7 @@ function CakeDetail() {
                             {cake.image_url && (
                                 <img
                                     src={cake.image_url.startsWith('http') ? cake.image_url : `${api.defaults.baseURL}${cake.image_url}`}
-                                    alt={cake.name}
+                                    alt={`${cake.name} замовити Київ`}
                                     className="w-full h-full object-contain drop-shadow-xl group-hover:scale-105 transition-transform duration-700"
                                 />
                             )}
@@ -616,7 +616,7 @@ function ProductCard({ cake, addToCart }) {
                         {cake.image_url && (
                             <img
                                 src={cake.image_url.startsWith('http') ? cake.image_url : `${api.defaults.baseURL}${cake.image_url}`}
-                                alt={cake.name}
+                                alt={`${cake.name} купити Київ`}
                                 className="w-full h-full object-contain drop-shadow-md group-hover:scale-105 transition-transform duration-500"
                                 loading="lazy"
                             />

@@ -371,7 +371,7 @@ function Home() {
                                 <div className="relative rounded-[2rem] overflow-hidden shadow-xl transform transition duration-500 group-hover:scale-[1.02] border border-gray-100">
                                     <img
                                         src="/images/confectioner.jpg"
-                                        alt="Наш кондитер"
+                                        alt="Шеф-кондитер Людмила Приходько - авторські торти на замовлення Київ"
                                         className="w-full h-auto object-cover"
                                         onError={(e) => {
                                             if (!e.target.dataset.retried) {
@@ -457,7 +457,7 @@ function Home() {
                             <div className="w-full md:w-1/2 h-[300px] md:h-[650px] relative overflow-hidden order-first md:order-last rounded-t-3xl md:rounded-t-none md:rounded-r-3xl">
                                 <img
                                     src="https://images.unsplash.com/photo-1535141192574-5d4897c12636?auto=format&fit=crop&q=80&w=1000"
-                                    alt="Holiday Cakes"
+                                    alt="Ексклюзивні святкові та весільні торти на замовлення в Києві"
                                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-[2000ms] ease-out"
                                 />
                                 <div className="absolute inset-0 bg-black/5 group-hover:bg-transparent transition-colors duration-500"></div>
