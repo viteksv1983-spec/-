@@ -228,7 +228,7 @@ function CakeList() {
         <div className="min-h-screen bg-white">
             <SEOHead
                 title={`${getCategoryTitle()} | Купити торти в Києві – Antreme`}
-                description={`Шукаєте ${getCategoryTitle().toLowerCase()}? В кондитерській Antreme величезний вибір свіжих десертів. Швидка доставка по Києву. Замовляйте онлайн!`}
+                description={`Шукаєте ${getCategoryTitle().toLowerCase()}? В кондитерській Antreme величезний вибір свіжих десертів з натуральних інгредієнтів. Адресна доставка по Києву.`}
                 canonical={canonicalUrl}
                 schema={schemaData}
             />

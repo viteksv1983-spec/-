@@ -34,7 +34,7 @@ export default function SEOHead({ title, description, keywords, h1, canonical, o
 
     // Effective values: Prop > Backend > Default
     const effectiveTitle = title || data.meta_title || 'Antreme - Торти на замовлення';
-    const effectiveDesc = description || data.meta_description || 'Найсмачніші торти на замовлення у Києві. Лише натуральні інгредієнти.';
+    const effectiveDesc = description || data.meta_description || 'Авторські торти на замовлення у Києві від кондитерської Antreme. Готуємо з 100% натуральних інгредієнтів: весільні, дитячі, корпоративні десерти з адресною доставкою.';
     const effectiveKeywords = keywords || data.meta_keywords || 'торти, київ, замовлення, десерти';
     const effectiveRobots = robots || data.meta_robots || 'index, follow';
 
