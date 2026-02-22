@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import api from '../api';
 
-export default function SEOHead({ title, description, keywords, h1, canonical, ogImage, type = 'website', schema }) {
+export default function SEOHead({ title, description, keywords, h1, canonical, ogImage, type = 'website', schema, robots }) {
     const location = useLocation();
     const [seoData, setSeoData] = useState(null);
     const domain = 'https://antreme.kiev.ua';
@@ -36,6 +36,7 @@ export default function SEOHead({ title, description, keywords, h1, canonical, o
     const effectiveTitle = title || data.meta_title || 'Antreme - Торти на замовлення';
     const effectiveDesc = description || data.meta_description || 'Найсмачніші торти на замовлення у Києві. Лише натуральні інгредієнти.';
     const effectiveKeywords = keywords || data.meta_keywords || 'торти, київ, замовлення, десерти';
+    const effectiveRobots = robots || data.meta_robots || 'index, follow';
 
     // Construct canonical
     const pathForCanonical = canonical || location.pathname;
@@ -52,6 +53,7 @@ export default function SEOHead({ title, description, keywords, h1, canonical, o
             <meta name="description" content={effectiveDesc} />
             <meta name="keywords" content={effectiveKeywords} />
             <link rel="canonical" href={effectiveCanonical} />
+            <meta name="robots" content={effectiveRobots} />
 
             {/* Open Graph */}
             <meta property="og:type" content={type} />
@@ -60,6 +62,12 @@ export default function SEOHead({ title, description, keywords, h1, canonical, o
             <meta property="og:image" content={effectiveOgImage} />
             <meta property="og:url" content={effectiveCanonical} />
             <meta property="og:site_name" content="Antreme – Кондитерська майстерня" />
+
+            {/* Twitter Cards */}
+            <meta name="twitter:card" content="summary_large_image" />
+            <meta name="twitter:title" content={effectiveTitle} />
+            <meta name="twitter:description" content={effectiveDesc} />
+            <meta name="twitter:image" content={effectiveOgImage} />
 
             {/* Schema.org */}
             {effectiveSchema && (
