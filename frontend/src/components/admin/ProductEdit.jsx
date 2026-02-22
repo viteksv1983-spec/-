@@ -131,14 +131,14 @@ export default function ProductEdit() {
                     <button
                         type="button"
                         onClick={() => setActiveTab('content')}
-                        className={`flex-1 py-4 text-sm font-bold uppercase tracking-wider ${activeTab === 'content' ? 'bg-gray-50 text-vatsak-red border-b-2 border-vatsak-red' : 'text-gray-500 hover:text-gray-700'}`}
+                        className={`flex-1 py-4 text-sm font-bold uppercase tracking-wider ${activeTab === 'content' ? 'bg-gray-50 text-antreme-red border-b-2 border-antreme-red' : 'text-gray-500 hover:text-gray-700'}`}
                     >
                         Основна інформація
                     </button>
                     <button
                         type="button"
                         onClick={() => setActiveTab('seo')}
-                        className={`flex-1 py-4 text-sm font-bold uppercase tracking-wider ${activeTab === 'seo' ? 'bg-gray-50 text-vatsak-red border-b-2 border-vatsak-red' : 'text-gray-500 hover:text-gray-700'}`}
+                        className={`flex-1 py-4 text-sm font-bold uppercase tracking-wider ${activeTab === 'seo' ? 'bg-gray-50 text-antreme-red border-b-2 border-antreme-red' : 'text-gray-500 hover:text-gray-700'}`}
                     >
                         SEO Налаштування
                     </button>
@@ -155,7 +155,7 @@ export default function ProductEdit() {
                                         name="name"
                                         value={formData.name}
                                         onChange={handleChange}
-                                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-vatsak-red focus:border-transparent"
+                                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-antreme-red focus:border-transparent"
                                     />
                                 </div>
                                 <div>
@@ -165,7 +165,7 @@ export default function ProductEdit() {
                                         name="price"
                                         value={formData.price}
                                         onChange={handleChange}
-                                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-vatsak-red focus:border-transparent"
+                                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-antreme-red focus:border-transparent"
                                     />
                                 </div>
                             </div>
@@ -177,7 +177,7 @@ export default function ProductEdit() {
                                     rows="4"
                                     value={formData.description}
                                     onChange={handleChange}
-                                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-vatsak-red focus:border-transparent"
+                                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-antreme-red focus:border-transparent"
                                 />
                             </div>
 
@@ -188,7 +188,7 @@ export default function ProductEdit() {
                                         name="weight"
                                         value={formData.weight}
                                         onChange={handleChange}
-                                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-vatsak-red focus:border-transparent cursor-pointer"
+                                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-antreme-red focus:border-transparent cursor-pointer"
                                     >
                                         <option value="">Оберіть вагу</option>
                                         {WEIGHT_OPTIONS.map(opt => (
@@ -202,7 +202,7 @@ export default function ProductEdit() {
                                         name="category"
                                         value={formData.category}
                                         onChange={handleChange}
-                                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-vatsak-red focus:border-transparent cursor-pointer"
+                                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-antreme-red focus:border-transparent cursor-pointer"
                                     >
                                         <option value="">Оберіть категорію</option>
                                         {CATEGORIES.map(cat => (
@@ -241,7 +241,7 @@ export default function ProductEdit() {
                                                 value={formData.image_url}
                                                 onChange={handleChange}
                                                 placeholder="Вставте посилання або завантажте файл"
-                                                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-vatsak-red focus:border-transparent mb-2"
+                                                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-antreme-red focus:border-transparent mb-2"
                                             />
                                             <input
                                                 type="file"
@@ -267,7 +267,7 @@ export default function ProductEdit() {
                                                         alert("Помилка завантаження файлу: " + (typeof detail === 'string' ? detail : "Перевірте підключення або спробуйте увійти знову"));
                                                     }
                                                 }}
-                                                className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-vatsak-red file:text-white hover:file:bg-red-700 cursor-pointer"
+                                                className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-antreme-red file:text-white hover:file:bg-red-700 cursor-pointer"
                                             />
                                         </div>
                                     </div>

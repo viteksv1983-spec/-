@@ -558,7 +558,7 @@ function CakeDetail({ predefinedId, predefinedSlug, expectedCategory, groupType,
                         title="Популярні товари"
                         subtitle="Хіти продажів"
                         cakes={popular}
-                        linkTo="/cakes"
+                        linkTo="/torty-na-zamovlennya/"
                         linkText="Всі товари"
                     />
 
@@ -574,7 +574,7 @@ function CakeDetail({ predefinedId, predefinedSlug, expectedCategory, groupType,
                         title="Рекомендовані"
                         subtitle="Вам сподобається"
                         cakes={recommended}
-                        linkTo="/cakes"
+                        linkTo="/torty-na-zamovlennya/"
                         linkText="Весь каталог"
                     />
                 </div>

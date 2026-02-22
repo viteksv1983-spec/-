@@ -123,7 +123,7 @@ function Blog() {
                                 <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-3">
                                     {post.date}
                                 </span>
-                                <h2 className="text-xl md:text-2xl font-bold text-gray-900 mb-4 group-hover:text-vatsak-red transition-colors leading-tight">
+                                <h2 className="text-xl md:text-2xl font-bold text-gray-900 mb-4 group-hover:text-antreme-red transition-colors leading-tight">
                                     {post.title}
                                 </h2>
                                 <p className="text-gray-500 text-sm leading-relaxed mb-6 flex-1">

@@ -53,12 +53,12 @@ def check_and_seed_data(db: Session):
         "birthday": "https://images.unsplash.com/photo-1533777857889-4be7c70b33f7?auto=format&fit=crop&q=80&w=800",
         "anniversary": "https://images.unsplash.com/photo-1535141192574-5d4897c12636?auto=format&fit=crop&q=80&w=800",
         "kids": "https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?auto=format&fit=crop&q=80&w=800",
-        "wedding": "https://vatsak.com.ua/image/cache/catalog/products/Tortu/SER?IA%20VELVET/Velvet%20Cherry/Velvet%20Redberry_main-562x429.png",
-        "bento": "https://vatsak.com.ua/image/cache/catalog/products/Tortu/Child/FruttiMango/FruttiMango_Icon-562x429.jpg",
-        "biscuit": "https://vatsak.com.ua/image/cache/catalog/products/Tortu/Milk%20Cream/RedVelvet/RedVelvet_icon-562x429.jpg",
-        "mousse": "https://vatsak.com.ua/image/cache/catalog/products/Tortu/SER%IA%20VELVET/Velvet%20Cherry/velvet%20cherry-562x429.jpg",
-        "cupcakes": "https://vatsak.com.ua/image/cache/catalog/products/Tortu/PORTC%JN?/Medovuk/Medovuk_porc_Icon-562x429.jpg",
-        "gingerbread": "https://vatsak.com.ua/image/cache/catalog/products/Tortu/KARTONNA%20UPAKOVKA/Tof?/tofi-562x429.jpg"
+        "wedding": "",
+        "bento": "",
+        "biscuit": "",
+        "mousse": "",
+        "cupcakes": "",
+        "gingerbread": ""
     }
     for slug, img_url in initial_images.items():
         if not crud.get_category_metadata(db, slug):
@@ -66,12 +66,12 @@ def check_and_seed_data(db: Session):
     
     # 4. Seed Essential Cakes (Minimal set for instant WOW)
     categories_data = {
-        "bento": ("Бенто", 450.0, 500.0, "https://vatsak.com.ua/image/cache/catalog/products/Tortu/Child/FruttiMango/FruttiMango_Icon-562x429.jpg"),
-        "biscuit": ("Бісквітний", 1500.0, 1000.0, "https://vatsak.com.ua/image/cache/catalog/products/Tortu/Milk%20Cream/RedVelvet/RedVelvet_icon-562x429.jpg"),
-        "mousse": ("Мусовий", 1100.0, 1200.0, "https://vatsak.com.ua/image/cache/catalog/products/Tortu/SER%IA%20VELVET/Velvet%20Cherry/velvet%20cherry-562x429.jpg"),
-        "wedding": ("Весільний", 4000.0, 3500.0, "https://vatsak.com.ua/image/cache/catalog/products/Tortu/SER?IA%20VELVET/Velvet%20Cherry/Velvet%20Redberry_main-562x429.png"),
-        "cupcakes": ("Капкейки", 350.0, 600.0, "https://vatsak.com.ua/image/cache/catalog/products/Tortu/PORTC%JN?/Medovuk/Medovuk_porc_Icon-562x429.jpg"),
-        "gingerbread": ("Пряник", 200.0, 300.0, "https://vatsak.com.ua/image/cache/catalog/products/Tortu/KARTONNA%20UPAKOVKA/Tof?/tofi-562x429.jpg")
+        "bento": ("Бенто", 450.0, 500.0, ""),
+        "biscuit": ("Бісквітний", 1500.0, 1000.0, ""),
+        "mousse": ("Мусовий", 1100.0, 1200.0, ""),
+        "wedding": ("Весільний", 4000.0, 3500.0, ""),
+        "cupcakes": ("Капкейки", 350.0, 600.0, ""),
+        "gingerbread": ("Пряник", 200.0, 300.0, "")
     }
 
     for cat_slug, (pref, weight, price, img) in categories_data.items():

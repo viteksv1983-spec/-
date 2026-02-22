@@ -72,7 +72,7 @@ export default function SEOPages() {
                 <h1 className="text-2xl font-bold">SEO Статичних Сторінок</h1>
                 <button
                     onClick={handleCreate}
-                    className="flex items-center justify-center gap-2 bg-vatsak-red text-white px-4 py-2 rounded-xl hover:bg-red-700 transition-colors shrink-0"
+                    className="flex items-center justify-center gap-2 bg-antreme-red text-white px-4 py-2 rounded-xl hover:bg-red-700 transition-colors shrink-0"
                 >
                     <FiPlus />
                     <span>Додати сторінку</span>

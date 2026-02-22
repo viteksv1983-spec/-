@@ -90,7 +90,7 @@ function Cart() {
                 <h2 className="text-4xl font-bold text-gray-800 mb-2 font-serif uppercase tracking-widest">Дякуємо за замовлення!</h2>
                 <p className="text-gray-500 mb-8 max-w-md mx-auto text-lg">Ваше замовлення успішно прийнято в обробку. Наш менеджер зв'яжеться з вами найближчим часом для уточнення деталей доставки.</p>
                 <div className="flex gap-4">
-                    <Link to="/" className="bg-vatsak-red text-white px-10 py-4 font-bold uppercase tracking-widest hover:bg-black transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-1">
+                    <Link to="/" className="bg-antreme-red text-white px-10 py-4 font-bold uppercase tracking-widest hover:bg-black transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-1">
                         Продовжити покупки
                     </Link>
                 </div>
@@ -106,11 +106,11 @@ function Cart() {
                     description="Ваш кошик поки що порожній. Перегляньте наш каталог і оберіть свій ідеальний торт від Antreme."
                 />
                 <div className="bg-white p-8 rounded-full shadow-lg mb-6">
-                    <svg className="w-16 h-16 text-vatsak-red" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
+                    <svg className="w-16 h-16 text-antreme-red" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
                 </div>
                 <h2 className="text-3xl font-bold text-gray-800 mb-2 font-serif uppercase tracking-wider">Ваш Кошик Порожній</h2>
                 <p className="text-gray-500 mb-8 max-w-md mx-auto">Схоже, ви ще не зробили свій вибір. Перегляньте наш каталог, щоб знайти найсмачніші торти.</p>
-                <Link to="/" className="bg-vatsak-red text-white px-10 py-4 font-bold uppercase tracking-widest hover:bg-red-900 transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-1">
+                <Link to="/" className="bg-antreme-red text-white px-10 py-4 font-bold uppercase tracking-widest hover:bg-red-900 transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-1">
                     Перейти до каталогу
                 </Link>
             </div>
@@ -124,11 +124,11 @@ function Cart() {
                 description="Перевірте ваше замовлення та оформіть доставку найсмачніших десертів від кондитерської Antreme."
             />
             <div className="max-w-6xl mx-auto">
-                <h1 className="text-3xl font-extrabold text-gray-900 mb-8 uppercase tracking-wide border-b-2 border-vatsak-gold pb-4 inline-block">Кошик покупок</h1>
+                <h1 className="text-3xl font-extrabold text-gray-900 mb-8 uppercase tracking-wide border-b-2 border-antreme-gold pb-4 inline-block">Кошик покупок</h1>
 
                 {/* Error message moved down closer to the checkout button */}
 
-                <div className="bg-white shadow-xl overflow-hidden border-t-4 border-vatsak-red">
+                <div className="bg-white shadow-xl overflow-hidden border-t-4 border-antreme-red">
                     <ul className="divide-y divide-gray-100">
                         {cartItems.map((item) => (
                             <li key={`${item.id}-${item.flavor}-${item.weight}`} className="p-6 sm:flex sm:items-center hover:bg-gray-50 transition-colors">
@@ -148,12 +148,12 @@ function Cart() {
                                     <div>
                                         <div className="flex justify-between text-base font-medium text-gray-900">
                                             <div>
-                                                <Link to={getProductUrl(item)} state={{ fromCategory: item.category }} className="hover:text-vatsak-red transition-colors inline-block text-gray-900">
+                                                <Link to={getProductUrl(item)} state={{ fromCategory: item.category }} className="hover:text-antreme-red transition-colors inline-block text-gray-900">
                                                     <h3 className="uppercase tracking-wide font-bold text-lg">{item.name}</h3>
                                                 </Link>
                                                 {item.flavor && (
-                                                    <p className="text-sm text-vatsak-red font-bold mt-1 uppercase tracking-wider flex items-center gap-2">
-                                                        <span className="w-1.5 h-1.5 bg-vatsak-red rounded-full"></span>
+                                                    <p className="text-sm text-antreme-red font-bold mt-1 uppercase tracking-wider flex items-center gap-2">
+                                                        <span className="w-1.5 h-1.5 bg-antreme-red rounded-full"></span>
                                                         Начинка: {item.flavor}
                                                     </p>
                                                 )}
@@ -164,7 +164,7 @@ function Cart() {
                                                     </p>
                                                 )}
                                             </div>
-                                            <p className="ml-4 text-vatsak-red font-bold text-xl">{item.price * item.quantity} <span className="text-sm text-gray-500 font-normal">грн</span></p>
+                                            <p className="ml-4 text-antreme-red font-bold text-xl">{item.price * item.quantity} <span className="text-sm text-gray-500 font-normal">грн</span></p>
                                         </div>
                                         <p className="mt-1 text-sm text-gray-500">{item.price} грн / шт</p>
                                     </div>
@@ -178,7 +178,7 @@ function Cart() {
                                         <button
                                             type="button"
                                             onClick={() => removeFromCart(item.id, item.flavor, item.weight, item.deliveryDate, item.deliveryMethod)}
-                                            className="font-bold text-gray-400 hover:text-vatsak-red transition-colors uppercase tracking-widest text-[10px] flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-red-50"
+                                            className="font-bold text-gray-400 hover:text-antreme-red transition-colors uppercase tracking-widest text-[10px] flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-red-50"
                                         >
                                             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
                                             Видалити
@@ -192,7 +192,7 @@ function Cart() {
                     <div className="border-t-2 border-gray-100 p-8 bg-gray-50">
                         <div className="flex justify-between text-base font-medium text-gray-900 mb-4">
                             <p className="uppercase tracking-wide font-bold text-lg">Підсумок</p>
-                            <p className="text-3xl font-bold text-vatsak-red">{cartTotal.toFixed(2)} <span className="text-lg text-gray-500 font-normal">грн</span></p>
+                            <p className="text-3xl font-bold text-antreme-red">{cartTotal.toFixed(2)} <span className="text-lg text-gray-500 font-normal">грн</span></p>
                         </div>
                         <p className="mt-0.5 text-sm text-gray-500 mb-6">Доставка оплачується окремо за тарифами служби таксі.</p>
 
@@ -205,7 +205,7 @@ function Cart() {
                                     value={customerDetails.name}
                                     onChange={handleDetailsChange}
                                     placeholder="Введіть ваше ім'я"
-                                    className="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-vatsak-red focus:border-transparent transition-all outline-none text-gray-900 font-medium"
+                                    className="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-antreme-red focus:border-transparent transition-all outline-none text-gray-900 font-medium"
                                 />
                             </div>
                             <div>
@@ -216,7 +216,7 @@ function Cart() {
                                     value={customerDetails.phone}
                                     onChange={handleDetailsChange}
                                     placeholder="+380..."
-                                    className="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-vatsak-red focus:border-transparent transition-all outline-none text-gray-900 font-medium"
+                                    className="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-antreme-red focus:border-transparent transition-all outline-none text-gray-900 font-medium"
                                 />
                             </div>
                             <div>
@@ -228,7 +228,7 @@ function Cart() {
                                     onChange={handleDetailsChange}
                                     onClick={(e) => e.target.showPicker()}
                                     min={new Date(Date.now() + 2 * 86400000).toISOString().split('T')[0]} // Min 2 days from now
-                                    className="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-vatsak-red focus:border-transparent transition-all outline-none text-gray-900 font-medium cursor-pointer"
+                                    className="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-antreme-red focus:border-transparent transition-all outline-none text-gray-900 font-medium cursor-pointer"
                                 />
                                 <p className="text-[10px] text-gray-400 mt-1 italic">* Мінімальний термін замовлення — 2-3 дні</p>
                             </div>
@@ -240,7 +240,7 @@ function Cart() {
                                         name="deliveryMethod"
                                         value={customerDetails.deliveryMethod}
                                         onChange={handleDetailsChange}
-                                        className="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-vatsak-red focus:border-transparent transition-all outline-none text-gray-900 font-medium appearance-none cursor-pointer"
+                                        className="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-antreme-red focus:border-transparent transition-all outline-none text-gray-900 font-medium appearance-none cursor-pointer"
                                     >
                                         <option value="pickup">🏪 Самовивіз</option>
                                         <option value="uklon">🚕 Доставка Uklon</option>
@@ -254,7 +254,7 @@ function Cart() {
 
                         {/* Error message moved here, right above the button */}
                         {error && (
-                            <div className="bg-red-50 border-2 border-vatsak-red rounded-xl p-4 mb-6 text-center animate-pulse">
+                            <div className="bg-red-50 border-2 border-antreme-red rounded-xl p-4 mb-6 text-center animate-pulse">
                                 <p className="text-red-700 font-bold">{error}</p>
                             </div>
                         )}
@@ -262,7 +262,7 @@ function Cart() {
                         <button
                             onClick={handleCheckout}
                             disabled={isCheckingOut}
-                            className={`w-full flex justify-center items-center bg-vatsak-red border border-transparent py-4 px-4 text-lg font-bold uppercase tracking-widest text-white hover:bg-red-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-vatsak-red transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 ${isCheckingOut ? 'opacity-75 cursor-not-allowed' : ''}`}
+                            className={`w-full flex justify-center items-center bg-antreme-red border border-transparent py-4 px-4 text-lg font-bold uppercase tracking-widest text-white hover:bg-red-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-antreme-red transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 ${isCheckingOut ? 'opacity-75 cursor-not-allowed' : ''}`}
                         >
                             {isCheckingOut ? (
                                 <>
@@ -276,7 +276,7 @@ function Cart() {
                         <div className="mt-8 flex justify-center text-center text-sm text-gray-500">
                             <p>
                                 або{' '}
-                                <Link to="/" className="font-medium text-vatsak-red hover:text-red-800 uppercase tracking-wide ml-1">
+                                <Link to="/" className="font-medium text-antreme-red hover:text-red-800 uppercase tracking-wide ml-1">
                                     Продовжити покупки<span aria-hidden="true"> &rarr;</span>
                                 </Link>
                             </p>

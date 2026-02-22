@@ -13,7 +13,7 @@ import {
  */
 export const getCategoryUrl = (dbCategory) => {
     const slug = dbCategoryToSlug(dbCategory);
-    if (!slug) return `/cakes?category=${dbCategory}`;
+    if (!slug) return `/torty-na-zamovlennya/`;
     return getCategoryCanonicalUrl(slug);
 };
 

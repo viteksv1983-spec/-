@@ -50,7 +50,7 @@ export default function PageEditor() {
 
     if (loading) return (
         <div className="flex items-center justify-center min-h-[400px]">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-vatsak-red"></div>
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-antreme-red"></div>
         </div>
     );
 
@@ -61,7 +61,7 @@ export default function PageEditor() {
                 <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
                     <div className="p-4 border-b border-gray-50 bg-gray-50/30">
                         <h2 className="font-bold text-gray-900 flex items-center gap-2">
-                            <FiLayout className="text-vatsak-red text-lg" />
+                            <FiLayout className="text-antreme-red text-lg" />
                             <span>Сторінки сайту</span>
                         </h2>
                     </div>
@@ -71,7 +71,7 @@ export default function PageEditor() {
                                 key={page.id}
                                 onClick={() => setSelectedPage(page)}
                                 className={`w-full text-left px-4 py-3 rounded-xl transition-all text-sm font-medium flex flex-col gap-0.5 ${selectedPage?.id === page.id
-                                    ? 'bg-vatsak-red text-white shadow-md'
+                                    ? 'bg-antreme-red text-white shadow-md'
                                     : 'text-gray-600 hover:bg-gray-50'
                                     }`}
                             >
@@ -108,7 +108,7 @@ export default function PageEditor() {
                         {/* SEO Section */}
                         <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
                             <h3 className="text-sm font-black text-gray-900 uppercase tracking-widest mb-6 flex items-center gap-2">
-                                <FiSettings className="text-vatsak-red" />
+                                <FiSettings className="text-antreme-red" />
                                 SEO налаштування
                             </h3>
                             <div className="space-y-4">
@@ -118,7 +118,7 @@ export default function PageEditor() {
                                         type="text"
                                         value={selectedPage.meta_title || ''}
                                         onChange={e => setSelectedPage({ ...selectedPage, meta_title: e.target.value })}
-                                        className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-vatsak-red/10 transition-all text-sm outline-none"
+                                        className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-antreme-red/10 transition-all text-sm outline-none"
                                         placeholder="Назва сторінки для пошуковиків"
                                     />
                                 </div>
@@ -128,7 +128,7 @@ export default function PageEditor() {
                                         rows="4"
                                         value={selectedPage.meta_description || ''}
                                         onChange={e => setSelectedPage({ ...selectedPage, meta_description: e.target.value })}
-                                        className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-vatsak-red/10 transition-all text-sm outline-none resize-none"
+                                        className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-antreme-red/10 transition-all text-sm outline-none resize-none"
                                         placeholder="Короткий опис для Google..."
                                     />
                                 </div>
@@ -138,7 +138,7 @@ export default function PageEditor() {
                                         type="text"
                                         value={selectedPage.h1_heading || ''}
                                         onChange={e => setSelectedPage({ ...selectedPage, h1_heading: e.target.value })}
-                                        className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-vatsak-red/10 transition-all text-sm outline-none font-bold"
+                                        className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-antreme-red/10 transition-all text-sm outline-none font-bold"
                                         placeholder="Головний заголовок сторінки"
                                     />
                                 </div>
@@ -148,7 +148,7 @@ export default function PageEditor() {
                         {/* Content Section */}
                         <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex flex-col">
                             <h3 className="text-sm font-black text-gray-900 uppercase tracking-widest mb-6 flex items-center gap-2">
-                                <FiInfo className="text-vatsak-red" />
+                                <FiInfo className="text-antreme-red" />
                                 Текстовий контент
                             </h3>
                             <div className="flex-grow flex flex-col">
@@ -156,7 +156,7 @@ export default function PageEditor() {
                                 <textarea
                                     value={selectedPage.content || ''}
                                     onChange={e => setSelectedPage({ ...selectedPage, content: e.target.value })}
-                                    className="w-full flex-grow px-4 py-4 bg-gray-50 border border-gray-200 rounded-2xl focus:bg-white focus:ring-2 focus:ring-vatsak-red/10 transition-all text-sm outline-none min-h-[300px]"
+                                    className="w-full flex-grow px-4 py-4 bg-gray-50 border border-gray-200 rounded-2xl focus:bg-white focus:ring-2 focus:ring-antreme-red/10 transition-all text-sm outline-none min-h-[300px]"
                                     placeholder="Введіть основний текст сторінки..."
                                 />
                                 <p className="text-[10px] text-gray-400 mt-3 italic">

@@ -66,7 +66,7 @@ export default function CategoryManager() {
 
     if (loading) return (
         <div className="flex items-center justify-center min-h-[400px]">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-vatsak-red"></div>
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-antreme-red"></div>
         </div>
     );
 
@@ -100,7 +100,7 @@ export default function CategoryManager() {
                                 <h3 className="font-bold text-gray-900 text-[10px] md:text-xs truncate uppercase tracking-tight text-center md:text-left leading-tight">{cat.name}</h3>
                             </div>
 
-                            <label className="flex items-center justify-center gap-1.5 md:gap-2 w-full px-2 py-1.5 md:px-3 md:py-1.5 bg-gray-50 hover:bg-vatsak-red hover:text-white rounded-lg md:rounded-xl text-gray-600 font-bold text-[9px] md:text-[10px] cursor-pointer transition-all border border-gray-100 uppercase tracking-widest text-center mt-auto">
+                            <label className="flex items-center justify-center gap-1.5 md:gap-2 w-full px-2 py-1.5 md:px-3 md:py-1.5 bg-gray-50 hover:bg-antreme-red hover:text-white rounded-lg md:rounded-xl text-gray-600 font-bold text-[9px] md:text-[10px] cursor-pointer transition-all border border-gray-100 uppercase tracking-widest text-center mt-auto">
                                 <FiUpload className="w-3 h-3 hidden md:block" />
                                 <span>Змінити</span>
                                 <input

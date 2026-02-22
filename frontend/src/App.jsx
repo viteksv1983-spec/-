@@ -9,7 +9,6 @@ import ProtectedRoute from './components/ProtectedRoute';
 
 // Public Components
 import Home from './components/Home';
-import CakeList from './components/CakeList';
 import Login from './components/Login';
 import Register from './components/Register';
 import Cart from './components/Cart';
@@ -49,7 +48,6 @@ function App() {
           <Routes>
             <Route element={<PublicLayout />}>
               <Route path="/" element={<Home />} />
-              <Route path="/cakes" element={<CakeList />} />
 
               {/* ═══════════════════════════════════════════════
                   Group A: Occasion-based Catalog (Nested)

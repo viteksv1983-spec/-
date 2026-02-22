@@ -228,12 +228,12 @@ def seed_data():
 
     # High quality official image mapping
     category_images = {
-        "bento": ["https://vatsak.com.ua/image/cache/catalog/products/Tortu/Child/FruttiMango/FruttiMango_Icon-562x429.jpg"],
-        "biscuit": ["https://vatsak.com.ua/image/cache/catalog/products/Tortu/Milk%20Cream/RedVelvet/RedVelvet_icon-562x429.jpg"],
-        "wedding": ["https://vatsak.com.ua/image/cache/catalog/products/Tortu/SER?IA%20VELVET/Velvet%20Cherry/Velvet%20Redberry_main-562x429.png"],
-        "mousse": ["https://vatsak.com.ua/image/cache/catalog/products/Tortu/SER?IA%20VELVET/Velvet%20Cherry/velvet%20cherry-562x429.jpg"],
-        "cupcakes": ["https://vatsak.com.ua/image/cache/catalog/products/Tortu/PORTC?JN?/Medovuk/Medovuk_porc_Icon-562x429.jpg"],
-        "gingerbread": ["https://vatsak.com.ua/image/cache/catalog/products/Tortu/KARTONNA%20UPAKOVKA/Tof?/tofi-562x429.jpg"]
+        "bento": [""],
+        "biscuit": [""],
+        "wedding": [""],
+        "mousse": [""],
+        "cupcakes": [""],
+        "gingerbread": [""]
     }
 
     # Predefined Bento Products for high-quality restoration
@@ -355,11 +355,11 @@ def seed_data():
             "christening": "https://images.unsplash.com/photo-1627916607164-7b20241db935?auto=format&fit=crop&q=80&w=800",
             "seasonal": "https://images.unsplash.com/photo-1512484776495-a09d92e87c3b?auto=format&fit=crop&q=80&w=800",
             "photo-cakes": "https://images.unsplash.com/photo-1558961359-1d9c29c5094f?auto=format&fit=crop&q=80&w=800",
-            "bento": "https://vatsak.com.ua/image/cache/catalog/products/Tortu/Child/FruttiMango/FruttiMango_Icon-562x429.jpg",
-            "biscuit": "https://vatsak.com.ua/image/cache/catalog/products/Tortu/Milk%20Cream/RedVelvet/RedVelvet_icon-562x429.jpg",
-            "mousse": "https://vatsak.com.ua/image/cache/catalog/products/Tortu/SER%IA%20VELVET/Velvet%20Cherry/velvet%20cherry-562x429.jpg",
-            "cupcakes": "https://vatsak.com.ua/image/cache/catalog/products/Tortu/PORTC%JN?/Medovuk/Medovuk_porc_Icon-562x429.jpg",
-            "gingerbread": "https://vatsak.com.ua/image/cache/catalog/products/Tortu/KARTONNA%20UPAKOVKA/Tof?/tofi-562x429.jpg"
+            "bento": "",
+            "biscuit": "",
+            "mousse": "",
+            "cupcakes": "",
+            "gingerbread": ""
         }
 
         for slug, img_url in initial_images.items():

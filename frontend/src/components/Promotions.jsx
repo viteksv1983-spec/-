@@ -16,7 +16,7 @@ function Promotions() {
                     {/* Promotion 1 */}
                     <div className="bg-gradient-to-br from-red-50 to-pink-50 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow">
                         <div className="p-8">
-                            <div className="inline-block bg-vatsak-red text-white px-4 py-2 rounded-full text-sm font-bold mb-4">
+                            <div className="inline-block bg-antreme-red text-white px-4 py-2 rounded-full text-sm font-bold mb-4">
                                 -20%
                             </div>
                             <h3 className="text-2xl font-bold text-gray-800 mb-3">Знижка на день народження</h3>
@@ -79,7 +79,7 @@ function Promotions() {
                 </div>
 
                 {/* Call to Action */}
-                <div className="max-w-4xl mx-auto mt-16 text-center bg-gradient-to-r from-vatsak-red to-red-700 text-white p-12 rounded-lg">
+                <div className="max-w-4xl mx-auto mt-16 text-center bg-gradient-to-r from-antreme-red to-red-700 text-white p-12 rounded-lg">
                     <h2 className="text-3xl font-bold mb-4">Хочете дізнатися про нові акції?</h2>
                     <p className="text-lg mb-6 opacity-90">
                         Підпишіться на нашу розсилку та першими дізнавайтеся про спеціальні пропозиції та знижки!
@@ -99,7 +99,7 @@ function Promotions() {
                 {/* Browse Products CTA */}
                 <div className="text-center mt-12">
                     <Link
-                        to="/cakes/"
+                        to="/torty-na-zamovlennya/"
                         className="inline-block bg-gray-800 text-white px-8 py-4 font-bold uppercase text-sm tracking-wider hover:bg-gray-900 transition-all"
                     >
                         Переглянути всі продукти

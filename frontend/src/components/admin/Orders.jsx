@@ -150,7 +150,7 @@ export default function Orders() {
                                                 </div>
                                             ))}
                                             {order.items && order.items.length > 2 && (
-                                                <div className="text-[9px] text-vatsak-red font-bold uppercase ml-2.5">
+                                                <div className="text-[9px] text-antreme-red font-bold uppercase ml-2.5">
                                                     + ще {order.items.length - 2} тов.
                                                 </div>
                                             )}
@@ -240,7 +240,7 @@ export default function Orders() {
                                     </div>
                                 ))}
                                 {order.items && order.items.length > 2 && (
-                                    <div className="text-[10px] text-vatsak-red font-bold uppercase tracking-wider pl-1.5 mt-1">
+                                    <div className="text-[10px] text-antreme-red font-bold uppercase tracking-wider pl-1.5 mt-1">
                                         + ще {order.items.length - 2} тов.
                                     </div>
                                 )}
@@ -310,7 +310,7 @@ export default function Orders() {
                             <div className="flex items-center gap-2">
                                 <button
                                     onClick={() => handleCopyOrder(selectedOrder)}
-                                    className="p-2 hover:bg-white rounded-lg border border-transparent hover:border-gray-200 text-gray-400 hover:text-vatsak-red transition-all"
+                                    className="p-2 hover:bg-white rounded-lg border border-transparent hover:border-gray-200 text-gray-400 hover:text-antreme-red transition-all"
                                     title="Скопіювати для Telegram"
                                 >
                                     <FiCopy className="w-5 h-5" />
@@ -335,7 +335,7 @@ export default function Orders() {
                                     </div>
                                     <div>
                                         <div className="text-lg font-bold text-gray-900 leading-tight">{selectedOrder.customer_name || 'Гість'}</div>
-                                        <div className="flex items-center gap-2 text-vatsak-red font-bold text-sm mt-1">
+                                        <div className="flex items-center gap-2 text-antreme-red font-bold text-sm mt-1">
                                             <FiPhone className="w-3.5 h-3.5" />
                                             {selectedOrder.customer_phone || '-'}
                                         </div>
@@ -384,7 +384,7 @@ export default function Orders() {
                                                 </div>
                                                 <div className="flex flex-wrap gap-1.5 mt-1">
                                                     {item.flavor && (
-                                                        <span className="text-[8px] font-bold uppercase tracking-wider bg-red-50 text-vatsak-red px-1.5 py-0.5 rounded border border-red-100">
+                                                        <span className="text-[8px] font-bold uppercase tracking-wider bg-red-50 text-antreme-red px-1.5 py-0.5 rounded border border-red-100">
                                                             {item.flavor}
                                                         </span>
                                                     )}

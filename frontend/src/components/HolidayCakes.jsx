@@ -102,14 +102,14 @@ function HolidayCakes() {
 
                             {/* Title */}
                             <div className="w-full p-4 md:p-5 text-center">
-                                <h3 className="text-sm md:text-base font-black text-[#1d263b] uppercase tracking-tight text-center leading-tight group-hover:text-vatsak-red transition-colors duration-300"
+                                <h3 className="text-sm md:text-base font-black text-[#1d263b] uppercase tracking-tight text-center leading-tight group-hover:text-antreme-red transition-colors duration-300"
                                     style={{ fontFamily: "'Oswald', sans-serif" }}>
                                     {cat.title}
                                 </h3>
                             </div>
 
                             {/* Gold bottom accent */}
-                            <div className="absolute inset-x-0 bottom-0 h-0.5 bg-vatsak-red scale-x-0 group-hover:scale-x-100 transition-transform origin-center duration-500" />
+                            <div className="absolute inset-x-0 bottom-0 h-0.5 bg-antreme-red scale-x-0 group-hover:scale-x-100 transition-transform origin-center duration-500" />
                         </Link>
                     ))}
                 </div>
@@ -120,7 +120,7 @@ function HolidayCakes() {
                         style={{ fontFamily: "'Oswald', sans-serif" }}>
                         Торти на замовлення Antreme
                     </h2>
-                    <div className="w-12 h-0.5 bg-vatsak-gold mb-6 rounded-full" />
+                    <div className="w-12 h-0.5 bg-antreme-gold mb-6 rounded-full" />
                     <p className="text-gray-600 text-sm md:text-base leading-relaxed mb-8">
                         У нашій кондитерській майстерні ви можете замовити десерт для будь-якої події. Ми пропонуємо широкий вибір категорій, щоб ваш вибір був ідеальним:
                     </p>
@@ -129,7 +129,7 @@ function HolidayCakes() {
                             <React.Fragment key={cat.slug}>
                                 <Link
                                     to={getCategoryUrl(cat.slug)}
-                                    className="text-gray-500 hover:text-vatsak-red font-semibold text-xs md:text-sm transition-colors underline decoration-gray-300 underline-offset-4 hover:decoration-vatsak-red"
+                                    className="text-gray-500 hover:text-antreme-red font-semibold text-xs md:text-sm transition-colors underline decoration-gray-300 underline-offset-4 hover:decoration-antreme-red"
                                 >
                                     {cat.name}
                                 </Link>

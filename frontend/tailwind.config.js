@@ -8,10 +8,10 @@ export default {
         extend: {
             fontFamily: {
                 sans: ['Montserrat', 'sans-serif'],
-                serif: ['Montserrat', 'sans-serif'], // Accessing Vatsak usually uses sans-serif even for headers
+                serif: ['Montserrat', 'sans-serif'], // Accessing antreme usually uses sans-serif even for headers
             },
             colors: {
-                vatsak: {
+                antreme: {
                     red: '#7b002c', // Deep Maroon/Red
                     gold: '#c5a059', // Gold/Beige
                     light: '#fdfbf7', // Off-white background

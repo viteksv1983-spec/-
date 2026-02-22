@@ -46,7 +46,7 @@ export default function AdminLayout() {
             {/* Mobile Header */}
             <header className="lg:hidden fixed top-0 left-0 right-0 h-16 bg-white border-b border-gray-200 flex items-center justify-between px-4 z-30">
                 <div className="flex items-center gap-3">
-                    <div className="w-8 h-8 bg-vatsak-red rounded-lg flex items-center justify-center text-white font-bold">A</div>
+                    <div className="w-8 h-8 bg-antreme-red rounded-lg flex items-center justify-center text-white font-bold">A</div>
                     <span className="font-bold text-gray-800 tracking-tight">Antreme Admin</span>
                 </div>
                 <button
@@ -71,7 +71,7 @@ export default function AdminLayout() {
                 ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}
             `}>
                 <div className="p-6 border-b border-gray-100 hidden lg:flex items-center gap-3">
-                    <div className="w-8 h-8 bg-vatsak-red rounded-lg flex items-center justify-center text-white font-bold">A</div>
+                    <div className="w-8 h-8 bg-antreme-red rounded-lg flex items-center justify-center text-white font-bold">A</div>
                     <span className="font-bold text-gray-800 text-lg tracking-tight">Antreme Admin</span>
                 </div>
 
@@ -80,7 +80,7 @@ export default function AdminLayout() {
                         to="/admin/orders"
                         onClick={() => setIsSidebarOpen(false)}
                         className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all ${isActive('/admin/orders')
-                            ? 'bg-vatsak-red text-white shadow-md shadow-red-100 font-medium'
+                            ? 'bg-antreme-red text-white shadow-md shadow-red-100 font-medium'
                             : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
                             }`}
                     >
@@ -97,7 +97,7 @@ export default function AdminLayout() {
                                     to={`/admin/orders${status.id !== 'all' ? `?status=${status.id}` : ''}`}
                                     onClick={() => setIsSidebarOpen(false)}
                                     className={`flex items-center gap-2 py-2 text-xs font-bold uppercase tracking-wider transition-colors ${activeStatus === status.id
-                                        ? 'text-vatsak-red'
+                                        ? 'text-antreme-red'
                                         : 'text-gray-400 hover:text-gray-600'
                                         }`}
                                 >
@@ -112,7 +112,7 @@ export default function AdminLayout() {
                         to="/admin/products"
                         onClick={() => setIsSidebarOpen(false)}
                         className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all ${isActive('/admin/products') || location.pathname.startsWith('/admin/products/edit')
-                            ? 'bg-vatsak-red text-white shadow-md shadow-red-100 font-medium'
+                            ? 'bg-antreme-red text-white shadow-md shadow-red-100 font-medium'
                             : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
                             }`}
                     >
@@ -129,7 +129,7 @@ export default function AdminLayout() {
                                         to="/admin/products"
                                         onClick={() => setIsSidebarOpen(false)}
                                         className={`flex items-center gap-2 py-2 text-xs font-bold uppercase tracking-wider transition-colors ${activeCategory === 'all'
-                                            ? 'text-vatsak-red'
+                                            ? 'text-antreme-red'
                                             : 'text-gray-400 hover:text-gray-600'
                                             }`}
                                     >
@@ -143,7 +143,7 @@ export default function AdminLayout() {
                                             to={`/admin/products?category=${cat.slug}`}
                                             onClick={() => setIsSidebarOpen(false)}
                                             className={`flex items-center gap-2 py-2 text-xs font-bold uppercase tracking-wider transition-colors ${activeCategory === cat.slug
-                                                ? 'text-vatsak-red'
+                                                ? 'text-antreme-red'
                                                 : 'text-gray-400 hover:text-gray-600'
                                                 }`}
                                         >
@@ -157,7 +157,7 @@ export default function AdminLayout() {
                             {/* Holiday Cakes Group */}
                             <button
                                 onClick={() => setIsHolidayOpen(!isHolidayOpen)}
-                                className={`flex items-center justify-between w-full py-2.5 text-xs font-bold uppercase tracking-wider transition-all ${HOLIDAY_CATS.some(c => c.slug === activeCategory) || isHolidayOpen ? 'text-vatsak-red' : 'text-gray-400 hover:text-gray-600'} ${isHolidayOpen ? 'bg-red-50/50 -ml-4 pl-4 rounded-l-xl border-l-2 border-vatsak-red' : ''}`}
+                                className={`flex items-center justify-between w-full py-2.5 text-xs font-bold uppercase tracking-wider transition-all ${HOLIDAY_CATS.some(c => c.slug === activeCategory) || isHolidayOpen ? 'text-antreme-red' : 'text-gray-400 hover:text-gray-600'} ${isHolidayOpen ? 'bg-red-50/50 -ml-4 pl-4 rounded-l-xl border-l-2 border-antreme-red' : ''}`}
                             >
                                 <div className="flex items-center gap-2">
                                     <span>{isHolidayOpen ? '⬅️' : '✨'}</span>
@@ -175,7 +175,7 @@ export default function AdminLayout() {
                                             to={`/admin/products?category=${cat.slug}`}
                                             onClick={() => setIsSidebarOpen(false)}
                                             className={`flex items-center gap-3 py-2.5 px-3 rounded-xl text-sm font-bold transition-all ${activeCategory === cat.slug
-                                                ? 'bg-vatsak-red text-white shadow-sm shadow-red-100 scale-[1.02]'
+                                                ? 'bg-antreme-red text-white shadow-sm shadow-red-100 scale-[1.02]'
                                                 : 'text-gray-500 hover:bg-gray-50 hover:text-gray-900 border border-transparent'
                                                 }`}
                                         >
@@ -192,7 +192,7 @@ export default function AdminLayout() {
                         to="/admin/categories"
                         onClick={() => setIsSidebarOpen(false)}
                         className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all ${isActive('/admin/categories')
-                            ? 'bg-vatsak-red text-white shadow-md shadow-red-100 font-medium'
+                            ? 'bg-antreme-red text-white shadow-md shadow-red-100 font-medium'
                             : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
                             }`}
                     >
@@ -204,7 +204,7 @@ export default function AdminLayout() {
                         to="/admin/seo"
                         onClick={() => setIsSidebarOpen(false)}
                         className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all ${isActive('/admin/seo')
-                            ? 'bg-vatsak-red text-white shadow-md shadow-red-100 font-medium'
+                            ? 'bg-antreme-red text-white shadow-md shadow-red-100 font-medium'
                             : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
                             }`}
                     >
@@ -216,7 +216,7 @@ export default function AdminLayout() {
                         to="/admin/telegram"
                         onClick={() => setIsSidebarOpen(false)}
                         className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all ${isActive('/admin/telegram')
-                            ? 'bg-vatsak-red text-white shadow-md shadow-red-100 font-medium'
+                            ? 'bg-antreme-red text-white shadow-md shadow-red-100 font-medium'
                             : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
                             }`}
                     >
@@ -226,7 +226,7 @@ export default function AdminLayout() {
                 </nav>
 
                 <div className="p-4 border-t border-gray-100">
-                    <Link to="/" className="flex items-center gap-3 px-4 py-3 text-sm text-gray-500 hover:text-vatsak-red mb-2 transition-colors">
+                    <Link to="/" className="flex items-center gap-3 px-4 py-3 text-sm text-gray-500 hover:text-antreme-red mb-2 transition-colors">
                         <FiHome className="w-4 h-4" />
                         <span>На головну сайту</span>
                     </Link>

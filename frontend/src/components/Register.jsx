@@ -46,7 +46,7 @@ function Register() {
                     <p className="mt-4 text-gray-600">Ваш акаунт створено. Ви будете автоматично перенаправлені на сторінку входу через кілька секунд...</p>
                     <button
                         onClick={() => navigate('/login')}
-                        className="mt-6 text-vatsak-red font-bold hover:underline"
+                        className="mt-6 text-antreme-red font-bold hover:underline"
                     >
                         Перейти до входу зараз
                     </button>
@@ -61,8 +61,8 @@ function Register() {
                 title="Реєстрація | Створити акаунт Antreme"
                 description="Зареєструйтесь у нашій кондитерській, щоб отримувати ексклюзивні знижки на торти, відстежувати замовлення та прискорити оформлення покупок."
             />
-            <div className="max-w-md w-full space-y-8 bg-white p-10 shadow-2xl border-t-4 border-vatsak-red relative overflow-hidden">
-                <div className="absolute top-0 right-0 -mt-4 -mr-4 w-24 h-24 bg-vatsak-gold opacity-10 rounded-full blur-2xl"></div>
+            <div className="max-w-md w-full space-y-8 bg-white p-10 shadow-2xl border-t-4 border-antreme-red relative overflow-hidden">
+                <div className="absolute top-0 right-0 -mt-4 -mr-4 w-24 h-24 bg-antreme-gold opacity-10 rounded-full blur-2xl"></div>
                 <div>
                     <h2 className="mt-6 text-center text-4xl font-serif font-bold text-gray-900 tracking-tight">
                         Реєстрація
@@ -72,33 +72,33 @@ function Register() {
                     </p>
                 </div>
                 {error && (
-                    <div className="bg-red-50 border-l-4 border-vatsak-red p-4 mb-4 animate-pulse" role="alert">
+                    <div className="bg-red-50 border-l-4 border-antreme-red p-4 mb-4 animate-pulse" role="alert">
                         <p className="text-sm text-red-700 font-bold">{error}</p>
                     </div>
                 )}
                 <form className="mt-8 space-y-7" onSubmit={handleSubmit}>
                     <div className="space-y-5">
                         <div className="relative group">
-                            <label htmlFor="email-address" className="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-1 transition-colors group-focus-within:text-vatsak-gold">Електронна пошта</label>
+                            <label htmlFor="email-address" className="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-1 transition-colors group-focus-within:text-antreme-gold">Електронна пошта</label>
                             <input
                                 id="email-address"
                                 name="email"
                                 type="email"
                                 required
-                                className="appearance-none block w-full px-4 py-3 border-b-2 border-gray-200 bg-gray-50 text-gray-900 focus:outline-none focus:border-vatsak-gold transition-all sm:text-sm"
+                                className="appearance-none block w-full px-4 py-3 border-b-2 border-gray-200 bg-gray-50 text-gray-900 focus:outline-none focus:border-antreme-gold transition-all sm:text-sm"
                                 placeholder="example@mail.com"
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
                             />
                         </div>
                         <div className="relative group">
-                            <label htmlFor="password" className="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-1 transition-colors group-focus-within:text-vatsak-gold">Пароль</label>
+                            <label htmlFor="password" className="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-1 transition-colors group-focus-within:text-antreme-gold">Пароль</label>
                             <input
                                 id="password"
                                 name="password"
                                 type="password"
                                 required
-                                className="appearance-none block w-full px-4 py-3 border-b-2 border-gray-200 bg-gray-50 text-gray-900 focus:outline-none focus:border-vatsak-gold transition-all sm:text-sm"
+                                className="appearance-none block w-full px-4 py-3 border-b-2 border-gray-200 bg-gray-50 text-gray-900 focus:outline-none focus:border-antreme-gold transition-all sm:text-sm"
                                 placeholder="••••••••"
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
@@ -110,7 +110,7 @@ function Register() {
                         <button
                             type="submit"
                             disabled={isLoading}
-                            className={`group relative w-full flex justify-center py-4 px-4 border border-transparent text-sm font-black uppercase tracking-widest text-white bg-vatsak-red hover:bg-black focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-vatsak-red transition-all duration-300 shadow-lg hover:shadow-2xl transform hover:-translate-y-1 ${isLoading ? 'opacity-50 cursor-not-allowed' : ''}`}
+                            className={`group relative w-full flex justify-center py-4 px-4 border border-transparent text-sm font-black uppercase tracking-widest text-white bg-antreme-red hover:bg-black focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-antreme-red transition-all duration-300 shadow-lg hover:shadow-2xl transform hover:-translate-y-1 ${isLoading ? 'opacity-50 cursor-not-allowed' : ''}`}
                         >
                             {isLoading ? (
                                 <svg className="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">

@@ -51,7 +51,7 @@ function Footer() {
                                 <span className="hidden lg:block opacity-0 group-hover:opacity-100 transition-opacity text-white text-[10px]">▶</span>
                                 Головна
                             </Link></li>
-                            <li><Link to="/cakes/" className="hover:text-amber-100 transition-all duration-300 flex items-center justify-center lg:justify-start gap-2 group text-gray-100">
+                            <li><Link to="/torty-na-zamovlennya/" className="hover:text-amber-100 transition-all duration-300 flex items-center justify-center lg:justify-start gap-2 group text-gray-100">
                                 <span className="hidden lg:block opacity-0 group-hover:opacity-100 transition-opacity text-white text-[10px]">▶</span>
                                 Всі торти
                             </Link></li>

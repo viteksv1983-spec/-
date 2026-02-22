@@ -4,15 +4,15 @@
     --font-sans: 'Montserrat', sans-serif;
     --font-serif: 'Montserrat', sans-serif;
 
-    --color-vatsak-red: #A0153E;
-    --color-vatsak-gold: #FFD700;
-    --color-vatsak-light: #F8F3EE;
-    --color-vatsak-accent: #D39A5E;
+    --color-antreme-red: #A0153E;
+    --color-antreme-gold: #FFD700;
+    --color-antreme-light: #F8F3EE;
+    --color-antreme-accent: #D39A5E;
 }
 
 @layer base {
     body {
-        background-color: var(--color-vatsak-light);
+        background-color: var(--color-antreme-light);
         color: #1a1a1a;
     }
 }

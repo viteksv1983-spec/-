@@ -273,7 +273,7 @@ function Home() {
                                 ЗАМОВИТИ ТОРТ
                             </button>
                             <Link
-                                to="/cakes/"
+                                to="/torty-na-zamovlennya/"
                                 className="h-[48px] lg:h-[52px] px-5 lg:px-6 bg-transparent border border-white/30 hover:border-white/60 hover:bg-white/10 text-white font-black uppercase tracking-wider text-[11px] lg:text-[12px] rounded-full transition-all duration-300 flex items-center justify-center text-center whitespace-nowrap"
                                 style={{ fontFamily: "'Oswald', sans-serif" }}
                             >
@@ -292,7 +292,7 @@ function Home() {
                             ЗАМОВИТИ ТОРТ
                         </button>
                         <Link
-                            to="/cakes/"
+                            to="/torty-na-zamovlennya/"
                             className="flex-1 h-[42px] bg-[#9e1634] bg-opacity-90 border border-white/20 hover:bg-[#8B1030] text-white font-black uppercase tracking-[0.05em] text-[10px] rounded-[20px] transition-all duration-300 shadow-sm flex flex-col items-center justify-center leading-[1.2]"
                             style={{ fontFamily: "'Oswald', sans-serif" }}
                         >
@@ -559,7 +559,7 @@ function Home() {
                                 ))}
                             </div>
                             <div className="text-center mt-12 animate-fade-in-delayed">
-                                <Link to="/cakes/" className="group inline-flex items-center gap-3 px-12 py-5 font-black uppercase text-sm tracking-wider transition-all hover:scale-105 duration-300 rounded-full bg-[#E8C064] hover:bg-[#D4A83C] text-white shadow-md">
+                                <Link to="/torty-na-zamovlennya/" className="group inline-flex items-center gap-3 px-12 py-5 font-black uppercase text-sm tracking-wider transition-all hover:scale-105 duration-300 rounded-full bg-[#E8C064] hover:bg-[#D4A83C] text-white shadow-md">
                                     Всі пропозиції
                                     <span className="group-hover:translate-x-2 transition-transform duration-300">→</span>
                                 </Link>
@@ -620,7 +620,7 @@ function Home() {
                         <a href="tel:0979081504" className="inline-flex items-center gap-2 px-10 py-4 font-black text-sm uppercase tracking-widest rounded-full transition-all hover:scale-105 border border-white/30 text-white hover:border-white/60 hover:bg-white/10">
                             📞 097 908 15 04
                         </a>
-                        <Link to="/cakes/" className="inline-block px-12 py-4 font-black text-sm uppercase tracking-widest rounded-full transition-all hover:scale-105 bg-[#E8C064] hover:bg-[#D4A83C] text-white shadow-md">
+                        <Link to="/torty-na-zamovlennya/" className="inline-block px-12 py-4 font-black text-sm uppercase tracking-widest rounded-full transition-all hover:scale-105 bg-[#E8C064] hover:bg-[#D4A83C] text-white shadow-md">
                             Обрати Торт
                         </Link>
                     </div>
