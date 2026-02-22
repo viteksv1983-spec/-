@@ -1,8 +1,13 @@
 import React from 'react';
+import SEOHead from './SEOHead';
 
 function GalleryVideo() {
     return (
         <div className="container mx-auto px-6 py-20 text-center">
+            <SEOHead
+                title="Відеогалерея | Процес створення тортів | Antreme Київ"
+                description="Подивіться за лаштунки кондитерської Antreme. Наші відео процесу створення тортів, декорування та оформлення."
+            />
             <h1 className="text-4xl font-bold text-gray-900 mb-8 uppercase" style={{ fontFamily: "'Oswald', sans-serif" }}>
                 Відеогалерея
             </h1>

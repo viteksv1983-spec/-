@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { CartContext } from '../context/CartContext';
 import { AuthContext } from '../context/AuthContext';
 import api from '../api';
+import SEOHead from './SEOHead';
 
 function Cart() {
     const { cartItems, removeFromCart, updateQuantity, cartTotal, clearCart } = useContext(CartContext);
@@ -76,6 +77,10 @@ function Cart() {
     if (isSuccess) {
         return (
             <div className="min-h-screen bg-[#F8F3EE] flex flex-col justify-center items-center p-4 text-center">
+                <SEOHead
+                    title="Замовлення прийнято | Antreme Київ"
+                    description="Дякуємо за замовлення в кондитерській Antreme! Ваше замовлення успішно прийнято в обробку."
+                />
                 <div className="bg-green-100 p-8 rounded-full shadow-lg mb-6 animate-bounce">
                     <svg className="w-16 h-16 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7"></path>
@@ -95,6 +100,10 @@ function Cart() {
     if (cartItems.length === 0) {
         return (
             <div className="min-h-screen bg-[#F8F3EE] flex flex-col justify-center items-center p-4 text-center">
+                <SEOHead
+                    title="Кошик порожній | Antreme Київ"
+                    description="Ваш кошик поки що порожній. Перегляньте наш каталог і оберіть свій ідеальний торт від Antreme."
+                />
                 <div className="bg-white p-8 rounded-full shadow-lg mb-6">
                     <svg className="w-16 h-16 text-vatsak-red" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
                 </div>
@@ -109,6 +118,10 @@ function Cart() {
 
     return (
         <div className="min-h-screen bg-[#F8F3EE] py-12 px-4 sm:px-6 lg:px-8">
+            <SEOHead
+                title="Оформлення замовлення | Кошик | Antreme Київ"
+                description="Перевірте ваше замовлення та оформіть доставку найсмачніших десертів від кондитерської Antreme."
+            />
             <div className="max-w-6xl mx-auto">
                 <h1 className="text-3xl font-extrabold text-gray-900 mb-8 uppercase tracking-wide border-b-2 border-vatsak-gold pb-4 inline-block">Кошик покупок</h1>
 

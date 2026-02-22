@@ -2,6 +2,7 @@ import React, { useState, useContext } from 'react';
 import { AuthContext } from '../context/AuthContext';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { GoogleLogin } from '@react-oauth/google';
+import SEOHead from './SEOHead';
 
 function Login() {
     const [email, setEmail] = useState('');
@@ -30,6 +31,10 @@ function Login() {
 
     return (
         <div className="min-h-screen flex items-center justify-center bg-[#FDFBF7] py-12 px-4 sm:px-6 lg:px-8">
+            <SEOHead
+                title="Вхід в особистий кабінет | Antreme"
+                description="Увійдіть до свого облікового запису в кондитерській Antreme, щоб переглядати історію замовлень та відстежувати статус доставки."
+            />
             <div className="max-w-md w-full space-y-8 bg-[#FDFBF7] p-10 shadow-2xl border-t-4 border-vatsak-red relative overflow-hidden">
                 <div className="absolute top-0 left-0 -mt-4 -ml-4 w-24 h-24 bg-vatsak-gold opacity-10 rounded-full blur-2xl"></div>
                 <div>

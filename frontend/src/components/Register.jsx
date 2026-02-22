@@ -2,6 +2,7 @@ import React, { useState, useContext } from 'react';
 import { AuthContext } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import api from '../api';
+import SEOHead from './SEOHead';
 
 function Register() {
     const [email, setEmail] = useState('');
@@ -31,6 +32,10 @@ function Register() {
     if (isRegistered) {
         return (
             <div className="min-h-screen flex items-center justify-center bg-[#FDFBF7] py-12 px-4 sm:px-6 lg:px-8">
+                <SEOHead
+                    title="Успішна реєстрація | Antreme"
+                    description="Дякуємо за реєстрацію в кондитерській Antreme! Тепер ви можете замовляти торти ще швидше."
+                />
                 <div className="max-w-md w-full space-y-8 bg-white p-10 shadow-xl border-t-4 border-green-500 text-center">
                     <div className="mx-auto flex items-center justify-center h-16 w-16 rounded-full bg-green-100 mb-4">
                         <svg className="h-10 w-10 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -52,6 +57,10 @@ function Register() {
 
     return (
         <div className="min-h-screen flex items-center justify-center bg-[#FDFBF7] py-12 px-4 sm:px-6 lg:px-8">
+            <SEOHead
+                title="Реєстрація | Створити акаунт Antreme"
+                description="Зареєструйтесь у нашій кондитерській, щоб отримувати ексклюзивні знижки на торти, відстежувати замовлення та прискорити оформлення покупок."
+            />
             <div className="max-w-md w-full space-y-8 bg-white p-10 shadow-2xl border-t-4 border-vatsak-red relative overflow-hidden">
                 <div className="absolute top-0 right-0 -mt-4 -mr-4 w-24 h-24 bg-vatsak-gold opacity-10 rounded-full blur-2xl"></div>
                 <div>

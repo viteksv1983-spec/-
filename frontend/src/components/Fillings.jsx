@@ -1,9 +1,14 @@
 import React from 'react';
 import { FILLINGS } from '../constants/fillings';
+import SEOHead from './SEOHead';
 
 function Fillings() {
     return (
         <div className="min-h-screen bg-[#FDFBF7]">
+            <SEOHead
+                title="Начинки для тортів | Смаки від кондитерської Antreme"
+                description="Обирайте ідеальну начинку для вашого майбутнього торта: Снікерс, Червоний оксамит, ягідні муси та інші смаки від Antreme."
+            />
 
             {/* Page Hero */}
             <div className="relative overflow-hidden py-16 md:py-24 text-center">

@@ -1,9 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import SEOHead from './SEOHead';
 
 function Promotions() {
     return (
         <div className="min-h-screen bg-white">
+            <SEOHead
+                title="Акції та знижки на торти | Antreme Київ"
+                description="Спеціальні пропозиції, знижки до дня народження, акції на перше замовлення та безкоштовна доставка тортів від кондитерської Antreme."
+            />
 
             {/* Current Promotions */}
             <div className="container mx-auto px-6 py-16">
