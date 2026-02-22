@@ -1,13 +1,11 @@
 {
+    "crons": [
+        {
+            "path": "/api/regenerate-sitemap",
+            "schedule": "0 3 * * *"
+        }
+    ],
     "rewrites": [
-        {
-            "source": "/sitemap.xml",
-            "destination": "https://cake-shop-backend.onrender.com/sitemap.xml"
-        },
-        {
-            "source": "/robots.txt",
-            "destination": "https://cake-shop-backend.onrender.com/robots.txt"
-        },
         {
             "source": "/(.*)",
             "destination": "/index.html"
