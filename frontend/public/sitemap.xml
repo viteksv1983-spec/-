@@ -25,6 +25,12 @@
     <priority>0.9</priority>
   </url>
   <url>
+    <loc>https://antreme.kyiv.ua/holiday/</loc>
+    <lastmod>2026-02-22</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
     <loc>https://antreme.kyiv.ua/reviews/</loc>
     <lastmod>2026-02-22</lastmod>
     <changefreq>daily</changefreq>

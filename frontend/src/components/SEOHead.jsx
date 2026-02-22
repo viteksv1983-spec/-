@@ -40,10 +40,15 @@ export default function SEOHead({ title, description, keywords, h1, canonical, o
 
     // Construct canonical
     const pathForCanonical = canonical || location.pathname;
-    // We must strictly preserve trailing slashes if they exist in pathForCanonical
-    const currentFullUrl = pathForCanonical.startsWith('http')
-        ? pathForCanonical
-        : `${domain}${pathForCanonical === '/' ? '/' : pathForCanonical}`;
+    // We must strictly enforce trailing slashes for canonical URLs
+    let formattedPath = pathForCanonical;
+    if (formattedPath !== '/' && !formattedPath.endsWith('/')) {
+        formattedPath += '/';
+    }
+
+    const currentFullUrl = formattedPath.startsWith('http')
+        ? formattedPath
+        : `${domain}${formattedPath}`;
 
     const imagePath = ogImage || data.og_image || '/og-image.jpg';
     const effectiveOgImage = imagePath.startsWith('http') ? imagePath : `${domain}${imagePath}`;

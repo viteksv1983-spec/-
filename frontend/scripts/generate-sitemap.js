@@ -99,7 +99,7 @@ async function generateSitemap() {
 
         // === Tier 2: Main pages (0.9) ===
         // Removed /cakes/ entirely. All structural routes end in /
-        ['/delivery/', '/about/', '/reviews/', '/fillings/', '/torty-na-zamovlennya/'].forEach(p => {
+        ['/holiday/', '/delivery/', '/about/', '/reviews/', '/fillings/', '/torty-na-zamovlennya/'].forEach(p => {
             addUrl(p, '0.9', 'daily');
         });
 

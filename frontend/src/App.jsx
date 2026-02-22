@@ -29,6 +29,7 @@ import NotFound from './components/NotFound';
 // SEO Group Routers (Strict Whitelist Validation)
 import { GroupACategoryPage, GroupAProductPage } from './components/GroupARouter';
 import { GroupBCategoryPage, GroupBProductPage } from './components/GroupBRouter';
+import { GROUP_A_SLUGS, GROUP_B_SLUGS } from './constants/seoRoutes';
 
 // Admin Components
 import Orders from './components/admin/Orders';
@@ -57,8 +58,12 @@ function App() {
                   /torty-na-zamovlennya/:categorySlug/:productSlug
                   ═══════════════════════════════════════════════ */}
               <Route path="/torty-na-zamovlennya" element={<HolidayCakes />} />
-              <Route path="/torty-na-zamovlennya/:categorySlug" element={<GroupACategoryPage />} />
-              <Route path="/torty-na-zamovlennya/:categorySlug/:productSlug" element={<GroupAProductPage />} />
+              {GROUP_A_SLUGS.map(slug => (
+                <Route key={`a-cat-${slug}`} path={`/torty-na-zamovlennya/${slug}`} element={<GroupACategoryPage categorySlug={slug} />} />
+              ))}
+              {GROUP_A_SLUGS.map(slug => (
+                <Route key={`a-prod-${slug}`} path={`/torty-na-zamovlennya/${slug}/:productSlug`} element={<GroupAProductPage categorySlug={slug} />} />
+              ))}
 
               {/* ═══════════════════════════════════════════════
                   Group B: Type-based Independent Categories
@@ -81,11 +86,13 @@ function App() {
               <Route path="/blog" element={<Blog />} />
               <Route path="/districts/:district" element={<DistrictPage />} />
 
-              {/* Group B category and product routes
-                  These use whitelist validation inside GroupBRouter components.
-                  If slug is invalid, GroupBRouter renders <NotFound /> */}
-              <Route path="/:categorySlug" element={<GroupBCategoryPage />} />
-              <Route path="/:categorySlug/:productSlug" element={<GroupBProductPage />} />
+              {/* Group B category and product explicit routes (Strict Whitelist) */}
+              {GROUP_B_SLUGS.map(slug => (
+                <Route key={`b-cat-${slug}`} path={`/${slug}`} element={<GroupBCategoryPage categorySlug={slug} />} />
+              ))}
+              {GROUP_B_SLUGS.map(slug => (
+                <Route key={`b-prod-${slug}`} path={`/${slug}/:productSlug`} element={<GroupBProductPage categorySlug={slug} />} />
+              ))}
 
               {/* Catch-all 404 */}
               <Route path="*" element={<NotFound />} />

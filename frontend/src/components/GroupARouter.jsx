@@ -13,8 +13,9 @@ import { GROUP_A_CATEGORIES, isGroupA } from '../constants/seoRoutes';
  *   /torty-na-zamovlennya/:categorySlug       → CakeList
  *   /torty-na-zamovlennya/:categorySlug/:productSlug → CakeDetail
  */
-export function GroupACategoryPage() {
-    const { categorySlug } = useParams();
+export function GroupACategoryPage({ categorySlug: propCategorySlug }) {
+    const params = useParams();
+    const categorySlug = propCategorySlug || params.categorySlug;
 
     if (!isGroupA(categorySlug)) {
         return <NotFound />;
@@ -24,8 +25,10 @@ export function GroupACategoryPage() {
     return <CakeList predefinedCategory={dbCategory} predefinedSlug={categorySlug} groupType="A" />;
 }
 
-export function GroupAProductPage() {
-    const { categorySlug, productSlug } = useParams();
+export function GroupAProductPage({ categorySlug: propCategorySlug }) {
+    const params = useParams();
+    const categorySlug = propCategorySlug || params.categorySlug;
+    const productSlug = params.productSlug;
 
     if (!isGroupA(categorySlug)) {
         return <NotFound />;

@@ -6,6 +6,7 @@
         }
     ],
     "cleanUrls": true,
+    "trailingSlash": true,
     "rewrites": [
         {
             "source": "/(login|register|cart|admin|admin/.*)",

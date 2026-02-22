@@ -43,6 +43,13 @@ function CakeDetail({ predefinedId, predefinedSlug, expectedCategory, groupType,
         }
         api.get(url)
             .then(response => {
+                // Strict Category ↔ Product Context Lock:
+                // Ensure the cake actually belongs to the category from the URL route.
+                if (expectedCategory && response.data.category !== expectedCategory) {
+                    setNotFound(true);
+                    return;
+                }
+
                 setCake(response.data);
                 setNotFound(false);
                 if (response.data.fillings && response.data.fillings.length > 0) {
@@ -128,6 +135,10 @@ function CakeDetail({ predefinedId, predefinedSlug, expectedCategory, groupType,
 
     // ─── Determine URLs and category context ───
     const productUrl = getProductUrl(cake);
+    if (!productUrl) {
+        return <NotFound />;
+    }
+
     const categoryUrlSlug = dbCategoryToSlug(cake.category);
     const isGroupACake = categoryUrlSlug && isGroupA(categoryUrlSlug);
     const categoryLabel = GET_CATEGORY_NAME(cake.category) || cake.category;

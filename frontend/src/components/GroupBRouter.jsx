@@ -13,8 +13,9 @@ import { GROUP_B_CATEGORIES, isGroupB } from '../constants/seoRoutes';
  *   /:categorySlug           → CakeList
  *   /:categorySlug/:productSlug → CakeDetail
  */
-export function GroupBCategoryPage() {
-    const { categorySlug } = useParams();
+export function GroupBCategoryPage({ categorySlug: propCategorySlug }) {
+    const params = useParams();
+    const categorySlug = propCategorySlug || params.categorySlug;
 
     if (!isGroupB(categorySlug)) {
         return <NotFound />;
@@ -24,8 +25,10 @@ export function GroupBCategoryPage() {
     return <CakeList predefinedCategory={dbCategory} predefinedSlug={categorySlug} groupType="B" />;
 }
 
-export function GroupBProductPage() {
-    const { categorySlug, productSlug } = useParams();
+export function GroupBProductPage({ categorySlug: propCategorySlug }) {
+    const params = useParams();
+    const categorySlug = propCategorySlug || params.categorySlug;
+    const productSlug = params.productSlug;
 
     if (!isGroupB(categorySlug)) {
         return <NotFound />;

@@ -264,7 +264,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
 
     const schemaData = [breadcrumbSchema, itemListSchema];
 
-    const canonicalUrl = categorySeoUrl || (category ? `/cakes?category=${category}` : '/cakes');
+    const canonicalUrl = categorySeoUrl || (category ? `/cakes?category=${category}` : '/cakes/');
 
     const metaTitle = seoData ? seoData.title : `${getCategoryTitle()} | Купити торти в Києві – Antreme`;
     const metaDesc = seoData ? seoData.description : `Шукаєте ${getCategoryTitle().toLowerCase()}? В кондитерській Antreme величезний вибір свіжих десертів з натуральних інгредієнтів. Адресна доставка по Києву.`;
