@@ -20,6 +20,52 @@ const baseHtml = fs.readFileSync(indexPath, 'utf-8');
 
 const domain = 'https://antreme.kyiv.ua';
 
+// ─── Group A: Occasion-based (nested under /torty-na-zamovlennya/) ───
+const GROUP_A = {
+    'vesilni': 'wedding',
+    'na-den-narodzhennya': 'birthday',
+    'na-yuviley': 'anniversary',
+    'dytyachi': 'kids',
+    'dlya-hlopchykiv': 'boy',
+    'dlya-divchat': 'girl',
+    'dlya-zhinok': 'for-women',
+    'dlya-cholovikiv': 'for-men',
+    'gender-reveal': 'gender-reveal',
+    'korporatyvni': 'corporate',
+    'sezonni': 'seasonal',
+    'foto-torty': 'photo-cakes',
+    'profesiine-svyato': 'professional',
+    'patriotychni': 'patriotic',
+    'na-khrestyny': 'christening',
+    'za-hobi': 'hobby',
+};
+
+// ─── Group B: Type-based (standalone at root /) ───
+const GROUP_B = {
+    'bento-torty': 'bento',
+    'biskvitni-torty': 'biscuit',
+    'musovi-torty': 'mousse',
+    'kapkeyky': 'cupcakes',
+    'imbirni-pryanyky': 'gingerbread',
+    'nachynky': 'fillings',
+};
+
+// Reverse map: dbCategory -> { urlSlug, group }
+const dbCatToUrl = {};
+for (const [slug, dbCat] of Object.entries(GROUP_A)) {
+    dbCatToUrl[dbCat] = { slug, group: 'A' };
+}
+for (const [slug, dbCat] of Object.entries(GROUP_B)) {
+    dbCatToUrl[dbCat] = { slug, group: 'B' };
+}
+
+function getProductUrl(cake) {
+    const info = dbCatToUrl[cake.category];
+    if (!info) return `/cakes/${cake.slug || cake.id}`;
+    if (info.group === 'A') return `/torty-na-zamovlennya/${info.slug}/${cake.slug}`;
+    return `/${info.slug}/${cake.slug}`;
+}
+
 // Define static routes
 const routes = [
     {
@@ -53,20 +99,34 @@ const routes = [
         description: 'Що кажуть наші клієнти про торти Antreme. Справжні відгуки та фото з доставкою по Києву.'
     },
     {
-        path: '/holiday',
-        title: 'Святкова пропозиція | Antreme',
-        description: 'Спеціальні пропозиції та знижки на торти для ваших свят.'
+        path: '/torty-na-zamovlennya',
+        title: 'Торти на замовлення Київ | Antreme',
+        description: 'Замовити торт на будь-яке свято в Києві. Весільні, дитячі, корпоративні торти від кондитерської Antreme.'
     }
 ];
 
-// Add category routes dynamically
-for (const key in categorySeoData) {
-    const cat = categorySeoData[key];
-    routes.push({
-        path: `/${cat.slug}`,
-        title: cat.title,
-        description: cat.description
-    });
+// Add Group A category routes (nested under /torty-na-zamovlennya/)
+for (const [slug, dbCat] of Object.entries(GROUP_A)) {
+    const seoData = categorySeoData[dbCat];
+    if (seoData) {
+        routes.push({
+            path: `/torty-na-zamovlennya/${slug}`,
+            title: seoData.title,
+            description: seoData.description
+        });
+    }
+}
+
+// Add Group B category routes (standalone at root)
+for (const [slug, dbCat] of Object.entries(GROUP_B)) {
+    const seoData = categorySeoData[dbCat];
+    if (seoData) {
+        routes.push({
+            path: `/${slug}`,
+            title: seoData.title,
+            description: seoData.description
+        });
+    }
 }
 
 async function fetchCakes() {
@@ -83,11 +143,12 @@ async function generatePages() {
     // Fetch products and add them to routes
     const cakes = await fetchCakes();
     cakes.forEach(cake => {
+        if (!cake.slug) return; // Skip products without slugs
         const title = cake.meta_title || `${cake.name} - Купити в Києві | Antreme`;
         const description = cake.meta_description || `Замовити торт ${cake.name}. ${cake.description?.slice(0, 100)}...`;
 
         routes.push({
-            path: `/cakes/${cake.id}`,
+            path: getProductUrl(cake),
             title: title,
             description: description,
             ogImage: cake.image_url

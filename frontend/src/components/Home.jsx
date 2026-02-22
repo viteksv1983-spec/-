@@ -1,4 +1,4 @@
-import { getCategoryUrl } from '../utils/urls';
+import { getCategoryUrl, getProductUrl } from '../utils/urls';
 import React, { useEffect, useState, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import api from '../api';
@@ -489,7 +489,7 @@ function Home() {
                                         style={{ animationDelay: `${index * 100}ms` }}
                                     >
                                         {/* Image Container */}
-                                        <Link to={`/cakes/${cake.id}`} className="relative w-full aspect-square mb-4 flex items-center justify-center">
+                                        <Link to={getProductUrl(cake)} className="relative w-full aspect-square mb-4 flex items-center justify-center">
                                             {/* Badges */}
                                             <div className="absolute top-0 left-0 flex flex-col gap-2 z-20 pointer-events-none">
                                                 {index === 0 && (
@@ -514,7 +514,7 @@ function Home() {
                                         {/* Content Section */}
                                         <div className="flex flex-col flex-grow text-center items-center justify-between">
                                             <div className="w-full">
-                                                <Link to={`/cakes/${cake.id}`}>
+                                                <Link to={getProductUrl(cake)}>
                                                     <h3 className="text-[14px] md:text-[16px] font-black text-gray-900 uppercase tracking-wide leading-snug line-clamp-2 min-h-[2.5rem] group-hover:text-[#7A0019] transition-colors duration-300">
                                                         {cake.name}
                                                     </h3>

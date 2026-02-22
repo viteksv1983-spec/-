@@ -21,6 +21,9 @@ def create_user(db: Session, user: schemas.UserCreate):
 def get_cake(db: Session, cake_id: int):
     return db.query(models.Cake).filter(models.Cake.id == cake_id).first()
 
+def get_cake_by_slug(db: Session, slug: str):
+    return db.query(models.Cake).filter(models.Cake.slug == slug).first()
+
 def get_cakes(db: Session, skip: int = 0, limit: int = 100, category: Optional[str] = None):
     query = db.query(models.Cake)
     if category:

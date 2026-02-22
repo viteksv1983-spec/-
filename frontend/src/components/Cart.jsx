@@ -4,6 +4,7 @@ import { CartContext } from '../context/CartContext';
 import { AuthContext } from '../context/AuthContext';
 import api from '../api';
 import SEOHead from './SEOHead';
+import { getProductUrl } from '../utils/urls';
 
 function Cart() {
     const { cartItems, removeFromCart, updateQuantity, cartTotal, clearCart } = useContext(CartContext);
@@ -132,7 +133,7 @@ function Cart() {
                         {cartItems.map((item) => (
                             <li key={`${item.id}-${item.flavor}-${item.weight}`} className="p-6 sm:flex sm:items-center hover:bg-gray-50 transition-colors">
                                 <div className="h-24 w-24 flex-shrink-0 overflow-hidden border border-gray-200 bg-white shadow-sm rounded-xl">
-                                    <Link to={`/cakes/${item.id}`} state={{ fromCategory: item.category }} className="hover:opacity-80 transition-opacity block h-full w-full">
+                                    <Link to={getProductUrl(item)} state={{ fromCategory: item.category }} className="hover:opacity-80 transition-opacity block h-full w-full">
                                         {item.image_url && (
                                             <img
                                                 src={item.image_url.startsWith('http') ? item.image_url : `${api.defaults.baseURL}${item.image_url}`}
@@ -147,7 +148,7 @@ function Cart() {
                                     <div>
                                         <div className="flex justify-between text-base font-medium text-gray-900">
                                             <div>
-                                                <Link to={`/cakes/${item.id}`} state={{ fromCategory: item.category }} className="hover:text-vatsak-red transition-colors inline-block text-gray-900">
+                                                <Link to={getProductUrl(item)} state={{ fromCategory: item.category }} className="hover:text-vatsak-red transition-colors inline-block text-gray-900">
                                                     <h3 className="uppercase tracking-wide font-bold text-lg">{item.name}</h3>
                                                 </Link>
                                                 {item.flavor && (

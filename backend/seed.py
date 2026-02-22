@@ -7,6 +7,7 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from sqlalchemy.orm import Session
 from backend import crud, models, schemas
 from backend.database import SessionLocal, engine
+from backend.migrate_slugs import generate_slug
 
 # Create tables if they don't exist
 models.Base.metadata.create_all(bind=engine)
@@ -259,12 +260,20 @@ def seed_data():
         # Special handling for Bento to restore the user's preferred set
         if category_key == "bento":
             for i, bento in enumerate(BENTO_PRODUCTS):
+                base_slug = generate_slug(bento["name"], "bento")
+                slug = base_slug
+                counter = 1
+                while any(c.slug == slug for c in cakes):
+                    slug = f"{base_slug}-{counter}"
+                    counter += 1
+                
                 cake = schemas.CakeCreate(
                     name=bento["name"],
                     description=bento["desc"],
                     price=float(random.randint(450, 550)),
                     image_url=bento["image"],
                     is_available=True,
+                    slug=slug,
                     weight=450.0,
                     ingredients="Бісквіт, крем-чіз, фруктова начинка",
                     shelf_life="48 годин",
@@ -295,12 +304,21 @@ def seed_data():
                 image_url = images[i % len(images)]
                 description = f"{details['description']} Варіант No.{i}."
 
+            name = f"{details['name_prefix']} #{i}"
+            base_slug = generate_slug(name, category_key)
+            slug = base_slug
+            counter = 1
+            while any(c.slug == slug for c in cakes):
+                slug = f"{base_slug}-{counter}"
+                counter += 1
+
             cake = schemas.CakeCreate(
-                name=f"{details['name_prefix']} #{i}",
+                name=name,
                 description=description,
                 price=price,
                 image_url=image_url,
                 is_available=True,
+                slug=slug,
                 weight=float(details["weight"]),
                 ingredients=details["ingredients"],
                 shelf_life=details["shelf_life"],

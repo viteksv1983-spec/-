@@ -7,11 +7,13 @@ class Cake(Base):
     __tablename__ = "cakes"
 
     id = Column(Integer, primary_key=True, index=True)
+    slug = Column(String, unique=True, index=True)
     name = Column(String, index=True)
     description = Column(String)
     price = Column(Float)
     image_url = Column(String)
     is_available = Column(Boolean, default=True)
+    updated_at = Column(DateTime(timezone=True), default=func.now(), onupdate=func.now())
     weight = Column(Float, nullable=True)  # Вага в грамах
     ingredients = Column(String, nullable=True)  # Склад
     shelf_life = Column(String, nullable=True)  # Термін придатності

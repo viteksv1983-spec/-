@@ -8,6 +8,8 @@ class CakeBase(BaseModel):
     price: float
     image_url: Optional[str] = None
     is_available: bool = True
+    slug: Optional[str] = None
+    updated_at: Optional[datetime] = None
     weight: Optional[float] = None
     ingredients: Optional[str] = None
     shelf_life: Optional[str] = None
@@ -57,9 +59,11 @@ class CakeCreate(CakeBase):
 
 class Cake(CakeBase):
     id: int
+    slug: str
 
 class CakeUpdate(BaseModel):
     name: Optional[str] = None
+    slug: Optional[str] = None
     description: Optional[str] = None
     price: Optional[float] = None
     image_url: Optional[str] = None

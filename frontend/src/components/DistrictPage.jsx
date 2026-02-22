@@ -5,6 +5,7 @@ import { CartContext } from '../context/CartContext';
 import { FILLINGS } from '../constants/fillings';
 import QuickOrderModal from './QuickOrderModal';
 import SEOHead from './SEOHead';
+import { getProductUrl } from '../utils/urls';
 import heroBanner from '../assets/hero-banner.png';
 
 const DISTRICTS_DATA = {
@@ -155,12 +156,12 @@ export default function DistrictPage() {
                     <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-6">
                         {cakes.map((cake) => (
                             <div key={cake.id} className="group bg-white rounded-2xl md:rounded-3xl border border-gray-100 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col overflow-hidden p-3 md:p-4">
-                                <Link to={`/cakes/${cake.id}`} className="block relative w-full aspect-square mb-3">
+                                <Link to={getProductUrl(cake)} className="block relative w-full aspect-square mb-3">
                                     {cake.image_url && (
                                         <img src={cake.image_url.startsWith('http') ? cake.image_url : `${api.defaults.baseURL}${cake.image_url}`} alt={cake.name} className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500" loading="lazy" />
                                     )}
                                 </Link>
-                                <Link to={`/cakes/${cake.id}`}>
+                                <Link to={getProductUrl(cake)}>
                                     <h3 className="text-[12px] md:text-[14px] font-black text-gray-900 uppercase tracking-tight leading-tight line-clamp-2 min-h-[2rem] md:min-h-[2.5rem] text-center mb-2 group-hover:text-[#7A0019] transition-colors" style={{ fontFamily: "'Oswald', sans-serif" }}>
                                         {cake.name}
                                     </h3>

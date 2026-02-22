@@ -15,7 +15,7 @@ function Navbar() {
     const location = useLocation();
 
     // Check if we are on a product detail page to hide secondary nav on mobile
-    const isProductDetailPage = location.pathname.startsWith('/cakes/') && location.pathname.split('/').length === 3;
+    const isProductDetailPage = location.pathname.startsWith('/torty-na-zamovlennya/') || location.pathname.split('/').length >= 3;
 
     const handleSearch = (e) => {
         if (e) e.preventDefault();
@@ -243,16 +243,16 @@ function Navbar() {
                                     <Link to="/musovi-torty" className="flex items-center gap-2 px-3 py-2.5 text-[13px] font-bold uppercase tracking-wider text-[#a0742d] hover:bg-[#F3E2CF]/60 rounded-lg transition-colors" onClick={() => setIsMenuOpen(false)}>
                                         🍮 Мусові торти
                                     </Link>
-                                    <Link to="/cakes/wedding" className="flex items-center gap-2 px-3 py-2.5 text-[13px] font-bold uppercase tracking-wider text-[#a0742d] hover:bg-[#F3E2CF]/60 rounded-lg transition-colors" onClick={() => setIsMenuOpen(false)}>
+                                    <Link to="/torty-na-zamovlennya/vesilni/" className="flex items-center gap-2 px-3 py-2.5 text-[13px] font-bold uppercase tracking-wider text-[#a0742d] hover:bg-[#F3E2CF]/60 rounded-lg transition-colors" onClick={() => setIsMenuOpen(false)}>
                                         💍 Весільні торти
                                     </Link>
-                                    <Link to="/cakes/kids" className="flex items-center gap-2 px-3 py-2.5 text-[13px] font-bold uppercase tracking-wider text-[#a0742d] hover:bg-[#F3E2CF]/60 rounded-lg transition-colors" onClick={() => setIsMenuOpen(false)}>
+                                    <Link to="/torty-na-zamovlennya/dytyachi/" className="flex items-center gap-2 px-3 py-2.5 text-[13px] font-bold uppercase tracking-wider text-[#a0742d] hover:bg-[#F3E2CF]/60 rounded-lg transition-colors" onClick={() => setIsMenuOpen(false)}>
                                         🧸 Дитячі торти
                                     </Link>
-                                    <Link to="/cakes/birthday" className="flex items-center gap-2 px-3 py-2.5 text-[13px] font-bold uppercase tracking-wider text-[#a0742d] hover:bg-[#F3E2CF]/60 rounded-lg transition-colors" onClick={() => setIsMenuOpen(false)}>
+                                    <Link to="/torty-na-zamovlennya/na-den-narodzhennya/" className="flex items-center gap-2 px-3 py-2.5 text-[13px] font-bold uppercase tracking-wider text-[#a0742d] hover:bg-[#F3E2CF]/60 rounded-lg transition-colors" onClick={() => setIsMenuOpen(false)}>
                                         🎉 На День народження
                                     </Link>
-                                    <Link to="/cakes/anniversary" className="flex items-center gap-2 px-3 py-2.5 text-[13px] font-bold uppercase tracking-wider text-[#a0742d] hover:bg-[#F3E2CF]/60 rounded-lg transition-colors" onClick={() => setIsMenuOpen(false)}>
+                                    <Link to="/torty-na-zamovlennya/na-yuviley/" className="flex items-center gap-2 px-3 py-2.5 text-[13px] font-bold uppercase tracking-wider text-[#a0742d] hover:bg-[#F3E2CF]/60 rounded-lg transition-colors" onClick={() => setIsMenuOpen(false)}>
                                         🥂 На ювілей
                                     </Link>
                                     <Link to="/kapkeyki" className="flex items-center gap-2 px-3 py-2.5 text-[13px] font-bold uppercase tracking-wider text-[#a0742d] hover:bg-[#F3E2CF]/60 rounded-lg transition-colors" onClick={() => setIsMenuOpen(false)}>

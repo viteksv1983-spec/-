@@ -1,4 +1,6 @@
-import { getCategoryUrl } from '../utils/urls';
+import { getCategoryUrl, getProductUrl } from '../utils/urls';
+import { dbCategoryToSlug, isGroupA, GROUP_A_CATEGORIES, GROUP_B_CATEGORIES } from '../constants/seoRoutes';
+import { GET_CATEGORY_NAME } from '../constants/categories';
 import React, { useEffect, useState, useContext, useRef } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import api from '../api';
@@ -6,13 +8,17 @@ import { CartContext } from '../context/CartContext';
 import { FILLINGS } from '../constants/fillings';
 import QuickOrderModal from './QuickOrderModal';
 import SEOHead from './SEOHead';
+import NotFound from './NotFound';
 import { Helmet } from 'react-helmet-async';
 
 
-function CakeDetail({ predefinedId }) {
+function CakeDetail({ predefinedId, predefinedSlug, expectedCategory, groupType, categorySlug }) {
     const params = useParams();
     const id = predefinedId || params.id;
+    const slug = predefinedSlug || params.productSlug;
+    const identifier = slug || id;
     const [cake, setCake] = useState(null);
+    const [notFound, setNotFound] = useState(false);
     const [quantity, setQuantity] = useState(1);
 
     const [selectedWeight, setSelectedWeight] = useState(1);
@@ -30,9 +36,15 @@ function CakeDetail({ predefinedId }) {
     const { popular, recommended, recentlyViewed } = useCarouselData(cake?.id);
 
     useEffect(() => {
-        api.get(`/cakes/${id}`)
+        // Build API URL with optional category context validation
+        let url = `/cakes/${identifier}`;
+        if (expectedCategory) {
+            url += `?category=${expectedCategory}`;
+        }
+        api.get(url)
             .then(response => {
                 setCake(response.data);
+                setNotFound(false);
                 if (response.data.fillings && response.data.fillings.length > 0) {
                     setSelectedFlavor(response.data.fillings[0].name);
                 }
@@ -44,8 +56,11 @@ function CakeDetail({ predefinedId }) {
             })
             .catch(error => {
                 console.error("Error fetching cake details", error);
+                if (error.response && error.response.status === 404) {
+                    setNotFound(true);
+                }
             });
-    }, [id]);
+    }, [identifier, expectedCategory]);
 
     // IntersectionObserver: show sticky bar when order section is NOT visible
     useEffect(() => {
@@ -95,6 +110,10 @@ function CakeDetail({ predefinedId }) {
         addToCart(itemToAdd, quantity, flavor, selectedWeight, defaultDate, deliveryMethod);
     };
 
+    if (notFound) {
+        return <NotFound />;
+    }
+
     if (!cake) {
         return (
             <div className="min-h-screen flex justify-center items-center bg-white">
@@ -107,18 +126,29 @@ function CakeDetail({ predefinedId }) {
     const pricePerKg = cake.price / baseWeightKg;
     const displayPrice = Math.round(pricePerKg * selectedWeight);
 
+    // ─── Determine URLs and category context ───
+    const productUrl = getProductUrl(cake);
+    const categoryUrlSlug = dbCategoryToSlug(cake.category);
+    const isGroupACake = categoryUrlSlug && isGroupA(categoryUrlSlug);
+    const categoryLabel = GET_CATEGORY_NAME(cake.category) || cake.category;
+    const categoryUrl = getCategoryUrl(cake.category);
+
     const productSchema = {
         "@context": "https://schema.org/",
         "@type": "Product",
         "name": cake.name,
         "image": cake.image_url ? (cake.image_url.startsWith('http') ? cake.image_url : `https://antreme.kyiv.ua${cake.image_url}`) : undefined,
         "description": cake.description,
+        "brand": {
+            "@type": "Brand",
+            "name": "Antreme"
+        },
         "offers": {
             "@type": "Offer",
             "priceCurrency": "UAH",
             "price": cake.price,
-            "availability": "https://schema.org/InStock",
-            "url": `https://antreme.kyiv.ua/cakes/${cake.id}`
+            "availability": cake.is_available ? "https://schema.org/InStock" : "https://schema.org/OutOfStock",
+            "url": `https://antreme.kyiv.ua${productUrl}`
         },
         "aggregateRating": {
             "@type": "AggregateRating",
@@ -127,24 +157,51 @@ function CakeDetail({ predefinedId }) {
         }
     };
 
-    const breadcrumbSchema = {
-        "@context": "https://schema.org",
-        "@type": "BreadcrumbList",
-        "itemListElement": [{
-            "@type": "ListItem",
-            "position": 1,
-            "name": "Головна",
-            "item": "https://antreme.kyiv.ua/"
-        }, {
+    // BreadcrumbList: Group A = Home -> Каталог -> Category -> Product
+    //                 Group B = Home -> Category -> Product
+    const breadcrumbItems = [{
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Головна",
+        "item": "https://antreme.kyiv.ua/"
+    }];
+
+    if (isGroupACake) {
+        breadcrumbItems.push({
             "@type": "ListItem",
             "position": 2,
-            "name": "Каталог",
-            "item": "https://antreme.kyiv.ua/cakes"
-        }, {
+            "name": "Торти на замовлення",
+            "item": "https://antreme.kyiv.ua/torty-na-zamovlennya/"
+        });
+        breadcrumbItems.push({
+            "@type": "ListItem",
+            "position": 3,
+            "name": categoryLabel,
+            "item": `https://antreme.kyiv.ua${categoryUrl}`
+        });
+        breadcrumbItems.push({
+            "@type": "ListItem",
+            "position": 4,
+            "name": cake.name
+        });
+    } else {
+        breadcrumbItems.push({
+            "@type": "ListItem",
+            "position": 2,
+            "name": categoryLabel,
+            "item": `https://antreme.kyiv.ua${categoryUrl}`
+        });
+        breadcrumbItems.push({
             "@type": "ListItem",
             "position": 3,
             "name": cake.name
-        }]
+        });
+    }
+
+    const breadcrumbSchema = {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": breadcrumbItems
     };
 
     const schemaData = [productSchema, breadcrumbSchema];
@@ -166,7 +223,7 @@ function CakeDetail({ predefinedId }) {
                 description={cake.meta_description || `Замовити торт ${cake.name}. ${cake.description?.slice(0, 100)}...`}
                 keywords={cake.meta_keywords}
                 h1={cake.h1_heading || cake.name}
-                canonical={cake.canonical_url || `/cakes/${cake.id}`}
+                canonical={productUrl}
                 ogImage={cake.image_url}
                 type="product"
                 schema={schemaData}
@@ -178,7 +235,13 @@ function CakeDetail({ predefinedId }) {
                     <p className="text-gray-400 text-[10px] md:text-xs uppercase tracking-[0.15em] font-bold">
                         <Link to="/" className="hover:text-[#7A0019] transition-colors">Головна</Link>
                         <span className="mx-2 text-gray-200">/</span>
-                        <Link to="/cakes" className="hover:text-[#7A0019] transition-colors">Каталог</Link>
+                        {isGroupACake && (
+                            <>
+                                <Link to="/torty-na-zamovlennya" className="hover:text-[#7A0019] transition-colors">Каталог</Link>
+                                <span className="mx-2 text-gray-200">/</span>
+                            </>
+                        )}
+                        <Link to={categoryUrl} className="hover:text-[#7A0019] transition-colors">{categoryLabel}</Link>
                         <span className="mx-2 text-gray-200">/</span>
                         <span className="text-gray-600">{cake.name}</span>
                     </p>
@@ -611,14 +674,14 @@ function ProductCard({ cake, addToCart }) {
     return (
         <div className="group bg-white rounded-2xl border border-gray-100 shadow-[0_2px_12px_rgba(0,0,0,0.06)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.1)] transition-all duration-300 flex flex-col h-full overflow-hidden">
             <div className="p-2.5 md:p-4 flex flex-col h-full">
-                <Link to={`/cakes/${cake.id}`}>
+                <Link to={getProductUrl(cake)}>
                     <h3 className="text-[10px] md:text-[13px] font-black text-gray-900 uppercase tracking-tight leading-tight line-clamp-2 min-h-[1.8rem] md:min-h-[2.2rem] text-center mb-1 group-hover:text-[#7A0019] transition-colors"
                         style={{ fontFamily: "'Oswald', sans-serif" }}>
                         {cake.name}
                     </h3>
                 </Link>
 
-                <Link to={`/cakes/${cake.id}`} className="relative w-full aspect-square mb-1.5 md:mb-2 block">
+                <Link to={getProductUrl(cake)} className="relative w-full aspect-square mb-1.5 md:mb-2 block">
                     <div className="w-full h-full flex items-center justify-center p-1.5">
                         {cake.image_url && (
                             <img

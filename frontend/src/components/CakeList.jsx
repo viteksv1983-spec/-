@@ -6,9 +6,12 @@ import { FILLINGS } from '../constants/fillings';
 import QuickOrderModal from './QuickOrderModal';
 import SEOHead from './SEOHead';
 import { categorySeoData } from '../constants/categorySeo';
+import { getProductUrl, getCategoryUrl } from '../utils/urls';
+import { dbCategoryToSlug, isGroupA, getCategoryCanonicalUrl } from '../constants/seoRoutes';
+import { GET_CATEGORY_NAME } from '../constants/categories';
 import { marked } from 'marked';
 
-function CakeList({ predefinedCategory, predefinedSlug }) {
+function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
     const [cakes, setCakes] = useState([]);
     const [loading, setLoading] = useState(true);
     const [isQuickOrderOpen, setIsQuickOrderOpen] = useState(false);
@@ -202,24 +205,44 @@ function CakeList({ predefinedCategory, predefinedSlug }) {
         { key: 'large', label: '2+ кг', icon: '🎂' },
     ];
 
+    // ─── BreadcrumbList: Group A vs Group B ───
+    const categorySlugForSeo = category ? dbCategoryToSlug(category) : null;
+    const isGroupACat = categorySlugForSeo && isGroupA(categorySlugForSeo);
+    const categoryLabel = category ? (GET_CATEGORY_NAME(category) || getCategoryTitle()) : null;
+    const categorySeoUrl = category ? getCategoryUrl(category) : null;
+
     const breadcrumbs = [{
         "@type": "ListItem",
         "position": 1,
         "name": "Головна",
         "item": "https://antreme.kyiv.ua/"
-    }, {
-        "@type": "ListItem",
-        "position": 2,
-        "name": "Каталог",
-        "item": "https://antreme.kyiv.ua/cakes"
     }];
 
     if (category) {
+        if (isGroupACat) {
+            breadcrumbs.push({
+                "@type": "ListItem",
+                "position": 2,
+                "name": "Торти на замовлення",
+                "item": "https://antreme.kyiv.ua/torty-na-zamovlennya/"
+            });
+            breadcrumbs.push({
+                "@type": "ListItem",
+                "position": 3,
+                "name": categoryLabel
+            });
+        } else {
+            breadcrumbs.push({
+                "@type": "ListItem",
+                "position": 2,
+                "name": categoryLabel || "Каталог"
+            });
+        }
+    } else {
         breadcrumbs.push({
             "@type": "ListItem",
-            "position": 3,
-            "name": getCategoryTitle(),
-            "item": `https://antreme.kyiv.ua/cakes?category=${category}`
+            "position": 2,
+            "name": "Каталог"
         });
     }
 
@@ -235,13 +258,13 @@ function CakeList({ predefinedCategory, predefinedSlug }) {
         "itemListElement": processedCakes.map((cake, index) => ({
             "@type": "ListItem",
             "position": index + 1,
-            "url": `https://antreme.kyiv.ua/cakes/${cake.id}`
+            "url": `https://antreme.kyiv.ua${getProductUrl(cake)}`
         }))
     };
 
     const schemaData = [breadcrumbSchema, itemListSchema];
 
-    const canonicalUrl = predefinedSlug ? `/${predefinedSlug}` : (category ? `/cakes?category=${category}` : '/cakes');
+    const canonicalUrl = categorySeoUrl || (category ? `/cakes?category=${category}` : '/cakes');
 
     const metaTitle = seoData ? seoData.title : `${getCategoryTitle()} | Купити торти в Києві – Antreme`;
     const metaDesc = seoData ? seoData.description : `Шукаєте ${getCategoryTitle().toLowerCase()}? В кондитерській Antreme величезний вибір свіжих десертів з натуральних інгредієнтів. Адресна доставка по Києву.`;
@@ -346,7 +369,7 @@ function CakeList({ predefinedCategory, predefinedSlug }) {
                                     <div className="p-3 md:p-4 flex flex-col h-full">
 
                                         {/* Title at top */}
-                                        <Link to={`/cakes/${cake.id}`}>
+                                        <Link to={getProductUrl(cake)}>
                                             <h3 className="text-[11px] md:text-[14px] font-black text-gray-900 uppercase tracking-tight leading-tight line-clamp-2 min-h-[2rem] md:min-h-[2.5rem] text-center mb-1 group-hover:text-[#7A0019] transition-colors"
                                                 style={{ fontFamily: "'Oswald', sans-serif" }}>
                                                 {cake.name}
@@ -374,7 +397,7 @@ function CakeList({ predefinedCategory, predefinedSlug }) {
                                                 </div>
                                             )}
 
-                                            <Link to={`/cakes/${cake.id}`} className="block w-full h-full flex items-center justify-center p-1">
+                                            <Link to={getProductUrl(cake)} className="block w-full h-full flex items-center justify-center p-1">
                                                 {cake.image_url && (
                                                     <img
                                                         src={cake.image_url.startsWith('http') ? cake.image_url : `${api.defaults.baseURL}${cake.image_url}`}

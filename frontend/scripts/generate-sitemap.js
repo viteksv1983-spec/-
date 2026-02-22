@@ -9,35 +9,51 @@ const __dirname = path.dirname(__filename);
 const API_URL = 'https://cake-shop-backend.onrender.com/cakes/?limit=1000';
 const BASE_URL = 'https://antreme.kyiv.ua';
 
-const staticRoutes = [
-    '/',
-    '/cakes',
-    '/delivery',
-    '/about',
-    '/reviews',
-    '/holiday',
-    '/bento-torty',
-    '/biskvitni-torty',
-    '/vesilni-torty',
-    '/musovi-torty',
-    '/kapkeyki',
-    '/imbirni-pryaniki',
-    '/torty-na-den-narodzhennya',
-    '/torty-na-yuviley',
-    '/dytyachi-torty',
-    '/torty-dlya-khlopchykiv',
-    '/torty-dlya-divchatok',
-    '/torty-dlya-zhinok',
-    '/torty-dlya-cholovikiv',
-    '/patriotychni-torty',
-    '/torty-na-profesiyne-svyato',
-    '/torty-gender-reveal-party',
-    '/torty-za-khobi',
-    '/korporatyvni-torty',
-    '/torty-na-khrestyny',
-    '/sezonni-torty',
-    '/foto-torty'
-];
+// ─── Group A: Occasion-based (nested under /torty-na-zamovlennya/) ───
+const GROUP_A = {
+    'vesilni': 'wedding',
+    'na-den-narodzhennya': 'birthday',
+    'na-yuviley': 'anniversary',
+    'dytyachi': 'kids',
+    'dlya-hlopchykiv': 'boy',
+    'dlya-divchat': 'girl',
+    'dlya-zhinok': 'for-women',
+    'dlya-cholovikiv': 'for-men',
+    'gender-reveal': 'gender-reveal',
+    'korporatyvni': 'corporate',
+    'sezonni': 'seasonal',
+    'foto-torty': 'photo-cakes',
+    'profesiine-svyato': 'professional',
+    'patriotychni': 'patriotic',
+    'na-khrestyny': 'christening',
+    'za-hobi': 'hobby',
+};
+
+// ─── Group B: Type-based (standalone at root /) ───
+const GROUP_B = {
+    'bento-torty': 'bento',
+    'biskvitni-torty': 'biscuit',
+    'musovi-torty': 'mousse',
+    'kapkeyky': 'cupcakes',
+    'imbirni-pryanyky': 'gingerbread',
+    'nachynky': 'fillings',
+};
+
+// Reverse map: dbCategory -> { urlSlug, group }
+const dbCatToUrl = {};
+for (const [slug, dbCat] of Object.entries(GROUP_A)) {
+    dbCatToUrl[dbCat] = { slug, group: 'A' };
+}
+for (const [slug, dbCat] of Object.entries(GROUP_B)) {
+    dbCatToUrl[dbCat] = { slug, group: 'B' };
+}
+
+function getProductUrl(cake) {
+    const info = dbCatToUrl[cake.category];
+    if (!info) return `/cakes/${cake.slug || cake.id}`;
+    if (info.group === 'A') return `/torty-na-zamovlennya/${info.slug}/${cake.slug}`;
+    return `/${info.slug}/${cake.slug}`;
+}
 
 async function fetchCakes() {
     try {
@@ -45,39 +61,76 @@ async function fetchCakes() {
         return response.data;
     } catch (error) {
         console.error("Error fetching cakes:", error.message);
-        return []; // return empty array if backend is down so build doesn't crash completely
+        return [];
     }
+}
+
+function urlEntry(loc, priority, changefreq, lastmod) {
+    return [
+        `  <url>`,
+        `    <loc>${loc}</loc>`,
+        `    <lastmod>${lastmod}</lastmod>`,
+        `    <changefreq>${changefreq}</changefreq>`,
+        `    <priority>${priority}</priority>`,
+        `  </url>`
+    ].join('\n');
 }
 
 async function generateSitemap() {
     try {
         console.log('Fetching cakes for sitemap...');
         const cakes = await fetchCakes();
+        const today = new Date().toISOString().split('T')[0];
+        const urls = new Set();
+        const entries = [];
 
+        const addUrl = (path, priority, changefreq, lastmod) => {
+            const full = `${BASE_URL}${path}`;
+            if (urls.has(full)) return;
+            urls.add(full);
+            entries.push({ path, priority, changefreq, lastmod: lastmod || today, full });
+        };
+
+        // === Tier 1: Home (1.0) ===
+        addUrl('/', '1.0', 'daily');
+
+        // === Tier 2: Main pages (0.9) ===
+        ['/cakes', '/delivery', '/about', '/reviews', '/fillings', '/torty-na-zamovlennya'].forEach(p => {
+            addUrl(p, '0.9', 'daily');
+        });
+
+        // === Tier 3: Category pages (0.8) ===
+        // Group A categories
+        for (const slug of Object.keys(GROUP_A)) {
+            addUrl(`/torty-na-zamovlennya/${slug}/`, '0.8', 'weekly');
+        }
+        // Group B categories
+        for (const slug of Object.keys(GROUP_B)) {
+            addUrl(`/${slug}/`, '0.8', 'weekly');
+        }
+
+        // === Tier 4: Product pages (0.7) ===
+        cakes.forEach(cake => {
+            if (!cake.slug) return; // Skip products without slugs
+            const lastmod = cake.updated_at
+                ? new Date(cake.updated_at).toISOString().split('T')[0]
+                : today;
+            addUrl(getProductUrl(cake), '0.7', 'weekly', lastmod);
+        });
+
+        // Build XML
         let sitemap = `<?xml version="1.0" encoding="UTF-8"?>\n`;
         sitemap += `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n`;
 
-        const today = new Date().toISOString().split('T')[0];
-
-        // Static Routes
-        staticRoutes.forEach(route => {
-            const priority = route === '/' ? '1.0' : '0.9';
-            sitemap += `  <url>\n`;
-            sitemap += `    <loc>${BASE_URL}${route}</loc>\n`;
-            sitemap += `    <lastmod>${today}</lastmod>\n`;
-            sitemap += `    <changefreq>daily</changefreq>\n`;
-            sitemap += `    <priority>${priority}</priority>\n`;
-            sitemap += `  </url>\n`;
+        // Sort by priority desc, then alphabetically
+        entries.sort((a, b) => {
+            const pDiff = parseFloat(b.priority) - parseFloat(a.priority);
+            if (pDiff !== 0) return pDiff;
+            return a.path.localeCompare(b.path);
         });
 
-        // Dynamic Cake Routes
-        cakes.forEach(cake => {
-            sitemap += `  <url>\n`;
-            sitemap += `    <loc>${BASE_URL}/cakes/${cake.id}</loc>\n`;
-            sitemap += `    <lastmod>${today}</lastmod>\n`;
-            sitemap += `    <changefreq>weekly</changefreq>\n`;
-            sitemap += `    <priority>0.7</priority>\n`;
-            sitemap += `  </url>\n`;
+        entries.forEach(e => {
+            sitemap += urlEntry(e.full, e.priority, e.changefreq, e.lastmod) + '\n';
         });
 
         sitemap += `</urlset>`;
@@ -89,7 +142,8 @@ async function generateSitemap() {
 
         const sitemapPath = path.join(publicDir, 'sitemap.xml');
         fs.writeFileSync(sitemapPath, sitemap, 'utf8');
-        console.log(`Sitemap generated successfully at ${sitemapPath} with ${staticRoutes.length + cakes.length} URLs.`);
+        console.log(`✅ Sitemap generated: ${sitemapPath} (${entries.length} URLs)`);
+        console.log(`   Breakdown: Home=1, Main=${6}, Categories=${Object.keys(GROUP_A).length + Object.keys(GROUP_B).length}, Products=${cakes.filter(c => c.slug).length}`);
     } catch (error) {
         console.error('Error generating sitemap:', error);
         process.exit(1);

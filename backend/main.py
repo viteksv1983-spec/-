@@ -254,11 +254,20 @@ def read_cakes(skip: int = 0, limit: int = 100, category: Optional[str] = None, 
     cakes = crud.get_cakes(db, skip=skip, limit=limit, category=category)
     return cakes
 
-@app.get("/cakes/{cake_id}", response_model=schemas.Cake)
-def read_cake(cake_id: int, db: Session = Depends(get_db)):
-    db_cake = crud.get_cake(db, cake_id=cake_id)
+@app.get("/cakes/{identifier}", response_model=schemas.Cake)
+def read_cake(identifier: str, category: Optional[str] = None, db: Session = Depends(get_db)):
+    if identifier.isdigit():
+        db_cake = crud.get_cake(db, cake_id=int(identifier))
+    else:
+        db_cake = crud.get_cake_by_slug(db, slug=identifier)
+        
     if db_cake is None:
         raise HTTPException(status_code=404, detail="Cake not found")
+        
+    # Contextual Slug Validation (SEO strict matching)
+    if category and db_cake.category != category:
+        raise HTTPException(status_code=404, detail="Cake not found in this category")
+        
     return db_cake
 
 
