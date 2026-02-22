@@ -1,6 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import axios from 'axios';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -68,46 +69,89 @@ for (const key in categorySeoData) {
     });
 }
 
-console.log(`Starting SSG injection for ${routes.length} pages...`);
-
-routes.forEach(route => {
-    // Determine path
-    const relativePath = route.path === '/' ? '' : route.path.replace(/^\//, '');
-    const folderPath = path.join(distDir, relativePath);
-
-    // Create subfolder if needed
-    if (route.path !== '/') {
-        fs.mkdirSync(folderPath, { recursive: true });
+async function fetchCakes() {
+    try {
+        const response = await axios.get('https://cake-shop-backend.onrender.com/cakes/?limit=1000', { timeout: 60000 });
+        return response.data;
+    } catch (error) {
+        console.error("Error fetching cakes for SSG:", error.message);
+        return [];
     }
+}
 
-    const fullUrl = `${domain}${route.path === '/' ? '' : route.path}`;
+async function generatePages() {
+    // Fetch products and add them to routes
+    const cakes = await fetchCakes();
+    cakes.forEach(cake => {
+        const title = cake.meta_title || `${cake.name} - Купити в Києві | Antreme`;
+        const description = cake.meta_description || `Замовити торт ${cake.name}. ${cake.description?.slice(0, 100)}...`;
 
-    // 1. Remove existing <title> and any existing meta description to avoid duplicates
-    let html = baseHtml.replace(/<title>[\s\S]*?<\/title>/gi, '');
-    html = html.replace(/<meta[^>]*name="description"[^>]*>/gi, '');
+        routes.push({
+            path: `/cakes/${cake.id}`,
+            title: title,
+            description: description,
+            ogImage: cake.image_url
+        });
+    });
 
-    // 2. Prepare our new meta tags block
-    const metaTags = `
+    console.log(`Starting SSG injection for ${routes.length} pages...`);
+
+    routes.forEach(route => {
+        // Determine path
+        const relativePath = route.path === '/' ? '' : route.path.replace(/^\//, '');
+        const folderPath = path.join(distDir, relativePath);
+
+        // Create subfolder if needed
+        if (route.path !== '/') {
+            fs.mkdirSync(folderPath, { recursive: true });
+        }
+
+        const fullUrl = `${domain}${route.path === '/' ? '' : route.path}`;
+
+        // Handle OG image correctly
+        let ogImageUrl = '/og-image.jpg';
+        if (route.ogImage) {
+            ogImageUrl = route.ogImage.startsWith('http') ? route.ogImage : `${domain}${route.ogImage}`;
+        } else {
+            ogImageUrl = `${domain}/og-image.jpg`;
+        }
+
+        // 1. Remove existing <title> and any existing meta description to avoid duplicates
+        let html = baseHtml.replace(/<title>[\s\S]*?<\/title>/gi, '');
+        html = html.replace(/<meta[^>]*name="description"[^>]*>/gi, '');
+
+        // Remove existing OG tags and standard canonical from Vite base to avoid duplicates if any
+        html = html.replace(/<link[^>]*rel="canonical"[^>]*>/gi, '');
+        html = html.replace(/<meta[^>]*property="og:[^>]*>/gi, '');
+        html = html.replace(/<meta[^>]*name="twitter:[^>]*>/gi, '');
+
+        // 2. Prepare our new meta tags block
+        const metaTags = `
     <title>${route.title}</title>
     <meta name="description" content="${route.description}" />
     <link rel="canonical" href="${fullUrl}" />
     <meta property="og:title" content="${route.title}" />
     <meta property="og:description" content="${route.description}" />
     <meta property="og:url" content="${fullUrl}" />
+    <meta property="og:image" content="${ogImageUrl}" />
     <meta property="og:type" content="website" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="${route.title}" />
     <meta name="twitter:description" content="${route.description}" />
+    <meta name="twitter:image" content="${ogImageUrl}" />
 </head>`;
 
-    // 3. Inject exactly before the closing </head> tag
-    html = html.replace(/<\/head>/i, metaTags);
+        // 3. Inject exactly before the closing </head> tag
+        html = html.replace(/<\/head>/i, metaTags);
 
-    // 4. Write modified HTML
-    const filePath = path.join(folderPath, 'index.html');
-    fs.writeFileSync(filePath, html, 'utf-8');
+        // 4. Write modified HTML
+        const filePath = path.join(folderPath, 'index.html');
+        fs.writeFileSync(filePath, html, 'utf-8');
 
-    console.log(`✅ Injected SEO for: ${route.path === '/' ? 'Root (Homepage)' : route.path}`);
-});
+        console.log(`✅ Injected SEO for: ${route.path === '/' ? 'Root (Homepage)' : route.path}`);
+    });
 
-console.log('🎉 SSG SEO Injection complete!');
+    console.log('🎉 SSG SEO Injection complete!');
+}
+
+generatePages();

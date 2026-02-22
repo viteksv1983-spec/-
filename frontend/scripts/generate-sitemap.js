@@ -41,7 +41,7 @@ const staticRoutes = [
 
 async function fetchCakes() {
     try {
-        const response = await axios.get(API_URL, { timeout: 10000 });
+        const response = await axios.get(API_URL, { timeout: 60000 });
         return response.data;
     } catch (error) {
         console.error("Error fetching cakes:", error.message);
