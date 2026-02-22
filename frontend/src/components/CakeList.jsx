@@ -404,6 +404,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                                                         alt={`${cake.name} купити Київ`}
                                                         className="w-full h-full object-contain drop-shadow-md group-hover:scale-105 transition-transform duration-500"
                                                         loading="lazy"
+                                                        decoding="async"
                                                     />
                                                 )}
                                             </Link>

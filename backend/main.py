@@ -25,6 +25,10 @@ models.Base.metadata.create_all(bind=engine)
 
 app = FastAPI(title="Cake Shop API", description="API for checking and ordering cakes", version="0.1.0")
 
+# Mount static files directive (For local/rendered WebP cake images)
+static_dir = os.path.join(os.path.dirname(__file__), "static")
+app.mount("/static", StaticFiles(directory=static_dir), name="static")
+
 # Populate database with mock data on startup if empty
 @app.on_event("startup")
 async def startup_event():
