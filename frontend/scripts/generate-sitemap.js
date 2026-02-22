@@ -34,8 +34,8 @@ const GROUP_B = {
     'bento-torty': 'bento',
     'biskvitni-torty': 'biscuit',
     'musovi-torty': 'mousse',
-    'kapkeyky': 'cupcakes',
-    'imbirni-pryanyky': 'gingerbread',
+    'kapkeyki': 'cupcakes',
+    'imbirni-pryaniki': 'gingerbread',
     'nachynky': 'fillings',
 };
 

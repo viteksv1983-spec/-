@@ -7,7 +7,7 @@
     ],
     "rewrites": [
         {
-            "source": "/(.*)",
+            "source": "/(login|register|cart|promotions|delivery|fillings|about|gallery/.*|reviews|blog|districts/.*|cakes|cakes/.*|admin|admin/.*)",
             "destination": "/index.html"
         }
     ]

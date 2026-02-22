@@ -45,8 +45,8 @@ const GROUP_B = {
     'bento-torty': 'bento',
     'biskvitni-torty': 'biscuit',
     'musovi-torty': 'mousse',
-    'kapkeyky': 'cupcakes',
-    'imbirni-pryanyky': 'gingerbread',
+    'kapkeyki': 'cupcakes',
+    'imbirni-pryaniki': 'gingerbread',
     'nachynky': 'fillings',
 };
 
@@ -211,6 +211,11 @@ async function generatePages() {
 
         console.log(`✅ Injected SEO for: ${route.path === '/' ? 'Root (Homepage)' : route.path}`);
     });
+
+    // 5. Create 404.html for Vercel to serve with a genuine 404 HTTP status
+    // Vercel will serve this file (with 404 status) for any route not found in dist/ or rewrites
+    fs.copyFileSync(indexPath, path.join(distDir, '404.html'));
+    console.log('✅ Created 404.html for true HTTP 404 status');
 
     console.log('🎉 SSG SEO Injection complete!');
 }
