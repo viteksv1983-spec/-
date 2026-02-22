@@ -54,6 +54,23 @@ function App() {
               <Route path="/kapkeyki" element={<CakeList predefinedCategory="cupcakes" predefinedSlug="kapkeyki" />} />
               <Route path="/imbirni-pryaniki" element={<CakeList predefinedCategory="gingerbread" predefinedSlug="imbirni-pryaniki" />} />
 
+              {/* Holiday Subcategories Routes */}
+              <Route path="/torty-na-den-narodzhennya" element={<CakeList predefinedCategory="birthday" predefinedSlug="torty-na-den-narodzhennya" />} />
+              <Route path="/torty-na-yuviley" element={<CakeList predefinedCategory="anniversary" predefinedSlug="torty-na-yuviley" />} />
+              <Route path="/dytyachi-torty" element={<CakeList predefinedCategory="kids" predefinedSlug="dytyachi-torty" />} />
+              <Route path="/torty-dlya-khlopchykiv" element={<CakeList predefinedCategory="boy" predefinedSlug="torty-dlya-khlopchykiv" />} />
+              <Route path="/torty-dlya-divchatok" element={<CakeList predefinedCategory="girl" predefinedSlug="torty-dlya-divchatok" />} />
+              <Route path="/torty-dlya-zhinok" element={<CakeList predefinedCategory="for-women" predefinedSlug="torty-dlya-zhinok" />} />
+              <Route path="/torty-dlya-cholovikiv" element={<CakeList predefinedCategory="for-men" predefinedSlug="torty-dlya-cholovikiv" />} />
+              <Route path="/patriotychni-torty" element={<CakeList predefinedCategory="patriotic" predefinedSlug="patriotychni-torty" />} />
+              <Route path="/torty-na-profesiyne-svyato" element={<CakeList predefinedCategory="professional" predefinedSlug="torty-na-profesiyne-svyato" />} />
+              <Route path="/torty-gender-reveal-party" element={<CakeList predefinedCategory="gender-reveal" predefinedSlug="torty-gender-reveal-party" />} />
+              <Route path="/torty-za-khobi" element={<CakeList predefinedCategory="hobby" predefinedSlug="torty-za-khobi" />} />
+              <Route path="/korporatyvni-torty" element={<CakeList predefinedCategory="corporate" predefinedSlug="korporatyvni-torty" />} />
+              <Route path="/torty-na-khrestyny" element={<CakeList predefinedCategory="christening" predefinedSlug="torty-na-khrestyny" />} />
+              <Route path="/sezonni-torty" element={<CakeList predefinedCategory="seasonal" predefinedSlug="sezonni-torty" />} />
+              <Route path="/foto-torty" element={<CakeList predefinedCategory="photo-cakes" predefinedSlug="foto-torty" />} />
+
               <Route path="/cakes/:id" element={<CakeDetail />} />
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />

@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import api from '../api';
 import { HOLIDAY_SUB_CATEGORIES, CATEGORIES } from '../constants/categories';
+import SEOHead from './SEOHead';
 
 function HolidayCakes() {
     const [categories, setCategories] = useState([]);
@@ -53,6 +54,10 @@ function HolidayCakes() {
 
     return (
         <div className="min-h-screen bg-[#f6f4ed] pb-20">
+            <SEOHead
+                title="Торти на свято на замовлення в Києві | Святкові торти - Antreme"
+                description="Замовити святковий торт у Києві: на день народження, ювілей, дитячі свята, весілля та корпоративи. Ексклюзивні дизайни, натуральні інгредієнти, доставка від Antreme."
+            />
 
             {/* Page Hero */}
             <div className="pt-10 pb-6 md:pt-14 md:pb-8 text-center flex flex-col items-center">
