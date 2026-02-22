@@ -199,12 +199,12 @@ function CakeList() {
         "@type": "ListItem",
         "position": 1,
         "name": "Головна",
-        "item": "https://antreme.kiev.ua/"
+        "item": "https://antreme.kyiv.ua/"
     }, {
         "@type": "ListItem",
         "position": 2,
         "name": "Каталог",
-        "item": "https://antreme.kiev.ua/cakes"
+        "item": "https://antreme.kyiv.ua/cakes"
     }];
 
     if (category) {
@@ -212,7 +212,7 @@ function CakeList() {
             "@type": "ListItem",
             "position": 3,
             "name": getCategoryTitle(),
-            "item": `https://antreme.kiev.ua/cakes?category=${category}`
+            "item": `https://antreme.kyiv.ua/cakes?category=${category}`
         });
     }
 

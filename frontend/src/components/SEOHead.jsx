@@ -7,7 +7,7 @@ import api from '../api';
 export default function SEOHead({ title, description, keywords, h1, canonical, ogImage, type = 'website', schema, robots }) {
     const location = useLocation();
     const [seoData, setSeoData] = useState(null);
-    const domain = 'https://antreme.kiev.ua';
+    const domain = 'https://antreme.kyiv.ua';
 
     // Fetch SEO data from backend if not provided via props (for static pages)
     useEffect(() => {

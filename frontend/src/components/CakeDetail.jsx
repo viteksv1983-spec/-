@@ -109,14 +109,14 @@ function CakeDetail() {
         "@context": "https://schema.org/",
         "@type": "Product",
         "name": cake.name,
-        "image": cake.image_url ? (cake.image_url.startsWith('http') ? cake.image_url : `https://antreme.kiev.ua${cake.image_url}`) : undefined,
+        "image": cake.image_url ? (cake.image_url.startsWith('http') ? cake.image_url : `https://antreme.kyiv.ua${cake.image_url}`) : undefined,
         "description": cake.description,
         "offers": {
             "@type": "Offer",
             "priceCurrency": "UAH",
             "price": cake.price,
             "availability": "https://schema.org/InStock",
-            "url": `https://antreme.kiev.ua/cakes/${cake.id}`
+            "url": `https://antreme.kyiv.ua/cakes/${cake.id}`
         }
     };
 
@@ -127,12 +127,12 @@ function CakeDetail() {
             "@type": "ListItem",
             "position": 1,
             "name": "Головна",
-            "item": "https://antreme.kiev.ua/"
+            "item": "https://antreme.kyiv.ua/"
         }, {
             "@type": "ListItem",
             "position": 2,
             "name": "Каталог",
-            "item": "https://antreme.kiev.ua/cakes"
+            "item": "https://antreme.kyiv.ua/cakes"
         }, {
             "@type": "ListItem",
             "position": 3,

@@ -51,7 +51,7 @@ async def sitemap(db: Session = Depends(get_db)):
     cakes = db.query(models.Cake).all()
     categories = ['bento', 'biscuit', 'wedding', 'mousse', 'cupcakes', 'gingerbread']
     
-    base_url = "https://antreme.kiev.ua"
+    base_url = "https://antreme.kyiv.ua"
     
     xml_content = '<?xml version="1.0" encoding="UTF-8"?>\n'
     xml_content += '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
@@ -92,7 +92,7 @@ Disallow: /admin/
 Disallow: /cart/
 Disallow: /api/
 
-Sitemap: https://antreme.kiev.ua/sitemap.xml
+Sitemap: https://antreme.kyiv.ua/sitemap.xml
 """
     return Response(content=content, media_type="text/plain")
 

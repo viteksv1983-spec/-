@@ -125,8 +125,8 @@ function Home() {
         "@context": "https://schema.org",
         "@type": ["LocalBusiness", "Bakery"],
         "name": "Кондитерська майстерня Antreme",
-        "image": "https://antreme.kiev.ua/og-image.jpg",
-        "url": "https://antreme.kiev.ua/",
+        "image": "https://antreme.kyiv.ua/og-image.jpg",
+        "url": "https://antreme.kyiv.ua/",
         "telephone": "+380979081504",
         "priceRange": "₴₴",
         "address": {
