@@ -10,7 +10,7 @@ import { categorySeoData } from './src/constants/categorySeo.js';
 
 const distDir = path.join(__dirname, 'dist');
 if (!fs.existsSync(distDir)) {
-    console.error('dist directory not found. Run npm run build first.');
+    console.error('Directory "dist" not found. Run "vite build" first.');
     process.exit(1);
 }
 
@@ -25,6 +25,11 @@ const routes = [
         path: '/',
         title: 'Торти на замовлення Київ | Antreme – Кондитерська майстерня',
         description: 'Авторські торти на замовлення у Києві від кондитерської Antreme. Готуємо з 100% натуральних інгредієнтів: весільні, бенто-торти, дитячі. Доставка по Києву.'
+    },
+    {
+        path: '/cakes',
+        title: 'Каталог тортів | Antreme',
+        description: 'Повний каталог тортів на замовлення в Києві.'
     },
     {
         path: '/delivery',
@@ -53,7 +58,7 @@ const routes = [
     }
 ];
 
-// Add category routes
+// Add category routes dynamically
 for (const key in categorySeoData) {
     const cat = categorySeoData[key];
     routes.push({
@@ -63,43 +68,46 @@ for (const key in categorySeoData) {
     });
 }
 
-console.log(`Generating ${routes.length} SEO static pages...`);
+console.log(`Starting SSG injection for ${routes.length} pages...`);
 
 routes.forEach(route => {
-    const folderPath = path.join(distDir, route.path === '/' ? '' : route.path);
+    // Determine path
+    const relativePath = route.path === '/' ? '' : route.path.replace(/^\//, '');
+    const folderPath = path.join(distDir, relativePath);
 
-    // Create folders if they don't exist
+    // Create subfolder if needed
     if (route.path !== '/') {
         fs.mkdirSync(folderPath, { recursive: true });
     }
 
     const fullUrl = `${domain}${route.path === '/' ? '' : route.path}`;
 
-    // Inject SEO tags
-    let html = baseHtml;
+    // 1. Remove existing <title> and any existing meta description to avoid duplicates
+    let html = baseHtml.replace(/<title>[\s\S]*?<\/title>/gi, '');
+    html = html.replace(/<meta[^>]*name="description"[^>]*>/gi, '');
 
-    // Replace title (using [\s\S]*? to match across newlines)
-    html = html.replace(
-        /<title>[\s\S]*?<\/title>/,
-        `<title>${route.title}</title>`
-    );
-
-    // Provide default description insertion if not exists, else create it
+    // 2. Prepare our new meta tags block
     const metaTags = `
-  <meta name="description" content="${route.description}" />
-  <link rel="canonical" href="${fullUrl}" />
-  <meta property="og:title" content="${route.title}" />
-  <meta property="og:description" content="${route.description}" />
-  <meta property="og:url" content="${fullUrl}" />
-  <meta name="twitter:title" content="${route.title}" />
-  <meta name="twitter:description" content="${route.description}" />\n</head>`;
+    <title>${route.title}</title>
+    <meta name="description" content="${route.description}" />
+    <link rel="canonical" href="${fullUrl}" />
+    <meta property="og:title" content="${route.title}" />
+    <meta property="og:description" content="${route.description}" />
+    <meta property="og:url" content="${fullUrl}" />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="${route.title}" />
+    <meta name="twitter:description" content="${route.description}" />
+</head>`;
 
-    // Inject right before </head> instead of <head>
-    html = html.replace('</head>', metaTags);
+    // 3. Inject exactly before the closing </head> tag
+    html = html.replace(/<\/head>/i, metaTags);
 
+    // 4. Write modified HTML
     const filePath = path.join(folderPath, 'index.html');
-    fs.writeFileSync(filePath, html);
-    console.log(`Generated HTML for ${route.path}`);
+    fs.writeFileSync(filePath, html, 'utf-8');
+
+    console.log(`✅ Injected SEO for: ${route.path === '/' ? 'Root (Homepage)' : route.path}`);
 });
 
-console.log('Static pages generated successfully!');
+console.log('🎉 SSG SEO Injection complete!');
