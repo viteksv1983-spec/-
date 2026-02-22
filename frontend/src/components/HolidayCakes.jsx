@@ -1,3 +1,4 @@
+import { getCategoryUrl } from '../utils/urls';
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import api from '../api';
@@ -77,7 +78,7 @@ function HolidayCakes() {
                     {categories.map((cat, index) => (
                         <Link
                             key={index}
-                            to={`/cakes?category=${cat.slug}`}
+                            to={getCategoryUrl(cat.slug)}
                             className="group bg-white rounded-3xl overflow-hidden flex flex-col items-center transition-all duration-300 hover:shadow-xl hover:-translate-y-1"
                         >
                             {/* Image */}
@@ -122,7 +123,7 @@ function HolidayCakes() {
                         {CATEGORIES.map((cat, i) => (
                             <React.Fragment key={cat.slug}>
                                 <Link
-                                    to={`/cakes?category=${cat.slug}`}
+                                    to={getCategoryUrl(cat.slug)}
                                     className="text-gray-500 hover:text-vatsak-red font-semibold text-xs md:text-sm transition-colors underline decoration-gray-300 underline-offset-4 hover:decoration-vatsak-red"
                                 >
                                     {cat.name}

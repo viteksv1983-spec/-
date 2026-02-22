@@ -66,13 +66,23 @@ async def sitemap(db: Session = Depends(get_db)):
   </url>\n'''
     
     # 2. Categories
+    category_slugs = {
+        'bento': 'bento-torty',
+        'biscuit': 'biskvitni-torty',
+        'mousse': 'musovi-torty',
+        'wedding': 'vesilni-torty',
+        'cupcakes': 'kapkeyki',
+        'gingerbread': 'imbirni-pryaniki'
+    }
     for cat in categories:
+        slug = category_slugs.get(cat)
+        url_path = f"/{slug}" if slug else f"/cakes?category={cat}"
         xml_content += f'''  <url>
-    <loc>{base_url}/cakes?category={cat}</loc>
+    <loc>{base_url}{url_path}</loc>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>\n'''
-  
+
     # 3. Products
     for cake in cakes:
         xml_content += f'''  <url>

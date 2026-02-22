@@ -45,6 +45,15 @@ function App() {
             <Route element={<PublicLayout />}>
               <Route path="/" element={<Home />} />
               <Route path="/cakes" element={<CakeList />} />
+
+              {/* SEO Category Routes */}
+              <Route path="/bento-torty" element={<CakeList predefinedCategory="bento" predefinedSlug="bento-torty" />} />
+              <Route path="/biskvitni-torty" element={<CakeList predefinedCategory="biscuit" predefinedSlug="biskvitni-torty" />} />
+              <Route path="/musovi-torty" element={<CakeList predefinedCategory="mousse" predefinedSlug="musovi-torty" />} />
+              <Route path="/vesilni-torty" element={<CakeList predefinedCategory="wedding" predefinedSlug="vesilni-torty" />} />
+              <Route path="/kapkeyki" element={<CakeList predefinedCategory="cupcakes" predefinedSlug="kapkeyki" />} />
+              <Route path="/imbirni-pryaniki" element={<CakeList predefinedCategory="gingerbread" predefinedSlug="imbirni-pryaniki" />} />
+
               <Route path="/cakes/:id" element={<CakeDetail />} />
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />

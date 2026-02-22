@@ -1,9 +1,11 @@
 import React from 'react';
 import { FaHeart, FaStar, FaAward } from 'react-icons/fa';
+import SEOHead from './SEOHead';
 
 function About() {
     return (
         <div className="min-h-screen" style={{ background: 'linear-gradient(160deg, #1a0010 0%, #2d0018 40%, #1a0010 100%)' }}>
+            <SEOHead title="Про нас | Кондитерська Antreme Київ" />
 
             {/* Hero Section */}
             <header className="relative h-[65vh] flex items-center justify-center overflow-hidden">

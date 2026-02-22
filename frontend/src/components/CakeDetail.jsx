@@ -1,3 +1,4 @@
+import { getCategoryUrl } from '../utils/urls';
 import React, { useEffect, useState, useContext, useRef } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import api from '../api';
@@ -683,7 +684,7 @@ function CategoriesStrip({ currentCategory }) {
                 {mainCategories.map(cat => (
                     <Link
                         key={cat.slug}
-                        to={`/cakes?category=${cat.slug}`}
+                        to={getCategoryUrl(cat.slug)}
                         className={`shrink-0 flex items-center gap-1.5 md:gap-2 h-9 md:h-10 px-3.5 md:px-5 rounded-full text-[10px] md:text-xs font-bold uppercase tracking-wider transition-all border-2 active:scale-95 ${currentCategory === cat.slug
                             ? 'bg-[#7A0019] border-[#7A0019] text-white shadow-md'
                             : 'bg-white border-gray-200 text-gray-600 hover:border-[#E8C064] hover:text-[#7A0019]'

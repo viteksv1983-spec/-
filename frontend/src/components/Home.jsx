@@ -1,3 +1,4 @@
+import { getCategoryUrl } from '../utils/urls';
 import React, { useEffect, useState, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import api from '../api';
@@ -168,7 +169,7 @@ function Home() {
     return (
         <div className="min-h-screen bg-[#FDFBF7]">
             <SEOHead
-                title="Торти на замовлення Київ | Купити авторський торт з доставкою – Antreme"
+                title="Торти на замовлення Київ | Antreme"
                 description="Авторські торти на замовлення у Києві від кондитерської Antreme. Готуємо з 100% натуральних інгредієнтів: весільні, дитячі, корпоративні десерти з адресною доставкою."
                 canonical="/"
                 ogImage="/og-image.jpg"
@@ -325,7 +326,7 @@ function Home() {
                                     <p className="text-gray-500 mb-4 text-[11px] md:text-[13px] font-medium leading-snug whitespace-pre-line">
                                         {desc}
                                     </p>
-                                    <Link to={`/cakes?category=${cat.slug}`} className="inline-block bg-white text-gray-800 border border-gray-200 px-5 py-2 font-black uppercase text-[10px] md:text-[11px] tracking-[0.15em] transition-all shadow-sm hover:shadow-md hover:bg-gray-900 hover:text-white rounded-full">
+                                    <Link to={getCategoryUrl(cat.slug)} className="inline-block bg-white text-gray-800 border border-gray-200 px-5 py-2 font-black uppercase text-[10px] md:text-[11px] tracking-[0.15em] transition-all shadow-sm hover:shadow-md hover:bg-gray-900 hover:text-white rounded-full">
                                         ПЕРЕГЛЯНУТИ
                                     </Link>
                                 </div>

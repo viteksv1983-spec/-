@@ -5,8 +5,10 @@ import { CartContext } from '../context/CartContext';
 import { FILLINGS } from '../constants/fillings';
 import QuickOrderModal from './QuickOrderModal';
 import SEOHead from './SEOHead';
+import { categorySeoData } from '../constants/categorySeo';
+import { marked } from 'marked';
 
-function CakeList() {
+function CakeList({ predefinedCategory, predefinedSlug }) {
     const [cakes, setCakes] = useState([]);
     const [loading, setLoading] = useState(true);
     const [isQuickOrderOpen, setIsQuickOrderOpen] = useState(false);
@@ -16,8 +18,12 @@ function CakeList() {
     });
     const { addToCart } = useContext(CartContext);
     const [searchParams] = useSearchParams();
-    const category = searchParams.get('category');
+    const categoryQuery = searchParams.get('category');
+    const category = predefinedCategory || categoryQuery;
     const searchQuery = searchParams.get('search');
+
+    // Retrieve SEO Data if available
+    const seoData = category ? categorySeoData[category] : null;
 
     // ===== FILTER & SORT STATE =====
     const [sortBy, setSortBy] = useState('popular');
@@ -88,6 +94,7 @@ function CakeList() {
 
     const getCategoryTitle = () => {
         if (searchQuery) return 'ПОШУК ТОРТІВ';
+        if (seoData && seoData.h1) return seoData.h1;
         if (!category) return 'ВСЯ КОЛЕКЦІЯ';
         return categoryLabels[category]?.toUpperCase() || 'ПРОДУКЦІЯ';
     };
@@ -234,13 +241,16 @@ function CakeList() {
 
     const schemaData = [breadcrumbSchema, itemListSchema];
 
-    const canonicalUrl = category ? `/cakes?category=${category}` : '/cakes';
+    const canonicalUrl = predefinedSlug ? `/${predefinedSlug}` : (category ? `/cakes?category=${category}` : '/cakes');
+
+    const metaTitle = seoData ? seoData.title : `${getCategoryTitle()} | Купити торти в Києві – Antreme`;
+    const metaDesc = seoData ? seoData.description : `Шукаєте ${getCategoryTitle().toLowerCase()}? В кондитерській Antreme величезний вибір свіжих десертів з натуральних інгредієнтів. Адресна доставка по Києву.`;
 
     return (
         <div className="min-h-screen bg-white">
             <SEOHead
-                title={`${getCategoryTitle()} | Купити торти в Києві – Antreme`}
-                description={`Шукаєте ${getCategoryTitle().toLowerCase()}? В кондитерській Antreme величезний вибір свіжих десертів з натуральних інгредієнтів. Адресна доставка по Києву.`}
+                title={metaTitle}
+                description={metaDesc}
                 canonical={canonicalUrl}
                 schema={schemaData}
             />
@@ -432,6 +442,16 @@ function CakeList() {
                     </div>
                 )}
             </div>
+
+            {/* ===== CATEGORY SEO TEXT ===== */}
+            {seoData && seoData.seoText && (
+                <div className="max-w-4xl mx-auto px-4 md:px-8 py-12 md:py-16">
+                    <div
+                        className="prose prose-sm md:prose-base prose-stone max-w-none prose-headings:text-[#7A0019] prose-h2:text-2xl md:prose-h2:text-3xl prose-h2:font-black prose-h2:uppercase prose-h2:tracking-tight prose-h2:mt-12 prose-h2:mb-6 prose-p:text-gray-600 prose-p:leading-relaxed prose-li:text-gray-600 prose-strong:text-gray-900 prose-strong:font-bold prose-ul:list-disc prose-ol:list-decimal"
+                        dangerouslySetInnerHTML={{ __html: marked.parse(seoData.seoText) }}
+                    />
+                </div>
+            )}
 
             {/* ===== FILTER BOTTOM SHEET (OVERLAY) ===== */}
             {isFilterOpen && (

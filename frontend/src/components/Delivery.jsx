@@ -1,9 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import SEOHead from './SEOHead';
 
 function Delivery() {
     return (
         <div className="min-h-screen bg-[#FDFBF7]">
+            <SEOHead title="Доставка тортів по Києву | Antreme" />
 
             {/* Hero Banner */}
             <div className="relative overflow-hidden py-16 md:py-24 text-center">

@@ -40,7 +40,7 @@ export default function SEOHead({ title, description, keywords, h1, canonical, o
 
     // Construct canonical
     const pathForCanonical = canonical || location.pathname;
-    const effectiveCanonical = pathForCanonical.startsWith('http') ? pathForCanonical : `${domain}${pathForCanonical === '/' ? '' : pathForCanonical}`;
+    const currentFullUrl = pathForCanonical.startsWith('http') ? pathForCanonical : `${domain}${pathForCanonical === '/' ? '' : pathForCanonical}`;
 
     const imagePath = ogImage || data.og_image || '/og-image.jpg';
     const effectiveOgImage = imagePath.startsWith('http') ? imagePath : `${domain}${imagePath}`;
@@ -52,7 +52,7 @@ export default function SEOHead({ title, description, keywords, h1, canonical, o
             <title>{effectiveTitle}</title>
             <meta name="description" content={effectiveDesc} />
             <meta name="keywords" content={effectiveKeywords} />
-            <link rel="canonical" href={effectiveCanonical} />
+            <link rel="canonical" href={currentFullUrl} />
             <meta name="robots" content={effectiveRobots} />
 
             {/* Open Graph */}
@@ -60,7 +60,7 @@ export default function SEOHead({ title, description, keywords, h1, canonical, o
             <meta property="og:title" content={effectiveTitle} />
             <meta property="og:description" content={effectiveDesc} />
             <meta property="og:image" content={effectiveOgImage} />
-            <meta property="og:url" content={effectiveCanonical} />
+            <meta property="og:url" content={currentFullUrl} />
             <meta property="og:site_name" content="Antreme – Кондитерська майстерня" />
 
             {/* Twitter Cards */}
