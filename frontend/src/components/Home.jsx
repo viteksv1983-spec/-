@@ -13,6 +13,7 @@ import mousseImg from '../assets/category-mousse.png';
 
 import { CATEGORIES } from '../constants/categories';
 import { FILLINGS } from '../constants/fillings';
+import SEOHead from './SEOHead';
 
 const blockStyles = [
     { bg: 'bg-[#FFF0F5]', border: 'border-pink-100', shadow: 'shadow-[0_8px_30px_rgba(160,21,62,0.06)] hover:shadow-[0_15px_40px_rgba(160,21,62,0.12)]' },
@@ -120,8 +121,59 @@ function Home() {
         setTimeout(() => setIsVisible(true), 100);
     }, []);
 
+    const homeSchema = {
+        "@context": "https://schema.org",
+        "@type": ["LocalBusiness", "Bakery"],
+        "name": "Кондитерська майстерня Antreme",
+        "image": "https://antreme.kiev.ua/og-image.jpg",
+        "url": "https://antreme.kiev.ua/",
+        "telephone": "+380979081504",
+        "priceRange": "₴₴",
+        "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Київ",
+            "addressRegion": "Київська область",
+            "addressCountry": "UA"
+        },
+        "openingHoursSpecification": {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+            "opens": "09:00",
+            "closes": "20:00"
+        }
+    };
+
+    const faqSchema = {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [{
+            "@type": "Question",
+            "name": "Скільки коштує доставка торта по Києву?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Доставка розраховується за тарифами таксі (Uklon/Bolt) від нашої кондитерської до вашої адреси."
+            }
+        }, {
+            "@type": "Question",
+            "name": "За скільки днів потрібно робити замовлення?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Бажано оформлювати замовлення за 2-3 дні до потрібної дати, але ми також приймаємо термінові замовлення."
+            }
+        }]
+    };
+
+    const combinedSchema = [homeSchema, faqSchema];
+
     return (
         <div className="min-h-screen bg-[#FDFBF7]">
+            <SEOHead
+                title="Торти на замовлення Київ | Купити 🎂 авторський торт з доставкою – Antreme"
+                description="Хочете замовити торт у Києві? 🍰 Ексклюзивні авторські торти від кондитерської Antreme: на весілля, день народження, корпоратив. 100% натурально! Швидка доставка. ☎ Замовляйте зараз!"
+                canonical="/"
+                ogImage="/og-image.jpg"
+                schema={combinedSchema}
+            />
             {/* ====== HERO SECTION ====== */}
             <div className="w-full pt-2 md:pt-4 mb-4 md:mb-6 px-4 md:px-10">
                 <section
@@ -454,6 +506,7 @@ function Home() {
                                                         src={cake.image_url.startsWith('http') ? cake.image_url : `${api.defaults.baseURL}${cake.image_url}`}
                                                         alt={cake.name}
                                                         className="w-full h-full object-contain drop-shadow-lg transform group-hover:scale-105 transition-transform duration-500"
+                                                        loading="lazy"
                                                     />
                                                 )}
                                             </div>
@@ -517,6 +570,38 @@ function Home() {
                             <div className="text-gray-500 font-medium tracking-wider text-sm animate-pulse uppercase">Завантаження шедеврів...</div>
                         </div>
                     )}
+                </div>
+            </div>
+
+            {/* ===== PROCESS SECTION (How to Order) ===== */}
+            <div className="py-16 md:py-24 max-w-7xl mx-auto px-4 md:px-10">
+                <div className="text-center mb-12 md:mb-16">
+                    <h2 className="text-3xl md:text-5xl font-black text-gray-900 uppercase tracking-tight mb-4" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                        Як зробити <span className="text-[#E8C064]">замовлення</span>?
+                    </h2>
+                    <p className="text-gray-500 font-medium italic max-w-xl mx-auto" style={{ fontFamily: "'Dancing Script', cursive" }}>
+                        Всього 4 прості кроки до ідеального свята
+                    </p>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-4 gap-8 relative">
+                    {/* Connecting line for desktop */}
+                    <div className="hidden md:block absolute top-[45px] left-[10%] right-[10%] h-[2px] bg-gradient-to-r from-[#E8C064] via-gray-200 to-[#E8C064] z-0"></div>
+
+                    {[
+                        { step: '01', title: 'Оберіть дизайн', desc: 'Перегляньте каталог або надішліть нам своє фото для натхнення.' },
+                        { step: '02', title: 'Виберіть начинку', desc: 'Більше 15 авторських смаків: від класики до екзотики.' },
+                        { step: '03', title: 'Деталі та Оплата', desc: 'Узгоджуємо вагу, дату доставки та вносимо передплату.' },
+                        { step: '04', title: 'Насолоджуйтесь!', desc: 'Отримуєте свій ідеальний торт точно у визначений час.' }
+                    ].map((item, i) => (
+                        <div key={i} className="relative z-10 flex flex-col items-center text-center group">
+                            <div className="w-24 h-24 rounded-full bg-white border-4 border-[#FDFBF7] shadow-xl flex items-center justify-center mb-6 group-hover:-translate-y-2 transition-transform duration-300">
+                                <span className="text-3xl font-black text-[#7A0019]" style={{ fontFamily: "'Oswald', sans-serif" }}>{item.step}</span>
+                            </div>
+                            <h3 className="text-lg font-bold text-gray-900 mb-2">{item.title}</h3>
+                            <p className="text-sm text-gray-500 max-w-[200px]">{item.desc}</p>
+                        </div>
+                    ))}
                 </div>
             </div>
 
@@ -733,6 +818,45 @@ function Home() {
                             Всі відгуки
                             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" /></svg>
                         </Link>
+                    </div>
+                </div>
+            </div>
+            {/* ====== SEO & FAQ SECTION ====== */}
+            <div className="max-w-7xl mx-auto px-4 md:px-10 py-16">
+                <div className="bg-white rounded-3xl p-8 md:p-12 shadow-[0_8px_30px_rgba(0,0,0,0.04)] border border-gray-100 mb-12">
+                    <h2 className="text-2xl md:text-3xl font-black text-gray-900 mb-6 uppercase tracking-tight" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                        Ексклюзивні торти на замовлення в Києві від кондитерської майстерні Antreme
+                    </h2>
+                    <div className="prose prose-sm md:prose-base max-w-none text-gray-600 space-y-4">
+                        <p>Кондитерська майстерня <strong>Antreme</strong> пропонує вам зануритися у світ справжнього смаку та естетики. Ми створюємо авторські торти на замовлення у Києві для будь-якого вашого свята: від камерних днів народження до масштабних весіль та корпоративних івентів.</p>
+
+                        <h3 className="text-xl font-bold text-gray-900 mt-8 mb-4">Які авторські торти ви можете замовити у нас?</h3>
+                        <p>Наш асортимент включає найпопулярніші десерти, створені з любов'ю та увагою до кожної деталі:</p>
+                        <ul className="list-disc pl-5 mt-2 space-y-2">
+                            <li><strong>Бенто-тортики:</strong> ідеальний солодкий сюрприз на 1-2 персони.</li>
+                            <li><strong>Бісквітні десерти:</strong> класика, яку обожнюють всі, з різноманітними кремами та ягідними прошарками.</li>
+                            <li><strong>Мусові торти:</strong> легкі, сучасні, з вишуканим глянцевим покриттям або велюром.</li>
+                            <li><strong>Весільні торти:</strong> багатоярусні шедеври, які стануть головною окрасою вашого свята.</li>
+                        </ul>
+                        <p className="mt-6 text-sm italic opacity-70">
+                            [ТУТ БУДЕ РОЗМІЩЕНО ПОВНИЙ SEO-ТЕКСТ НА 1200-1500 СЛІВ ПІСЛЯ НАПИСАННЯ КОПІРАЙТЕРОМ...]
+                        </p>
+                    </div>
+                </div>
+
+                <div className="max-w-4xl mx-auto">
+                    <h3 className="text-2xl font-black text-center text-gray-900 mb-8 uppercase tracking-wide" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                        Поширені запитання
+                    </h3>
+                    <div className="space-y-4">
+                        <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
+                            <h4 className="font-bold text-gray-900 mb-2">Скільки коштує доставка торта по Києву?</h4>
+                            <p className="text-gray-600 text-sm">Доставка розраховується за тарифами таксі (Uklon/Bolt) від нашої кондитерської до вашої адреси. Ми надійно запаковуємо торти, щоб вони доїхали в ідеальному стані.</p>
+                        </div>
+                        <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
+                            <h4 className="font-bold text-gray-900 mb-2">За скільки днів потрібно робити замовлення?</h4>
+                            <p className="text-gray-600 text-sm">Бажано оформлювати замовлення за 2-3 дні до потрібної дати, щоб ми встигли підготувати ідеальний декор та свіжі інгредієнти. Але ми також приймаємо термінові замовлення за можливості.</p>
+                        </div>
                     </div>
                 </div>
             </div>

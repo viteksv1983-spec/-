@@ -4,9 +4,10 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import api from '../api';
 
-export default function SEOHead({ title, description, keywords, h1, canonical, ogImage, type = 'website' }) {
+export default function SEOHead({ title, description, keywords, h1, canonical, ogImage, type = 'website', schema }) {
     const location = useLocation();
     const [seoData, setSeoData] = useState(null);
+    const domain = 'https://antreme.kiev.ua';
 
     // Fetch SEO data from backend if not provided via props (for static pages)
     useEffect(() => {
@@ -35,8 +36,15 @@ export default function SEOHead({ title, description, keywords, h1, canonical, o
     const effectiveTitle = title || data.meta_title || 'Antreme - Торти на замовлення';
     const effectiveDesc = description || data.meta_description || 'Найсмачніші торти на замовлення у Києві. Лише натуральні інгредієнти.';
     const effectiveKeywords = keywords || data.meta_keywords || 'торти, київ, замовлення, десерти';
-    const effectiveCanonical = canonical || data.canonical_url || window.location.href;
-    const effectiveOgImage = ogImage || data.og_image || '/og-image.jpg'; // TODO: Add default OG image
+
+    // Construct canonical
+    const pathForCanonical = canonical || location.pathname;
+    const effectiveCanonical = pathForCanonical.startsWith('http') ? pathForCanonical : `${domain}${pathForCanonical === '/' ? '' : pathForCanonical}`;
+
+    const imagePath = ogImage || data.og_image || '/og-image.jpg';
+    const effectiveOgImage = imagePath.startsWith('http') ? imagePath : `${domain}${imagePath}`;
+
+    const effectiveSchema = schema || data.schema_json;
 
     return (
         <Helmet>
@@ -50,12 +58,13 @@ export default function SEOHead({ title, description, keywords, h1, canonical, o
             <meta property="og:title" content={effectiveTitle} />
             <meta property="og:description" content={effectiveDesc} />
             <meta property="og:image" content={effectiveOgImage} />
-            <meta property="og:url" content={window.location.href} />
+            <meta property="og:url" content={effectiveCanonical} />
+            <meta property="og:site_name" content="Antreme – Кондитерська майстерня" />
 
             {/* Schema.org */}
-            {data.schema_json && (
+            {effectiveSchema && (
                 <script type="application/ld+json">
-                    {data.schema_json}
+                    {typeof effectiveSchema === 'string' ? effectiveSchema : JSON.stringify(effectiveSchema)}
                 </script>
             )}
 

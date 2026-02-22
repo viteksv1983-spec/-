@@ -5,7 +5,7 @@ import os
 # Fix definitions for deployment: Add project root to path
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from fastapi import FastAPI, Depends, HTTPException, File, UploadFile
+from fastapi import FastAPI, Depends, HTTPException, File, UploadFile, Response
 from fastapi.staticfiles import StaticFiles
 import uuid
 import shutil
@@ -45,6 +45,57 @@ async def health_check(db: Session = Depends(get_db)):
         "cakes_count": cakes_count,
         "pages_count": pages_count
     }
+
+@app.get("/sitemap.xml", response_class=Response)
+async def sitemap(db: Session = Depends(get_db)):
+    cakes = db.query(models.Cake).all()
+    categories = ['bento', 'biscuit', 'wedding', 'mousse', 'cupcakes', 'gingerbread']
+    
+    base_url = "https://antreme.kiev.ua"
+    
+    xml_content = '<?xml version="1.0" encoding="UTF-8"?>\n'
+    xml_content += '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+    
+    # 1. Homepage & Static Pages
+    static_urls = ['/', '/cakes', '/delivery', '/fillings', '/about', '/reviews', '/holiday']
+    for url in static_urls:
+        xml_content += f'''  <url>
+    <loc>{base_url}{url}</loc>
+    <changefreq>weekly</changefreq>
+    <priority>{1.0 if url == '/' else 0.8}</priority>
+  </url>\n'''
+    
+    # 2. Categories
+    for cat in categories:
+        xml_content += f'''  <url>
+    <loc>{base_url}/cakes?category={cat}</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>\n'''
+  
+    # 3. Products
+    for cake in cakes:
+        xml_content += f'''  <url>
+    <loc>{base_url}/cakes/{cake.id}</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>\n'''
+
+    xml_content += '</urlset>'
+    return Response(content=xml_content, media_type="application/xml")
+
+@app.get("/robots.txt", response_class=Response)
+async def robots():
+    content = """User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /cart/
+Disallow: /api/
+
+Sitemap: https://antreme.kiev.ua/sitemap.xml
+"""
+    return Response(content=content, media_type="text/plain")
+
 
 # CORS setup to allow frontend connection
 # For production, you might want to restrict this to your specific frontend domain.

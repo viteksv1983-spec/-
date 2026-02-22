@@ -105,19 +105,42 @@ function CakeDetail() {
     const pricePerKg = cake.price / baseWeightKg;
     const displayPrice = Math.round(pricePerKg * selectedWeight);
 
-    const schemaData = {
+    const productSchema = {
         "@context": "https://schema.org/",
         "@type": "Product",
         "name": cake.name,
-        "image": cake.image_url,
+        "image": cake.image_url ? (cake.image_url.startsWith('http') ? cake.image_url : `https://antreme.kiev.ua${cake.image_url}`) : undefined,
         "description": cake.description,
         "offers": {
             "@type": "Offer",
             "priceCurrency": "UAH",
             "price": cake.price,
-            "availability": "https://schema.org/InStock"
+            "availability": "https://schema.org/InStock",
+            "url": `https://antreme.kiev.ua/cakes/${cake.id}`
         }
     };
+
+    const breadcrumbSchema = {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [{
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Головна",
+            "item": "https://antreme.kiev.ua/"
+        }, {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Каталог",
+            "item": "https://antreme.kiev.ua/cakes"
+        }, {
+            "@type": "ListItem",
+            "position": 3,
+            "name": cake.name
+        }]
+    };
+
+    const schemaData = [productSchema, breadcrumbSchema];
 
     const weightOptions = [
         { value: 0.5, label: '0.5 кг (2-3 порції)' },
@@ -136,15 +159,11 @@ function CakeDetail() {
                 description={cake.meta_description || `Замовити торт ${cake.name}. ${cake.description?.slice(0, 100)}...`}
                 keywords={cake.meta_keywords}
                 h1={cake.h1_heading || cake.name}
-                canonical={cake.canonical_url}
+                canonical={cake.canonical_url || `/cakes/${cake.id}`}
                 ogImage={cake.image_url}
                 type="product"
+                schema={schemaData}
             />
-            <Helmet>
-                <script type="application/ld+json">
-                    {JSON.stringify(schemaData)}
-                </script>
-            </Helmet>
 
             {/* Breadcrumb */}
             <div className="bg-white border-b border-gray-100 sticky top-0 z-40">

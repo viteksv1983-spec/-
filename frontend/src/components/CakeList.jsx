@@ -4,6 +4,7 @@ import api from '../api';
 import { CartContext } from '../context/CartContext';
 import { FILLINGS } from '../constants/fillings';
 import QuickOrderModal from './QuickOrderModal';
+import SEOHead from './SEOHead';
 
 function CakeList() {
     const [cakes, setCakes] = useState([]);
@@ -194,8 +195,43 @@ function CakeList() {
         { key: 'large', label: '2+ кг', icon: '🎂' },
     ];
 
+    const breadcrumbs = [{
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Головна",
+        "item": "https://antreme.kiev.ua/"
+    }, {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Каталог",
+        "item": "https://antreme.kiev.ua/cakes"
+    }];
+
+    if (category) {
+        breadcrumbs.push({
+            "@type": "ListItem",
+            "position": 3,
+            "name": getCategoryTitle(),
+            "item": `https://antreme.kiev.ua/cakes?category=${category}`
+        });
+    }
+
+    const schemaData = {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": breadcrumbs
+    };
+
+    const canonicalUrl = category ? `/cakes?category=${category}` : '/cakes';
+
     return (
         <div className="min-h-screen bg-white">
+            <SEOHead
+                title={`${getCategoryTitle()} | Купити торти в Києві – Antreme`}
+                description={`Шукаєте ${getCategoryTitle().toLowerCase()}? В кондитерській Antreme величезний вибір свіжих десертів. Швидка доставка по Києву. Замовляйте онлайн!`}
+                canonical={canonicalUrl}
+                schema={schemaData}
+            />
             {/* Page Header */}
             <div className="bg-white pt-6 md:pt-12 pb-4 md:pb-8 px-4 md:px-8">
                 <div className="max-w-7xl mx-auto text-center">
@@ -321,6 +357,7 @@ function CakeList() {
                                                         src={cake.image_url.startsWith('http') ? cake.image_url : `${api.defaults.baseURL}${cake.image_url}`}
                                                         alt={cake.name}
                                                         className="w-full h-full object-contain drop-shadow-md group-hover:scale-105 transition-transform duration-500"
+                                                        loading="lazy"
                                                     />
                                                 )}
                                             </Link>

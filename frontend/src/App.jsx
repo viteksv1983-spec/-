@@ -24,6 +24,7 @@ import Reviews from './components/Reviews';
 import ScrollToTop from './components/ScrollToTop';
 import HolidayCakes from './components/HolidayCakes';
 import Blog from './components/Blog';
+import DistrictPage from './components/DistrictPage';
 
 // Admin Components
 import Orders from './components/admin/Orders';
@@ -57,6 +58,7 @@ function App() {
               <Route path="/gallery/video" element={<GalleryVideo />} />
               <Route path="/reviews" element={<Reviews />} />
               <Route path="/blog" element={<Blog />} />
+              <Route path="/districts/:district" element={<DistrictPage />} />
             </Route>
 
             <Route element={<ProtectedRoute />}>
