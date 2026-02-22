@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import https from 'https';
+import axios from 'axios';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -40,23 +40,13 @@ const staticRoutes = [
 ];
 
 async function fetchCakes() {
-    return new Promise((resolve, reject) => {
-        https.get(API_URL, (res) => {
-            let data = '';
-            res.on('data', (chunk) => {
-                data += chunk;
-            });
-            res.on('end', () => {
-                try {
-                    resolve(JSON.parse(data));
-                } catch (e) {
-                    reject(e);
-                }
-            });
-        }).on('error', (e) => {
-            reject(e);
-        });
-    });
+    try {
+        const response = await axios.get(API_URL, { timeout: 10000 });
+        return response.data;
+    } catch (error) {
+        console.error("Error fetching cakes:", error.message);
+        return []; // return empty array if backend is down so build doesn't crash completely
+    }
 }
 
 async function generateSitemap() {
