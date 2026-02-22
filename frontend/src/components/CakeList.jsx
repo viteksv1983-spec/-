@@ -216,11 +216,23 @@ function CakeList() {
         });
     }
 
-    const schemaData = {
+    const breadcrumbSchema = {
         "@context": "https://schema.org",
         "@type": "BreadcrumbList",
         "itemListElement": breadcrumbs
     };
+
+    const itemListSchema = {
+        "@context": "https://schema.org",
+        "@type": "ItemList",
+        "itemListElement": processedCakes.map((cake, index) => ({
+            "@type": "ListItem",
+            "position": index + 1,
+            "url": `https://antreme.kyiv.ua/cakes/${cake.id}`
+        }))
+    };
+
+    const schemaData = [breadcrumbSchema, itemListSchema];
 
     const canonicalUrl = category ? `/cakes?category=${category}` : '/cakes';
 

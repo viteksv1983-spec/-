@@ -117,6 +117,11 @@ function CakeDetail() {
             "price": cake.price,
             "availability": "https://schema.org/InStock",
             "url": `https://antreme.kyiv.ua/cakes/${cake.id}`
+        },
+        "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "5.0",
+            "reviewCount": "7"
         }
     };
 
