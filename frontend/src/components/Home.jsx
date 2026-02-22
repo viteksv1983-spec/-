@@ -319,9 +319,9 @@ function Home() {
                         return (
                             <div key={cat.slug} className={`group relative flex flex-row items-center ${style.bg} rounded-[1.5rem] md:rounded-[2rem] ${style.shadow} transition-all duration-500 overflow-visible ${style.border} border hover:-translate-y-1 min-h-[130px] md:min-h-[160px] `}>
                                 <div className="flex-1 px-5 md:px-7 py-5 md:py-7 z-10 w-[60%]">
-                                    <h3 className="text-[17px] md:text-[20px] lg:text-[22px] font-black text-gray-900 mb-1.5 uppercase tracking-tight leading-tight" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                                    <h2 className="text-[17px] md:text-[20px] lg:text-[22px] font-black text-gray-900 mb-1.5 uppercase tracking-tight leading-tight" style={{ fontFamily: "'Oswald', sans-serif" }}>
                                         {cat.name}
-                                    </h3>
+                                    </h2>
                                     <p className="text-gray-500 mb-4 text-[11px] md:text-[13px] font-medium leading-snug whitespace-pre-line">
                                         {desc}
                                     </p>
@@ -678,7 +678,7 @@ function Home() {
                                     <div className="w-12 h-12 rounded-xl bg-[#F0FFF4] flex items-center justify-center text-2xl">🏪</div>
                                     <div>
                                         <h3 className="font-black text-gray-900 uppercase text-sm tracking-wide" style={{ fontFamily: "'Oswald', sans-serif" }}>Самовивіз</h3>
-                                        <p className="text-xs text-[#22c55e] font-bold">Безкоштовно</p>
+                                        <p className="text-xs text-gray-400">г. Київ, вул. Прирічна 11</p>
                                     </div>
                                 </div>
                                 <p className="text-gray-500 text-sm leading-relaxed">
