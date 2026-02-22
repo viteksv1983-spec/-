@@ -63,12 +63,12 @@ function Navbar() {
 
                             {/* Desktop Links - Subtle & Dark */}
                             <div className="hidden xl:flex items-center space-x-5 font-bold text-[11px] uppercase tracking-tight text-gray-800 flex-shrink-0">
-                                <Link to="/about" className="hover:text-[#D39A5E] transition-colors">Про нас</Link>
-                                <Link to="/delivery" className="hover:text-[#D39A5E] transition-colors">Доставка та оплата</Link>
-                                <Link to="/gallery/photo" className="hover:text-[#D39A5E] transition-colors">Фото</Link>
-                                <Link to="/gallery/video" className="hover:text-[#D39A5E] transition-colors">Відео</Link>
-                                <Link to="/reviews" className="hover:text-[#D39A5E] transition-colors">Відгуки</Link>
-                                <Link to="/blog" className="hover:text-[#D39A5E] transition-colors">Блог</Link>
+                                <Link to="/about/" className="hover:text-[#D39A5E] transition-colors">Про нас</Link>
+                                <Link to="/delivery/" className="hover:text-[#D39A5E] transition-colors">Доставка та оплата</Link>
+                                <Link to="/gallery/photo/" className="hover:text-[#D39A5E] transition-colors">Фото</Link>
+                                <Link to="/gallery/video/" className="hover:text-[#D39A5E] transition-colors">Відео</Link>
+                                <Link to="/reviews/" className="hover:text-[#D39A5E] transition-colors">Відгуки</Link>
+                                <Link to="/blog/" className="hover:text-[#D39A5E] transition-colors">Блог</Link>
                             </div>
 
                             {/* Actions */}
@@ -147,13 +147,13 @@ function Navbar() {
             {/* Десктоп версия */}
             <div className="bg-white border-t border-gray-100 py-4 overflow-x-auto scrollbar-hide hidden md:block">
                 <div className="container mx-auto px-4 md:px-6 flex items-center justify-center space-x-8 md:space-x-12 font-bold text-[12px] uppercase tracking-widest flex-nowrap">
-                    <Link to="/torty-na-zamovlennya" className={`transition-all whitespace-nowrap font-black border-b-2 pb-0.5 ${location.pathname === '/torty-na-zamovlennya' ? 'text-[#D8A055] border-[#D8A055]' : 'text-gray-900 border-transparent hover:text-[#D8A055] hover:border-[#D8A055]'}`}>Торти на замовлення</Link>
-                    <Link to="/bento-torty" className={`transition-all whitespace-nowrap border-b-2 pb-0.5 ${location.pathname === '/bento-torty' ? 'text-[#D8A055] font-black border-[#D8A055]' : 'text-gray-900 border-transparent hover:text-[#D8A055]'}`}>Бенто тортики</Link>
-                    <Link to="/biskvitni-torty" className={`transition-all whitespace-nowrap border-b-2 pb-0.5 ${location.pathname === '/biskvitni-torty' ? 'text-[#D8A055] font-black border-[#D8A055]' : 'text-gray-900 border-transparent hover:text-[#D8A055]'}`}>Бісквітні торти</Link>
-                    <Link to="/musovi-torty" className={`transition-all whitespace-nowrap border-b-2 pb-0.5 ${location.pathname === '/musovi-torty' ? 'text-[#D8A055] font-black border-[#D8A055]' : 'text-gray-900 border-transparent hover:text-[#D8A055]'}`}>Мусові торти</Link>
-                    <Link to="/kapkeyki" className={`transition-all whitespace-nowrap border-b-2 pb-0.5 ${location.pathname === '/kapkeyki' ? 'text-[#D8A055] font-black border-[#D8A055]' : 'text-gray-900 border-transparent hover:text-[#D8A055]'}`}>Капкейки</Link>
-                    <Link to="/imbirni-pryaniki" className={`transition-all whitespace-nowrap border-b-2 pb-0.5 ${location.pathname === '/imbirni-pryaniki' ? 'text-[#D8A055] font-black border-[#D8A055]' : 'text-gray-900 border-transparent hover:text-[#D8A055]'}`}>Імбирні пряники</Link>
-                    <Link to="/fillings" className={`transition-all whitespace-nowrap border-b-2 pb-0.5 ${location.pathname === '/fillings' ? 'text-[#D8A055] font-black border-[#D8A055]' : 'text-gray-900 border-transparent hover:text-[#D8A055]'}`}>Начинки</Link>
+                    <Link to="/torty-na-zamovlennya/" className={`transition-all whitespace-nowrap font-black border-b-2 pb-0.5 ${location.pathname.startsWith('/torty-na-zamovlennya') ? 'text-[#D8A055] border-[#D8A055]' : 'text-gray-900 border-transparent hover:text-[#D8A055] hover:border-[#D8A055]'}`}>Торти на замовлення</Link>
+                    <Link to="/bento-torty/" className={`transition-all whitespace-nowrap border-b-2 pb-0.5 ${location.pathname.startsWith('/bento-torty') ? 'text-[#D8A055] font-black border-[#D8A055]' : 'text-gray-900 border-transparent hover:text-[#D8A055]'}`}>Бенто тортики</Link>
+                    <Link to="/biskvitni-torty/" className={`transition-all whitespace-nowrap border-b-2 pb-0.5 ${location.pathname.startsWith('/biskvitni-torty') ? 'text-[#D8A055] font-black border-[#D8A055]' : 'text-gray-900 border-transparent hover:text-[#D8A055]'}`}>Бісквітні торти</Link>
+                    <Link to="/musovi-torty/" className={`transition-all whitespace-nowrap border-b-2 pb-0.5 ${location.pathname.startsWith('/musovi-torty') ? 'text-[#D8A055] font-black border-[#D8A055]' : 'text-gray-900 border-transparent hover:text-[#D8A055]'}`}>Мусові торти</Link>
+                    <Link to="/kapkeyky/" className={`transition-all whitespace-nowrap border-b-2 pb-0.5 ${location.pathname.startsWith('/kapkeyky') ? 'text-[#D8A055] font-black border-[#D8A055]' : 'text-gray-900 border-transparent hover:text-[#D8A055]'}`}>Капкейки</Link>
+                    <Link to="/imbirni-pryanyky/" className={`transition-all whitespace-nowrap border-b-2 pb-0.5 ${location.pathname.startsWith('/imbirni-pryanyky') ? 'text-[#D8A055] font-black border-[#D8A055]' : 'text-gray-900 border-transparent hover:text-[#D8A055]'}`}>Імбирні пряники</Link>
+                    <Link to="/fillings/" className={`transition-all whitespace-nowrap border-b-2 pb-0.5 ${location.pathname.startsWith('/fillings') ? 'text-[#D8A055] font-black border-[#D8A055]' : 'text-gray-900 border-transparent hover:text-[#D8A055]'}`}>Начинки</Link>
                 </div>
             </div>
 
@@ -164,16 +164,17 @@ function Navbar() {
                     <div className="flex-1 overflow-x-auto scrollbar-hide">
                         <div className="flex items-center gap-4 font-bold text-[11px] uppercase tracking-widest min-w-max pr-3">
                             <Link
-                                to="/torty-na-zamovlennya"
-                                className={`whitespace-nowrap border-b-2 pb-0.5 transition-colors ${location.pathname === '/torty-na-zamovlennya' || location.pathname === '/' ? 'text-[#D8A055] border-[#D8A055] font-black' : 'text-gray-700 border-transparent'}`}
+                                to="/torty-na-zamovlennya/"
+                                className={`whitespace-nowrap border-b-2 pb-0.5 transition-colors ${location.pathname.startsWith('/torty-na-zamovlennya') || location.pathname === '/' ? 'text-[#D8A055] border-[#D8A055] font-black' : 'text-gray-700 border-transparent'}`}
                             >
                                 Торти на замовлення
                             </Link>
-                            <Link to="/bento-torty" className={`whitespace-nowrap border-b-2 pb-0.5 ${location.pathname === '/bento-torty' ? 'text-[#D8A055] border-[#D8A055] font-black' : 'text-gray-500 border-transparent'}`}>Бенто</Link>
-                            <Link to="/biskvitni-torty" className={`whitespace-nowrap border-b-2 pb-0.5 ${location.pathname === '/biskvitni-torty' ? 'text-[#D8A055] border-[#D8A055] font-black' : 'text-gray-500 border-transparent'}`}>Бісквітні</Link>
-                            <Link to="/musovi-torty" className={`whitespace-nowrap border-b-2 pb-0.5 ${location.pathname === '/musovi-torty' ? 'text-[#D8A055] border-[#D8A055] font-black' : 'text-gray-500 border-transparent'}`}>Мусові</Link>
-                            <Link to="/kapkeyki" className={`whitespace-nowrap border-b-2 pb-0.5 ${location.pathname === '/kapkeyki' ? 'text-[#D8A055] border-[#D8A055] font-black' : 'text-gray-500 border-transparent'}`}>Капкейки</Link>
-                            <Link to="/fillings" className={`whitespace-nowrap border-b-2 pb-0.5 ${location.pathname === '/fillings' ? 'text-[#D8A055] border-[#D8A055] font-black' : 'text-gray-500 border-transparent'}`}>Начинки</Link>
+                            <Link to="/bento-torty/" className={`whitespace-nowrap border-b-2 pb-0.5 ${location.pathname.startsWith('/bento-torty') ? 'text-[#D8A055] border-[#D8A055] font-black' : 'text-gray-500 border-transparent'}`}>Бенто</Link>
+                            <Link to="/biskvitni-torty/" className={`whitespace-nowrap border-b-2 pb-0.5 ${location.pathname.startsWith('/biskvitni-torty') ? 'text-[#D8A055] border-[#D8A055] font-black' : 'text-gray-500 border-transparent'}`}>Бісквітні</Link>
+                            <Link to="/musovi-torty/" className={`whitespace-nowrap border-b-2 pb-0.5 ${location.pathname.startsWith('/musovi-torty') ? 'text-[#D8A055] border-[#D8A055] font-black' : 'text-gray-500 border-transparent'}`}>Мусові</Link>
+                            <Link to="/kapkeyky/" className={`whitespace-nowrap border-b-2 pb-0.5 ${location.pathname.startsWith('/kapkeyky') ? 'text-[#D8A055] border-[#D8A055] font-black' : 'text-gray-500 border-transparent'}`}>Капкейки</Link>
+                            <Link to="/imbirni-pryanyky/" className={`whitespace-nowrap border-b-2 pb-0.5 ${location.pathname.startsWith('/imbirni-pryanyky') ? 'text-[#D8A055] border-[#D8A055] font-black' : 'text-gray-500 border-transparent'}`}>Імбирні пряники</Link>
+                            <Link to="/fillings/" className={`whitespace-nowrap border-b-2 pb-0.5 ${location.pathname.startsWith('/fillings') ? 'text-[#D8A055] border-[#D8A055] font-black' : 'text-gray-500 border-transparent'}`}>Начинки</Link>
                         </div>
                     </div>
                     {/* Иконки справа */}
@@ -231,16 +232,16 @@ function Navbar() {
                             <div className="mb-5">
                                 <div className="text-[10px] uppercase tracking-[0.2em] text-[#a0742d]/60 font-black mb-3 px-2">Каталог</div>
                                 <div className="rounded-xl py-2 px-1">
-                                    <Link to="/torty-na-zamovlennya" className="flex items-center gap-2 px-3 py-2.5 text-[13px] font-black uppercase tracking-wider text-[#5a0020] hover:bg-[#F3E2CF]/60 rounded-lg transition-colors" onClick={() => setIsMenuOpen(false)}>
+                                    <Link to="/torty-na-zamovlennya/" className="flex items-center gap-2 px-3 py-2.5 text-[13px] font-black uppercase tracking-wider text-[#5a0020] hover:bg-[#F3E2CF]/60 rounded-lg transition-colors" onClick={() => setIsMenuOpen(false)}>
                                         🎂 Торти на замовлення
                                     </Link>
-                                    <Link to="/bento-torty" className="flex items-center gap-2 px-3 py-2.5 text-[13px] font-bold uppercase tracking-wider text-[#a0742d] hover:bg-[#F3E2CF]/60 rounded-lg transition-colors" onClick={() => setIsMenuOpen(false)}>
+                                    <Link to="/bento-torty/" className="flex items-center gap-2 px-3 py-2.5 text-[13px] font-bold uppercase tracking-wider text-[#a0742d] hover:bg-[#F3E2CF]/60 rounded-lg transition-colors" onClick={() => setIsMenuOpen(false)}>
                                         🍰 Бенто тортики
                                     </Link>
-                                    <Link to="/biskvitni-torty" className="flex items-center gap-2 px-3 py-2.5 text-[13px] font-bold uppercase tracking-wider text-[#a0742d] hover:bg-[#F3E2CF]/60 rounded-lg transition-colors" onClick={() => setIsMenuOpen(false)}>
+                                    <Link to="/biskvitni-torty/" className="flex items-center gap-2 px-3 py-2.5 text-[13px] font-bold uppercase tracking-wider text-[#a0742d] hover:bg-[#F3E2CF]/60 rounded-lg transition-colors" onClick={() => setIsMenuOpen(false)}>
                                         🧁 Бісквітні торти
                                     </Link>
-                                    <Link to="/musovi-torty" className="flex items-center gap-2 px-3 py-2.5 text-[13px] font-bold uppercase tracking-wider text-[#a0742d] hover:bg-[#F3E2CF]/60 rounded-lg transition-colors" onClick={() => setIsMenuOpen(false)}>
+                                    <Link to="/musovi-torty/" className="flex items-center gap-2 px-3 py-2.5 text-[13px] font-bold uppercase tracking-wider text-[#a0742d] hover:bg-[#F3E2CF]/60 rounded-lg transition-colors" onClick={() => setIsMenuOpen(false)}>
                                         🍮 Мусові торти
                                     </Link>
                                     <Link to="/torty-na-zamovlennya/vesilni/" className="flex items-center gap-2 px-3 py-2.5 text-[13px] font-bold uppercase tracking-wider text-[#a0742d] hover:bg-[#F3E2CF]/60 rounded-lg transition-colors" onClick={() => setIsMenuOpen(false)}>
@@ -255,13 +256,13 @@ function Navbar() {
                                     <Link to="/torty-na-zamovlennya/na-yuviley/" className="flex items-center gap-2 px-3 py-2.5 text-[13px] font-bold uppercase tracking-wider text-[#a0742d] hover:bg-[#F3E2CF]/60 rounded-lg transition-colors" onClick={() => setIsMenuOpen(false)}>
                                         🥂 На ювілей
                                     </Link>
-                                    <Link to="/kapkeyki" className="flex items-center gap-2 px-3 py-2.5 text-[13px] font-bold uppercase tracking-wider text-[#a0742d] hover:bg-[#F3E2CF]/60 rounded-lg transition-colors" onClick={() => setIsMenuOpen(false)}>
+                                    <Link to="/kapkeyky/" className="flex items-center gap-2 px-3 py-2.5 text-[13px] font-bold uppercase tracking-wider text-[#a0742d] hover:bg-[#F3E2CF]/60 rounded-lg transition-colors" onClick={() => setIsMenuOpen(false)}>
                                         🧁 Капкейки
                                     </Link>
-                                    <Link to="/imbirni-pryaniki" className="flex items-center gap-2 px-3 py-2.5 text-[13px] font-bold uppercase tracking-wider text-[#a0742d] hover:bg-[#F3E2CF]/60 rounded-lg transition-colors" onClick={() => setIsMenuOpen(false)}>
+                                    <Link to="/imbirni-pryanyky/" className="flex items-center gap-2 px-3 py-2.5 text-[13px] font-bold uppercase tracking-wider text-[#a0742d] hover:bg-[#F3E2CF]/60 rounded-lg transition-colors" onClick={() => setIsMenuOpen(false)}>
                                         🍪 Імбирні пряники
                                     </Link>
-                                    <Link to="/fillings" className="flex items-center gap-2 px-3 py-2.5 text-[13px] font-bold uppercase tracking-wider text-[#a0742d] hover:bg-[#F3E2CF]/60 rounded-lg transition-colors" onClick={() => setIsMenuOpen(false)}>
+                                    <Link to="/fillings/" className="flex items-center gap-2 px-3 py-2.5 text-[13px] font-bold uppercase tracking-wider text-[#a0742d] hover:bg-[#F3E2CF]/60 rounded-lg transition-colors" onClick={() => setIsMenuOpen(false)}>
                                         🫐 Начинки
                                     </Link>
                                 </div>
@@ -274,22 +275,22 @@ function Navbar() {
                             <div className="mt-4">
                                 <div className="text-[10px] uppercase tracking-[0.2em] text-gray-400 font-black mb-3 px-2">Інформація</div>
                                 <div className="flex flex-col gap-1 px-1">
-                                    <Link to="/delivery" className="flex items-center gap-2 px-3 py-2.5 text-[13px] font-semibold text-gray-700 hover:bg-gray-50 rounded-lg transition-colors" onClick={() => setIsMenuOpen(false)}>
+                                    <Link to="/delivery/" className="flex items-center gap-2 px-3 py-2.5 text-[13px] font-semibold text-gray-700 hover:bg-gray-50 rounded-lg transition-colors" onClick={() => setIsMenuOpen(false)}>
                                         🚚 Доставка та оплата
                                     </Link>
-                                    <Link to="/gallery/photo" className="flex items-center gap-2 px-3 py-2.5 text-[13px] font-semibold text-gray-700 hover:bg-gray-50 rounded-lg transition-colors" onClick={() => setIsMenuOpen(false)}>
+                                    <Link to="/gallery/photo/" className="flex items-center gap-2 px-3 py-2.5 text-[13px] font-semibold text-gray-700 hover:bg-gray-50 rounded-lg transition-colors" onClick={() => setIsMenuOpen(false)}>
                                         📸 Фото
                                     </Link>
-                                    <Link to="/gallery/video" className="flex items-center gap-2 px-3 py-2.5 text-[13px] font-semibold text-gray-700 hover:bg-gray-50 rounded-lg transition-colors" onClick={() => setIsMenuOpen(false)}>
+                                    <Link to="/gallery/video/" className="flex items-center gap-2 px-3 py-2.5 text-[13px] font-semibold text-gray-700 hover:bg-gray-50 rounded-lg transition-colors" onClick={() => setIsMenuOpen(false)}>
                                         🎬 Відео
                                     </Link>
-                                    <Link to="/reviews" className="flex items-center gap-2 px-3 py-2.5 text-[13px] font-semibold text-gray-700 hover:bg-gray-50 rounded-lg transition-colors" onClick={() => setIsMenuOpen(false)}>
+                                    <Link to="/reviews/" className="flex items-center gap-2 px-3 py-2.5 text-[13px] font-semibold text-gray-700 hover:bg-gray-50 rounded-lg transition-colors" onClick={() => setIsMenuOpen(false)}>
                                         ⭐ Відгуки
                                     </Link>
-                                    <Link to="/blog" className="flex items-center gap-2 px-3 py-2.5 text-[13px] font-semibold text-gray-700 hover:bg-gray-50 rounded-lg transition-colors" onClick={() => setIsMenuOpen(false)}>
+                                    <Link to="/blog/" className="flex items-center gap-2 px-3 py-2.5 text-[13px] font-semibold text-gray-700 hover:bg-gray-50 rounded-lg transition-colors" onClick={() => setIsMenuOpen(false)}>
                                         📝 Блог
                                     </Link>
-                                    <Link to="/about" className="flex items-center gap-2 px-3 py-2.5 text-[13px] font-semibold text-gray-700 hover:bg-gray-50 rounded-lg transition-colors" onClick={() => setIsMenuOpen(false)}>
+                                    <Link to="/about/" className="flex items-center gap-2 px-3 py-2.5 text-[13px] font-semibold text-gray-700 hover:bg-gray-50 rounded-lg transition-colors" onClick={() => setIsMenuOpen(false)}>
                                         💛 Про нас
                                     </Link>
                                 </div>

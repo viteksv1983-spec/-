@@ -45,8 +45,8 @@ const GROUP_B = {
     'bento-torty': 'bento',
     'biskvitni-torty': 'biscuit',
     'musovi-torty': 'mousse',
-    'kapkeyki': 'cupcakes',
-    'imbirni-pryaniki': 'gingerbread',
+    'kapkeyky': 'cupcakes',
+    'imbirni-pryanyky': 'gingerbread',
     'nachynky': 'fillings',
 };
 
@@ -61,7 +61,11 @@ for (const [slug, dbCat] of Object.entries(GROUP_B)) {
 
 function getProductUrl(cake) {
     const info = dbCatToUrl[cake.category];
-    if (!info) return `/cakes/${cake.slug || cake.id}`;
+    if (!info) {
+        console.warn(`[WARNING] Category not mapped in GROUP_A or GROUP_B for product: ${cake.name}`);
+        // Skip unmapped categories entirely instead of polluting Vercel routes with /cakes/:id
+        return null;
+    }
     if (info.group === 'A') return `/torty-na-zamovlennya/${info.slug}/${cake.slug}`;
     return `/${info.slug}/${cake.slug}`;
 }
@@ -143,12 +147,19 @@ async function generatePages() {
     // Fetch products and add them to routes
     const cakes = await fetchCakes();
     cakes.forEach(cake => {
-        if (!cake.slug) return; // Skip products without slugs
+        if (!cake.slug) {
+            console.warn(`[WARNING] Product ${cake.id} missing slug. Migrations required.`);
+            return;
+        }
+
+        const url = getProductUrl(cake);
+        if (!url) return; // Skip if category is mismatched
+
         const title = cake.meta_title || `${cake.name} - Купити в Києві | Antreme`;
-        const description = cake.meta_description || `Замовити торт ${cake.name}. ${cake.description?.slice(0, 100)}...`;
+        const description = cake.meta_description || `Замовити торт ${cake.name}. ${cake.description ? cake.description.slice(0, 100) : ''}...`;
 
         routes.push({
-            path: getProductUrl(cake),
+            path: url,
             title: title,
             description: description,
             ogImage: cake.image_url
@@ -167,7 +178,10 @@ async function generatePages() {
             fs.mkdirSync(folderPath, { recursive: true });
         }
 
-        const fullUrl = `${domain}${route.path === '/' ? '' : route.path}`;
+        let fullUrl = `${domain}${route.path}`;
+        if (fullUrl !== domain + '/' && !fullUrl.endsWith('/')) {
+            fullUrl += '/';
+        }
 
         // Handle OG image correctly
         let ogImageUrl = '/og-image.jpg';
@@ -214,8 +228,15 @@ async function generatePages() {
 
     // 5. Create 404.html for Vercel to serve with a genuine 404 HTTP status
     // Vercel will serve this file (with 404 status) for any route not found in dist/ or rewrites
-    fs.copyFileSync(indexPath, path.join(distDir, '404.html'));
-    console.log('✅ Created 404.html for true HTTP 404 status');
+    // CRITICAL: We must STRIP ANY CANONICAL and inject <meta name="robots" content="noindex, follow" />
+    let html404 = baseHtml.replace(/<title>[\s\S]*?<\/title>/gi, '<title>Сторінку не знайдено | Antreme</title>');
+    html404 = html404.replace(/<link[^>]*rel="canonical"[^>]*>/gi, '');
+    html404 = html404.replace(/<meta[^>]*property="og:[^>]*>/gi, '');
+    html404 = html404.replace(/<meta[^>]*name="twitter:[^>]*>/gi, '');
+    html404 = html404.replace(/<\/head>/i, `    <meta name="robots" content="noindex, follow" />\n</head>`);
+
+    fs.writeFileSync(path.join(distDir, '404.html'), html404, 'utf-8');
+    console.log('✅ Created strict SEO-hardened 404.html');
 
     console.log('🎉 SSG SEO Injection complete!');
 }

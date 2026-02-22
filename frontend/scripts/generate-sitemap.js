@@ -34,8 +34,8 @@ const GROUP_B = {
     'bento-torty': 'bento',
     'biskvitni-torty': 'biscuit',
     'musovi-torty': 'mousse',
-    'kapkeyki': 'cupcakes',
-    'imbirni-pryaniki': 'gingerbread',
+    'kapkeyky': 'cupcakes',
+    'imbirni-pryanyky': 'gingerbread',
     'nachynky': 'fillings',
 };
 
@@ -50,9 +50,12 @@ for (const [slug, dbCat] of Object.entries(GROUP_B)) {
 
 function getProductUrl(cake) {
     const info = dbCatToUrl[cake.category];
-    if (!info) return `/cakes/${cake.slug || cake.id}`;
-    if (info.group === 'A') return `/torty-na-zamovlennya/${info.slug}/${cake.slug}`;
-    return `/${info.slug}/${cake.slug}`;
+    if (!info) {
+        console.warn(`[WARNING] Category not mapped in GROUP_A or GROUP_B for product: ${cake.name}`);
+        return null; // Skip unmapped completely, no legacy fallbacks
+    }
+    if (info.group === 'A') return `/torty-na-zamovlennya/${info.slug}/${cake.slug}/`;
+    return `/${info.slug}/${cake.slug}/`;
 }
 
 async function fetchCakes() {
@@ -95,7 +98,8 @@ async function generateSitemap() {
         addUrl('/', '1.0', 'daily');
 
         // === Tier 2: Main pages (0.9) ===
-        ['/cakes', '/delivery', '/about', '/reviews', '/fillings', '/torty-na-zamovlennya'].forEach(p => {
+        // Removed /cakes/ entirely. All structural routes end in /
+        ['/delivery/', '/about/', '/reviews/', '/fillings/', '/torty-na-zamovlennya/'].forEach(p => {
             addUrl(p, '0.9', 'daily');
         });
 
@@ -112,10 +116,12 @@ async function generateSitemap() {
         // === Tier 4: Product pages (0.7) ===
         cakes.forEach(cake => {
             if (!cake.slug) return; // Skip products without slugs
+            const url = getProductUrl(cake);
+            if (!url) return; // Skip mismatched 
             const lastmod = cake.updated_at
                 ? new Date(cake.updated_at).toISOString().split('T')[0]
                 : today;
-            addUrl(getProductUrl(cake), '0.7', 'weekly', lastmod);
+            addUrl(url, '0.7', 'weekly', lastmod);
         });
 
         // Build XML

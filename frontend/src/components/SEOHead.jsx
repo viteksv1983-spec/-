@@ -4,14 +4,14 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import api from '../api';
 
-export default function SEOHead({ title, description, keywords, h1, canonical, ogImage, type = 'website', schema, robots }) {
+export default function SEOHead({ title, description, keywords, h1, canonical, ogImage, type = 'website', schema, robots, is404 = false }) {
     const location = useLocation();
     const [seoData, setSeoData] = useState(null);
     const domain = 'https://antreme.kyiv.ua';
 
     // Fetch SEO data from backend if not provided via props (for static pages)
     useEffect(() => {
-        if (title) return; // If props provided, use them (e.g. Product Detail)
+        if (title || is404) return; // If props provided, use them (e.g. Product Detail), skip fetching for 404
 
         const fetchSEO = async () => {
             try {
@@ -40,7 +40,10 @@ export default function SEOHead({ title, description, keywords, h1, canonical, o
 
     // Construct canonical
     const pathForCanonical = canonical || location.pathname;
-    const currentFullUrl = pathForCanonical.startsWith('http') ? pathForCanonical : `${domain}${pathForCanonical === '/' ? '' : pathForCanonical}`;
+    // We must strictly preserve trailing slashes if they exist in pathForCanonical
+    const currentFullUrl = pathForCanonical.startsWith('http')
+        ? pathForCanonical
+        : `${domain}${pathForCanonical === '/' ? '/' : pathForCanonical}`;
 
     const imagePath = ogImage || data.og_image || '/og-image.jpg';
     const effectiveOgImage = imagePath.startsWith('http') ? imagePath : `${domain}${imagePath}`;
@@ -52,7 +55,8 @@ export default function SEOHead({ title, description, keywords, h1, canonical, o
             <title>{effectiveTitle}</title>
             <meta name="description" content={effectiveDesc} />
             <meta name="keywords" content={effectiveKeywords} />
-            <link rel="canonical" href={currentFullUrl} />
+            {/* Canonical & OGs should be omitted on 404 pages */}
+            {!is404 && <link rel="canonical" href={currentFullUrl} />}
             <meta name="robots" content={effectiveRobots} />
 
             {/* Open Graph */}
@@ -60,7 +64,7 @@ export default function SEOHead({ title, description, keywords, h1, canonical, o
             <meta property="og:title" content={effectiveTitle} />
             <meta property="og:description" content={effectiveDesc} />
             <meta property="og:image" content={effectiveOgImage} />
-            <meta property="og:url" content={currentFullUrl} />
+            {!is404 && <meta property="og:url" content={currentFullUrl} />}
             <meta property="og:site_name" content="Antreme – Кондитерська майстерня" />
 
             {/* Twitter Cards */}

@@ -5,10 +5,15 @@
             "schedule": "0 3 * * *"
         }
     ],
+    "cleanUrls": true,
     "rewrites": [
         {
-            "source": "/(login|register|cart|promotions|delivery|fillings|about|gallery/.*|reviews|blog|districts/.*|cakes|cakes/.*|admin|admin/.*)",
+            "source": "/(login|register|cart|admin|admin/.*)",
             "destination": "/index.html"
+        },
+        {
+            "source": "/cakes/.*",
+            "destination": "/404.html"
         }
     ]
 }

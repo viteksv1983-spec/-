@@ -160,7 +160,7 @@ function Delivery() {
                                 </a>
                                 <span className="text-white/30 hidden sm:block">|</span>
                                 <Link
-                                    to="/cakes"
+                                    to="/cakes/"
                                     className="inline-block px-10 py-4 bg-[#E8C064] hover:bg-[#D4A83C] text-white font-black text-sm uppercase tracking-widest rounded-full transition-all hover:scale-105 shadow-md"
                                 >
                                     Оформити замовлення

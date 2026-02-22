@@ -22,16 +22,16 @@ export const getCategoryUrl = (dbCategory) => {
  * Uses the cake's `slug` (SEO slug) and `category` (DB key).
  */
 export const getProductUrl = (cake) => {
-    if (!cake || !cake.slug) return `/cakes/${cake?.id || ''}`;
+    if (!cake || !cake.slug) return null; // No fallback to /cakes/id
 
     const categoryUrlSlug = dbCategoryToSlug(cake.category);
-    if (!categoryUrlSlug) return `/cakes/${cake.slug}`;
+    if (!categoryUrlSlug) return null; // Unmapped categories cannot have a product url
 
     if (isGroupA(categoryUrlSlug)) {
-        return `/torty-na-zamovlennya/${categoryUrlSlug}/${cake.slug}`;
+        return `/torty-na-zamovlennya/${categoryUrlSlug}/${cake.slug}/`;
     }
     if (isGroupB(categoryUrlSlug)) {
-        return `/${categoryUrlSlug}/${cake.slug}`;
+        return `/${categoryUrlSlug}/${cake.slug}/`;
     }
-    return `/cakes/${cake.slug}`;
+    return null;
 };

@@ -81,9 +81,9 @@ export function getCategoryCanonicalUrl(slug) {
  * Group B: /{categorySlug}/{productSlug}
  */
 export function getProductUrl(categorySlug, productSlug) {
-    if (isGroupA(categorySlug)) return `/torty-na-zamovlennya/${categorySlug}/${productSlug}`;
-    if (isGroupB(categorySlug)) return `/${categorySlug}/${productSlug}`;
-    return `/cakes/${productSlug}`; // fallback
+    if (isGroupA(categorySlug)) return `/torty-na-zamovlennya/${categorySlug}/${productSlug}/`;
+    if (isGroupB(categorySlug)) return `/${categorySlug}/${productSlug}/`;
+    return `/cakes/${productSlug}/`; // fallback
 }
 
 /**

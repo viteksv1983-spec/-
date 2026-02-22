@@ -272,7 +272,7 @@ function Home() {
                                 ЗАМОВИТИ ТОРТ
                             </button>
                             <Link
-                                to="/cakes"
+                                to="/cakes/"
                                 className="h-[48px] lg:h-[52px] px-5 lg:px-6 bg-transparent border border-white/30 hover:border-white/60 hover:bg-white/10 text-white font-black uppercase tracking-wider text-[11px] lg:text-[12px] rounded-full transition-all duration-300 flex items-center justify-center text-center whitespace-nowrap"
                                 style={{ fontFamily: "'Oswald', sans-serif" }}
                             >
@@ -291,7 +291,7 @@ function Home() {
                             ЗАМОВИТИ ТОРТ
                         </button>
                         <Link
-                            to="/cakes"
+                            to="/cakes/"
                             className="flex-1 h-[42px] bg-[#9e1634] bg-opacity-90 border border-white/20 hover:bg-[#8B1030] text-white font-black uppercase tracking-[0.05em] text-[10px] rounded-[20px] transition-all duration-300 shadow-sm flex flex-col items-center justify-center leading-[1.2]"
                             style={{ fontFamily: "'Oswald', sans-serif" }}
                         >
@@ -431,7 +431,7 @@ function Home() {
             {/* Holiday Cakes Promo Section - Dark Premium */}
             <section className="py-20 md:py-32 overflow-hidden bg-[#FDFBF7]">
                 <div className="container mx-auto px-4 md:px-8">
-                    <Link to="/torty-na-zamovlennya" className="group block relative overflow-hidden rounded-3xl md:rounded-[3rem] border border-gray-100 hover:border-[#E8C064]/40 transition-all duration-500 bg-white shadow-[0_4px_30px_rgba(0,0,0,0.08)] hover:shadow-[0_8px_40px_rgba(0,0,0,0.12)]">
+                    <Link to="/torty-na-zamovlennya/" className="group block relative overflow-hidden rounded-3xl md:rounded-[3rem] border border-gray-100 hover:border-[#E8C064]/40 transition-all duration-500 bg-white shadow-[0_4px_30px_rgba(0,0,0,0.08)] hover:shadow-[0_8px_40px_rgba(0,0,0,0.12)]">
                         <div className="flex flex-col md:flex-row items-center">
                             {/* Text Content */}
                             <div className="w-full md:w-1/2 p-8 md:p-20 text-center md:text-left z-10 flex flex-col justify-center">
@@ -558,7 +558,7 @@ function Home() {
                                 ))}
                             </div>
                             <div className="text-center mt-12 animate-fade-in-delayed">
-                                <Link to="/cakes" className="group inline-flex items-center gap-3 px-12 py-5 font-black uppercase text-sm tracking-wider transition-all hover:scale-105 duration-300 rounded-full bg-[#E8C064] hover:bg-[#D4A83C] text-white shadow-md">
+                                <Link to="/cakes/" className="group inline-flex items-center gap-3 px-12 py-5 font-black uppercase text-sm tracking-wider transition-all hover:scale-105 duration-300 rounded-full bg-[#E8C064] hover:bg-[#D4A83C] text-white shadow-md">
                                     Всі пропозиції
                                     <span className="group-hover:translate-x-2 transition-transform duration-300">→</span>
                                 </Link>
@@ -619,7 +619,7 @@ function Home() {
                         <a href="tel:0979081504" className="inline-flex items-center gap-2 px-10 py-4 font-black text-sm uppercase tracking-widest rounded-full transition-all hover:scale-105 border border-white/30 text-white hover:border-white/60 hover:bg-white/10">
                             📞 097 908 15 04
                         </a>
-                        <Link to="/cakes" className="inline-block px-12 py-4 font-black text-sm uppercase tracking-widest rounded-full transition-all hover:scale-105 bg-[#E8C064] hover:bg-[#D4A83C] text-white shadow-md">
+                        <Link to="/cakes/" className="inline-block px-12 py-4 font-black text-sm uppercase tracking-widest rounded-full transition-all hover:scale-105 bg-[#E8C064] hover:bg-[#D4A83C] text-white shadow-md">
                             Обрати Торт
                         </Link>
                     </div>
@@ -704,7 +704,7 @@ function Home() {
                             </div>
 
                             {/* CTA */}
-                            <Link to="/delivery" className="block text-center bg-[#7A0019] hover:bg-[#5a0014] text-white font-black uppercase tracking-widest text-xs md:text-sm py-4 rounded-2xl transition-all active:scale-95 shadow-md">
+                            <Link to="/delivery/" className="block text-center bg-[#7A0019] hover:bg-[#5a0014] text-white font-black uppercase tracking-widest text-xs md:text-sm py-4 rounded-2xl transition-all active:scale-95 shadow-md">
                                 Детальніше про доставку →
                             </Link>
                         </div>
@@ -742,7 +742,7 @@ function Home() {
                             { id: 6, title: "Pokemon", thumb: "/reviews/review_6.jpg" },
                             { id: 7, title: "Перфект", thumb: "/reviews/review_7.jpg" },
                         ].map(story => (
-                            <Link to="/reviews" key={story.id} className="shrink-0 flex flex-col items-center gap-1.5 group">
+                            <Link to="/reviews/" key={story.id} className="shrink-0 flex flex-col items-center gap-1.5 group">
                                 <div className="w-16 h-16 md:w-20 md:h-20 rounded-full p-[3px] group-hover:scale-110 transition-transform duration-300" style={{ background: 'linear-gradient(135deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888)' }}>
                                     <div className="w-full h-full rounded-full border-2 border-white overflow-hidden">
                                         <img src={story.thumb} alt={story.title} className="w-full h-full object-cover" loading="lazy" />
@@ -814,7 +814,7 @@ function Home() {
 
                     {/* CTA link */}
                     <div className="text-center mt-8 md:mt-10">
-                        <Link to="/reviews" className="inline-flex items-center gap-2 text-[#7A0019] font-black text-xs uppercase tracking-wider border-b-2 border-[#E8C064] pb-1 hover:text-[#9C142B] transition-all">
+                        <Link to="/reviews/" className="inline-flex items-center gap-2 text-[#7A0019] font-black text-xs uppercase tracking-wider border-b-2 border-[#E8C064] pb-1 hover:text-[#9C142B] transition-all">
                             Всі відгуки
                             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" /></svg>
                         </Link>

@@ -99,7 +99,7 @@ function Promotions() {
                 {/* Browse Products CTA */}
                 <div className="text-center mt-12">
                     <Link
-                        to="/cakes"
+                        to="/cakes/"
                         className="inline-block bg-gray-800 text-white px-8 py-4 font-bold uppercase text-sm tracking-wider hover:bg-gray-900 transition-all"
                     >
                         Переглянути всі продукти

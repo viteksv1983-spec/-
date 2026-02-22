@@ -1,14 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Helmet } from 'react-helmet-async';
+import SEOHead from './SEOHead';
 
 export default function NotFound() {
     return (
         <>
-            <Helmet>
-                <meta name="robots" content="noindex, follow" />
-                <title>404 — Сторінку не знайдено | Antreme</title>
-            </Helmet>
+            <SEOHead
+                title="404 — Сторінку не знайдено | Antreme"
+                robots="noindex, follow"
+                is404={true}
+            />
             <div style={{
                 display: 'flex',
                 flexDirection: 'column',

@@ -57,7 +57,7 @@ async def sitemap(db: Session = Depends(get_db)):
     xml_content += '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
     
     # 1. Homepage & Static Pages
-    static_urls = ['/', '/cakes', '/delivery', '/fillings', '/about', '/reviews', '/holiday']
+    static_urls = ['/', '/cakes/', '/delivery/', '/fillings/', '/about/', '/reviews/', '/holiday/']
     for url in static_urls:
         xml_content += f'''  <url>
     <loc>{base_url}{url}</loc>
@@ -91,7 +91,7 @@ async def sitemap(db: Session = Depends(get_db)):
     }
     for cat in categories:
         slug = category_slugs.get(cat)
-        url_path = f"/{slug}" if slug else f"/cakes?category={cat}"
+        url_path = f"/{slug}/" if slug else f"/cakes?category={cat}"
         xml_content += f'''  <url>
     <loc>{base_url}{url_path}</loc>
     <changefreq>weekly</changefreq>
@@ -101,7 +101,7 @@ async def sitemap(db: Session = Depends(get_db)):
     # 3. Products
     for cake in cakes:
         xml_content += f'''  <url>
-    <loc>{base_url}/cakes/{cake.id}</loc>
+    <loc>{base_url}/cakes/{cake.id}/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>\n'''
