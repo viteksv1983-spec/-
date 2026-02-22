@@ -235,10 +235,8 @@ function Home() {
                     {/* — ORDER 1: Text Block — */}
                     <div className="relative flex flex-col order-1 px-5 md:px-12 lg:px-16 pt-8 pb-4 md:pb-16 md:pt-16 md:pr-[45%] lg:pr-[42%] md:min-h-[440px] lg:min-h-[480px] justify-center" style={{ zIndex: 10 }}>
                         <div className="w-[65%] md:w-auto">
-                            <h1 className="text-[28px] md:text-[40px] lg:text-[50px] xl:text-[56px] font-black text-white leading-[1.15] mb-2 md:mb-3 tracking-tight" style={{ fontFamily: "'Oswald', sans-serif" }}>
-                                Торти на <br className="md:hidden" />
-                                замовлення <br className="md:hidden" />
-                                в Києві
+                            <h1 className="text-[28px] md:text-[40px] lg:text-[50px] xl:text-[56px] font-black text-white leading-[1.15] mb-2 md:mb-3 tracking-tight max-w-[200px] md:max-w-none" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                                Торти на замовлення в Києві
                             </h1>
                             <div className="text-[#F5C24D] text-[11px] md:text-[13px] lg:text-[14px] font-black leading-tight mb-2 md:mb-5 tracking-[0.1em] uppercase" style={{ fontFamily: "'Oswald', sans-serif" }}>
                                 КОНДИТЕРСЬКА <br className="md:hidden" />
