@@ -9,6 +9,7 @@ import ProtectedRoute from './components/ProtectedRoute';
 
 // Public Components
 import Home from './components/Home';
+import CakeList from './components/CakeList';
 import CakeDetail from './components/CakeDetail';
 import CakesRouter from './components/CakesRouter';
 import Login from './components/Login';
