@@ -22,5 +22,5 @@ export const getCategoryUrl = (slug) => {
         'seasonal': '/sezonni-torty',
         'photo-cakes': '/foto-torty'
     };
-    return seoMap[slug] || `/cakes?category=${slug}`;
+    return seoMap[slug] || `/cakes/${slug}`;
 };

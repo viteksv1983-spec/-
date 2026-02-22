@@ -9,8 +9,8 @@ import ProtectedRoute from './components/ProtectedRoute';
 
 // Public Components
 import Home from './components/Home';
-import CakeList from './components/CakeList';
 import CakeDetail from './components/CakeDetail';
+import CakesRouter from './components/CakesRouter';
 import Login from './components/Login';
 import Register from './components/Register';
 import Cart from './components/Cart';
@@ -71,7 +71,7 @@ function App() {
               <Route path="/sezonni-torty" element={<CakeList predefinedCategory="seasonal" predefinedSlug="sezonni-torty" />} />
               <Route path="/foto-torty" element={<CakeList predefinedCategory="photo-cakes" predefinedSlug="foto-torty" />} />
 
-              <Route path="/cakes/:id" element={<CakeDetail />} />
+              <Route path="/cakes/:categoryOrId" element={<CakesRouter />} />
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
               <Route path="/cart" element={<Cart />} />

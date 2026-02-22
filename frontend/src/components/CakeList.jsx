@@ -252,6 +252,7 @@ function CakeList({ predefinedCategory, predefinedSlug }) {
                 title={metaTitle}
                 description={metaDesc}
                 canonical={canonicalUrl}
+                ogImage={seoData?.ogImage}
                 schema={schemaData}
             />
             {/* Page Header */}

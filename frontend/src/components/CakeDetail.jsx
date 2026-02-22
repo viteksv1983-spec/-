@@ -9,8 +9,9 @@ import SEOHead from './SEOHead';
 import { Helmet } from 'react-helmet-async';
 
 
-function CakeDetail() {
-    const { id } = useParams();
+function CakeDetail({ predefinedId }) {
+    const params = useParams();
+    const id = predefinedId || params.id;
     const [cake, setCake] = useState(null);
     const [quantity, setQuantity] = useState(1);
 

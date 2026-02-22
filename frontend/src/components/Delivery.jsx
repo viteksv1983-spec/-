@@ -5,7 +5,11 @@ import SEOHead from './SEOHead';
 function Delivery() {
     return (
         <div className="min-h-screen bg-[#FDFBF7]">
-            <SEOHead title="Доставка тортів по Києву | Antreme" />
+            <SEOHead
+                title="Доставка тортів у Києві – Antreme"
+                description="Швидка та безпечна доставка тортів по Києву. Самовивіз та адресна доставка."
+                ogImage="/og-delivery.jpg"
+            />
 
             {/* Hero Banner */}
             <div className="relative overflow-hidden py-16 md:py-24 text-center">

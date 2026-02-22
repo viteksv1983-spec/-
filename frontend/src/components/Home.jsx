@@ -169,8 +169,8 @@ function Home() {
     return (
         <div className="min-h-screen bg-[#FDFBF7]">
             <SEOHead
-                title="Торти на замовлення Київ | Antreme"
-                description="Авторські торти на замовлення у Києві від кондитерської Antreme. Готуємо з 100% натуральних інгредієнтів: весільні, дитячі, корпоративні десерти з адресною доставкою."
+                title="Торти на замовлення у Києві | Авторські торти – Antreme"
+                description="Авторські торти на замовлення у Києві. Весільні, дитячі, корпоративні десерти з доставкою."
                 canonical="/"
                 ogImage="/og-image.jpg"
                 schema={combinedSchema}
