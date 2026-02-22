@@ -284,7 +284,7 @@ function CakeList() {
                                 <div key={cake.id}
                                     className="group bg-white rounded-2xl md:rounded-3xl border border-gray-100 shadow-[0_2px_12px_rgba(0,0,0,0.06)] hover:shadow-[0_8px_30px_rgba(0,0,0,0.12)] transition-all duration-300 flex flex-col h-full overflow-hidden relative"
                                 >
-                                    <div className="p-3 md:p-5 flex flex-col h-full">
+                                    <div className="p-3 md:p-4 flex flex-col h-full">
 
                                         {/* Title at top */}
                                         <Link to={`/cakes/${cake.id}`}>
@@ -295,7 +295,7 @@ function CakeList() {
                                         </Link>
 
                                         {/* Image + Wishlist */}
-                                        <div className="relative w-full aspect-[4/5] mb-2 md:mb-3">
+                                        <div className="relative w-full aspect-square mb-2">
                                             <button
                                                 onClick={(e) => { e.preventDefault(); toggleWishlist(cake.id); }}
                                                 className="absolute top-0 right-0 z-20 w-8 h-8 md:w-9 md:h-9 flex items-center justify-center rounded-full transition-all"
