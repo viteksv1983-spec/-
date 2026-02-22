@@ -64,7 +64,7 @@ function HolidayCakes() {
                 <div className="container mx-auto px-6 flex flex-col items-center">
                     <h1 className="text-3xl md:text-5xl font-black text-[#3b1218] uppercase tracking-wide mb-3"
                         style={{ fontFamily: "'Oswald', sans-serif" }}>
-                        Торти для свята
+                        Торти на замовлення
                     </h1>
                     {/* Decorative Flourish */}
                     <div className="w-full max-w-sm mx-auto flex justify-center mb-8">

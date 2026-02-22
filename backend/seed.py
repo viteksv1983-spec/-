@@ -238,9 +238,9 @@ def seed_data():
 
     # Predefined Bento Products for high-quality restoration
     BENTO_PRODUCTS = [
-        {"name": "Бенто 'Love Story'", "image": "/static/images/bento_1.jpg", "desc": "Ніжний тортик для закоханих з індивідуальним написом."},
-        {"name": "Бенто 'Happy Birthday'", "image": "/static/images/bento_2.jpg", "desc": "Святковий дизайн для незабутнього дня народження."},
-        {"name": "Бенто 'Милий Котик'", "image": "/static/images/bento_3.jpg", "desc": "Милий малюнок котика, що дарує посмішку."},
+        {"name": "Бенто 'Love Story'", "image": "/static/images/bento_1.png", "desc": "Ніжний тортик для закоханих з індивідуальним написом."},
+        {"name": "Бенто 'Happy Birthday'", "image": "/static/images/bento_2.png", "desc": "Святковий дизайн для незабутнього дня народження."},
+        {"name": "Бенто 'Милий Котик'", "image": "/static/images/bento_3.png", "desc": "Милий малюнок котика, що дарує посмішку."},
         {"name": "Бенто 'Весняний Сад'", "image": "/static/images/bento_4.jpg", "desc": "Вишуканий декор з весняними квітами та зеленню."},
         {"name": "Бенто 'Зоряне Небо'", "image": "/static/images/bento_5.jpg", "desc": "Глибокий синій колір з золотистими зірками."},
         {"name": "Бенто 'Рожева Мрія'", "image": "/static/images/bento_6.jpg", "desc": "Повітряний рожевий крем та перлинний декор."},
@@ -332,40 +332,42 @@ def seed_data():
     
     print(f"Database seeded successfully with {len(cakes)} items!")
     
-    # --- Seed Category Metadata (New Section) ---
-    print("Seeding category metadata...")
-    initial_images = {
-        "birthday": "https://images.unsplash.com/photo-1533777857889-4be7c70b33f7?auto=format&fit=crop&q=80&w=800",
-        "anniversary": "https://images.unsplash.com/photo-1535141192574-5d4897c12636?auto=format&fit=crop&q=80&w=800",
-        "kids": "https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?auto=format&fit=crop&q=80&w=800",
-        "boy": "https://images.unsplash.com/photo-1525124541374-b7eaf79d0dbf?auto=format&fit=crop&q=80&w=800",
-        "girl": "https://images.unsplash.com/photo-1621303837174-89787a7d4729?auto=format&fit=crop&q=80&w=800",
-        "wedding": "https://images.unsplash.com/photo-1510076857177-7470076d4098?auto=format&fit=crop&q=80&w=800",
-        "for-women": "https://images.unsplash.com/photo-1535254973040-607b474cb50d?auto=format&fit=crop&q=80&w=800",
-        "for-men": "https://images.unsplash.com/photo-1622621746654-20ecb790757d?auto=format&fit=crop&q=80&w=800",
-        "patriotic": "https://images.unsplash.com/photo-1517260911058-0fcfd733702f?auto=format&fit=crop&q=80&w=800",
-        "professional": "https://images.unsplash.com/photo-1542826438-bd32f43d626f?auto=format&fit=crop&q=80&w=800",
-        "gender-reveal": "https://images.unsplash.com/photo-1519340333755-56e9c1d04579?auto=format&fit=crop&q=80&w=800",
-        "hobby": "https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?auto=format&fit=crop&q=80&w=800",
-        "corporate": "https://images.unsplash.com/photo-1550617931-e17a7b70dce2?auto=format&fit=crop&q=80&w=800",
-        "christening": "https://images.unsplash.com/photo-1627916607164-7b20241db935?auto=format&fit=crop&q=80&w=800",
-        "seasonal": "https://images.unsplash.com/photo-1512484776495-a09d92e87c3b?auto=format&fit=crop&q=80&w=800",
-        "photo-cakes": "https://images.unsplash.com/photo-1558961359-1d9c29c5094f?auto=format&fit=crop&q=80&w=800",
-        "bento": "https://vatsak.com.ua/image/cache/catalog/products/Tortu/Child/FruttiMango/FruttiMango_Icon-562x429.jpg",
-        "biscuit": "https://vatsak.com.ua/image/cache/catalog/products/Tortu/Milk%20Cream/RedVelvet/RedVelvet_icon-562x429.jpg",
-        "mousse": "https://vatsak.com.ua/image/cache/catalog/products/Tortu/SER%IA%20VELVET/Velvet%20Cherry/velvet%20cherry-562x429.jpg",
-        "cupcakes": "https://vatsak.com.ua/image/cache/catalog/products/Tortu/PORTC%JN?/Medovuk/Medovuk_porc_Icon-562x429.jpg",
-        "gingerbread": "https://vatsak.com.ua/image/cache/catalog/products/Tortu/KARTONNA%20UPAKOVKA/Tof?/tofi-562x429.jpg"
-    }
+    # --- Seed Category Metadata (only if table is empty) ---
+    existing_meta_count = db.query(models.CategoryMetadata).count()
+    if existing_meta_count > 0:
+        print(f"Category metadata already has {existing_meta_count} entries — SKIPPING (preserving admin-uploaded images).")
+    else:
+        print("Seeding category metadata (first time)...")
+        initial_images = {
+            "birthday": "https://images.unsplash.com/photo-1533777857889-4be7c70b33f7?auto=format&fit=crop&q=80&w=800",
+            "anniversary": "https://images.unsplash.com/photo-1535141192574-5d4897c12636?auto=format&fit=crop&q=80&w=800",
+            "kids": "https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?auto=format&fit=crop&q=80&w=800",
+            "boy": "https://images.unsplash.com/photo-1525124541374-b7eaf79d0dbf?auto=format&fit=crop&q=80&w=800",
+            "girl": "https://images.unsplash.com/photo-1621303837174-89787a7d4729?auto=format&fit=crop&q=80&w=800",
+            "wedding": "https://images.unsplash.com/photo-1510076857177-7470076d4098?auto=format&fit=crop&q=80&w=800",
+            "for-women": "https://images.unsplash.com/photo-1535254973040-607b474cb50d?auto=format&fit=crop&q=80&w=800",
+            "for-men": "https://images.unsplash.com/photo-1622621746654-20ecb790757d?auto=format&fit=crop&q=80&w=800",
+            "patriotic": "https://images.unsplash.com/photo-1517260911058-0fcfd733702f?auto=format&fit=crop&q=80&w=800",
+            "professional": "https://images.unsplash.com/photo-1542826438-bd32f43d626f?auto=format&fit=crop&q=80&w=800",
+            "gender-reveal": "https://images.unsplash.com/photo-1519340333755-56e9c1d04579?auto=format&fit=crop&q=80&w=800",
+            "hobby": "https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?auto=format&fit=crop&q=80&w=800",
+            "corporate": "https://images.unsplash.com/photo-1550617931-e17a7b70dce2?auto=format&fit=crop&q=80&w=800",
+            "christening": "https://images.unsplash.com/photo-1627916607164-7b20241db935?auto=format&fit=crop&q=80&w=800",
+            "seasonal": "https://images.unsplash.com/photo-1512484776495-a09d92e87c3b?auto=format&fit=crop&q=80&w=800",
+            "photo-cakes": "https://images.unsplash.com/photo-1558961359-1d9c29c5094f?auto=format&fit=crop&q=80&w=800",
+            "bento": "https://vatsak.com.ua/image/cache/catalog/products/Tortu/Child/FruttiMango/FruttiMango_Icon-562x429.jpg",
+            "biscuit": "https://vatsak.com.ua/image/cache/catalog/products/Tortu/Milk%20Cream/RedVelvet/RedVelvet_icon-562x429.jpg",
+            "mousse": "https://vatsak.com.ua/image/cache/catalog/products/Tortu/SER%IA%20VELVET/Velvet%20Cherry/velvet%20cherry-562x429.jpg",
+            "cupcakes": "https://vatsak.com.ua/image/cache/catalog/products/Tortu/PORTC%JN?/Medovuk/Medovuk_porc_Icon-562x429.jpg",
+            "gingerbread": "https://vatsak.com.ua/image/cache/catalog/products/Tortu/KARTONNA%20UPAKOVKA/Tof?/tofi-562x429.jpg"
+        }
 
-    for slug, img_url in initial_images.items():
-        existing = db.query(models.CategoryMetadata).filter(models.CategoryMetadata.slug == slug).first()
-        if not existing:
+        for slug, img_url in initial_images.items():
             meta = models.CategoryMetadata(slug=slug, image_url=img_url)
             db.add(meta)
-    
-    db.commit()
-    print("Category metadata seeded!")
+        
+        db.commit()
+        print("Category metadata seeded!")
     db.close()
 
 if __name__ == "__main__":

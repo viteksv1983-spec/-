@@ -33,8 +33,8 @@ export const GROUP_B_CATEGORIES = {
     'bento-torty': { dbCategory: 'bento', label: 'Бенто торти' },
     'biskvitni-torty': { dbCategory: 'biscuit', label: 'Бісквітні торти' },
     'musovi-torty': { dbCategory: 'mousse', label: 'Мусові торти' },
-    'kapkeyky': { dbCategory: 'cupcakes', label: 'Капкейки' },
-    'imbirni-pryanyky': { dbCategory: 'gingerbread', label: 'Імбирні пряники' },
+    'kapkeyki': { dbCategory: 'cupcakes', label: 'Капкейки' },
+    'imbirni-pryaniki': { dbCategory: 'gingerbread', label: 'Імбирні пряники' },
     'nachynky': { dbCategory: 'fillings', label: 'Начинки' },
 };
 

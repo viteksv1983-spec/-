@@ -6,7 +6,7 @@ import { FILLINGS } from '../constants/fillings';
 import QuickOrderModal from './QuickOrderModal';
 import SEOHead from './SEOHead';
 import { getProductUrl } from '../utils/urls';
-import heroBanner from '../assets/hero-banner.png';
+import heroBanner from '../assets/hero-banner.webp';
 
 const DISTRICTS_DATA = {
     'poznyaky': {

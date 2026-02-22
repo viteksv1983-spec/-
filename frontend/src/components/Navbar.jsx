@@ -4,7 +4,7 @@ import { FiUser } from 'react-icons/fi';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
 import { CartContext } from '../context/CartContext';
-import logo from '../assets/logo.png';
+import logo from '../assets/logo.webp';
 
 function Navbar() {
     const { user, logout } = useContext(AuthContext);
@@ -147,7 +147,7 @@ function Navbar() {
             {/* Десктоп версия */}
             <div className="bg-white border-t border-gray-100 py-4 overflow-x-auto scrollbar-hide hidden md:block">
                 <div className="container mx-auto px-4 md:px-6 flex items-center justify-center space-x-8 md:space-x-12 font-bold text-[12px] uppercase tracking-widest flex-nowrap">
-                    <Link to="/holiday" className={`transition-all whitespace-nowrap font-black border-b-2 pb-0.5 ${location.pathname === '/holiday' ? 'text-[#D8A055] border-[#D8A055]' : 'text-gray-900 border-transparent hover:text-[#D8A055] hover:border-[#D8A055]'}`}>Торти на замовлення</Link>
+                    <Link to="/torty-na-zamovlennya" className={`transition-all whitespace-nowrap font-black border-b-2 pb-0.5 ${location.pathname === '/torty-na-zamovlennya' ? 'text-[#D8A055] border-[#D8A055]' : 'text-gray-900 border-transparent hover:text-[#D8A055] hover:border-[#D8A055]'}`}>Торти на замовлення</Link>
                     <Link to="/bento-torty" className={`transition-all whitespace-nowrap border-b-2 pb-0.5 ${location.pathname === '/bento-torty' ? 'text-[#D8A055] font-black border-[#D8A055]' : 'text-gray-900 border-transparent hover:text-[#D8A055]'}`}>Бенто тортики</Link>
                     <Link to="/biskvitni-torty" className={`transition-all whitespace-nowrap border-b-2 pb-0.5 ${location.pathname === '/biskvitni-torty' ? 'text-[#D8A055] font-black border-[#D8A055]' : 'text-gray-900 border-transparent hover:text-[#D8A055]'}`}>Бісквітні торти</Link>
                     <Link to="/musovi-torty" className={`transition-all whitespace-nowrap border-b-2 pb-0.5 ${location.pathname === '/musovi-torty' ? 'text-[#D8A055] font-black border-[#D8A055]' : 'text-gray-900 border-transparent hover:text-[#D8A055]'}`}>Мусові торти</Link>
@@ -164,8 +164,8 @@ function Navbar() {
                     <div className="flex-1 overflow-x-auto scrollbar-hide">
                         <div className="flex items-center gap-4 font-bold text-[11px] uppercase tracking-widest min-w-max pr-3">
                             <Link
-                                to="/holiday"
-                                className={`whitespace-nowrap border-b-2 pb-0.5 transition-colors ${location.pathname === '/holiday' || location.pathname === '/' ? 'text-[#D8A055] border-[#D8A055] font-black' : 'text-gray-700 border-transparent'}`}
+                                to="/torty-na-zamovlennya"
+                                className={`whitespace-nowrap border-b-2 pb-0.5 transition-colors ${location.pathname === '/torty-na-zamovlennya' || location.pathname === '/' ? 'text-[#D8A055] border-[#D8A055] font-black' : 'text-gray-700 border-transparent'}`}
                             >
                                 Торти на замовлення
                             </Link>
@@ -231,7 +231,7 @@ function Navbar() {
                             <div className="mb-5">
                                 <div className="text-[10px] uppercase tracking-[0.2em] text-[#a0742d]/60 font-black mb-3 px-2">Каталог</div>
                                 <div className="rounded-xl py-2 px-1">
-                                    <Link to="/holiday" className="flex items-center gap-2 px-3 py-2.5 text-[13px] font-black uppercase tracking-wider text-[#5a0020] hover:bg-[#F3E2CF]/60 rounded-lg transition-colors" onClick={() => setIsMenuOpen(false)}>
+                                    <Link to="/torty-na-zamovlennya" className="flex items-center gap-2 px-3 py-2.5 text-[13px] font-black uppercase tracking-wider text-[#5a0020] hover:bg-[#F3E2CF]/60 rounded-lg transition-colors" onClick={() => setIsMenuOpen(false)}>
                                         🎂 Торти на замовлення
                                     </Link>
                                     <Link to="/bento-torty" className="flex items-center gap-2 px-3 py-2.5 text-[13px] font-bold uppercase tracking-wider text-[#a0742d] hover:bg-[#F3E2CF]/60 rounded-lg transition-colors" onClick={() => setIsMenuOpen(false)}>

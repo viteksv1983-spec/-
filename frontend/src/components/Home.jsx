@@ -2,15 +2,15 @@ import { getCategoryUrl, getProductUrl } from '../utils/urls';
 import React, { useEffect, useState, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import api from '../api';
-import logo from '../assets/logo.png';
+import logo from '../assets/logo.webp';
 import { CartContext } from '../context/CartContext';
 import QuickOrderModal from './QuickOrderModal';
-import heroBanner from '../assets/hero-banner.png';
-import mobileHeroBg from '../assets/mobile_hero_bg.png';
-import transparentHeroCake from '../assets/transparent-hero-cake.png';
-import bentoImg from '../assets/category-bento.png';
-import biscuitImg from '../assets/category-biscuit.png';
-import mousseImg from '../assets/category-mousse.png';
+import heroBanner from '../assets/hero-banner.webp';
+import mobileHeroBg from '../assets/mobile_hero_bg.webp';
+import transparentHeroCake from '../assets/transparent-hero-cake.webp';
+import bentoImg from '../assets/category-bento.webp';
+import biscuitImg from '../assets/category-biscuit.webp';
+import mousseImg from '../assets/category-mousse.webp';
 
 import { CATEGORIES } from '../constants/categories';
 import { FILLINGS } from '../constants/fillings';
@@ -187,6 +187,7 @@ function Home() {
                         alt="Торт Antreme Desktop"
                         className="absolute inset-0 w-full h-full object-cover hidden md:block"
                         style={{ zIndex: 0, objectPosition: 'center right' }}
+                        fetchpriority="high"
                         onError={(e) => { e.target.style.display = 'none'; }}
                     />
 
@@ -331,7 +332,7 @@ function Home() {
                                     </Link>
                                 </div>
                                 <div className="relative flex-shrink-0 w-[110px] md:w-[150px] self-end pr-2 md:pr-4 pb-2 md:pb-4">
-                                    <img src={imgUrl} alt={cat.name} className="w-full h-auto max-h-[120px] md:max-h-[160px] object-contain mix-blend-multiply group-hover:scale-105 group-hover:-translate-y-1 transition-transform duration-500" />
+                                    <img src={imgUrl} alt={cat.name} className="w-full h-auto max-h-[120px] md:max-h-[160px] object-contain mix-blend-multiply group-hover:scale-105 group-hover:-translate-y-1 transition-transform duration-500" loading="lazy" />
                                 </div>
                             </div>
                         )
@@ -395,7 +396,7 @@ function Home() {
                         {/* Content Column */}
                         <div className="w-full lg:w-1/2 relative flex flex-col items-center text-center">
                             <div className="mb-4 animate-fade-in">
-                                <img src={logo} alt="ANTREME Logo" className="w-[380px] h-auto object-contain" />
+                                <img src={logo} alt="ANTREME Logo" className="w-[380px] h-auto object-contain" loading="lazy" />
                             </div>
 
                             <h2 className="text-4xl md:text-5xl font-black text-gray-900 mb-6 leading-tight animate-fade-in uppercase tracking-tight" style={{ fontFamily: "'Oswald', sans-serif" }}>
@@ -430,7 +431,7 @@ function Home() {
             {/* Holiday Cakes Promo Section - Dark Premium */}
             <section className="py-20 md:py-32 overflow-hidden bg-[#FDFBF7]">
                 <div className="container mx-auto px-4 md:px-8">
-                    <Link to="/holiday" className="group block relative overflow-hidden rounded-3xl md:rounded-[3rem] border border-gray-100 hover:border-[#E8C064]/40 transition-all duration-500 bg-white shadow-[0_4px_30px_rgba(0,0,0,0.08)] hover:shadow-[0_8px_40px_rgba(0,0,0,0.12)]">
+                    <Link to="/torty-na-zamovlennya" className="group block relative overflow-hidden rounded-3xl md:rounded-[3rem] border border-gray-100 hover:border-[#E8C064]/40 transition-all duration-500 bg-white shadow-[0_4px_30px_rgba(0,0,0,0.08)] hover:shadow-[0_8px_40px_rgba(0,0,0,0.12)]">
                         <div className="flex flex-col md:flex-row items-center">
                             {/* Text Content */}
                             <div className="w-full md:w-1/2 p-8 md:p-20 text-center md:text-left z-10 flex flex-col justify-center">
@@ -744,7 +745,7 @@ function Home() {
                             <Link to="/reviews" key={story.id} className="shrink-0 flex flex-col items-center gap-1.5 group">
                                 <div className="w-16 h-16 md:w-20 md:h-20 rounded-full p-[3px] group-hover:scale-110 transition-transform duration-300" style={{ background: 'linear-gradient(135deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888)' }}>
                                     <div className="w-full h-full rounded-full border-2 border-white overflow-hidden">
-                                        <img src={story.thumb} alt={story.title} className="w-full h-full object-cover" />
+                                        <img src={story.thumb} alt={story.title} className="w-full h-full object-cover" loading="lazy" />
                                     </div>
                                 </div>
                                 <span className="text-[9px] md:text-[10px] font-bold text-gray-500 uppercase tracking-wider text-center leading-tight max-w-[70px] line-clamp-1">{story.title}</span>
