@@ -71,8 +71,8 @@ export default function PageEditor() {
                                 key={page.id}
                                 onClick={() => setSelectedPage(page)}
                                 className={`w-full text-left px-4 py-3 rounded-xl transition-all text-sm font-medium flex flex-col gap-0.5 ${selectedPage?.id === page.id
-                                        ? 'bg-vatsak-red text-white shadow-md'
-                                        : 'text-gray-600 hover:bg-gray-50'
+                                    ? 'bg-vatsak-red text-white shadow-md'
+                                    : 'text-gray-600 hover:bg-gray-50'
                                     }`}
                             >
                                 <span className="truncate">{page.name}</span>
@@ -104,68 +104,64 @@ export default function PageEditor() {
                         </button>
                     </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="flex flex-col gap-6 max-w-3xl">
                         {/* SEO Section */}
-                        <div className="space-y-6">
-                            <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
-                                <h3 className="text-sm font-black text-gray-900 uppercase tracking-widest mb-6 flex items-center gap-2">
-                                    <FiSettings className="text-vatsak-red" />
-                                    SEO налаштування
-                                </h3>
-                                <div className="space-y-4">
-                                    <div>
-                                        <label className="block text-[10px] font-black text-gray-400 uppercase tracking-widest mb-1.5 ml-1">Meta Title</label>
-                                        <input
-                                            type="text"
-                                            value={selectedPage.meta_title || ''}
-                                            onChange={e => setSelectedPage({ ...selectedPage, meta_title: e.target.value })}
-                                            className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-vatsak-red/10 transition-all text-sm outline-none"
-                                            placeholder="Назва сторінки для пошуковиків"
-                                        />
-                                    </div>
-                                    <div>
-                                        <label className="block text-[10px] font-black text-gray-400 uppercase tracking-widest mb-1.5 ml-1">Meta Description</label>
-                                        <textarea
-                                            rows="4"
-                                            value={selectedPage.meta_description || ''}
-                                            onChange={e => setSelectedPage({ ...selectedPage, meta_description: e.target.value })}
-                                            className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-vatsak-red/10 transition-all text-sm outline-none resize-none"
-                                            placeholder="Короткий опис для Google..."
-                                        />
-                                    </div>
-                                    <div>
-                                        <label className="block text-[10px] font-black text-gray-400 uppercase tracking-widest mb-1.5 ml-1">H1 Заголовок</label>
-                                        <input
-                                            type="text"
-                                            value={selectedPage.h1_heading || ''}
-                                            onChange={e => setSelectedPage({ ...selectedPage, h1_heading: e.target.value })}
-                                            className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-vatsak-red/10 transition-all text-sm outline-none font-bold"
-                                            placeholder="Головний заголовок сторінки"
-                                        />
-                                    </div>
+                        <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
+                            <h3 className="text-sm font-black text-gray-900 uppercase tracking-widest mb-6 flex items-center gap-2">
+                                <FiSettings className="text-vatsak-red" />
+                                SEO налаштування
+                            </h3>
+                            <div className="space-y-4">
+                                <div>
+                                    <label className="block text-[10px] font-black text-gray-400 uppercase tracking-widest mb-1.5 ml-1">Meta Title</label>
+                                    <input
+                                        type="text"
+                                        value={selectedPage.meta_title || ''}
+                                        onChange={e => setSelectedPage({ ...selectedPage, meta_title: e.target.value })}
+                                        className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-vatsak-red/10 transition-all text-sm outline-none"
+                                        placeholder="Назва сторінки для пошуковиків"
+                                    />
+                                </div>
+                                <div>
+                                    <label className="block text-[10px] font-black text-gray-400 uppercase tracking-widest mb-1.5 ml-1">Meta Description</label>
+                                    <textarea
+                                        rows="4"
+                                        value={selectedPage.meta_description || ''}
+                                        onChange={e => setSelectedPage({ ...selectedPage, meta_description: e.target.value })}
+                                        className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-vatsak-red/10 transition-all text-sm outline-none resize-none"
+                                        placeholder="Короткий опис для Google..."
+                                    />
+                                </div>
+                                <div>
+                                    <label className="block text-[10px] font-black text-gray-400 uppercase tracking-widest mb-1.5 ml-1">H1 Заголовок</label>
+                                    <input
+                                        type="text"
+                                        value={selectedPage.h1_heading || ''}
+                                        onChange={e => setSelectedPage({ ...selectedPage, h1_heading: e.target.value })}
+                                        className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-vatsak-red/10 transition-all text-sm outline-none font-bold"
+                                        placeholder="Головний заголовок сторінки"
+                                    />
                                 </div>
                             </div>
                         </div>
 
                         {/* Content Section */}
-                        <div className="space-y-6">
-                            <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex flex-col h-full">
-                                <h3 className="text-sm font-black text-gray-900 uppercase tracking-widest mb-6 flex items-center gap-2">
-                                    <FiInfo className="text-vatsak-red" />
-                                    Текстовий контент
-                                </h3>
-                                <div className="flex-grow flex flex-col">
-                                    <label className="block text-[10px] font-black text-gray-400 uppercase tracking-widest mb-1.5 ml-1">Текст сторінки</label>
-                                    <textarea
-                                        value={selectedPage.content || ''}
-                                        onChange={e => setSelectedPage({ ...selectedPage, content: e.target.value })}
-                                        className="w-full flex-grow px-4 py-4 bg-gray-50 border border-gray-200 rounded-2xl focus:bg-white focus:ring-2 focus:ring-vatsak-red/10 transition-all text-sm outline-none min-h-[300px]"
-                                        placeholder="Введіть основний текст сторінки..."
-                                    />
-                                    <p className="text-[10px] text-gray-400 mt-3 italic">
-                                        * Наразі підтримується звичайний текст. HTML-теги будуть додані в наступних оновленнях.
-                                    </p>
-                                </div>
+                        <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex flex-col">
+                            <h3 className="text-sm font-black text-gray-900 uppercase tracking-widest mb-6 flex items-center gap-2">
+                                <FiInfo className="text-vatsak-red" />
+                                Текстовий контент
+                            </h3>
+                            <div className="flex-grow flex flex-col">
+                                <label className="block text-[10px] font-black text-gray-400 uppercase tracking-widest mb-1.5 ml-1">Текст сторінки</label>
+                                <textarea
+                                    value={selectedPage.content || ''}
+                                    onChange={e => setSelectedPage({ ...selectedPage, content: e.target.value })}
+                                    className="w-full flex-grow px-4 py-4 bg-gray-50 border border-gray-200 rounded-2xl focus:bg-white focus:ring-2 focus:ring-vatsak-red/10 transition-all text-sm outline-none min-h-[300px]"
+                                    placeholder="Введіть основний текст сторінки..."
+                                />
+                                <p className="text-[10px] text-gray-400 mt-3 italic">
+                                    * Наразі підтримується звичайний текст. HTML-теги будуть додані в наступних оновленнях.
+                                </p>
                             </div>
                         </div>
                     </div>

@@ -71,7 +71,7 @@ export default function CategoryManager() {
     );
 
     return (
-        <div className="space-y-6 max-w-5xl">
+        <div className="space-y-6 max-w-3xl">
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
                 <div>
                     <h1 className="text-2xl font-bold text-gray-900">Керування категоріями</h1>
@@ -79,7 +79,7 @@ export default function CategoryManager() {
                 </div>
             </div>
 
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 md:gap-5">
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-5">
                 {CATEGORIES.filter(c => !['bento', 'biscuit', 'mousse', 'wedding', 'cupcakes', 'gingerbread'].includes(c.slug) || c.slug === 'wedding').map((cat) => (
                     <div key={cat.slug} className="bg-white rounded-2xl md:rounded-3xl shadow-sm border border-gray-100 overflow-hidden group hover:shadow-md transition-shadow">
                         <div className="aspect-square md:aspect-video relative bg-gray-50 overflow-hidden">
