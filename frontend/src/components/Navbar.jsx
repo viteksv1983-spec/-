@@ -124,19 +124,19 @@ function Navbar() {
                                 </div>
                             </Link>
                             {/* Правая часть: соцсети + телефон */}
-                            <div className="flex flex-col items-end gap-0.5">
-                                <div className="flex items-center gap-2">
-                                    <a href="https://www.instagram.com/liudmilaprikhodko" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="text-[#6A1A24]">
-                                        <FaInstagram className="text-[15px]" />
+                            <div className="flex flex-col items-end gap-1">
+                                <div className="flex items-center gap-1">
+                                    <a href="https://www.instagram.com/liudmilaprikhodko" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="text-[#6A1A24] p-2.5 hover:bg-black/5 rounded-full -my-1">
+                                        <FaInstagram className="text-[18px]" />
                                     </a>
-                                    <a href="https://www.facebook.com/sveetdesert/" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="text-[#6A1A24]">
-                                        <FaFacebook className="text-[15px]" />
+                                    <a href="https://www.facebook.com/sveetdesert/" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="text-[#6A1A24] p-2.5 hover:bg-black/5 rounded-full -my-1">
+                                        <FaFacebook className="text-[18px]" />
                                     </a>
-                                    <a href="https://t.me/antreeeme" target="_blank" rel="noopener noreferrer" aria-label="Telegram" className="text-[#6A1A24]">
-                                        <FaTelegram className="text-[15px]" />
+                                    <a href="https://t.me/antreeeme" target="_blank" rel="noopener noreferrer" aria-label="Telegram" className="text-[#6A1A24] p-2.5 hover:bg-black/5 rounded-full -my-1">
+                                        <FaTelegram className="text-[18px]" />
                                     </a>
                                 </div>
-                                <a href="tel:0979081504" className="font-extrabold text-[#5a0020] text-[13px] tracking-tight">097 908 15 04</a>
+                                <a href="tel:0979081504" className="font-extrabold text-[#5a0020] text-[14px] tracking-tight py-2 px-3 -mr-3 hover:bg-black/5 rounded-lg -mb-2">097 908 15 04</a>
                             </div>
                         </div>
                     </div>
@@ -301,16 +301,16 @@ function Navbar() {
                         <div className="mt-auto p-8 border-t border-gray-100 flex flex-col gap-6 bg-gray-50/50">
                             <a href="tel:0979081504" className="text-lg font-black text-[#D39A5E] hover:text-black transition-colors">097 908 15 04</a>
                             <div className="flex gap-6 items-center">
-                                <a href="https://www.instagram.com/liudmilaprikhodko" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="text-2xl text-[#D39A5E] hover:scale-110 transition-transform">
+                                <a href="https://www.instagram.com/liudmilaprikhodko" target="_blank" rel="noopener noreferrer" className="text-2xl text-[#D39A5E] hover:scale-110 transition-transform">
                                     <FaInstagram />
                                 </a>
-                                <a href="https://t.me/antreeeme" target="_blank" rel="noopener noreferrer" aria-label="Telegram" className="text-2xl text-[#D39A5E] hover:scale-110 transition-transform">
+                                <a href="https://t.me/antreeeme" target="_blank" rel="noopener noreferrer" className="text-2xl text-[#D39A5E] hover:scale-110 transition-transform">
                                     <FaTelegram />
                                 </a>
-                                <a href="viber://chat?number=%2B380979081504" target="_blank" rel="noopener noreferrer" aria-label="Viber" className="text-2xl text-[#D39A5E] hover:scale-110 transition-transform">
+                                <a href="viber://chat?number=%2B380979081504" target="_blank" rel="noopener noreferrer" className="text-2xl text-[#D39A5E] hover:scale-110 transition-transform">
                                     <FaViber />
                                 </a>
-                                <a href="https://www.facebook.com/sveetdesert/" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="text-2xl text-[#D39A5E] hover:scale-110 transition-transform">
+                                <a href="https://www.facebook.com/sveetdesert/" target="_blank" rel="noopener noreferrer" className="text-2xl text-[#D39A5E] hover:scale-110 transition-transform">
                                     <FaFacebook />
                                 </a>
                             </div>
