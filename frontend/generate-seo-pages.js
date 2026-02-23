@@ -274,18 +274,12 @@ function getSeoJsonLd(routePath) {
                 "priceRange": "₴₴",
                 "areaServed": { "@type": "City", "name": "Kyiv" },
                 "sameAs": ["https://www.instagram.com/antreme.kyiv/"],
-                "aggregateRating": {
-                    "@type": "AggregateRating",
-                    "ratingValue": "5.0",
-                    "reviewCount": "200",
-                    "bestRating": "5",
-                    "worstRating": "1"
-                },
                 "address": {
                     "@type": "PostalAddress",
-                    "addressLocality": "Київ",
-                    "addressRegion": "Київська область",
                     "streetAddress": "Харківське шосе, 180/21",
+                    "addressLocality": "Київ",
+                    "postalCode": "02091",
+                    "addressRegion": "Київська область",
                     "addressCountry": "UA"
                 },
                 "openingHoursSpecification": {

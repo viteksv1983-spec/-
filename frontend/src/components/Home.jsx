@@ -146,10 +146,13 @@ function Home() {
         "url": "https://antreme.kyiv.ua/",
         "telephone": "+380979081504",
         "priceRange": "₴₴",
-        "areaServed": "Kyiv",
+        "areaServed": { "@type": "City", "name": "Kyiv" },
+        "sameAs": ["https://www.instagram.com/antreme.kyiv/"],
         "address": {
             "@type": "PostalAddress",
+            "streetAddress": "Харківське шосе, 180/21",
             "addressLocality": "Київ",
+            "postalCode": "02091",
             "addressRegion": "Київська область",
             "addressCountry": "UA"
         },
