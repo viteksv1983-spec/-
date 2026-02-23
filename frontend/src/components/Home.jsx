@@ -414,7 +414,7 @@ function Home() {
                                     <div key={i} className="flex items-start gap-4 p-4 rounded-2xl transition-all duration-300 bg-white border border-gray-100 shadow-sm hover:shadow-md">
                                         <div className="w-12 h-12 rounded-full flex items-center justify-center text-2xl flex-shrink-0" style={{ background: item.color }}>{item.icon}</div>
                                         <div>
-                                            <h4 className="font-bold text-gray-900 mb-1">{item.title}</h4>
+                                            <h3 className="font-bold text-gray-900 mb-1">{item.title}</h3>
                                             <p className="text-sm text-gray-500">{item.sub}</p>
                                         </div>
                                     </div>
