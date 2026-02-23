@@ -54,6 +54,7 @@ function Navbar() {
                                     />
                                     <button
                                         type="submit"
+                                        aria-label="Пошук"
                                         className="absolute right-0 top-0 w-10 h-full bg-[#6A1A24] text-white flex items-center justify-center rounded-r-md transition-colors hover:bg-[#80202c]"
                                     >
                                         <FaSearch className="text-sm" />
@@ -75,16 +76,16 @@ function Navbar() {
                             <div className="flex items-center space-x-4 lg:space-x-6 flex-shrink-0">
                                 <div className="hidden lg:flex flex-col items-center">
                                     <div className="flex items-center space-x-3 mb-1">
-                                        <a href="https://www.instagram.com/liudmilaprikhodko" target="_blank" rel="noopener noreferrer" className="text-[#6A1A24] hover:text-[#5a0020] transition-colors">
+                                        <a href="https://www.instagram.com/liudmilaprikhodko" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="text-[#6A1A24] hover:text-[#5a0020] transition-colors">
                                             <FaInstagram className="text-xl" />
                                         </a>
-                                        <a href="https://www.facebook.com/sveetdesert/" target="_blank" rel="noopener noreferrer" className="text-[#6A1A24] hover:text-[#5a0020] transition-colors">
+                                        <a href="https://www.facebook.com/sveetdesert/" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="text-[#6A1A24] hover:text-[#5a0020] transition-colors">
                                             <FaFacebook className="text-xl" />
                                         </a>
-                                        <a href="https://t.me/antreeeme" target="_blank" rel="noopener noreferrer" className="text-[#6A1A24] hover:text-[#5a0020] transition-colors">
+                                        <a href="https://t.me/antreeeme" target="_blank" rel="noopener noreferrer" aria-label="Telegram" className="text-[#6A1A24] hover:text-[#5a0020] transition-colors">
                                             <FaTelegram className="text-xl" />
                                         </a>
-                                        <a href="viber://chat?number=%2B380979081504" target="_blank" rel="noopener noreferrer" className="text-[#6A1A24] hover:text-[#5a0020] transition-colors">
+                                        <a href="viber://chat?number=%2B380979081504" target="_blank" rel="noopener noreferrer" aria-label="Viber" className="text-[#6A1A24] hover:text-[#5a0020] transition-colors">
                                             <FaViber className="text-xl" />
                                         </a>
                                     </div>
@@ -92,12 +93,12 @@ function Navbar() {
                                 </div>
 
                                 <div className="hidden xl:flex items-center">
-                                    <Link to={user ? "/account" : "/login"} className="text-[#6A1A24] hover:text-[#5a0020] transition-colors p-2 rounded-full hover:bg-black/5" title={user ? "Особистий кабінет" : "Вхід"}>
+                                    <Link to={user ? "/account" : "/login"} className="text-[#6A1A24] hover:text-[#5a0020] transition-colors p-2 rounded-full hover:bg-black/5" title={user ? "Особистий кабінет" : "Вхід"} aria-label={user ? "Особистий кабінет" : "Вхід"}>
                                         <FiUser className="w-8 h-8" />
                                     </Link>
                                 </div>
 
-                                <Link to="/cart" className="relative group text-[#6A1A24] hover:text-[#5a0020] transition-colors p-2 rounded-full hover:bg-black/5">
+                                <Link to="/cart" aria-label="Кошик" className="relative group text-[#6A1A24] hover:text-[#5a0020] transition-colors p-2 rounded-full hover:bg-black/5">
                                     <div className="relative">
                                         <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
@@ -125,13 +126,13 @@ function Navbar() {
                             {/* Правая часть: соцсети + телефон */}
                             <div className="flex flex-col items-end gap-0.5">
                                 <div className="flex items-center gap-2">
-                                    <a href="https://www.instagram.com/liudmilaprikhodko" target="_blank" rel="noopener noreferrer" className="text-[#6A1A24]">
+                                    <a href="https://www.instagram.com/liudmilaprikhodko" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="text-[#6A1A24]">
                                         <FaInstagram className="text-[15px]" />
                                     </a>
-                                    <a href="https://www.facebook.com/sveetdesert/" target="_blank" rel="noopener noreferrer" className="text-[#6A1A24]">
+                                    <a href="https://www.facebook.com/sveetdesert/" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="text-[#6A1A24]">
                                         <FaFacebook className="text-[15px]" />
                                     </a>
-                                    <a href="https://t.me/antreeeme" target="_blank" rel="noopener noreferrer" className="text-[#6A1A24]">
+                                    <a href="https://t.me/antreeeme" target="_blank" rel="noopener noreferrer" aria-label="Telegram" className="text-[#6A1A24]">
                                         <FaTelegram className="text-[15px]" />
                                     </a>
                                 </div>
@@ -180,11 +181,11 @@ function Navbar() {
                     {/* Иконки справа */}
                     <div className="flex items-center gap-1.5 flex-shrink-0 ml-2 border-l border-gray-100 pl-2">
                         {/* Поиск */}
-                        <button onClick={() => { setIsMenuOpen(false); navigate('/torty-na-zamovlennya/'); }} className="text-[#6A1A24] p-1.5">
+                        <button onClick={() => { setIsMenuOpen(false); navigate('/torty-na-zamovlennya/'); }} aria-label="Пошук" className="text-[#6A1A24] p-1.5">
                             <FaSearch className="text-[14px]" />
                         </button>
                         {/* Корзина */}
-                        <Link to="/cart" className="relative text-[#6A1A24] p-1.5">
+                        <Link to="/cart" aria-label="Кошик" className="relative text-[#6A1A24] p-1.5">
                             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
                             </svg>
@@ -195,7 +196,7 @@ function Navbar() {
                             )}
                         </Link>
                         {/* Бургер */}
-                        <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="text-[#6A1A24] p-1.5">
+                        <button onClick={() => setIsMenuOpen(!isMenuOpen)} aria-label={isMenuOpen ? "Закрити меню" : "Відкрити меню"} className="text-[#6A1A24] p-1.5">
                             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d={isMenuOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16M4 18h16"} />
                             </svg>
@@ -217,10 +218,10 @@ function Navbar() {
                     <div className="fixed top-0 left-0 h-full bg-white z-50 shadow-2xl w-fit max-w-[85vw] transform transition-transform duration-300 md:hidden overflow-y-auto flex flex-col border-r-4 border-[#F6E7D6]">
                         <div className="p-6 flex items-center justify-between border-b border-gray-100 bg-[#F6E7D6] sticky top-0 z-10">
                             <div className="flex items-center gap-2">
-                                <img src={logo} alt="L" className="h-8 w-auto" />
+                                <img src={logo} alt="Antreme" className="h-8 w-auto" />
                                 <span className="text-xl font-serif font-bold text-[#5a0020]">Antreme</span>
                             </div>
-                            <button onClick={() => setIsMenuOpen(false)} className="text-[#5a0020] p-1 ml-4 hover:rotate-90 transition-transform">
+                            <button onClick={() => setIsMenuOpen(false)} aria-label="Закрити меню" className="text-[#5a0020] p-1 ml-4 hover:rotate-90 transition-transform">
                                 <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
                                 </svg>
