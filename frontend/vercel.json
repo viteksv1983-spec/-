@@ -11,10 +11,6 @@
         {
             "source": "/(login|register|cart|admin|admin/.*)",
             "destination": "/index.html"
-        },
-        {
-            "source": "/cakes/.*",
-            "destination": "/404.html"
         }
     ]
 }
