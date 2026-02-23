@@ -77,8 +77,16 @@ STATIC_DIR = Path(__file__).parent / "static"
 MEDIA_DIR = Path(__file__).parent / "media"
 MEDIA_DIR.mkdir(parents=True, exist_ok=True)
 
+# Custom StaticFiles with Cache-Control headers for media (images)
+class CachedStaticFiles(StaticFiles):
+    async def get_response(self, path, scope):
+        response = await super().get_response(path, scope)
+        # 1 year immutable cache for media images
+        response.headers["Cache-Control"] = "public, max-age=31536000, immutable"
+        return response
+
 app.mount("/static", StaticFiles(directory=str(STATIC_DIR)), name="static")
-app.mount("/media", StaticFiles(directory=str(MEDIA_DIR)), name="media")
+app.mount("/media", CachedStaticFiles(directory=str(MEDIA_DIR)), name="media")
 
 
 # Dependency
