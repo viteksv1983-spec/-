@@ -376,15 +376,9 @@ function Home() {
                                         src="/images/confectioner.jpg"
                                         alt="Шеф-кондитер Людмила Приходько - авторські торти на замовлення Київ"
                                         className="w-full h-auto object-cover"
-                                        onError={(e) => {
-                                            if (!e.target.dataset.retried) {
-                                                e.target.dataset.retried = "true";
-                                                e.target.src = "/images/confectioner.jpg.jpg";
-                                            } else {
-                                                e.target.onerror = null;
-                                                e.target.src = "https://placehold.co/600x800/FDFBF7/7A0019?text=Кондитер";
-                                            }
-                                        }}
+                                        width="600"
+                                        height="800"
+                                        loading="lazy"
                                     />
                                     <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-8">
                                         <h3 className="text-white text-2xl font-bold" style={{ fontFamily: "'Oswald', sans-serif" }}>Людмила Приходько</h3>
