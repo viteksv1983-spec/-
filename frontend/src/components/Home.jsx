@@ -513,6 +513,9 @@ function Home() {
                                     src="https://images.unsplash.com/photo-1535141192574-5d4897c12636?auto=format&fit=crop&q=80&w=1000"
                                     alt="Ексклюзивні святкові та весільні торти на замовлення в Києві"
                                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-[2000ms] ease-out"
+                                    width="1000"
+                                    height="650"
+                                    loading="lazy"
                                 />
                                 <div className="absolute inset-0 bg-black/5 group-hover:bg-transparent transition-colors duration-500"></div>
                             </div>
