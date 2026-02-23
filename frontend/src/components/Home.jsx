@@ -196,8 +196,10 @@ function Home() {
                         src="/transparent-hero-cake.webp"
                         alt="Mobile Hero Cake"
                         className="absolute right-[-10%] bottom-[20%] w-[82%] object-contain md:hidden pointer-events-none"
-                        style={{ zIndex: 5, filter: 'brightness(1.2) contrast(1.15) saturate(1.2) drop-shadow(0px 15px 25px rgba(0,0,0,0.6))' }}
+                        style={{ zIndex: 5 }}
                         fetchpriority="high"
+                        width="600"
+                        height="600"
                         onError={(e) => { e.target.style.display = 'none'; }}
                     />
 
