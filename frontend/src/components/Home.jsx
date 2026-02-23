@@ -42,6 +42,22 @@ const categoryDescriptions = {
     'corporate': 'Індивідуальні\nкорпоративні десерти',
 };
 
+const categoryAltTexts = {
+    'wedding': 'Весільний торт на замовлення Київ',
+    'birthday': 'Торт на день народження Київ',
+    'kids': 'Дитячий торт на замовлення Київ',
+    'bento': 'Бенто торт Київ',
+    'mousse': 'Мусовий торт Київ',
+    'corporate': 'Корпоративний торт Київ',
+    'anniversary': 'Торт на ювілей Київ',
+    'boy': 'Торт для хлопчика на замовлення Київ',
+    'girl': 'Торт для дівчинки на замовлення Київ',
+    'for-women': 'Торт для жінки на замовлення Київ',
+    'for-men': 'Торт для чоловіка на замовлення Київ',
+    'patriotic': 'Патріотичний торт на замовлення Київ',
+    'gender-reveal': 'Gender reveal торт Київ',
+};
+
 const PROMO_CATEGORY_SLUGS = [
     'wedding',
     'birthday',
@@ -220,7 +236,7 @@ function Home() {
                     {/* === DESKTOP: bg-image approach === */}
                     <img
                         src={heroBanner}
-                        alt="Торт Antreme Desktop"
+                        alt="Торт на замовлення в Києві від кондитерської Antreme"
                         className="absolute inset-0 w-full h-full object-cover hidden md:block"
                         style={{ zIndex: 0, objectPosition: 'center right' }}
                         fetchpriority="high"
@@ -230,7 +246,7 @@ function Home() {
                     {/* === MOBILE: Transparent PNG Cake overlay === */}
                     <img
                         src="/transparent-hero-cake.webp"
-                        alt="Mobile Hero Cake"
+                        alt="Торт на замовлення Київ – Antreme"
                         className="absolute right-[-10%] bottom-[20%] w-[82%] object-contain md:hidden pointer-events-none"
                         style={{ zIndex: 5 }}
                         fetchpriority="high"
@@ -371,7 +387,7 @@ function Home() {
                                     </Link>
                                 </div>
                                 <div className="relative flex-shrink-0 w-[110px] md:w-[150px] self-end pr-2 md:pr-4 pb-2 md:pb-4">
-                                    <img src={imgUrl} alt={cat.name} className="w-full h-auto max-h-[120px] md:max-h-[160px] object-contain mix-blend-multiply group-hover:scale-105 group-hover:-translate-y-1 transition-transform duration-500" loading="lazy" />
+                                    <img src={imgUrl} alt={categoryAltTexts[cat.slug] || `${cat.name} на замовлення Київ`} className="w-full h-auto max-h-[120px] md:max-h-[160px] object-contain mix-blend-multiply group-hover:scale-105 group-hover:-translate-y-1 transition-transform duration-500" loading="lazy" />
                                 </div>
                             </div>
                         )
@@ -412,7 +428,7 @@ function Home() {
                                 <div className="relative rounded-[2rem] overflow-hidden shadow-xl transform transition duration-500 group-hover:scale-[1.02] border border-gray-100">
                                     <img
                                         src="/images/confectioner.jpg"
-                                        alt="Шеф-кондитер Людмила Приходько - авторські торти на замовлення Київ"
+                                        alt="Кондитер Antreme з авторським тортом у Києві"
                                         className="w-full h-auto object-cover"
                                         width="600"
                                         height="800"
@@ -429,7 +445,7 @@ function Home() {
                         {/* Content Column */}
                         <div className="w-full lg:w-1/2 relative flex flex-col items-center text-center">
                             <div className="mb-4 animate-fade-in">
-                                <img src={logo} alt="ANTREME Logo" className="w-[380px] h-auto object-contain" loading="lazy" />
+                                <img src={logo} alt="" className="w-[380px] h-auto object-contain" loading="lazy" aria-hidden="true" />
                             </div>
 
                             <h2 className="text-4xl md:text-5xl font-black text-gray-900 mb-6 leading-tight animate-fade-in uppercase tracking-tight" style={{ fontFamily: "'Oswald', sans-serif" }}>
@@ -537,7 +553,7 @@ function Home() {
                                                 {cake.image_url && (
                                                     <img
                                                         src={cake.image_url.startsWith('http') ? cake.image_url : `${api.defaults.baseURL}${cake.image_url}`}
-                                                        alt={cake.name}
+                                                        alt={`${cake.name} – замовити в Києві`}
                                                         className="w-full h-full object-contain drop-shadow-lg transform group-hover:scale-105 transition-transform duration-500"
                                                         loading="lazy"
                                                     />
@@ -779,7 +795,7 @@ function Home() {
                             <Link to="/reviews/" key={story.id} className="shrink-0 flex flex-col items-center gap-1.5 group">
                                 <div className="w-16 h-16 md:w-20 md:h-20 rounded-full p-[3px] group-hover:scale-110 transition-transform duration-300" style={{ background: 'linear-gradient(135deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888)' }}>
                                     <div className="w-full h-full rounded-full border-2 border-white overflow-hidden">
-                                        <img src={story.thumb} alt={story.title} className="w-full h-full object-cover" loading="lazy" />
+                                        <img src={story.thumb} alt={`Відгук клієнта Antreme – ${story.title}`} className="w-full h-full object-cover" loading="lazy" />
                                     </div>
                                 </div>
                                 <span className="text-[9px] md:text-[10px] font-bold text-gray-500 uppercase tracking-wider text-center leading-tight max-w-[70px] line-clamp-1">{story.title}</span>
