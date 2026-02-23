@@ -990,6 +990,24 @@ function Home() {
                     </div>
                 </article>
 
+                {/* --- CTA Repeat Block --- */}
+                <section className="text-center py-10 mb-12">
+                    <h2 className="text-2xl md:text-3xl font-black text-gray-900 mb-3 uppercase tracking-tight" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                        Готові замовити торт у Києві?
+                    </h2>
+                    <p className="text-gray-500 text-sm md:text-base mb-6 max-w-lg mx-auto">
+                        Залиште заявку або зателефонуйте нам — підготуємо індивідуальну пропозицію.
+                    </p>
+                    <div className="flex flex-col sm:flex-row gap-3 justify-center">
+                        <a href="tel:0979081504" className="inline-flex items-center justify-center gap-2 px-8 py-3 font-black text-xs uppercase tracking-widest rounded-full border border-gray-200 text-gray-800 hover:border-[#7A0019] hover:text-[#7A0019] transition-all">
+                            📞 Зателефонувати
+                        </a>
+                        <Link to="/torty-na-zamovlennya/" className="inline-block px-8 py-3 font-black text-xs uppercase tracking-widest rounded-full bg-[#7A0019] hover:bg-[#5a0014] text-white transition-all shadow-sm">
+                            Переглянути каталог
+                        </Link>
+                    </div>
+                </section>
+
                 {/* --- FAQ Block --- */}
                 <div className="max-w-4xl mx-auto">
                     <h2 className="text-2xl font-black text-center text-gray-900 mb-8 uppercase tracking-wide" style={{ fontFamily: "'Oswald', sans-serif" }}>
