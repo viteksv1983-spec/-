@@ -193,7 +193,7 @@ function Home() {
 
                     {/* === MOBILE: Transparent PNG Cake overlay === */}
                     <img
-                        src={transparentHeroCake}
+                        src="/transparent-hero-cake.webp"
                         alt="Mobile Hero Cake"
                         className="absolute right-[-10%] bottom-[20%] w-[82%] object-contain md:hidden pointer-events-none"
                         style={{ zIndex: 5, filter: 'brightness(1.2) contrast(1.15) saturate(1.2) drop-shadow(0px 15px 25px rgba(0,0,0,0.6))' }}

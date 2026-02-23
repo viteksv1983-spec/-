@@ -13,6 +13,9 @@
   <!-- Preconnect to backend API for faster first request -->
   <link rel="preconnect" href="https://backend-gzko.onrender.com" crossorigin />
 
+  <!-- Preload LCP hero image for mobile (discoverable from HTML) -->
+  <link rel="preload" as="image" type="image/webp" href="/transparent-hero-cake.webp" media="(max-width: 767px)" />
+
   <!-- Non-render-blocking fonts: loads as print, swaps to all on load -->
   <link
     href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Oswald:wght@500;600;700&family=Dancing+Script:wght@400;700&display=swap"
