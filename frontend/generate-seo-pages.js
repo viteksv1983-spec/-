@@ -304,15 +304,29 @@ function getSeoJsonLd(routePath) {
         ]);
     }
     if (routePath === '/torty-na-zamovlennya/vesilni') {
-        return JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "FAQPage",
-            "mainEntity": [
-                { "@type": "Question", "name": "За скільки часу потрібно замовляти весільний торт?", "acceptedAnswer": { "@type": "Answer", "text": "Рекомендуємо оформити замовлення за 2–4 тижні до дати весілля." } },
-                { "@type": "Question", "name": "Чи можна провести дегустацію?", "acceptedAnswer": { "@type": "Answer", "text": "Так, за попереднім записом доступна дегустація начинок." } },
-                { "@type": "Question", "name": "Чи доставляєте за межі Києва?", "acceptedAnswer": { "@type": "Answer", "text": "Так, умови обговорюються індивідуально." } }
-            ]
-        });
+        return JSON.stringify([
+            {
+                "@context": "https://schema.org",
+                "@type": "FAQPage",
+                "mainEntity": [
+                    { "@type": "Question", "name": "За скільки часу потрібно замовляти весільний торт?", "acceptedAnswer": { "@type": "Answer", "text": "Рекомендуємо оформити замовлення за 2–4 тижні до дати весілля." } },
+                    { "@type": "Question", "name": "Чи можна провести дегустацію?", "acceptedAnswer": { "@type": "Answer", "text": "Так, за попереднім записом доступна дегустація начинок." } },
+                    { "@type": "Question", "name": "Чи доставляєте за межі Києва?", "acceptedAnswer": { "@type": "Answer", "text": "Так, умови обговорюються індивідуально." } }
+                ]
+            },
+            {
+                "@context": "https://schema.org",
+                "@type": "Service",
+                "name": "Весільні торти на замовлення",
+                "serviceType": "Wedding cake design",
+                "areaServed": { "@type": "City", "name": "Kyiv" },
+                "provider": {
+                    "@type": "LocalBusiness",
+                    "name": "Antreme",
+                    "url": "https://antreme.kyiv.ua/"
+                }
+            }
+        ]);
     }
     return null;
 }

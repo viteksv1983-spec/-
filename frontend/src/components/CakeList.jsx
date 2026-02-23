@@ -264,6 +264,22 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
 
     const schemaData = [breadcrumbSchema, itemListSchema];
 
+    // Service Schema for wedding category (SEO)
+    if (category === 'wedding') {
+        schemaData.push({
+            "@context": "https://schema.org",
+            "@type": "Service",
+            "name": "Весільні торти на замовлення",
+            "serviceType": "Wedding cake design",
+            "areaServed": { "@type": "City", "name": "Kyiv" },
+            "provider": {
+                "@type": "LocalBusiness",
+                "name": "Antreme",
+                "url": "https://antreme.kyiv.ua/"
+            }
+        });
+    }
+
     const canonicalUrl = categorySeoUrl || (category ? `/cakes?category=${category}` : '/cakes/');
 
     const metaTitle = seoData ? seoData.title : `${getCategoryTitle()} | Купити торти в Києві – Antreme`;
@@ -401,7 +417,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                                                 {cake.image_url && (
                                                     <img
                                                         src={cake.image_url.startsWith('http') ? cake.image_url : `${api.defaults.baseURL}${cake.image_url}`}
-                                                        alt={`${cake.name} купити Київ`}
+                                                        alt={category === 'wedding' ? `Весільний торт на замовлення Київ – Antreme` : `${cake.name} – замовити в Києві`}
                                                         className="w-full h-full object-contain drop-shadow-md group-hover:scale-105 transition-transform duration-500"
                                                         loading="lazy"
                                                         decoding="async"
@@ -477,6 +493,32 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                         dangerouslySetInnerHTML={{ __html: marked.parse(seoData.seoText) }}
                     />
                 </div>
+            )}
+
+            {/* ===== INTERNAL LINKING BLOCK ===== */}
+            {category && (
+                <nav className="max-w-4xl mx-auto px-4 md:px-8 pb-12" aria-label="Корисні посилання">
+                    <div className="border-t border-gray-100 pt-8">
+                        <h3 className="text-sm font-bold text-gray-400 uppercase tracking-widest mb-4">Дивіться також</h3>
+                        <div className="flex flex-wrap gap-2">
+                            <Link to="/" className="inline-block px-4 py-2 text-xs font-bold uppercase tracking-wider border border-gray-200 rounded-full text-gray-600 hover:border-[#7A0019] hover:text-[#7A0019] transition-all">
+                                Головна
+                            </Link>
+                            <Link to="/nachynky/" className="inline-block px-4 py-2 text-xs font-bold uppercase tracking-wider border border-gray-200 rounded-full text-gray-600 hover:border-[#7A0019] hover:text-[#7A0019] transition-all">
+                                Начинки
+                            </Link>
+                            <Link to="/delivery/" className="inline-block px-4 py-2 text-xs font-bold uppercase tracking-wider border border-gray-200 rounded-full text-gray-600 hover:border-[#7A0019] hover:text-[#7A0019] transition-all">
+                                Доставка та оплата
+                            </Link>
+                            <Link to="/reviews/" className="inline-block px-4 py-2 text-xs font-bold uppercase tracking-wider border border-gray-200 rounded-full text-gray-600 hover:border-[#7A0019] hover:text-[#7A0019] transition-all">
+                                Відгуки
+                            </Link>
+                            <Link to="/torty-na-zamovlennya/" className="inline-block px-4 py-2 text-xs font-bold uppercase tracking-wider border border-gray-200 rounded-full text-gray-600 hover:border-[#7A0019] hover:text-[#7A0019] transition-all">
+                                Усі категорії
+                            </Link>
+                        </div>
+                    </div>
+                </nav>
             )}
 
             {/* ===== FILTER BOTTOM SHEET (OVERLAY) ===== */}
