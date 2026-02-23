@@ -451,6 +451,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                                                 <button
                                                     onClick={(e) => { e.preventDefault(); handleAddToCart(cake); }}
                                                     className="w-8 h-8 md:w-10 md:h-10 flex-shrink-0 bg-[#E8C064] hover:bg-[#D4A83C] text-white rounded-lg md:rounded-xl flex items-center justify-center active:scale-95 transition-all shadow-sm"
+                                                    aria-label="Додати в кошик"
                                                 >
                                                     <svg className="w-4 h-4 md:w-5 md:h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                                                         <circle cx="9" cy="21" r="1" />

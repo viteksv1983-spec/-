@@ -545,6 +545,7 @@ function Home() {
                                                             handleAddToCart(cake);
                                                         }}
                                                         className="w-10 h-10 md:w-12 md:h-12 flex-shrink-0 bg-[#E8C064] hover:bg-[#D4A83C] text-white rounded-[10px] md:rounded-xl flex items-center justify-center transition-all active:scale-95 group/cart"
+                                                        aria-label="Додати в кошик"
                                                     >
                                                         <svg className="w-4 h-4 md:w-5 md:h-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                                                             <circle cx="9" cy="21" r="1" />
@@ -757,10 +758,10 @@ function Home() {
                     {/* Review Cards Carousel */}
                     <div className="relative">
                         {/* Scroll arrows (desktop) */}
-                        <button onClick={() => document.getElementById('reviewsCarousel')?.scrollBy({ left: -360, behavior: 'smooth' })} className="hidden md:flex absolute -left-4 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-white shadow-lg border border-gray-100 items-center justify-center hover:shadow-xl hover:border-[#E8C064] transition-all">
+                        <button onClick={() => document.getElementById('reviewsCarousel')?.scrollBy({ left: -360, behavior: 'smooth' })} aria-label="Попередній відгук" className="hidden md:flex absolute -left-4 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-white shadow-lg border border-gray-100 items-center justify-center hover:shadow-xl hover:border-[#E8C064] transition-all">
                             <svg className="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" /></svg>
                         </button>
-                        <button onClick={() => document.getElementById('reviewsCarousel')?.scrollBy({ left: 360, behavior: 'smooth' })} className="hidden md:flex absolute -right-4 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-white shadow-lg border border-gray-100 items-center justify-center hover:shadow-xl hover:border-[#E8C064] transition-all">
+                        <button onClick={() => document.getElementById('reviewsCarousel')?.scrollBy({ left: 360, behavior: 'smooth' })} aria-label="Наступний відгук" className="hidden md:flex absolute -right-4 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-white shadow-lg border border-gray-100 items-center justify-center hover:shadow-xl hover:border-[#E8C064] transition-all">
                             <svg className="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" /></svg>
                         </button>
 

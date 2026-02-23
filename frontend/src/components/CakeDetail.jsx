@@ -731,6 +731,7 @@ function ProductCard({ cake, addToCart }) {
                             addToCart(cake, 1, defaultFlavor, null, defaultDate, 'pickup');
                         }}
                         className="w-7 h-7 md:w-9 md:h-9 flex-shrink-0 bg-[#E8C064] hover:bg-[#D4A83C] text-white rounded-lg md:rounded-xl flex items-center justify-center active:scale-95 transition-all shadow-sm"
+                        aria-label="Додати в кошик"
                     >
                         <svg className="w-3.5 h-3.5 md:w-4 md:h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                             <circle cx="9" cy="21" r="1" /><circle cx="20" cy="21" r="1" />
