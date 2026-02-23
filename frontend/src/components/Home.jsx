@@ -125,11 +125,12 @@ function Home() {
     const homeSchema = {
         "@context": "https://schema.org",
         "@type": ["LocalBusiness", "Bakery"],
-        "name": "Кондитерська майстерня Antreme",
+        "name": "Antreme",
         "image": "https://antreme.kyiv.ua/og-image.jpg",
         "url": "https://antreme.kyiv.ua/",
         "telephone": "+380979081504",
         "priceRange": "₴₴",
+        "areaServed": "Kyiv",
         "address": {
             "@type": "PostalAddress",
             "addressLocality": "Київ",
@@ -147,21 +148,56 @@ function Home() {
     const faqSchema = {
         "@context": "https://schema.org",
         "@type": "FAQPage",
-        "mainEntity": [{
-            "@type": "Question",
-            "name": "Скільки коштує доставка торта по Києву?",
-            "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Доставка розраховується за тарифами таксі (Uklon/Bolt) від нашої кондитерської до вашої адреси."
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "Чи можна замовити торт у Києві терміново?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Залежить від завантаженості та складності замовлення. Прості торти без складного декору ми іноді виконуємо за 2 дні. Уточнюйте наявність через контакти."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "За скільки днів потрібно робити замовлення?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Мінімальний термін — 3 робочі дні. Для складних весільних тортів рекомендуємо звертатися за 2–4 тижні."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Чи можна обрати індивідуальну начинку?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Так, ми погоджуємо склад до виробництва. Пропонуємо 7+ авторських начинок та складаємо індивідуальні комбінації."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Скільки коштує доставка торта по Києву?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Доставка розраховується за тарифами таксі (Uklon/Bolt) від нашої кондитерської до вашої адреси. Самовивіз — безкоштовно."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Чи є варіанти без глютену або для алергіків?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Розглядаємо такі запити індивідуально. Звертайтесь — обговоримо склад і можливості для вашого випадку."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Чи працюєте ви з корпоративними замовленнями?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Так, виготовляємо торти з брендуванням, логотипом або корпоративними кольорами для будь-якого масштабу заходу."
+                }
             }
-        }, {
-            "@type": "Question",
-            "name": "За скільки днів потрібно робити замовлення?",
-            "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Бажано оформлювати замовлення за 2-3 дні до потрібної дати, але ми також приймаємо термінові замовлення."
-            }
-        }]
+        ]
     };
 
     const combinedSchema = [homeSchema, faqSchema];
@@ -169,8 +205,8 @@ function Home() {
     return (
         <div className="min-h-screen bg-[#FDFBF7]">
             <SEOHead
-                title="Торти на замовлення у Києві | Авторські торти – Antreme"
-                description="Авторські торти на замовлення у Києві. Весільні, дитячі, корпоративні десерти з доставкою."
+                title="Торти на замовлення Київ — Antreme | Авторська кондитерська"
+                description="Замовити торт у Києві з індивідуальним дизайном та доставкою. Весільні, дитячі, бенто та святкові торти на замовлення. Antreme — авторська кондитерська."
                 canonical="/"
                 ogImage="/og-image.jpg"
                 schema={combinedSchema}
@@ -819,45 +855,134 @@ function Home() {
                     </div>
                 </div>
             </div>
-            {/* ====== SEO & FAQ SECTION ====== */}
-            <div className="max-w-7xl mx-auto px-4 md:px-10 py-16">
-                <div className="bg-white rounded-3xl p-8 md:p-12 shadow-[0_8px_30px_rgba(0,0,0,0.04)] border border-gray-100 mb-12">
-                    <h2 className="text-2xl md:text-3xl font-black text-gray-900 mb-6 uppercase tracking-tight" style={{ fontFamily: "'Oswald', sans-serif" }}>
-                        Ексклюзивні торти на замовлення в Києві від кондитерської майстерні Antreme
-                    </h2>
-                    <div className="prose prose-sm md:prose-base max-w-none text-gray-600 space-y-4">
-                        <p>Кондитерська майстерня <strong>Antreme</strong> пропонує вам зануритися у світ справжнього смаку та естетики. Ми створюємо авторські торти на замовлення у Києві для будь-якого вашого свята: від камерних днів народження до масштабних весіль та корпоративних івентів.</p>
+            {/* ====== SEO TEXT + FAQ SECTION ====== */}
+            <section aria-label="Про кондитерську" className="max-w-7xl mx-auto px-4 md:px-10 py-16">
 
-                        <h3 className="text-xl font-bold text-gray-900 mt-8 mb-4">Які авторські торти ви можете замовити у нас?</h3>
-                        <p>Наш асортимент включає найпопулярніші десерти, створені з любов'ю та увагою до кожної деталі:</p>
-                        <ul className="list-disc pl-5 mt-2 space-y-2">
-                            <li><strong>Бенто-тортики:</strong> ідеальний солодкий сюрприз на 1-2 персони.</li>
-                            <li><strong>Бісквітні десерти:</strong> класика, яку обожнюють всі, з різноманітними кремами та ягідними прошарками.</li>
-                            <li><strong>Мусові торти:</strong> легкі, сучасні, з вишуканим глянцевим покриттям або велюром.</li>
-                            <li><strong>Весільні торти:</strong> багатоярусні шедеври, які стануть головною окрасою вашого свята.</li>
+                {/* --- SEO Text Block --- */}
+                <article className="bg-white rounded-3xl p-8 md:p-12 shadow-[0_8px_30px_rgba(0,0,0,0.04)] border border-gray-100 mb-12">
+                    <div className="prose prose-sm md:prose-base max-w-none text-gray-600 space-y-4">
+
+                        {/* H1 — sr-only: hero вже має видимий H1, цей для Google */}
+                        <h1 className="sr-only">Торти на замовлення в Києві — авторська кондитерська Antreme</h1>
+
+                        <p>Antreme — це авторська кондитерська в Києві з понад 20-річним досвідом роботи. Ми спеціалізуємося на виготовленні <strong>тортів на замовлення в Києві</strong> для приватних подій, весіль, корпоративів та сімейних свят. Кожен торт створюється індивідуально — без шаблонів і масового виробництва.</p>
+
+                        <p>Якщо ви шукаєте, де <strong>замовити торт у Києві</strong>, який відповідатиме формату вашої події, стилю заходу та очікуванням гостей — Antreme працює саме в цьому сегменті. Ми створюємо кондитерські рішення, а не просто десерти.</p>
+
+                        <h2 className="text-2xl md:text-3xl font-black text-gray-900 mt-8 mb-3 uppercase tracking-tight" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                            20 років досвіду та понад 6000 виконаних замовлень у Києві
+                        </h2>
+                        <p>За роки роботи ми виконали понад 6000 індивідуальних замовлень у Києві. Наші клієнти повертаються до нас на кожне важливе свято — від першого дитячого дня народження до весіль та корпоративних заходів.</p>
+                        <p>Більше 9000 підписників в Instagram, тисячі реальних фото робіт та живі відгуки — це відкритий доказ нашого досвіду. Ми не створюємо штучний імідж — наша репутація побудована на стабільному результаті.</p>
+
+                        <h2 className="text-2xl md:text-3xl font-black text-gray-900 mt-8 mb-3 uppercase tracking-tight" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                            Торти на замовлення Київ — індивідуальний підхід без компромісів
+                        </h2>
+                        <p>Ми працюємо виключно під замовлення. Кожен <strong>торт на замовлення в Києві</strong> проходить погодження дизайну, ваги, начинки та термінів виготовлення до початку виробництва. Це дозволяє створювати продукт, який повністю відповідає події.</p>
+                        <p>Середній термін виготовлення — від 3 робочих днів. У деяких випадках можливе виконання від 24–48 годин. Весільні торти рекомендуємо замовляти за 2–4 тижні.</p>
+
+                        <h2 className="text-2xl md:text-3xl font-black text-gray-900 mt-8 mb-3 uppercase tracking-tight" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                            Чому варто замовити торт у Antreme
+                        </h2>
+                        <h3 className="text-lg font-bold text-gray-900 mt-5 mb-2">Натуральні інгредієнти</h3>
+                        <p>Ми використовуємо вершкове масло, бельгійський шоколад, натуральні вершки, сезонні ягоди та фрукти. Без маргарину та замінників какао-масла.</p>
+
+                        <h3 className="text-lg font-bold text-gray-900 mt-5 mb-2">Індивідуальний дизайн</h3>
+                        <p>Розробляємо концепцію під стиль заходу: мінімалізм, класика, сучасна геометрія або тематичний декор.</p>
+
+                        <h3 className="text-lg font-bold text-gray-900 mt-5 mb-2">Прозора вартість</h3>
+                        <p>Ціна формується залежно від ваги, складності декору та начинки. Ми одразу погоджуємо фінальний розрахунок без прихованих доплат.</p>
+
+                        <h3 className="text-lg font-bold text-gray-900 mt-5 mb-2">Доставка по Києву</h3>
+                        <p>Ми доставляємо торти по всіх районах столиці з контролем температури та безпечним транспортуванням. <Link to="/delivery/" className="text-[#7A0019] font-semibold underline underline-offset-2 hover:text-[#9C142B]">Детальніше про доставку →</Link></p>
+
+                        <h2 className="text-2xl md:text-3xl font-black text-gray-900 mt-8 mb-3 uppercase tracking-tight" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                            Доставка тортів у всі райони Києва
+                        </h2>
+                        <p>Ми працюємо по всіх районах: Печерськ, Шевченківський, Голосіївський, Солом'янка, Оболонь, Поділ, Дарниця, Позняки, Осокорки, Троєщина, Деснянський район, Святошин та інші. Лівий і правий берег — без обмежень.</p>
+                        <p>Якщо потрібно <strong>замовити торт у Києві</strong> з доставкою в ресторан, офіс або додому — ми узгоджуємо час подачі та формат транспортування.</p>
+
+                        <h2 className="text-2xl md:text-3xl font-black text-gray-900 mt-8 mb-3 uppercase tracking-tight" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                            Популярні категорії тортів у Києві
+                        </h2>
+
+                        <h3 className="text-lg font-bold text-gray-900 mt-5 mb-2">Весільні торти</h3>
+                        <p>Багатоярусні конструкції, сучасний або класичний декор, індивідуальний розрахунок ваги відповідно до кількості гостей. <Link to="/torty-na-zamovlennya/vesilni/" className="text-[#7A0019] font-semibold underline underline-offset-2 hover:text-[#9C142B]">Переглянути весільні торти →</Link></p>
+
+                        <h3 className="text-lg font-bold text-gray-900 mt-5 mb-2">Торти на день народження</h3>
+                        <p>Індивідуальні написи, тематичні рішення, корпоративний стиль. <Link to="/torty-na-zamovlennya/na-den-narodzhennya/" className="text-[#7A0019] font-semibold underline underline-offset-2 hover:text-[#9C142B]">Переглянути →</Link></p>
+
+                        <h3 className="text-lg font-bold text-gray-900 mt-5 mb-2">Дитячі торти</h3>
+                        <p>Контроль складу, погодження алергенів та безпечні барвники. <Link to="/torty-na-zamovlennya/dytyachi/" className="text-[#7A0019] font-semibold underline underline-offset-2 hover:text-[#9C142B]">Переглянути →</Link></p>
+
+                        <h3 className="text-lg font-bold text-gray-900 mt-5 mb-2">Бенто-торти</h3>
+                        <p>Компактний формат для персональних привітань. <Link to="/bento-torty/" className="text-[#7A0019] font-semibold underline underline-offset-2 hover:text-[#9C142B]">Переглянути →</Link></p>
+
+                        <h3 className="text-lg font-bold text-gray-900 mt-5 mb-2">Мусові торти</h3>
+                        <p>Легка текстура, сучасний вигляд та нестандартні поєднання смаків.</p>
+
+                        <h2 className="text-2xl md:text-3xl font-black text-gray-900 mt-8 mb-3 uppercase tracking-tight" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                            Скільки коштує торт на замовлення у Києві
+                        </h2>
+                        <p>Мінімальна вага стандартного торта — від 1 кг. Бенто-торти — від 300–400 г. Остаточна вартість залежить від декору та начинки. Для розрахунку достатньо надіслати запит із датою та описом події.</p>
+
+                        <h2 className="text-2xl md:text-3xl font-black text-gray-900 mt-8 mb-3 uppercase tracking-tight" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                            Начинки
+                        </h2>
+                        <ul className="list-disc pl-5 space-y-1">
+                            <li>Шоколадний трюфель</li>
+                            <li>Полуниця з вершками</li>
+                            <li>Карамель-банан</li>
+                            <li>Лісова ягода</li>
+                            <li>Фісташка-малина</li>
+                            <li>Лимонний чізкейк</li>
+                            <li>Кокос-манго</li>
                         </ul>
-                        <p className="mt-6 text-sm italic opacity-70">
-                            [ТУТ БУДЕ РОЗМІЩЕНО ПОВНИЙ SEO-ТЕКСТ НА 1200-1500 СЛІВ ПІСЛЯ НАПИСАННЯ КОПІРАЙТЕРОМ...]
+                        <p className="mt-2"><Link to="/nachynky/" className="text-[#7A0019] font-semibold underline underline-offset-2 hover:text-[#9C142B]">Усі начинки та смаки →</Link></p>
+
+                        <h2 className="text-2xl md:text-3xl font-black text-gray-900 mt-8 mb-3 uppercase tracking-tight" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                            Як замовити торт у Києві
+                        </h2>
+                        <ol className="list-decimal pl-5 space-y-2">
+                            <li>Надішліть запит через сайт або месенджер.</li>
+                            <li>Узгодьте деталі замовлення.</li>
+                            <li>Внесіть передоплату для фіксації дати.</li>
+                            <li>Отримайте торт із доставкою по Києву або самовивозом.</li>
+                        </ol>
+
+                        <h2 className="text-2xl md:text-3xl font-black text-gray-900 mt-8 mb-3 uppercase tracking-tight" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                            Реальні відгуки та портфоліо робіт
+                        </h2>
+                        <p>Понад 6000 замовлень та тисячі фото виконаних робіт доступні для перегляду. Наш Instagram — це публічний архів реальних проєктів, а не студійних знімків. <Link to="/reviews/" className="text-[#7A0019] font-semibold underline underline-offset-2 hover:text-[#9C142B]">Переглянути відгуки →</Link></p>
+
+                        <p className="mt-6 pt-6 border-t border-gray-100 text-gray-700">
+                            <strong>Antreme — кондитерська в Києві з досвідом, портфоліо та реальними відгуками.</strong> Якщо ви плануєте подію та хочете замовити торт у Києві без компромісів у якості — ми реалізуємо це професійно.
                         </p>
                     </div>
-                </div>
+                </article>
 
+                {/* --- FAQ Block --- */}
                 <div className="max-w-4xl mx-auto">
-                    <h3 className="text-2xl font-black text-center text-gray-900 mb-8 uppercase tracking-wide" style={{ fontFamily: "'Oswald', sans-serif" }}>
-                        Поширені запитання
-                    </h3>
+                    <h2 className="text-2xl font-black text-center text-gray-900 mb-8 uppercase tracking-wide" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                        Часті запитання
+                    </h2>
                     <div className="space-y-4">
-                        <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
-                            <h4 className="font-bold text-gray-900 mb-2">Скільки коштує доставка торта по Києву?</h4>
-                            <p className="text-gray-600 text-sm">Доставка розраховується за тарифами таксі (Uklon/Bolt) від нашої кондитерської до вашої адреси. Ми надійно запаковуємо торти, щоб вони доїхали в ідеальному стані.</p>
-                        </div>
-                        <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
-                            <h4 className="font-bold text-gray-900 mb-2">За скільки днів потрібно робити замовлення?</h4>
-                            <p className="text-gray-600 text-sm">Бажано оформлювати замовлення за 2-3 дні до потрібної дати, щоб ми встигли підготувати ідеальний декор та свіжі інгредієнти. Але ми також приймаємо термінові замовлення за можливості.</p>
-                        </div>
+                        {[
+                            { q: 'Чи можна замовити торт терміново?', a: 'Так, у деяких випадках можливе виготовлення від 24–48 годин. Уточнюйте наявність через контакти.' },
+                            { q: 'Чи можливі безглютенові або безцукрові варіанти?', a: 'Такі запити розглядаються індивідуально. Напишіть нам — обговоримо склад та можливості.' },
+                            { q: 'Яка передоплата?', a: 'Передоплата фіксує дату виробництва. Точний відсоток уточнюється при оформленні замовлення.' },
+                            { q: 'Скільки зберігається торт?', a: 'У холодильнику 2–5 днів залежно від начинки. Умови зберігання передаємо разом із замовленням.' },
+                            { q: 'Чи доставляєте по всіх районах Києва?', a: 'Так — лівий і правий берег, будь-який район. Вартість доставки за тарифами таксі (Uklon/Bolt). Самовивіз — безкоштовно.' },
+                            { q: 'Чи працюєте з корпоративними замовленнями?', a: 'Так, виготовляємо торти з брендуванням та корпоративним дизайном для будь-якого масштабу заходу.' },
+                        ].map(({ q, a }, i) => (
+                            <div key={i} className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
+                                <h3 className="font-bold text-gray-900 mb-2 text-base">{q}</h3>
+                                <p className="text-gray-600 text-sm leading-relaxed">{a}</p>
+                            </div>
+                        ))}
                     </div>
                 </div>
-            </div>
+            </section>
 
             {/* Add custom CSS for animations */}
             <style jsx>{`
