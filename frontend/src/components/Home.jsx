@@ -345,7 +345,7 @@ function Home() {
             <div className="relative py-24 md:py-36 overflow-hidden bg-[#FDFBF7]">
                 <div className="container mx-auto px-6 relative z-10">
                     <div className="max-w-5xl mx-auto text-center">
-                        <div className="text-xs font-bold uppercase tracking-[0.3em] text-[#E8C064] mb-6">Наші принципи</div>
+                        <div className="text-xs font-bold uppercase tracking-[0.3em] text-[#B8860B] mb-6">Наші принципи</div>
                         <h2 className="text-5xl md:text-8xl lg:text-[110px] font-black mb-10 leading-none uppercase tracking-tighter" style={{ fontFamily: "'Oswald', sans-serif" }}>
                             <span className="text-[#E8C064] block md:inline">СМАК</span>
                             <span className="text-gray-300 mx-4 hidden md:inline">/</span>
@@ -355,7 +355,7 @@ function Home() {
                         </h2>
                         <div className="flex items-center justify-center gap-4">
                             <div className="h-[1px] w-12 bg-[#E8C064]/40"></div>
-                            <p className="text-xl md:text-3xl font-medium italic text-gray-400" style={{ fontFamily: "'Dancing Script', cursive" }}>
+                            <p className="text-xl md:text-3xl font-medium italic text-gray-500" style={{ fontFamily: "'Dancing Script', cursive" }}>
                                 це наші головні цінності
                             </p>
                             <div className="h-[1px] w-12 bg-[#E8C064]/40"></div>
@@ -474,7 +474,7 @@ function Home() {
             <div className="relative pt-10 md:pt-20 pb-16 md:pb-20 overflow-hidden bg-[#FDFBF7]">
                 <div className="container mx-auto px-6 relative z-10">
                     <div className="text-center mb-8 md:mb-14 animate-fade-in">
-                        <div className="text-xs font-bold uppercase tracking-[0.3em] text-[#E8C064] mb-3">Популярні</div>
+                        <div className="text-xs font-bold uppercase tracking-[0.3em] text-[#B8860B] mb-3">Популярні</div>
                         <h2 className="text-3xl md:text-5xl font-black text-gray-900 mb-2 md:mb-4" style={{ fontFamily: "'Oswald', sans-serif" }}>
                             Обирають найчастіше
                         </h2>
@@ -525,8 +525,8 @@ function Home() {
 
                                             {/* Price & Action Section */}
                                             <div className="w-full flex-col flex items-center mt-3">
-                                                <div className="text-[22px] md:text-[26px] font-black text-[#E8C064] flex items-baseline justify-center mb-4 leading-none">
-                                                    {cake.price} <span className="text-[12px] md:text-[14px] font-bold text-gray-400 ml-1.5 uppercase">грн</span>
+                                                <div className="text-[22px] md:text-[26px] font-black text-[#B8860B] flex items-baseline justify-center mb-4 leading-none">
+                                                    {cake.price} <span className="text-[12px] md:text-[14px] font-bold text-gray-500 ml-1.5 uppercase">грн</span>
                                                 </div>
 
                                                 <div className="flex items-center gap-2 w-full justify-center">
@@ -633,7 +633,7 @@ function Home() {
                 <div className="container mx-auto px-4 md:px-8">
                     {/* Section Header */}
                     <div className="text-center mb-10 md:mb-14">
-                        <div className="text-xs font-bold uppercase tracking-[0.3em] text-[#E8C064] mb-3">Доставка</div>
+                        <div className="text-xs font-bold uppercase tracking-[0.3em] text-[#B8860B] mb-3">Доставка</div>
                         <h2 className="text-3xl md:text-5xl font-black text-gray-900 uppercase tracking-tight mb-3" style={{ fontFamily: "'Oswald', sans-serif" }}>
                             Доставляємо у <span className="text-[#7A0019]">всі райони Києва</span>
                         </h2>
@@ -671,7 +671,7 @@ function Home() {
                                 <p className="text-gray-500 text-sm leading-relaxed mb-3">
                                     Ви сплачуєте лише вартість поїздки таксі. Кондитер особисто передає торт водію з інструкціями щодо бережного перевезення.
                                 </p>
-                                <div className="flex items-center gap-2 text-[#E8C064] font-black text-sm">
+                                <div className="flex items-center gap-2 text-[#B8860B] font-black text-sm">
                                     <span>⏱</span> 30–90 хвилин по місту
                                 </div>
                             </div>
