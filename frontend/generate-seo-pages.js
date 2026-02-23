@@ -201,23 +201,33 @@ async function generatePages() {
         html = html.replace(/<meta[^>]*name="twitter:[^>]*>/gi, '');
 
         // 2. Prepare our new meta tags block
+        //    data-rh="true" ensures react-helmet-async REPLACES these tags
+        //    instead of creating duplicates when React loads on client
         const metaTags = `
-    <title>${route.title}</title>
-    <meta name="description" content="${route.description}" />
-    <link rel="canonical" href="${fullUrl}" />
-    <meta property="og:title" content="${route.title}" />
-    <meta property="og:description" content="${route.description}" />
-    <meta property="og:url" content="${fullUrl}" />
-    <meta property="og:image" content="${ogImageUrl}" />
-    <meta property="og:type" content="website" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="${route.title}" />
-    <meta name="twitter:description" content="${route.description}" />
-    <meta name="twitter:image" content="${ogImageUrl}" />
+    <title data-rh="true">${route.title}</title>
+    <meta name="description" content="${route.description}" data-rh="true" />
+    <link rel="canonical" href="${fullUrl}" data-rh="true" />
+    <meta name="robots" content="index, follow" data-rh="true" />
+    <meta property="og:type" content="website" data-rh="true" />
+    <meta property="og:title" content="${route.title}" data-rh="true" />
+    <meta property="og:description" content="${route.description}" data-rh="true" />
+    <meta property="og:url" content="${fullUrl}" data-rh="true" />
+    <meta property="og:image" content="${ogImageUrl}" data-rh="true" />
+    <meta property="og:site_name" content="Antreme – Кондитерська майстерня" data-rh="true" />
+    <meta name="twitter:card" content="summary_large_image" data-rh="true" />
+    <meta name="twitter:title" content="${route.title}" data-rh="true" />
+    <meta name="twitter:description" content="${route.description}" data-rh="true" />
+    <meta name="twitter:image" content="${ogImageUrl}" data-rh="true" />
 </head>`;
 
-        // 3. Inject exactly before the closing </head> tag
+        // 3. Inject meta tags before closing </head> tag
         html = html.replace(/<\/head>/i, metaTags);
+
+        // 3b. Inject JSON-LD schema into <head> (not body) for key routes
+        const jsonLd = getSeoJsonLd(route.path);
+        if (jsonLd) {
+            html = html.replace(/<\/head>/i, `    <script type="application/ld+json" data-rh="true">${jsonLd}</script>\n</head>`);
+        }
 
         // 4. Inject SEO HTML content into <div id="root"> for key routes
         //    This ensures Googlebot sees full content without JavaScript
@@ -250,8 +260,61 @@ async function generatePages() {
     console.log('🎉 SSG SEO Injection complete!');
 }
 
+// ─── JSON-LD Schema for key routes (injected into <head>) ───
+function getSeoJsonLd(routePath) {
+    if (routePath === '/') {
+        return JSON.stringify([
+            {
+                "@context": "https://schema.org",
+                "@type": ["LocalBusiness", "Bakery"],
+                "name": "Antreme",
+                "image": "https://antreme.kyiv.ua/og-image.jpg",
+                "url": "https://antreme.kyiv.ua/",
+                "telephone": "+380979081504",
+                "priceRange": "₴₴",
+                "areaServed": { "@type": "City", "name": "Kyiv" },
+                "sameAs": ["https://www.instagram.com/antreme.kyiv/"],
+                "aggregateRating": {
+                    "@type": "AggregateRating",
+                    "ratingValue": "5.0",
+                    "reviewCount": "200",
+                    "bestRating": "5",
+                    "worstRating": "1"
+                },
+                "address": {
+                    "@type": "PostalAddress",
+                    "addressLocality": "Київ",
+                    "addressRegion": "Київська область",
+                    "streetAddress": "Харківське шосе, 180/21",
+                    "addressCountry": "UA"
+                },
+                "openingHoursSpecification": {
+                    "@type": "OpeningHoursSpecification",
+                    "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+                    "opens": "09:00",
+                    "closes": "20:00"
+                }
+            },
+            {
+                "@context": "https://schema.org",
+                "@type": "FAQPage",
+                "mainEntity": [
+                    { "@type": "Question", "name": "Чи можна замовити торт у Києві терміново?", "acceptedAnswer": { "@type": "Answer", "text": "Залежить від завантаженості та складності замовлення. Прості торти без складного декору ми іноді виконуємо за 2 дні. Уточнюйте наявність через контакти." } },
+                    { "@type": "Question", "name": "За скільки днів потрібно робити замовлення?", "acceptedAnswer": { "@type": "Answer", "text": "Мінімальний термін — 3 робочі дні. Для складних весільних тортів рекомендуємо звертатися за 2–4 тижні." } },
+                    { "@type": "Question", "name": "Чи можна обрати індивідуальну начинку?", "acceptedAnswer": { "@type": "Answer", "text": "Так, ми погоджуємо склад до виробництва. Пропонуємо 7+ авторських начинок та складаємо індивідуальні комбінації." } },
+                    { "@type": "Question", "name": "Скільки коштує доставка торта по Києву?", "acceptedAnswer": { "@type": "Answer", "text": "Доставка розраховується за тарифами таксі (Uklon/Bolt) від нашої кондитерської до вашої адреси. Самовивіз — безкоштовно." } },
+                    { "@type": "Question", "name": "Чи є варіанти без глютену або для алергіків?", "acceptedAnswer": { "@type": "Answer", "text": "Розглядаємо такі запити індивідуально. Звертайтесь — обговоримо склад і можливості для вашого випадку." } },
+                    { "@type": "Question", "name": "Чи працюєте ви з корпоративними замовленнями?", "acceptedAnswer": { "@type": "Answer", "text": "Так, виготовляємо торти з брендуванням, логотипом або корпоративними кольорами для будь-якого масштабу заходу." } }
+                ]
+            }
+        ]);
+    }
+    return null;
+}
+
 // ─── SEO HTML Content for key routes (injected into <div id="root">) ───
-// React will hydrate over this content on client-side load
+// createRoot() replaces this content when React loads — this is intentional.
+// The static HTML exists solely for Googlebot's initial crawl (view-source).
 function getSeoHtmlContent(routePath) {
     const contentMap = {
         '/': getHomepageSeoHtml(),
@@ -263,54 +326,9 @@ function getSeoHtmlContent(routePath) {
 }
 
 function getHomepageSeoHtml() {
-    const schema = JSON.stringify([
-        {
-            "@context": "https://schema.org",
-            "@type": ["LocalBusiness", "Bakery"],
-            "name": "Antreme",
-            "image": "https://antreme.kyiv.ua/og-image.jpg",
-            "url": "https://antreme.kyiv.ua/",
-            "telephone": "+380979081504",
-            "priceRange": "₴₴",
-            "areaServed": { "@type": "City", "name": "Kyiv" },
-            "sameAs": ["https://www.instagram.com/antreme.kyiv/"],
-            "aggregateRating": {
-                "@type": "AggregateRating",
-                "ratingValue": "5.0",
-                "reviewCount": "200",
-                "bestRating": "5",
-                "worstRating": "1"
-            },
-            "address": {
-                "@type": "PostalAddress",
-                "addressLocality": "Київ",
-                "addressRegion": "Київська область",
-                "streetAddress": "Харківське шосе, 180/21",
-                "addressCountry": "UA"
-            },
-            "openingHoursSpecification": {
-                "@type": "OpeningHoursSpecification",
-                "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
-                "opens": "09:00",
-                "closes": "20:00"
-            }
-        },
-        {
-            "@context": "https://schema.org",
-            "@type": "FAQPage",
-            "mainEntity": [
-                { "@type": "Question", "name": "Чи можна замовити торт у Києві терміново?", "acceptedAnswer": { "@type": "Answer", "text": "Залежить від завантаженості та складності замовлення. Прості торти без складного декору ми іноді виконуємо за 2 дні. Уточнюйте наявність через контакти." } },
-                { "@type": "Question", "name": "За скільки днів потрібно робити замовлення?", "acceptedAnswer": { "@type": "Answer", "text": "Мінімальний термін — 3 робочі дні. Для складних весільних тортів рекомендуємо звертатися за 2–4 тижні." } },
-                { "@type": "Question", "name": "Чи можна обрати індивідуальну начинку?", "acceptedAnswer": { "@type": "Answer", "text": "Так, ми погоджуємо склад до виробництва. Пропонуємо 7+ авторських начинок та складаємо індивідуальні комбінації." } },
-                { "@type": "Question", "name": "Скільки коштує доставка торта по Києву?", "acceptedAnswer": { "@type": "Answer", "text": "Доставка розраховується за тарифами таксі (Uklon/Bolt) від нашої кондитерської до вашої адреси. Самовивіз — безкоштовно." } },
-                { "@type": "Question", "name": "Чи є варіанти без глютену або для алергіків?", "acceptedAnswer": { "@type": "Answer", "text": "Розглядаємо такі запити індивідуально. Звертайтесь — обговоримо склад і можливості для вашого випадку." } },
-                { "@type": "Question", "name": "Чи працюєте ви з корпоративними замовленнями?", "acceptedAnswer": { "@type": "Answer", "text": "Так, виготовляємо торти з брендуванням, логотипом або корпоративними кольорами для будь-якого масштабу заходу." } }
-            ]
-        }
-    ]);
-
+    // JSON-LD schema is injected into <head> by getSeoJsonLd()
+    // This function only returns semantic HTML content for <div id="root">
     return `
-<script type="application/ld+json">${schema}</script>
 <main>
 <article>
 <h1>Торти на замовлення в Києві — авторська кондитерська Antreme</h1>
