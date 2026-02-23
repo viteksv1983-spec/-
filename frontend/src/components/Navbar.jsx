@@ -301,16 +301,16 @@ function Navbar() {
                         <div className="mt-auto p-8 border-t border-gray-100 flex flex-col gap-6 bg-gray-50/50">
                             <a href="tel:0979081504" className="text-lg font-black text-[#D39A5E] hover:text-black transition-colors">097 908 15 04</a>
                             <div className="flex gap-6 items-center">
-                                <a href="https://www.instagram.com/liudmilaprikhodko" target="_blank" rel="noopener noreferrer" className="text-2xl text-[#D39A5E] hover:scale-110 transition-transform">
+                                <a href="https://www.instagram.com/liudmilaprikhodko" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="text-2xl text-[#D39A5E] hover:scale-110 transition-transform">
                                     <FaInstagram />
                                 </a>
-                                <a href="https://t.me/antreeeme" target="_blank" rel="noopener noreferrer" className="text-2xl text-[#D39A5E] hover:scale-110 transition-transform">
+                                <a href="https://t.me/antreeeme" target="_blank" rel="noopener noreferrer" aria-label="Telegram" className="text-2xl text-[#D39A5E] hover:scale-110 transition-transform">
                                     <FaTelegram />
                                 </a>
-                                <a href="viber://chat?number=%2B380979081504" target="_blank" rel="noopener noreferrer" className="text-2xl text-[#D39A5E] hover:scale-110 transition-transform">
+                                <a href="viber://chat?number=%2B380979081504" target="_blank" rel="noopener noreferrer" aria-label="Viber" className="text-2xl text-[#D39A5E] hover:scale-110 transition-transform">
                                     <FaViber />
                                 </a>
-                                <a href="https://www.facebook.com/sveetdesert/" target="_blank" rel="noopener noreferrer" className="text-2xl text-[#D39A5E] hover:scale-110 transition-transform">
+                                <a href="https://www.facebook.com/sveetdesert/" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="text-2xl text-[#D39A5E] hover:scale-110 transition-transform">
                                     <FaFacebook />
                                 </a>
                             </div>

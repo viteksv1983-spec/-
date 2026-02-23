@@ -107,16 +107,16 @@ function Footer() {
                                 </div>
 
                                 <div className="flex justify-center md:justify-start space-x-3 pt-2 md:pt-6 w-full">
-                                    <a href="https://www.instagram.com/liudmilaprikhodko" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-white/60 hover:text-white hover:bg-gradient-to-tr from-[#f09433] via-[#dc2743] to-[#bc1888] transition-all transform hover:-translate-y-1 border border-white/10 shadow-lg shadow-black/20">
+                                    <a href="https://www.instagram.com/liudmilaprikhodko" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-white/60 hover:text-white hover:bg-gradient-to-tr from-[#f09433] via-[#dc2743] to-[#bc1888] transition-all transform hover:-translate-y-1 border border-white/10 shadow-lg shadow-black/20">
                                         <FaInstagram className="text-lg" />
                                     </a>
-                                    <a href="https://www.facebook.com/sveetdesert/" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-white/60 hover:text-white hover:bg-[#1877F2] transition-all transform hover:-translate-y-1 border border-white/10 shadow-lg shadow-black/20">
+                                    <a href="https://www.facebook.com/sveetdesert/" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-white/60 hover:text-white hover:bg-[#1877F2] transition-all transform hover:-translate-y-1 border border-white/10 shadow-lg shadow-black/20">
                                         <FaFacebook className="text-lg" />
                                     </a>
-                                    <a href="https://t.me/antreeeme" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-white/60 hover:text-white hover:bg-[#0088cc] transition-all transform hover:-translate-y-1 border border-white/10 shadow-lg shadow-black/20">
+                                    <a href="https://t.me/antreeeme" target="_blank" rel="noopener noreferrer" aria-label="Telegram" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-white/60 hover:text-white hover:bg-[#0088cc] transition-all transform hover:-translate-y-1 border border-white/10 shadow-lg shadow-black/20">
                                         <FaTelegram className="text-lg" />
                                     </a>
-                                    <a href="viber://chat?number=%2B380979081504" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-white/60 hover:text-white hover:bg-[#7360f2] transition-all transform hover:-translate-y-1 border border-white/10 shadow-lg shadow-black/20">
+                                    <a href="viber://chat?number=%2B380979081504" target="_blank" rel="noopener noreferrer" aria-label="Viber" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-white/60 hover:text-white hover:bg-[#7360f2] transition-all transform hover:-translate-y-1 border border-white/10 shadow-lg shadow-black/20">
                                         <FaViber className="text-lg" />
                                     </a>
                                 </div>
