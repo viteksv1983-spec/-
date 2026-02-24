@@ -436,6 +436,11 @@ async function scrapeInstagram() {
 
         const link = linksArray[i];
         const shortcode = getShortcodeFromUrl(link);
+        if (!shortcode) {
+            log.warn(`Shortcode не определён для ${link}. Пропуск.`);
+            continue;
+        }
+
         let currentPostTexts = new Set();
         let successLoad = false;
         let retries = 0;
@@ -513,6 +518,11 @@ async function scrapeInstagram() {
                         log.warn(`Пропуск поста.`);
                         break;
                     }
+                    if (globalRateLimitHits >= 5) {
+                        log.error('Слишком много 429 (Глобальный лимит). Прерывание скрипта.');
+                        isCheckpoint = true;
+                        break;
+                    }
 
                     let curWait = isRateLimit ? baseWaitTime : 15000;
                     curWait = applyJitter(curWait, 0.3); // Добавляем до 30% джиттера
@@ -568,6 +578,22 @@ async function scrapeInstagram() {
 
             // 4. Debug Counters
             log.info(`[POST #${i + 1}] GraphQL texts: ${graphQlTextsCount} | DOM texts added: ${domTextsCount} | Unique total: ${currentPostTexts.size}`);
+
+            // Защита от "тихого пустого GraphQL" (CDN рассинхронизация)
+            if (currentPostTexts.size === 0) {
+                log.warn(`[POST #${i + 1}] Пустой результат от GraphQL и DOM. Возможна рассинхронизация CDN. Делаем Soft Reload...`);
+                // Пробуем 1 раз перезагрузить страницу
+                await page.goto(link, { waitUntil: 'domcontentloaded', timeout: 45000 }).catch(() => { });
+                await randomDelay(4000, 6000);
+
+                const fallbackTexts = await evaluateDOMFallback(page);
+                if (fallbackTexts && fallbackTexts.length > 0) {
+                    fallbackTexts.forEach(t => currentPostTexts.add(t));
+                    log.info(`[POST #${i + 1}] Soft Reload помог извлечь ${fallbackTexts.length} текстов через DOM.`);
+                } else {
+                    log.warn(`[POST #${i + 1}] Soft Reload не дал результатов. Пропускаем.`);
+                }
+            }
 
             await randomDelay(2000, 3000);
 
@@ -628,10 +654,9 @@ async function scrapeInstagram() {
 
         } finally {
             // --- 3. Memory Safety & Cleanup ---
-            // Гарантируем 100% очистку listener'ов и переподключение глобального
+            // Точечная отвязка конкретного listener'а для защиты future hooks
             try {
-                page.removeAllListeners('response');
-                page.on('response', globalResponseHandler);
+                page.off('response', postGraphQLHandler);
             } catch (e) { }
         }
 
