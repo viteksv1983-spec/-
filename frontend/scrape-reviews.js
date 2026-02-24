@@ -123,49 +123,93 @@ function extractAllTextsFromJSON(obj) {
     return texts;
 }
 
-// Мягкое раскрытие комментариев
-async function expandCommentsIfExists(page) {
+// Профессиональная загрузка комментариев (Production Stable)
+async function fullyLoadComments(page) {
     let clicksCount = 0;
-    const maxClicks = 2;
+    const maxIterations = 15;
+    let iterations = 0;
+    let previousHeight = 0;
 
-    // Скроллим к блоку комментариев
-    await page.evaluate(() => {
-        const article = document.querySelector('article');
-        if (article) article.scrollIntoView({ behavior: 'instant', block: 'center' });
-    });
+    while (iterations < maxIterations) {
+        iterations++;
 
-    await new Promise(r => setTimeout(r, 1500));
+        // 1. Ищем scrollable контейнер и скроллим
+        const scrollResult = await page.evaluate(() => {
+            const getScrollable = () => {
+                const roots = document.querySelectorAll('article, div[role="dialog"]');
+                for (const root of roots) {
+                    const elements = root.querySelectorAll('*');
+                    for (const el of elements) {
+                        if (el.scrollHeight > el.clientHeight && el.clientHeight > 200) {
+                            const style = window.getComputedStyle(el);
+                            if (style.overflowY === 'auto' || style.overflowY === 'scroll' || style.overflowY === 'overlay') {
+                                return el;
+                            }
+                        }
+                    }
+                }
+                return null;
+            };
 
-    while (clicksCount < maxClicks) {
+            const container = getScrollable();
+            if (container) {
+                container.scrollTo({ top: container.scrollHeight, behavior: 'instant' });
+                return container.scrollHeight;
+            } else {
+                window.scrollTo({ top: document.body.scrollHeight, behavior: 'instant' });
+                return document.body.scrollHeight;
+            }
+        });
+
+        const waitTimeScroll = Math.floor(Math.random() * (1200 - 800 + 1)) + 800; // 800-1200ms
+        await new Promise(r => setTimeout(r, waitTimeScroll));
+
+        // 2. Ищем и кликаем кнопки
         const clicked = await page.evaluate(() => {
-            const buttons = Array.from(
-                document.querySelectorAll('button, div[role="button"]')
-            );
+            const buttons = Array.from(document.querySelectorAll('button, div[role="button"], svg circle'));
+            const targetWords = ['view', 'repl', 'ответ', 'все', 'more'];
 
             for (let btn of buttons) {
-                const text = (btn.innerText || '').toLowerCase();
-
-                if (
-                    text.includes('view') ||
-                    text.includes('repl') ||
-                    text.includes('ответ') ||
-                    text.includes('все')
-                ) {
-                    btn.click();
-                    return true;
+                const text = (btn.innerText || btn.getAttribute('aria-label') || '').toLowerCase();
+                if (targetWords.some(w => text.includes(w)) && text.length > 0 && text.length < 60) {
+                    let clickable = btn;
+                    while (clickable && clickable.tagName !== 'BUTTON' && clickable.getAttribute('role') !== 'button' && clickable.tagName !== 'DIV') {
+                        if (!clickable.parentElement) break;
+                        clickable = clickable.parentElement;
+                    }
+                    if (clickable && typeof clickable.click === 'function') {
+                        clickable.click();
+                        return true;
+                    }
                 }
             }
-
             return false;
         });
 
-        if (!clicked) break;
+        if (clicked) {
+            clicksCount++;
+            await new Promise(r => setTimeout(r, 1500 + Math.random() * 500)); // 1.5-2s
+        }
 
-        clicksCount++;
-        await new Promise(r => setTimeout(r, 2000));
+        // 3. Условие выхода (нет роста scrollHeight и не было кликов)
+        if (scrollResult === previousHeight && !clicked) {
+            break;
+        }
+        previousHeight = scrollResult;
     }
 
-    return clicksCount;
+    // 4. Ожидание завершения запросов XHR/Fetch
+    await page.waitForNetworkIdle({ idleTime: 1500, timeout: 5000 }).catch(() => { });
+
+    // 5. Fallback DOM extraction
+    const domTexts = await page.evaluate(() => {
+        const nodes = document.querySelectorAll('article ul li span, div[role="dialog"] ul li span');
+        return Array.from(nodes)
+            .map(n => n.innerText?.trim())
+            .filter(t => t && t.length > 5);
+    });
+
+    return { clicks: clicksCount, texts: domTexts };
 }
 
 // Извлечение шорткода поста из URL
@@ -384,32 +428,21 @@ async function scrapeInstagram() {
             }
 
             // --- Мягкое раскрытие комментариев ---
+            // --- Профессиональная загрузка комментариев ---
             await randomDelay(3000, 5000);
 
-            const expanded = await expandCommentsIfExists(page);
-            if (expanded > 0) {
-                log.info(`[POST #${i + 1}] Expanded comments: ${expanded}`);
+            const { clicks, texts } = await fullyLoadComments(page);
+            if (clicks > 0) {
+                log.info(`[POST #${i + 1}] Expanded comments: ${clicks}`);
             }
 
-            await page.waitForNetworkIdle({
-                idleTime: 2000,
-                timeout: 10000
-            }).catch(() => { });
+            // Добавляем DOM Fallback тексты
+            if (texts && texts.length > 0) {
+                texts.forEach(t => currentPostTexts.add(t));
+                log.debug(`[DOM FALLBACK] Добавлено текстов: ${texts.length}`);
+            }
 
             await randomDelay(2000, 4000);
-
-            // Fallback: забираем DOM текст для гарантии
-            try {
-                const domTexts = await page.evaluate(() => {
-                    const nodes = document.querySelectorAll('article ul li span');
-                    return Array.from(nodes)
-                        .map(n => n.innerText?.trim())
-                        .filter(t => t && t.length > 5);
-                });
-                domTexts.forEach(t => currentPostTexts.add(t));
-            } catch (e) {
-                log.error(`Ошибка при чтении DOM: ${e.message}`);
-            }
         } finally {
             // --- 3. Memory Safety & Cleanup ---
             // Обязательно снимаем обработчик текущего поста, устраняем утечку памяти и смешивание комментов
