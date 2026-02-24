@@ -25,16 +25,17 @@ def optimize_image(source: str, output_path: str, is_local: bool = False):
             response.raise_for_status()
             img = Image.open(BytesIO(response.content))
         
-        # Convert to RGB (required for WebP compatibility if original is RGBA or P)
-        if img.mode in ("RGBA", "P"):
-            img = img.convert("RGB")
+        # Convert 'P' mode to 'RGBA' to ensure transparency is preserved
+        if img.mode == "P":
+            img = img.convert("RGBA")
             
         # Max dimensions constraints
         max_size = (800, 800)
         img.thumbnail(max_size, Image.Resampling.LANCZOS)
         
         # Save as optimized webp
-        img.save(output_path, "WEBP", quality=80, optimize=True)
+        is_transparent = img.mode == "RGBA"
+        img.save(output_path, "WEBP", quality=80, optimize=True, alpha_quality=100 if is_transparent else 0)
         return True
     except Exception as e:
         print(f"Failed to optimize {source}: {e}")

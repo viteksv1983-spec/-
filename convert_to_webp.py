@@ -26,8 +26,10 @@ for filename in files_to_convert:
     old_size = os.path.getsize(src) / 1024
     
     img = Image.open(src)
+    if img.mode == 'P':
+        img = img.convert('RGBA')
     # Convert RGBA to RGBA WebP (preserves transparency)
-    img.save(dst, 'WEBP', quality=QUALITY, method=6)
+    img.save(dst, 'WEBP', quality=QUALITY, method=6, alpha_quality=100)
     
     new_size = os.path.getsize(dst) / 1024
     savings = ((old_size - new_size) / old_size) * 100
