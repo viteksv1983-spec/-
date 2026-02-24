@@ -154,7 +154,47 @@ async function scrapeInstagram() {
             // Имитация чтения человеком (задержка 3-4 сек)
             await delay(3000 + Math.floor(Math.random() * 1000));
 
-            // Дополнительная задержка 2с для загрузки комментариев
+            // Логика разворота всех комментариев
+            let commentsExpanded = true;
+            let expandClickCount = 0;
+            while (commentsExpanded) {
+                commentsExpanded = await page.evaluate(() => {
+                    const elements = Array.from(document.querySelectorAll('div[role="button"], button, span, svg'));
+                    const targetWords = ['view', 'all', 'comments', 'посмотре', 'все', 'комментари', 'більше', 'коментар', 'load', 'more'];
+
+                    for (const el of elements) {
+                        const ariaLabel = el.getAttribute('aria-label') || '';
+                        const text = el.innerText || '';
+                        const combined = (ariaLabel + ' ' + text).toLowerCase();
+
+                        const isMatch = targetWords.some(word => combined.includes(word));
+
+                        if (isMatch && combined.length > 2 && combined.length < 50) {
+                            let clickable = el;
+                            // Поднимаемся до кликабельного элемента, если нужно
+                            while (clickable && clickable.tagName !== 'BUTTON' && clickable.getAttribute('role') !== 'button' && clickable.tagName !== 'DIV' && clickable.tagName !== 'SPAN') {
+                                if (!clickable.parentElement) break;
+                                clickable = clickable.parentElement;
+                            }
+
+                            if (clickable && typeof clickable.click === 'function') {
+                                clickable.click();
+                                return true;
+                            }
+                        }
+                    }
+                    return false;
+                });
+
+                if (commentsExpanded) {
+                    expandClickCount++;
+                    process.stdout.write(`\r   🔄 Разворачиваю комментарии... Нашел и кликнул по ссылке (${expandClickCount} раз).   `);
+                    await delay(1000); // 1 секунда для подгрузки
+                }
+            }
+            if (expandClickCount > 0) console.log(''); // Перенос строки после логгера
+
+            // Дополнительная задержка 2с для финальной загрузки комментариев
             await delay(2000);
 
             // Извлечение всех текстов поста (описание + комментарии)
