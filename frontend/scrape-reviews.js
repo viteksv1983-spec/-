@@ -317,17 +317,14 @@ async function scrapeInstagram() {
             if (response.status() === 429) is429 = true;
 
             if (req.resourceType() === 'xhr' || req.resourceType() === 'fetch') {
-                if (url.includes('graphql/query') || url.includes('/api/v1/media/') || url.includes('/comments/')) {
+                if (url.includes('graphql') || url.includes('/comments/')) {
                     try {
-                        // Relaxed GraphQL Capture
-                        if (url.includes('graphql') || url.includes('/comments/')) {
-                            const json = await response.json();
-                            const texts = extractAllTextsFromJSON(json);
-                            texts.forEach(t => {
-                                if (t.length > 5 && !t.match(/^[0-9]+$/)) currentPostTexts.add(t);
-                            });
-                            log.debug(`[GRAPHQL CAPTURED] Извлечено текстов: ${texts.length}`);
-                        }
+                        const json = await response.json();
+                        const texts = extractAllTextsFromJSON(json);
+                        texts.forEach(t => {
+                            if (t.length > 5 && !t.match(/^[0-9]+$/)) currentPostTexts.add(t);
+                        });
+                        log.debug(`[GRAPHQL CAPTURED] Извлечено текстов: ${texts.length}`);
                     } catch (e) {
                         // Игнорируем ошибки парсинга
                     }
@@ -392,13 +389,20 @@ async function scrapeInstagram() {
                 log.info(`[POST #${i + 1}] Expanded comments: ${expanded}`);
             }
 
+            await page.waitForNetworkIdle({
+                idleTime: 2000,
+                timeout: 10000
+            }).catch(() => { });
+
             await randomDelay(2000, 4000);
 
             // Fallback: забираем DOM текст для гарантии
             try {
                 const domTexts = await page.evaluate(() => {
-                    const spans = document.querySelectorAll('article span, article div[role="listitem"] span');
-                    return Array.from(spans).map(s => s.innerText ? s.innerText.trim() : '').filter(t => t.length > 5 && !t.match(/^[0-9]+[dhwsмч]$/i));
+                    const nodes = document.querySelectorAll('article ul li span');
+                    return Array.from(nodes)
+                        .map(n => n.innerText?.trim())
+                        .filter(t => t && t.length > 5);
                 });
                 domTexts.forEach(t => currentPostTexts.add(t));
             } catch (e) {
