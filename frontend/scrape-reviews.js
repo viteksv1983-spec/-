@@ -154,10 +154,10 @@ async function scrapeInstagram() {
             // Имитация чтения человеком (задержка 3-4 сек)
             await delay(3000 + Math.floor(Math.random() * 1000));
 
-            // Логика разворота всех комментариев
+            // Логика разворота всех комментариев (максимум 5 раз)
             let commentsExpanded = true;
             let expandClickCount = 0;
-            while (commentsExpanded) {
+            while (commentsExpanded && expandClickCount < 5) {
                 commentsExpanded = await page.evaluate(() => {
                     const elements = Array.from(document.querySelectorAll('div[role="button"], button, span, svg'));
                     const targetWords = ['view', 'all', 'comments', 'посмотре', 'все', 'комментари', 'більше', 'коментар', 'load', 'more'];
@@ -188,7 +188,7 @@ async function scrapeInstagram() {
 
                 if (commentsExpanded) {
                     expandClickCount++;
-                    process.stdout.write(`\r   🔄 Разворачиваю комментарии... Нашел и кликнул по ссылке (${expandClickCount} раз).   `);
+                    process.stdout.write(`\r   🔄 Разворачиваю комментарии... Нашел и кликнул по ссылке (${expandClickCount}/5).   `);
                     await delay(1000); // 1 секунда для подгрузки
                 }
             }
@@ -215,6 +215,11 @@ async function scrapeInstagram() {
 
             for (const text of extractedTexts) {
                 const lowerText = text.toLowerCase();
+
+                if (text.length > 5) {
+                    console.log(`   📖 Текст прочитан: "${text.replace(/\n/g, ' ').substring(0, 50)}..."`);
+                }
+
                 const isReview = KEYWORDS.some(word => lowerText.includes(word));
                 if (isReview) {
                     foundReview = true;
