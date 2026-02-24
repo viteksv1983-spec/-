@@ -492,6 +492,11 @@ async function scrapeInstagram() {
         try {
             // --- 2. Retry Логика и 429 RateLimit Handler ---
             while (retries < 3 && !successLoad) {
+                if (Date.now() - postStart > 90000) {
+                    log.warn(`[POST #${i + 1}] Лимит времени поста превышен (ожидание > 90s). Пропуск.`);
+                    break;
+                }
+
                 try {
                     is429 = false;
                     await randomDelay(1000, 2000); // Random pause before action
@@ -565,7 +570,7 @@ async function scrapeInstagram() {
                 const containsShortcode = shortcode && url.includes(shortcode);
 
                 return isGraphQL && isFetch && isPostOrGet && isJson && containsShortcode;
-            }, { timeout: 2500 }).catch(() => { });
+            }, { timeout: 4000 }).catch(() => { });
 
             await delay(1000); // Micro-delay для финальной отработки listener'а
 
@@ -604,11 +609,6 @@ async function scrapeInstagram() {
             }
 
             await randomDelay(2000, 3000);
-
-            if (Date.now() - postStart > 90000) {
-                log.warn(`Лимит времени поста превышен (ожидание > 90s). Пропуск.`);
-                continue;
-            }
 
             // Текст процессируется синхронно
             let foundKeyword = null;
