@@ -26,6 +26,21 @@ const OUTPUT_DIR = path.join(__dirname, 'public', 'images', 'reviews');
 const DATA_FILE = path.join(__dirname, 'src', 'data', 'reviewsData.js');
 const SESSION_FILE = path.join(__dirname, 'session_cookies.json');
 
+// Конфигурация анти-детекта
+const USER_AGENTS = [
+    'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+    'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36',
+    'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36',
+    'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
+];
+
+const VIEWPORTS = [
+    { width: 1366, height: 768 },
+    { width: 1920, height: 1080 },
+    { width: 1440, height: 900 },
+    { width: 1536, height: 864 }
+];
+
 // --- Инициализация консоли ---
 const rl = readline.createInterface({
     input: process.stdin,
@@ -43,6 +58,22 @@ const randomDelay = (min = 2000, max = 5000) => {
     return new Promise(resolve => setTimeout(resolve, ms));
 };
 
+// Функция для добавления небольшого Jitter (дрожания) к задержке
+const applyJitter = (baseMs, factor = 0.2) => {
+    const jitterStr = baseMs * factor;
+    return baseMs + Math.floor(Math.random() * (jitterStr * 2) - jitterStr);
+};
+
+// Структурированный логгер
+const log = {
+    info: (msg) => console.log(`[INFO] ${msg}`),
+    post: (idx, msg) => console.log(`[POST #${idx}] ${msg}`),
+    warn: (msg) => console.log(`[WARN] ⚠️ ${msg}`),
+    error: (msg) => console.error(`[ERROR] ❌ ${msg}`),
+    succ: (msg) => console.log(`[SUCCESS] ✅ ${msg}`),
+    debug: (msg) => { } // Временно отключен, чтобы не спамить
+};
+
 async function downloadImage(url, filepath) {
     try {
         const response = await axios({
@@ -55,6 +86,7 @@ async function downloadImage(url, filepath) {
             writer.on('error', reject);
         });
     } catch (error) {
+        log.error(`Ошибка загрузки изображения: ${error.message}`);
         return false;
     }
 }
@@ -67,11 +99,10 @@ function determineCategory(text) {
 }
 
 function saveReviews(reviewsArr) {
-    const fileContent = `// Автоматически сгенерировано скриптом scrape-reviews.js (Production Edition)\n\nexport const reviewsData = ${JSON.stringify(reviewsArr, null, 4)};\n`;
+    const fileContent = `// Автоматически сгенерировано скриптом scrape-reviews.js (Hardened Production Edition)\n\nexport const reviewsData = ${JSON.stringify(reviewsArr, null, 4)};\n`;
     fs.writeFileSync(DATA_FILE, fileContent, 'utf-8');
 }
 
-// Извлечение всех строковых значений ключа 'text' из глубокого JSON (GraphQL/XHR)
 function extractAllTextsFromJSON(obj) {
     let texts = [];
     let stack = [obj];
@@ -90,87 +121,104 @@ function extractAllTextsFromJSON(obj) {
     return texts;
 }
 
+// Извлечение шорткода поста из URL
+function getShortcodeFromUrl(url) {
+    const match = url.match(/\/p\/([^\/?#&]+)/);
+    return match ? match[1] : null;
+}
+
 // Глобальные переменные
 let globalReviewCount = 0;
 const reviewsArr = [];
-let isCheckpoint = false; // Флаг блокировки/редиректа
+let isCheckpoint = false;
+let globalRateLimitHits = 0;
 
 // --- Основной скрипт ---
 async function scrapeInstagram() {
-    console.log(`🚀 Запуск Production Edition Scraper (Single Thread, Stealth, Anti-ban)...`);
+    log.info(`🚀 Запуск Продакшн Версии (Production-Hardened, Anti-Bot).`);
+
+    const selUA = USER_AGENTS[Math.floor(Math.random() * USER_AGENTS.length)];
+    const selViewport = VIEWPORTS[Math.floor(Math.random() * VIEWPORTS.length)];
 
     const browser = await puppeteer.launch({
-        headless: false, // Обязательно false для Instagram (headless true чаще блокируют)
-        defaultViewport: { width: 1366, height: 768 },
+        headless: false,
+        defaultViewport: selViewport,
         args: [
             '--no-sandbox',
             '--disable-setuid-sandbox',
             '--disable-blink-features=AutomationControlled',
-            '--start-maximized'
+            '--start-maximized',
+            '--disable-web-security',
+            '--disable-features=IsolateOrigins,site-per-process'
         ]
     });
 
     const page = await browser.newPage();
 
-    // User-Agent Spoofing
-    await page.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36');
+    // Hardening Fingerprint
+    await page.setUserAgent(selUA);
+    await page.evaluateOnNewDocument(() => {
+        Object.defineProperty(navigator, 'webdriver', { get: () => false });
+        Object.defineProperty(navigator, 'languages', { get: () => ['ru-RU', 'ru', 'en-US', 'en'] });
+        Object.defineProperty(navigator, 'plugins', { get: () => [1, 2, 3] });
+    });
 
-    // Перехват ответов: анализ 429 и редиректов на checkpoint
-    page.on('response', async (response) => {
+    // Обработчик проверки на Checkpoint/Rate limit
+    const globalResponseHandler = async (response) => {
         const status = response.status();
         const url = response.url();
 
         if (status === 429) {
-            console.log(`\n⚠️ ВНИМАНИЕ: Получен HTTP 429 Too Many Requests. Instagram ограничивает запросы.`);
+            globalRateLimitHits++;
+            log.warn(`HTTP 429 Too Many Requests detected. (Global Hit: ${globalRateLimitHits})`);
         }
-        if (url.includes('/challenge/') || url.includes('/suspended/')) {
-            console.log('\n🛑 АЛЕРТ: Обнаружен Checkpoint / Подтверждение номера телефона!');
-            isCheckpoint = true;
+        if (url.includes('/challenge/') || url.includes('/suspended/') || url.includes('/login/?next=')) {
+            // Игнорируем логин редирект для static assets
+            if (response.request().resourceType() === 'document' && !url.includes('graphql')) {
+                log.error('Checkpoint / Login redirect Detected!');
+                isCheckpoint = true;
+            }
         }
-    });
+    };
+    page.on('response', globalResponseHandler);
 
-    // Загрузка сохранённой сессии
+    // Загрузка сессии
     if (fs.existsSync(SESSION_FILE)) {
-        console.log('🍪 Загрузка сохраненных cookies...');
+        log.info('Загрузка сохраненных cookies...');
         const cookies = JSON.parse(fs.readFileSync(SESSION_FILE, 'utf-8'));
         await page.setCookie(...cookies);
     }
 
-    console.log('🔗 Переход на базовый домен Instagram...');
-    await page.goto('https://www.instagram.com/', { waitUntil: 'networkidle2' });
-
-    await randomDelay(3000, 5000);
+    log.info('Переход на Instagram...');
+    await page.goto('https://www.instagram.com/', { waitUntil: 'domcontentloaded' });
+    await randomDelay(3000, 6000);
 
     if (isCheckpoint) {
-        console.log('🛑 Работа прервана из-за обнаруженной блокировки (Checkpoint).');
+        log.error('Работа прервана из-за обнаруженной блокировки (Checkpoint).');
         await browser.close();
         process.exit(1);
     }
 
-    // Проверка авторизации
     const isLoggedIn = await page.evaluate(() => {
         return !!document.querySelector('svg[aria-label="Home"]') || !!document.querySelector('svg[aria-label="Главная"]');
     });
 
     if (!isLoggedIn) {
         console.log('\n=============================================');
-        console.log('⚠️ ДЕЙСТВИЕ: Требуется авторизация.');
+        log.warn('Требуется авторизация.');
         await askQuestion('⚠️ Пожалуйста, залогиньтесь в Instagram в браузере и нажмите ENTER в терминале... ');
 
-        // Сохраняем куки после входа
         const currentCookies = await page.cookies();
         fs.writeFileSync(SESSION_FILE, JSON.stringify(currentCookies));
-        console.log('✅ Cookies сохранены. Следующий запуск пройдет без логина.');
+        log.succ('Cookies сохранены.');
         console.log('=============================================\n');
-    } else {
-        console.log('✅ Вы успешно авторизованы по старой сессии (Cookies Valid).');
     }
 
-    // Сбор ссылок на посты
-    console.log(`🔍 Переход на профиль @${TARGET_ACCOUNT}...`);
-    await page.goto(`https://www.instagram.com/${TARGET_ACCOUNT}/`, { waitUntil: 'networkidle2', timeout: 60000 });
+    // Сбор ссылок
+    log.info(`Переход на профиль @${TARGET_ACCOUNT}...`);
+    await page.goto(`https://www.instagram.com/${TARGET_ACCOUNT}/`, { waitUntil: 'domcontentloaded', timeout: 60000 });
 
-    console.log(`\n⏳ Сбор ссылок на ${POSTS_TO_CHECK} постов (без агрессивного скролла)...`);
+    log.info(`Сбор ссылок на ${POSTS_TO_CHECK} постов...`);
     let postLinks = new Set();
     let scrollAttempts = 0;
 
@@ -181,18 +229,17 @@ async function scrapeInstagram() {
         const prevSize = postLinks.size;
         links.forEach(link => postLinks.add(link));
 
-        process.stdout.write(`\r🔗 Собрано уникальных ссылок: ${postLinks.size} / ${POSTS_TO_CHECK}`);
+        process.stdout.write(`\r🔗 Собрано ссылок: ${postLinks.size} / ${POSTS_TO_CHECK}`);
 
         if (postLinks.size >= POSTS_TO_CHECK) break;
 
-        // Деликатный скролл частями
-        await page.evaluate(() => window.scrollBy(0, 1000));
-        await randomDelay(2000, 5000); // 2-5 секунд задержки
+        await page.evaluate(() => window.scrollBy(0, 800 + Math.random() * 400));
+        await randomDelay(2000, 4500);
 
         if (postLinks.size === prevSize) {
             scrollAttempts++;
-            if (scrollAttempts > 3) {
-                console.log('\n🛑 Новые посты не загружаются. Конец ленты.');
+            if (scrollAttempts > 4) {
+                log.info('\nНовые посты не загружаются. Конец ленты.');
                 break;
             }
         } else {
@@ -201,87 +248,117 @@ async function scrapeInstagram() {
     }
 
     const linksArray = Array.from(postLinks).slice(0, POSTS_TO_CHECK);
-    console.log(`\n✅ Сбор ссылок завершен. Постов для анализа: ${linksArray.length}\n`);
+    log.succ(`\nСбор ссылок завершен. Постов для анализа: ${linksArray.length}\n`);
 
-    // Переменная для перехвата данных текущего поста
-    let currentPostTexts = new Set();
-
-    // Настраиваем перехват Network GraphQL / XHR (собираем текст "на лету")
-    page.on('response', async (response) => {
-        const url = response.url();
-        const req = response.request();
-
-        if (req.resourceType() === 'xhr' || req.resourceType() === 'fetch') {
-            if (url.includes('graphql/query') || url.includes('/api/v1/media/') || url.includes('/comments/')) {
-                try {
-                    const json = await response.json();
-                    const texts = extractAllTextsFromJSON(json);
-                    texts.forEach(t => {
-                        if (t.length > 5 && !t.match(/^[0-9]+$/)) currentPostTexts.add(t);
-                    });
-                } catch (e) {
-                    // Игнорируем ошибки парсинга не JSON-ответов
-                }
-            }
-        }
-    });
-
-    // Обработка каждого поста (Single Thread)
+    // Анализ каждого поста
     for (let i = 0; i < linksArray.length; i++) {
         if (isCheckpoint) {
-            console.log('\n🛑 БЛОКИРОВКА АКТИВИРОВАНА. Корректное завершение...');
+            log.error('БЛОКИРОВКА АКТИВИРОВАНА. Останавливаем анализ текущих постов.');
             break;
         }
 
         const link = linksArray[i];
-        currentPostTexts.clear(); // Сброс собранных текстов для нового поста
-
+        const shortcode = getShortcodeFromUrl(link);
+        let currentPostTexts = new Set();
         let successLoad = false;
         let retries = 0;
-        let baseWaitTime = 30000; // Базовая задержка для Exponential Backoff (30 сек)
+        let baseWaitTime = 60000; // 60 секунд базовая задержка при 429
+        let is429 = false;
 
-        console.log(`\n➡️ Переход к посту #${i + 1}...`);
+        // --- 1. Listener Isolation & GraphQL Capture ---
+        // Строгое отслеживание запросов ТОЛЬКО текущего поста
+        const postGraphQLHandler = async (response) => {
+            const url = response.url();
+            const req = response.request();
+            if (response.status() === 429) is429 = true;
 
-        // Retry logic + Exponential Backoff
+            if (req.resourceType() === 'xhr' || req.resourceType() === 'fetch') {
+                if (url.includes('graphql/query') || url.includes('/api/v1/media/') || url.includes('/comments/')) {
+                    try {
+                        // Strict GraphQL Capture: Проверяем, относится ли запрос к текущему посту
+                        // (Instagram часто передает shortcode в параметре variables или URL)
+                        const postData = req.postData() || '';
+                        if (postData.includes(shortcode) || url.includes(shortcode) || url.includes('/api/v1/media/')) {
+                            const json = await response.json();
+                            const texts = extractAllTextsFromJSON(json);
+                            texts.forEach(t => {
+                                if (t.length > 5 && !t.match(/^[0-9]+$/)) currentPostTexts.add(t);
+                            });
+                            log.debug(`[GRAPHQL CAPTURED] Извлечено текстов: ${texts.length}`);
+                        }
+                    } catch (e) {
+                        // Игнорируем ошибки парсинга
+                    }
+                }
+            }
+        };
+
+        // Подписываемся ТОЛЬКО на время загрузки этого поста
+        page.on('response', postGraphQLHandler);
+
+        log.post(i + 1, `Анализ: ${link}`);
+
+        // --- 2. Retry Логика и 429 RateLimit Handler ---
         while (retries < 3 && !successLoad) {
             try {
-                const response = await page.goto(link, { waitUntil: 'domcontentloaded', timeout: 45000 });
-                const status = response ? response.status() : 200;
+                is429 = false;
+                await randomDelay(1000, 2000); // Random pause before action
 
-                if (status === 429) {
-                    throw new Error('HTTP 429 Too Many Requests');
+                const gotoResponse = await page.goto(link, { waitUntil: 'domcontentloaded', timeout: 45000 });
+                const status = gotoResponse ? gotoResponse.status() : 200;
+
+                if (status === 429 || is429) {
+                    throw new Error('HTTP 429');
                 }
 
+                // Post load stabilization
+                await randomDelay(3000, 5000); // Ожидаем GraphQL ответы и стабилизацию DOM
                 successLoad = true;
+
             } catch (err) {
                 retries++;
-                console.log(`⚠️ Ошибка загрузки поста #${i + 1} (Попытка ${retries}/3) - ${err.message}`);
+                const isRateLimit = err.message.includes('429');
+                log.warn(`[RETRY ${retries}/3] Ошибка загрузки поста: ${isRateLimit ? 'Rate Limit (429)' : err.message}`);
+
+                if (isCheckpoint) break; // Сразу выходим при чекпоинте
 
                 if (retries >= 3) {
-                    console.log(`⏩ Пропуск поста #${i + 1}.`);
+                    log.warn(`Пропуск поста.`);
                     break;
                 }
 
-                console.log(`⏳ Отдых ${baseWaitTime / 1000} сек. перед повторной попыткой...`);
-                await randomDelay(baseWaitTime, baseWaitTime);
-                baseWaitTime *= 2; // Exponential Backoff: 30s -> 60s -> 120s
+                let curWait = isRateLimit ? baseWaitTime : 15000;
+                curWait = applyJitter(curWait, 0.3); // Добавляем до 30% джиттера
+
+                log.info(`Ожидание ${Math.round(curWait / 1000)} сек. перед повтором...`);
+                await delay(curWait);
+
+                if (isRateLimit) baseWaitTime = Math.min(baseWaitTime * 2, 240000); // Max 4 минуты
             }
         }
 
-        if (!successLoad) continue;
+        // --- 3. Memory Safety & Cleanup ---
+        // Обязательно снимаем обработчик текущего поста, устраняем утечку памяти и смешивание комментов
+        page.off('response', postGraphQLHandler);
 
-        // Умная задержка 2-5 сек после загрузки
-        await randomDelay(2000, 5000);
+        if (!successLoad || isCheckpoint) {
+            currentPostTexts.clear();
+            continue;
+        }
 
-        // Fallback: Также собираем текст прямо со страницы, так как первый батч комментов может быть зашит в HTML
-        const domTexts = await page.evaluate(() => {
-            const spans = document.querySelectorAll('article span, article div[role="listitem"] span');
-            return Array.from(spans).map(s => s.innerText ? s.innerText.trim() : '').filter(t => t.length > 5 && !t.match(/^[0-9]+[dhwsмч]$/i));
-        });
+        // Fallback: забираем DOM текст для гарантии
+        try {
+            const domTexts = await page.evaluate(() => {
+                const spans = document.querySelectorAll('article span, article div[role="listitem"] span');
+                return Array.from(spans).map(s => s.innerText ? s.innerText.trim() : '').filter(t => t.length > 5 && !t.match(/^[0-9]+[dhwsмч]$/i));
+            });
+            domTexts.forEach(t => currentPostTexts.add(t));
+        } catch (e) {
+            log.error(`Ошибка при чтении DOM: ${e.message}`);
+        }
 
-        domTexts.forEach(t => currentPostTexts.add(t));
-
-        // Анализ собранных текстов
+        // --- 4. Защита от Race Conditions ---
+        // Текст процессируется синхронно, только когда страница полностью загружена и Network listeners сняты.
         let foundKeyword = null;
         let targetText = '';
 
@@ -297,59 +374,67 @@ async function scrapeInstagram() {
         }
 
         if (foundKeyword) {
-            console.log(`✅ Найдено совпадение! Ключевое слово: [${foundKeyword}]`);
+            log.succ(`Найдено совпадение! Ключ: [${foundKeyword}]`);
 
-            const imgUrl = await page.evaluate(() => {
-                const img = document.querySelector('article img[style*="object-fit: cover"]') || document.querySelector('article img[class*="x5yr21d"]');
-                return img ? img.src : null;
-            });
+            try {
+                const imgUrl = await page.evaluate(() => {
+                    const img = document.querySelector('article img[style*="object-fit: cover"]') || document.querySelector('article img[class*="x5yr21d"]');
+                    return img ? img.src : null;
+                });
 
-            if (imgUrl) {
-                globalReviewCount++;
-                const filename = `review-${i + 1}-${globalReviewCount}.jpg`;
-                const filepath = path.join(OUTPUT_DIR, filename);
+                if (imgUrl) {
+                    globalReviewCount++;
+                    const filename = `review-${i + 1}-${globalReviewCount}.jpg`;
+                    const filepath = path.join(OUTPUT_DIR, filename);
 
-                const downloaded = await downloadImage(imgUrl, filepath);
-                if (downloaded) {
-                    reviewsArr.push({
-                        id: globalReviewCount,
-                        clientName: 'Instagram Відгук',
-                        text: targetText.substring(0, 1000).trim(), // Ограничиваем текст до 1000 символов
-                        image: `/images/reviews/${filename}`,
-                        category: determineCategory(targetText),
-                        rating: 5,
-                        sourceUrl: link
-                    });
+                    const downloaded = await downloadImage(imgUrl, filepath);
+                    if (downloaded) {
+                        reviewsArr.push({
+                            id: globalReviewCount,
+                            clientName: 'Instagram Відгук',
+                            text: targetText.substring(0, 1000).trim(),
+                            image: `/images/reviews/${filename}`,
+                            category: determineCategory(targetText),
+                            rating: 5,
+                            sourceUrl: link
+                        });
 
-                    saveReviews(reviewsArr);
-                    console.log(`💾 Отзыв сохранен. Всего собрано: ${globalReviewCount}`);
+                        saveReviews(reviewsArr);
+                        log.info(`Отзыв сохранен. Всего собрано: ${globalReviewCount}`);
+                    }
                 }
+            } catch (e) {
+                log.error(`Не удалось сохранить картинку для поста: ${e.message}`);
             }
         } else {
-            console.log(`❌ Совпадений не найдено. (Проверено символов: ${Array.from(currentPostTexts).join(' ').length})`);
+            log.info(`Нет совпадений. (Текстов: ${currentPostTexts.size})`);
         }
 
-        // Random smart delay перед следующим постом
-        const nextDelay = Math.floor(Math.random() * 3000) + 2000;
-        console.log(`⏳ Отдых ${nextDelay} мс...`);
+        // Очистка Set и переменных
+        currentPostTexts.clear();
+        currentPostTexts = null;
+
+        // Пауза перед следующим постом
+        const nextDelay = applyJitter(3000, 0.5); // 1.5 - 4.5 сек
+        log.info(`Пауза: ${Math.round(nextDelay)}мс.`);
         await delay(nextDelay);
     }
 
-    // 4. Финал
-    console.log(`\n\n🎉 Парсинг полностью завершен!`);
+    // --- Финал ---
+    console.log(`\n\n🎉 Парсинг завершен!`);
     if (globalReviewCount > 0) {
-        console.log(`✅ Найдено и сохранено отзывов: ${globalReviewCount} в ${DATA_FILE}`);
+        log.succ(`Всего отзывов: ${globalReviewCount} -> ${DATA_FILE}`);
     } else {
-        console.log('😔 Совпадений по ключевым словам не найдено.');
+        log.warn('Совпадений по ключевым словам не найдено.');
     }
 
-    console.log('Закрытие браузера...');
+    log.info('Отключаю браузер...');
     await browser.close();
     rl.close();
 }
 
 scrapeInstagram().catch(err => {
-    console.error('\n💥 Критическая ошибка скрипта:', err);
+    log.error(`Критическая ошибка: ${err.message}`);
     rl.close();
     process.exit(1);
 });
