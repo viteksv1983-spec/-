@@ -134,7 +134,7 @@ function extractStrictCommentsFromJSON(obj) {
 }
 
 // Профессиональная загрузка комментариев (Production Stable)
-async function fullyLoadComments(page) {
+async function fullyLoadComments(page, abortSignal) {
     let clicksCount = 0;
     const maxIterations = 25; // Увеличено до 25
     let iterations = 0;
@@ -145,6 +145,11 @@ async function fullyLoadComments(page) {
     const startTime = Date.now();
 
     while (iterations < maxIterations) {
+        if (abortSignal && abortSignal.aborted) {
+            log.warn('fullyLoadComments прерван через AbortController (Глобальный таймаут поста).');
+            break;
+        }
+
         iterations++;
 
         // 1. Ищем scrollable контейнер, начиная от списка комментариев (ul)
@@ -429,6 +434,13 @@ async function scrapeInstagram() {
 
     // Анализ каждого поста
     for (let i = 0; i < linksArray.length; i++) {
+        // --- Hard Memory Guard ---
+        if (process.memoryUsage().heapUsed > 500 * 1024 * 1024) {
+            log.error('Memory limit exceeded (>500MB). Необходим перезапуск для освобождения памяти.');
+            await browser.close().catch(() => { });
+            process.exit(1);
+        }
+
         if (isCheckpoint) {
             log.error('БЛОКИРОВКА АКТИВИРОВАНА. Останавливаем анализ текущих постов.');
             break;
@@ -441,7 +453,12 @@ async function scrapeInstagram() {
             continue;
         }
 
-        const postStart = Date.now();
+        const abortController = new AbortController();
+        const postAbortTimeout = setTimeout(() => {
+            log.warn(`[POST #${i + 1}] Жёсткий лимит времени поста превышен (ожидание > 90s). Сработал AbortController.`);
+            abortController.abort();
+        }, 90000);
+
         let currentPostTexts = new Set();
         let successLoad = false;
         let retries = 0;
@@ -492,10 +509,7 @@ async function scrapeInstagram() {
         try {
             // --- 2. Retry Логика и 429 RateLimit Handler ---
             while (retries < 3 && !successLoad) {
-                if (Date.now() - postStart > 90000) {
-                    log.warn(`[POST #${i + 1}] Лимит времени поста превышен (ожидание > 90s). Пропуск.`);
-                    break;
-                }
+                if (abortController.signal.aborted) break;
 
                 try {
                     is429 = false;
@@ -552,7 +566,7 @@ async function scrapeInstagram() {
             // --- Профессиональная загрузка комментариев ---
             await randomDelay(3000, 5000);
 
-            const { clicksCount, totalScrolls, finalHeight, texts } = await fullyLoadComments(page);
+            const { clicksCount, totalScrolls, finalHeight, texts } = await fullyLoadComments(page, abortController.signal);
             if (clicksCount > 0 || totalScrolls > 0) {
                 log.info(`[POST #${i + 1}] Expanded: ${clicksCount} clicks, ${totalScrolls} scrolls (H: ${finalHeight}px)`);
             }
@@ -599,7 +613,7 @@ async function scrapeInstagram() {
                 await page.goto(link, { waitUntil: 'domcontentloaded', timeout: 45000 }).catch(() => { });
                 await randomDelay(4000, 6000);
 
-                const reloadResult = await fullyLoadComments(page);
+                const reloadResult = await fullyLoadComments(page, abortController.signal);
                 if (reloadResult.texts && reloadResult.texts.length > 0) {
                     reloadResult.texts.forEach(t => currentPostTexts.add(t));
                     log.info(`[POST #${i + 1}] Soft Reload извлёк ${reloadResult.texts.length} текстов через DOM.`);
@@ -666,6 +680,7 @@ async function scrapeInstagram() {
             currentPostTexts.clear();
 
         } finally {
+            clearTimeout(postAbortTimeout);
             // --- 3. Memory Safety & Cleanup ---
             // Точечная отвязка конкретного listener'а для защиты future hooks
             try {
