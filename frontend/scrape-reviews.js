@@ -191,11 +191,17 @@ async function fullyLoadComments(page) {
             const container = getScrollable();
             if (container) {
                 container.scrollTo({ top: container.scrollHeight, behavior: 'instant' });
-                return container.scrollHeight;
             } else {
                 window.scrollTo({ top: document.body.scrollHeight, behavior: 'instant' });
-                return document.body.scrollHeight;
             }
+
+            // Fallback принудительного scrollIntoView для position: sticky и lazy-load
+            const ul = document.querySelector('article ul, div[role="dialog"] ul');
+            if (ul && ul.lastElementChild) {
+                ul.lastElementChild.scrollIntoView({ behavior: 'instant', block: 'end' });
+            }
+
+            return container ? container.scrollHeight : document.body.scrollHeight;
         });
 
         const waitTimeScroll = Math.floor(Math.random() * (1300 - 900 + 1)) + 900; // 900-1300ms
@@ -514,6 +520,7 @@ async function scrapeInstagram() {
 
             // 6. Anti-Race Condition Sequence
             await page.waitForNetworkIdle({ idleTime: 2000, timeout: 8000 }).catch(() => { });
+            await delay(1500); // Микрозадержка для delayed pagination (Instagram delayed GraphQL)
             graphQlTextsCount = currentPostTexts.size; // Финальный размер GraphQL данных
 
             let domTextsCount = 0;
