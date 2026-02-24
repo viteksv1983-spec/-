@@ -411,11 +411,12 @@ async function scrapeInstagram() {
         } finally {
             // --- 3. Memory Safety & Cleanup ---
             // Обязательно снимаем обработчик текущего поста, устраняем утечку памяти и смешивание комментов
-            page.off('response', postGraphQLHandler);
+            // ничего не делаем тут
         }
 
         // --- 4. Защита от Race Conditions ---
         // Текст процессируется синхронно, только когда страница полностью загружена и Network listeners сняты.
+        page.off('response', postGraphQLHandler);
         let foundKeyword = null;
         let targetText = '';
 
