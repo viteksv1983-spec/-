@@ -94,7 +94,7 @@ function About() {
                                     Моя мета — зробити ваше свято <span style={{ color: '#FFD700' }}>незабутнім</span>
                                 </h2>
                                 <p className="text-[#FFD700] font-black italic text-lg">
-                                    — Шеф-кондитер, засновник Antreme
+                                    — Людмила Приходько, засновник Antreme
                                 </p>
                             </div>
                             <p className="text-white/60 text-lg leading-relaxed">

@@ -445,7 +445,8 @@ function Home() {
                                         loading="lazy"
                                     />
                                     <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-8">
-                                        <h3 className="text-[#E8C064] text-2xl font-bold uppercase tracking-wider">Шеф-кондитер</h3>
+                                        <h3 className="text-white text-2xl font-bold" style={{ fontFamily: "'Oswald', sans-serif" }}>Людмила Приходько</h3>
+                                        <p className="text-[#E8C064] font-medium">Шеф-кондитер</p>
                                     </div>
                                 </div>
                             </div>
