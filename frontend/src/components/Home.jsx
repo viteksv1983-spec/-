@@ -437,16 +437,15 @@ function Home() {
                             <div className="relative group">
                                 <div className="relative rounded-[2rem] overflow-hidden shadow-xl transform transition duration-500 group-hover:scale-[1.02] border border-gray-100">
                                     <img
-                                        src="/images/confectioner.jpg"
-                                        alt="Кондитер Antreme з авторським тортом у Києві"
+                                        src="/images/confectioner.webp"
+                                        alt="Шеф-кондитер Antreme з авторським тортом у Києві"
                                         className="w-full h-auto object-cover"
                                         width="600"
                                         height="800"
                                         loading="lazy"
                                     />
                                     <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-8">
-                                        <h3 className="text-white text-2xl font-bold" style={{ fontFamily: "'Oswald', sans-serif" }}>Людмила Приходько</h3>
-                                        <p className="text-[#E8C064] font-medium">Шеф-кондитер</p>
+                                        <h3 className="text-[#E8C064] text-2xl font-bold uppercase tracking-wider">Шеф-кондитер</h3>
                                     </div>
                                 </div>
                             </div>

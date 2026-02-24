@@ -94,7 +94,7 @@ function About() {
                                     Моя мета — зробити ваше свято <span style={{ color: '#FFD700' }}>незабутнім</span>
                                 </h2>
                                 <p className="text-[#FFD700] font-black italic text-lg">
-                                    — Людмила Приходько, засновник Antreme
+                                    — Шеф-кондитер, засновник Antreme
                                 </p>
                             </div>
                             <p className="text-white/60 text-lg leading-relaxed">
@@ -115,8 +115,8 @@ function About() {
                             <div className="relative rounded-3xl overflow-hidden shadow-2xl border border-white/10"
                                 style={{ boxShadow: '0 0 50px rgba(255,215,0,0.15)' }}>
                                 <img
-                                    src="/about/about_3.jpg"
-                                    alt="Людмила Приходько"
+                                    src="/about/about_3.webp"
+                                    alt="Шеф-кондитер Antreme"
                                     className="w-full h-full object-cover"
                                 />
                                 <div className="absolute inset-0"
