@@ -154,57 +154,70 @@ async function scrapeInstagram() {
             // Имитация чтения человеком (задержка 3-4 сек)
             await delay(3000 + Math.floor(Math.random() * 1000));
 
-            // Извлечение текста
-            const textContent = await page.evaluate(() => {
-                const element = document.querySelector('h1[dir="auto"]') || document.querySelector('span[dir="auto"]');
-                return element ? element.innerText : '';
+            // Дополнительная задержка 2с для загрузки комментариев
+            await delay(2000);
+
+            // Извлечение всех текстов поста (описание + комментарии)
+            const extractedTexts = await page.evaluate(() => {
+                const texts = [];
+                const elements = document.querySelectorAll('span[dir="auto"], h1[dir="auto"], div[role="listitem"] span');
+                elements.forEach(el => {
+                    if (el.innerText && el.innerText.trim().length > 0) {
+                        texts.push(el.innerText.trim());
+                    }
+                });
+                return texts;
             });
 
             let foundReview = false;
             let previewText = '';
+            let targetReviewText = '';
 
-            if (textContent) {
-                const lowerText = textContent.toLowerCase();
-                // Поиск по ключевым словам (регистронезависимо)
+            for (const text of extractedTexts) {
+                const lowerText = text.toLowerCase();
                 const isReview = KEYWORDS.some(word => lowerText.includes(word));
-
                 if (isReview) {
                     foundReview = true;
-                    // Извлечение URL картинки (ищем первый попавшийся img)
-                    const imgUrl = await page.evaluate(() => {
-                        const img = document.querySelector('article img[style*="object-fit: cover"]') || document.querySelector('article img[class*="x5yr21d"]');
-                        return img ? img.src : null;
+                    targetReviewText = text;
+                    break;
+                }
+            }
+
+            if (foundReview) {
+                // Извлечение URL картинки (ищем первый попавшийся img)
+                const imgUrl = await page.evaluate(() => {
+                    const img = document.querySelector('article img[style*="object-fit: cover"]') || document.querySelector('article img[class*="x5yr21d"]');
+                    return img ? img.src : null;
+                });
+
+                if (imgUrl) {
+                    reviewCount++;
+                    // Название файла: review-index-id.jpg
+                    const filename = `review-${i + 1}-${reviewCount}.jpg`;
+                    const filepath = path.join(OUTPUT_DIR, filename);
+                    const publicUrl = `/images/reviews/${filename}`;
+
+                    await downloadImage(imgUrl, filepath);
+
+                    const category = determineCategory(targetReviewText);
+
+                    reviewsArr.push({
+                        id: reviewCount,
+                        clientName: 'Клієнт Instagram',
+                        text: targetReviewText.trim(),
+                        image: publicUrl,
+                        category: category,
+                        rating: 5,
+                        sourceUrl: link // добавляем ссылку на оригинал (опционально)
                     });
 
-                    if (imgUrl) {
-                        reviewCount++;
-                        // Название файла: review-index-id.jpg
-                        const filename = `review-${i + 1}-${reviewCount}.jpg`;
-                        const filepath = path.join(OUTPUT_DIR, filename);
-                        const publicUrl = `/images/reviews/${filename}`;
-
-                        await downloadImage(imgUrl, filepath);
-
-                        const category = determineCategory(textContent);
-
-                        reviewsArr.push({
-                            id: reviewCount,
-                            clientName: 'Людмила Приходько (Instagram)',
-                            text: textContent.trim(),
-                            image: publicUrl,
-                            category: category,
-                            rating: 5,
-                            sourceUrl: link // добавляем ссылку на оригинал (опционально)
-                        });
-
-                        // Сохраняем каждые 10 отзывов для надежности
-                        if (reviewCount % 10 === 0) {
-                            saveReviews(reviewsArr);
-                            console.log(`\n💾 Автосохранение... (сохранено ${reviewCount} отзывов)`);
-                        }
-
-                        previewText = textContent.replace(/\n/g, ' ').substring(0, 50) + '...';
+                    // Сохраняем каждые 10 отзывов для надежности
+                    if (reviewCount % 10 === 0) {
+                        saveReviews(reviewsArr);
+                        console.log(`\n💾 Автосохранение... (сохранено ${reviewCount} отзывов)`);
                     }
+
+                    previewText = targetReviewText.replace(/\n/g, ' ').substring(0, 50) + '...';
                 }
             }
 
