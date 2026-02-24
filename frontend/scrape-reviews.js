@@ -126,47 +126,46 @@ function extractAllTextsFromJSON(obj) {
 // Мягкое раскрытие комментариев
 async function expandCommentsIfExists(page) {
     let clicksCount = 0;
-    const maxClicks = 2; // Не более 2 раз на пост
+    const maxClicks = 2;
 
-    // Мягкий scroll вниз перед началом кликов
-    await page.evaluate(() => window.scrollBy(0, 500));
-    await randomDelay(2000, 3000);
+    // Скроллим к блоку комментариев
+    await page.evaluate(() => {
+        const article = document.querySelector('article');
+        if (article) article.scrollIntoView({ behavior: 'instant', block: 'center' });
+    });
+
+    await new Promise(r => setTimeout(r, 1500));
 
     while (clicksCount < maxClicks) {
         const clicked = await page.evaluate(() => {
-            const buttons = Array.from(document.querySelectorAll('div[role="button"], button, svg circle'));
-            const targetWords = ['view', 'all', 'replies', 'ответ', 'ответов', '+'];
+            const buttons = Array.from(
+                document.querySelectorAll('button, div[role="button"]')
+            );
 
             for (let btn of buttons) {
-                const txt = (btn.innerText || btn.getAttribute('aria-label') || '').toLowerCase();
-                const isExpandBtn = targetWords.some(w => txt.includes(w)) || txt === '+';
+                const text = (btn.innerText || '').toLowerCase();
 
-                if (isExpandBtn && txt.length > 0 && txt.length < 40) {
-                    let clickable = btn;
-                    while (clickable && clickable.tagName !== 'BUTTON' && clickable.getAttribute('role') !== 'button' && clickable.tagName !== 'DIV') {
-                        if (!clickable.parentElement) break;
-                        clickable = clickable.parentElement;
-                    }
-                    if (clickable && typeof clickable.click === 'function') {
-                        clickable.click();
-                        return true;
-                    }
+                if (
+                    text.includes('view') ||
+                    text.includes('repl') ||
+                    text.includes('ответ') ||
+                    text.includes('все')
+                ) {
+                    btn.click();
+                    return true;
                 }
             }
+
             return false;
         });
 
-        if (!clicked) {
-            break; // Расширять больше нечего
-        }
+        if (!clicked) break;
 
         clicksCount++;
-        await randomDelay(2000, 3000); // Ожидание подгрузки данных после клика
+        await new Promise(r => setTimeout(r, 2000));
     }
 
-    if (clicksCount > 0) {
-        log.info(`Expanded comments: ${clicksCount}`);
-    }
+    return clicksCount;
 }
 
 // Извлечение шорткода поста из URL
@@ -320,10 +319,8 @@ async function scrapeInstagram() {
             if (req.resourceType() === 'xhr' || req.resourceType() === 'fetch') {
                 if (url.includes('graphql/query') || url.includes('/api/v1/media/') || url.includes('/comments/')) {
                     try {
-                        // Strict GraphQL Capture: Проверяем, относится ли запрос к текущему посту
-                        // (Instagram часто передает shortcode в параметре variables или URL)
-                        const postData = req.postData() || '';
-                        if (postData.includes(shortcode) || url.includes(shortcode) || url.includes('/api/v1/media/')) {
+                        // Relaxed GraphQL Capture
+                        if (url.includes('graphql') || url.includes('/comments/')) {
                             const json = await response.json();
                             const texts = extractAllTextsFromJSON(json);
                             texts.forEach(t => {
@@ -388,8 +385,14 @@ async function scrapeInstagram() {
             }
 
             // --- Мягкое раскрытие комментариев ---
-            await expandCommentsIfExists(page);
-            await randomDelay(2000, 4000); // Ожидание перед снятием listener
+            await randomDelay(3000, 5000);
+
+            const expanded = await expandCommentsIfExists(page);
+            if (expanded > 0) {
+                log.info(`[POST #${i + 1}] Expanded comments: ${expanded}`);
+            }
+
+            await randomDelay(2000, 4000);
 
             // Fallback: забираем DOM текст для гарантии
             try {
