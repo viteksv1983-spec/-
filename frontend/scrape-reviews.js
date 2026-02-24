@@ -123,6 +123,52 @@ function extractAllTextsFromJSON(obj) {
     return texts;
 }
 
+// Мягкое раскрытие комментариев
+async function expandCommentsIfExists(page) {
+    let clicksCount = 0;
+    const maxClicks = 2; // Не более 2 раз на пост
+
+    // Мягкий scroll вниз перед началом кликов
+    await page.evaluate(() => window.scrollBy(0, 500));
+    await randomDelay(2000, 3000);
+
+    while (clicksCount < maxClicks) {
+        const clicked = await page.evaluate(() => {
+            const buttons = Array.from(document.querySelectorAll('div[role="button"], button, svg circle'));
+            const targetWords = ['view', 'all', 'replies', 'ответ', 'ответов', '+'];
+
+            for (let btn of buttons) {
+                const txt = (btn.innerText || btn.getAttribute('aria-label') || '').toLowerCase();
+                const isExpandBtn = targetWords.some(w => txt.includes(w)) || txt === '+';
+
+                if (isExpandBtn && txt.length > 0 && txt.length < 40) {
+                    let clickable = btn;
+                    while (clickable && clickable.tagName !== 'BUTTON' && clickable.getAttribute('role') !== 'button' && clickable.tagName !== 'DIV') {
+                        if (!clickable.parentElement) break;
+                        clickable = clickable.parentElement;
+                    }
+                    if (clickable && typeof clickable.click === 'function') {
+                        clickable.click();
+                        return true;
+                    }
+                }
+            }
+            return false;
+        });
+
+        if (!clicked) {
+            break; // Расширять больше нечего
+        }
+
+        clicksCount++;
+        await randomDelay(2000, 3000); // Ожидание подгрузки данных после клика
+    }
+
+    if (clicksCount > 0) {
+        log.info(`Expanded comments: ${clicksCount}`);
+    }
+}
+
 // Извлечение шорткода поста из URL
 function getShortcodeFromUrl(url) {
     const match = url.match(/\/p\/([^\/?#&]+)/);
@@ -340,6 +386,10 @@ async function scrapeInstagram() {
             if (!successLoad || isCheckpoint) {
                 continue;
             }
+
+            // --- Мягкое раскрытие комментариев ---
+            await expandCommentsIfExists(page);
+            await randomDelay(2000, 4000); // Ожидание перед снятием listener
 
             // Fallback: забираем DOM текст для гарантии
             try {
