@@ -89,6 +89,13 @@ export default function DistrictPage() {
         "name": `Кондитерська Antreme - Доставка ${districtData.name}`,
         "image": "https://antreme.kyiv.ua/og-image.jpg",
         "url": `https://antreme.kyiv.ua/districts/${district}`,
+        "servesCuisine": [
+            "Торти на замовлення",
+            "Весільні торти",
+            "Дитячі торти",
+            "Бенто-торти",
+            "Десерти"
+        ],
         "address": {
             "@type": "PostalAddress",
             "addressLocality": "Київ",

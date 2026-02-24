@@ -148,6 +148,13 @@ function Home() {
         "priceRange": "₴₴",
         "areaServed": { "@type": "City", "name": "Kyiv" },
         "sameAs": ["https://www.instagram.com/antreme.kyiv/"],
+        "servesCuisine": [
+            "Торти на замовлення",
+            "Весільні торти",
+            "Дитячі торти",
+            "Бенто-торти",
+            "Десерти"
+        ],
         "address": {
             "@type": "PostalAddress",
             "streetAddress": "Харківське шосе, 180/21",

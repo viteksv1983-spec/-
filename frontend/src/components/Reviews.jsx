@@ -113,6 +113,13 @@ function Reviews() {
             "name": "Antreme",
             "image": "https://antreme.com.ua/logo.png",
             "priceRange": "$$",
+            "servesCuisine": [
+                "Торти на замовлення",
+                "Весільні торти",
+                "Дитячі торти",
+                "Бенто-торти",
+                "Десерти"
+            ],
             "address": {
                 "@type": "PostalAddress",
                 "streetAddress": "Харківське шосе, 180/21",
