@@ -760,7 +760,7 @@ function Home() {
                             </div>
 
                             {/* CTA */}
-                            <Link to="/delivery/" className="block text-center bg-[#7A0019] hover:bg-[#5a0014] text-white font-black uppercase tracking-widest text-xs md:text-sm py-4 rounded-2xl transition-all active:scale-95 shadow-md">
+                            <Link to="/dostavka/" className="block text-center bg-[#7A0019] hover:bg-[#5a0014] text-white font-black uppercase tracking-widest text-xs md:text-sm py-4 rounded-2xl transition-all active:scale-95 shadow-md">
                                 Детальніше про доставку →
                             </Link>
                         </div>
@@ -798,7 +798,7 @@ function Home() {
                             { id: 6, title: "Pokemon", thumb: "/reviews/review_6.jpg" },
                             { id: 7, title: "Перфект", thumb: "/reviews/review_7.jpg" },
                         ].map(story => (
-                            <Link to="/reviews/" key={story.id} className="shrink-0 flex flex-col items-center gap-1.5 group">
+                            <Link to="/vidguky/" key={story.id} className="shrink-0 flex flex-col items-center gap-1.5 group">
                                 <div className="w-16 h-16 md:w-20 md:h-20 rounded-full p-[3px] group-hover:scale-110 transition-transform duration-300" style={{ background: 'linear-gradient(135deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888)' }}>
                                     <div className="w-full h-full rounded-full border-2 border-white overflow-hidden">
                                         <img src={story.thumb} alt={`Відгук клієнта Antreme – ${story.title}`} className="w-full h-full object-cover" loading="lazy" />
@@ -870,7 +870,7 @@ function Home() {
 
                     {/* CTA link */}
                     <div className="text-center mt-8 md:mt-10">
-                        <Link to="/reviews/" className="inline-flex items-center gap-2 text-[#7A0019] font-black text-xs uppercase tracking-wider border-b-2 border-[#E8C064] pb-1 hover:text-[#9C142B] transition-all">
+                        <Link to="/vidguky/" className="inline-flex items-center gap-2 text-[#7A0019] font-black text-xs uppercase tracking-wider border-b-2 border-[#E8C064] pb-1 hover:text-[#9C142B] transition-all">
                             Всі відгуки
                             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" /></svg>
                         </Link>
@@ -916,7 +916,7 @@ function Home() {
                         <p>Ціна формується залежно від ваги, складності декору та начинки. Ми одразу погоджуємо фінальний розрахунок без прихованих доплат.</p>
 
                         <h3 className="text-lg font-bold text-gray-900 mt-5 mb-2">Доставка по Києву</h3>
-                        <p>Ми доставляємо торти по всіх районах столиці з контролем температури та безпечним транспортуванням. <Link to="/delivery/" className="text-[#7A0019] font-semibold underline underline-offset-2 hover:text-[#9C142B]">Детальніше про доставку →</Link></p>
+                        <p>Ми доставляємо торти по всіх районах столиці з контролем температури та безпечним транспортуванням. <Link to="/dostavka/" className="text-[#7A0019] font-semibold underline underline-offset-2 hover:text-[#9C142B]">Детальніше про доставку →</Link></p>
 
                         <h2 className="text-2xl md:text-3xl font-black text-gray-900 mt-8 mb-3 uppercase tracking-tight" style={{ fontFamily: "'Oswald', sans-serif" }}>
                             Доставка тортів у всі райони Києва
@@ -982,7 +982,7 @@ function Home() {
                         <h2 className="text-2xl md:text-3xl font-black text-gray-900 mt-8 mb-3 uppercase tracking-tight" style={{ fontFamily: "'Oswald', sans-serif" }}>
                             Реальні відгуки та портфоліо робіт
                         </h2>
-                        <p>Понад 6000 замовлень та тисячі фото виконаних робіт доступні для перегляду. Наш Instagram — це публічний архів реальних проєктів, а не студійних знімків. <Link to="/reviews/" className="text-[#7A0019] font-semibold underline underline-offset-2 hover:text-[#9C142B]">Переглянути відгуки →</Link></p>
+                        <p>Понад 6000 замовлень та тисячі photo виконаних робіт доступні для перегляду. Наш Instagram — це публічний архів реальних проєктів, а не студійних знімків. <Link to="/vidguky/" className="text-[#7A0019] font-semibold underline underline-offset-2 hover:text-[#9C142B]">Переглянути відгуки →</Link></p>
 
                         <p className="mt-6 pt-6 border-t border-gray-100 text-gray-700">
                             <strong>Antreme — кондитерська в Києві з досвідом, портфоліо та реальними відгуками.</strong> Якщо ви плануєте подію та хочете замовити торт у Києві без компромісів у якості — ми реалізуємо це професійно.

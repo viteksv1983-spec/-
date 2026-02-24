@@ -38,27 +38,6 @@ async def startup_event():
         auto_seed.check_and_seed_data(db)
     finally:
         db.close()
-    
-    # Auto-compress media images for mobile performance
-    try:
-        from PIL import Image as PILImage
-        media_path = Path(__file__).parent / "media"
-        if media_path.exists():
-            for img_file in media_path.glob("*.webp"):
-                file_size = img_file.stat().st_size
-                if file_size > 100_000:  # Only compress files > 100KB
-                    try:
-                        img = PILImage.open(img_file)
-                        if img.mode in ("RGBA", "P"):
-                            img = img.convert("RGB")
-                        img.thumbnail((600, 600), PILImage.LANCZOS)
-                        img.save(str(img_file), "WEBP", quality=70, optimize=True)
-                        new_size = img_file.stat().st_size
-                        print(f"Compressed {img_file.name}: {file_size//1024}KB -> {new_size//1024}KB")
-                    except Exception as e:
-                        print(f"Skip {img_file.name}: {e}")
-    except ImportError:
-        print("Pillow not installed, skipping image compression")
 
 @app.get("/health-check")
 async def health_check(db: Session = Depends(get_db)):

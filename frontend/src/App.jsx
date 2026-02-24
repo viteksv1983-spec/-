@@ -79,12 +79,12 @@ function App() {
                 <Route path="/register" element={<Register />} />
                 <Route path="/cart" element={<Cart />} />
                 <Route path="/promotions" element={<Promotions />} />
-                <Route path="/delivery" element={<Delivery />} />
-                <Route path="/fillings" element={<Fillings />} />
-                <Route path="/about" element={<About />} />
-                <Route path="/gallery/photo" element={<GalleryPhoto />} />
-                <Route path="/gallery/video" element={<GalleryVideo />} />
-                <Route path="/reviews" element={<Reviews />} />
+                <Route path="/dostavka" element={<Delivery />} />
+                <Route path="/nachynky" element={<Fillings />} />
+                <Route path="/pro-nas" element={<About />} />
+                <Route path="/foto" element={<GalleryPhoto />} />
+                <Route path="/video" element={<GalleryVideo />} />
+                <Route path="/vidguky" element={<Reviews />} />
                 <Route path="/blog" element={<Blog />} />
                 <Route path="/districts/:district" element={<DistrictPage />} />
 

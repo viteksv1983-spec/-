@@ -64,11 +64,11 @@ function Navbar() {
 
                             {/* Desktop Links - Subtle & Dark */}
                             <div className="hidden xl:flex items-center space-x-5 font-bold text-[11px] uppercase tracking-tight text-gray-800 flex-shrink-0">
-                                <Link to="/about/" className="hover:text-[#D39A5E] transition-colors">Про нас</Link>
-                                <Link to="/delivery/" className="hover:text-[#D39A5E] transition-colors">Доставка та оплата</Link>
-                                <Link to="/gallery/photo/" className="hover:text-[#D39A5E] transition-colors">Фото</Link>
-                                <Link to="/gallery/video/" className="hover:text-[#D39A5E] transition-colors">Відео</Link>
-                                <Link to="/reviews/" className="hover:text-[#D39A5E] transition-colors">Відгуки</Link>
+                                <Link to="/pro-nas/" className="hover:text-[#D39A5E] transition-colors">Про нас</Link>
+                                <Link to="/dostavka/" className="hover:text-[#D39A5E] transition-colors">Доставка та оплата</Link>
+                                <Link to="/foto/" className="hover:text-[#D39A5E] transition-colors">Фото</Link>
+                                <Link to="/video/" className="hover:text-[#D39A5E] transition-colors">Відео</Link>
+                                <Link to="/vidguky/" className="hover:text-[#D39A5E] transition-colors">Відгуки</Link>
                                 <Link to="/blog/" className="hover:text-[#D39A5E] transition-colors">Блог</Link>
                             </div>
 
@@ -152,9 +152,9 @@ function Navbar() {
                     <Link to="/bento-torty/" className={`transition-all whitespace-nowrap border-b-2 pb-0.5 ${location.pathname.startsWith('/bento-torty') ? 'text-[#B8860B] font-black border-[#D8A055]' : 'text-gray-900 border-transparent hover:text-[#B8860B]'}`}>Бенто тортики</Link>
                     <Link to="/biskvitni-torty/" className={`transition-all whitespace-nowrap border-b-2 pb-0.5 ${location.pathname.startsWith('/biskvitni-torty') ? 'text-[#B8860B] font-black border-[#D8A055]' : 'text-gray-900 border-transparent hover:text-[#B8860B]'}`}>Бісквітні торти</Link>
                     <Link to="/musovi-torty/" className={`transition-all whitespace-nowrap border-b-2 pb-0.5 ${location.pathname.startsWith('/musovi-torty') ? 'text-[#B8860B] font-black border-[#D8A055]' : 'text-gray-900 border-transparent hover:text-[#B8860B]'}`}>Мусові торти</Link>
-                    <Link to="/kapkeyki/" className={`transition-all whitespace-nowrap border-b-2 pb-0.5 ${location.pathname.startsWith('/kapkeyki') ? 'text-[#B8860B] font-black border-[#D8A055]' : 'text-gray-900 border-transparent hover:text-[#B8860B]'}`}>Капкейки</Link>
-                    <Link to="/imbirni-pryaniki/" className={`transition-all whitespace-nowrap border-b-2 pb-0.5 ${location.pathname.startsWith('/imbirni-pryaniki') ? 'text-[#B8860B] font-black border-[#D8A055]' : 'text-gray-900 border-transparent hover:text-[#B8860B]'}`}>Імбирні пряники</Link>
-                    <Link to="/fillings/" className={`transition-all whitespace-nowrap border-b-2 pb-0.5 ${location.pathname.startsWith('/fillings') ? 'text-[#B8860B] font-black border-[#D8A055]' : 'text-gray-900 border-transparent hover:text-[#B8860B]'}`}>Начинки</Link>
+                    <Link to="/kapkeyky/" className={`transition-all whitespace-nowrap border-b-2 pb-0.5 ${location.pathname.startsWith('/kapkeyky') ? 'text-[#B8860B] font-black border-[#D8A055]' : 'text-gray-900 border-transparent hover:text-[#B8860B]'}`}>Капкейки</Link>
+                    <Link to="/imbirni-pryanyky/" className={`transition-all whitespace-nowrap border-b-2 pb-0.5 ${location.pathname.startsWith('/imbirni-pryanyky') ? 'text-[#B8860B] font-black border-[#D8A055]' : 'text-gray-900 border-transparent hover:text-[#B8860B]'}`}>Імбирні пряники</Link>
+                    <Link to="/nachynky/" className={`transition-all whitespace-nowrap border-b-2 pb-0.5 ${location.pathname.startsWith('/nachynky') ? 'text-[#B8860B] font-black border-[#D8A055]' : 'text-gray-900 border-transparent hover:text-[#B8860B]'}`}>Начинки</Link>
                 </div>
             </div>
 
@@ -173,9 +173,9 @@ function Navbar() {
                             <Link to="/bento-torty/" className={`whitespace-nowrap border-b-2 pb-0.5 ${location.pathname.startsWith('/bento-torty') ? 'text-[#B8860B] border-[#D8A055] font-black' : 'text-gray-600 border-transparent'}`}>Бенто</Link>
                             <Link to="/biskvitni-torty/" className={`whitespace-nowrap border-b-2 pb-0.5 ${location.pathname.startsWith('/biskvitni-torty') ? 'text-[#B8860B] border-[#D8A055] font-black' : 'text-gray-600 border-transparent'}`}>Бісквітні</Link>
                             <Link to="/musovi-torty/" className={`whitespace-nowrap border-b-2 pb-0.5 ${location.pathname.startsWith('/musovi-torty') ? 'text-[#B8860B] border-[#D8A055] font-black' : 'text-gray-600 border-transparent'}`}>Мусові</Link>
-                            <Link to="/kapkeyki/" className={`whitespace-nowrap border-b-2 pb-0.5 ${location.pathname.startsWith('/kapkeyki') ? 'text-[#B8860B] border-[#D8A055] font-black' : 'text-gray-600 border-transparent'}`}>Капкейки</Link>
-                            <Link to="/imbirni-pryaniki/" className={`whitespace-nowrap border-b-2 pb-0.5 ${location.pathname.startsWith('/imbirni-pryaniki') ? 'text-[#B8860B] border-[#D8A055] font-black' : 'text-gray-600 border-transparent'}`}>Імбирні пряники</Link>
-                            <Link to="/fillings/" className={`whitespace-nowrap border-b-2 pb-0.5 ${location.pathname.startsWith('/fillings') ? 'text-[#B8860B] border-[#D8A055] font-black' : 'text-gray-600 border-transparent'}`}>Начинки</Link>
+                            <Link to="/kapkeyky/" className={`whitespace-nowrap border-b-2 pb-0.5 ${location.pathname.startsWith('/kapkeyky') ? 'text-[#B8860B] border-[#D8A055] font-black' : 'text-gray-600 border-transparent'}`}>Капкейки</Link>
+                            <Link to="/imbirni-pryanyky/" className={`whitespace-nowrap border-b-2 pb-0.5 ${location.pathname.startsWith('/imbirni-pryanyky') ? 'text-[#B8860B] border-[#D8A055] font-black' : 'text-gray-600 border-transparent'}`}>Імбирні пряники</Link>
+                            <Link to="/nachynky/" className={`whitespace-nowrap border-b-2 pb-0.5 ${location.pathname.startsWith('/nachynky') ? 'text-[#B8860B] border-[#D8A055] font-black' : 'text-gray-600 border-transparent'}`}>Начинки</Link>
                         </div>
                     </div>
                     {/* Иконки справа */}
@@ -257,13 +257,13 @@ function Navbar() {
                                     <Link to="/torty-na-zamovlennya/na-yuviley/" className="flex items-center gap-2 px-3 py-2.5 text-[13px] font-bold uppercase tracking-wider text-[#a0742d] hover:bg-[#F3E2CF]/60 rounded-lg transition-colors" onClick={() => setIsMenuOpen(false)}>
                                         🥂 На ювілей
                                     </Link>
-                                    <Link to="/kapkeyki/" className="flex items-center gap-2 px-3 py-2.5 text-[13px] font-bold uppercase tracking-wider text-[#a0742d] hover:bg-[#F3E2CF]/60 rounded-lg transition-colors" onClick={() => setIsMenuOpen(false)}>
+                                    <Link to="/kapkeyky/" className="flex items-center gap-2 px-3 py-2.5 text-[13px] font-bold uppercase tracking-wider text-[#a0742d] hover:bg-[#F3E2CF]/60 rounded-lg transition-colors" onClick={() => setIsMenuOpen(false)}>
                                         🧁 Капкейки
                                     </Link>
-                                    <Link to="/imbirni-pryaniki/" className="flex items-center gap-2 px-3 py-2.5 text-[13px] font-bold uppercase tracking-wider text-[#a0742d] hover:bg-[#F3E2CF]/60 rounded-lg transition-colors" onClick={() => setIsMenuOpen(false)}>
+                                    <Link to="/imbirni-pryanyky/" className="flex items-center gap-2 px-3 py-2.5 text-[13px] font-bold uppercase tracking-wider text-[#a0742d] hover:bg-[#F3E2CF]/60 rounded-lg transition-colors" onClick={() => setIsMenuOpen(false)}>
                                         🍪 Імбирні пряники
                                     </Link>
-                                    <Link to="/fillings/" className="flex items-center gap-2 px-3 py-2.5 text-[13px] font-bold uppercase tracking-wider text-[#a0742d] hover:bg-[#F3E2CF]/60 rounded-lg transition-colors" onClick={() => setIsMenuOpen(false)}>
+                                    <Link to="/nachynky/" className="flex items-center gap-2 px-3 py-2.5 text-[13px] font-bold uppercase tracking-wider text-[#a0742d] hover:bg-[#F3E2CF]/60 rounded-lg transition-colors" onClick={() => setIsMenuOpen(false)}>
                                         🫐 Начинки
                                     </Link>
                                 </div>
@@ -276,22 +276,22 @@ function Navbar() {
                             <div className="mt-4">
                                 <div className="text-[10px] uppercase tracking-[0.2em] text-gray-400 font-black mb-3 px-2">Інформація</div>
                                 <div className="flex flex-col gap-1 px-1">
-                                    <Link to="/delivery/" className="flex items-center gap-2 px-3 py-2.5 text-[13px] font-semibold text-gray-700 hover:bg-gray-50 rounded-lg transition-colors" onClick={() => setIsMenuOpen(false)}>
+                                    <Link to="/dostavka/" className="flex items-center gap-2 px-3 py-2.5 text-[13px] font-semibold text-gray-700 hover:bg-gray-50 rounded-lg transition-colors" onClick={() => setIsMenuOpen(false)}>
                                         🚚 Доставка та оплата
                                     </Link>
-                                    <Link to="/gallery/photo/" className="flex items-center gap-2 px-3 py-2.5 text-[13px] font-semibold text-gray-700 hover:bg-gray-50 rounded-lg transition-colors" onClick={() => setIsMenuOpen(false)}>
+                                    <Link to="/foto/" className="flex items-center gap-2 px-3 py-2.5 text-[13px] font-semibold text-gray-700 hover:bg-gray-50 rounded-lg transition-colors" onClick={() => setIsMenuOpen(false)}>
                                         📸 Фото
                                     </Link>
-                                    <Link to="/gallery/video/" className="flex items-center gap-2 px-3 py-2.5 text-[13px] font-semibold text-gray-700 hover:bg-gray-50 rounded-lg transition-colors" onClick={() => setIsMenuOpen(false)}>
+                                    <Link to="/video/" className="flex items-center gap-2 px-3 py-2.5 text-[13px] font-semibold text-gray-700 hover:bg-gray-50 rounded-lg transition-colors" onClick={() => setIsMenuOpen(false)}>
                                         🎬 Відео
                                     </Link>
-                                    <Link to="/reviews/" className="flex items-center gap-2 px-3 py-2.5 text-[13px] font-semibold text-gray-700 hover:bg-gray-50 rounded-lg transition-colors" onClick={() => setIsMenuOpen(false)}>
+                                    <Link to="/vidguky/" className="flex items-center gap-2 px-3 py-2.5 text-[13px] font-semibold text-gray-700 hover:bg-gray-50 rounded-lg transition-colors" onClick={() => setIsMenuOpen(false)}>
                                         ⭐ Відгуки
                                     </Link>
                                     <Link to="/blog/" className="flex items-center gap-2 px-3 py-2.5 text-[13px] font-semibold text-gray-700 hover:bg-gray-50 rounded-lg transition-colors" onClick={() => setIsMenuOpen(false)}>
                                         📝 Блог
                                     </Link>
-                                    <Link to="/about/" className="flex items-center gap-2 px-3 py-2.5 text-[13px] font-semibold text-gray-700 hover:bg-gray-50 rounded-lg transition-colors" onClick={() => setIsMenuOpen(false)}>
+                                    <Link to="/pro-nas/" className="flex items-center gap-2 px-3 py-2.5 text-[13px] font-semibold text-gray-700 hover:bg-gray-50 rounded-lg transition-colors" onClick={() => setIsMenuOpen(false)}>
                                         💛 Про нас
                                     </Link>
                                 </div>

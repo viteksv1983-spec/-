@@ -29,11 +29,11 @@ function Footer() {
                                 <span className="group-hover:text-white transition-colors text-[#F8E9D8]/90">Замовлення за 3+ дні</span>
                             </div>
                             <div className="pt-2 space-y-4">
-                                <Link to="/gallery/photo/" className="flex items-center gap-4 group/link hover:text-white transition-colors text-[#F8E9D8]/90">
+                                <Link to="/foto/" className="flex items-center gap-4 group/link hover:text-white transition-colors text-[#F8E9D8]/90">
                                     <span className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center group-hover/link:bg-white/10 transition-colors shadow-lg shadow-black/20 text-base">🖼️</span>
                                     <span>Фотогалерея</span>
                                 </Link>
-                                <Link to="/gallery/video/" className="flex items-center gap-4 group/link hover:text-white transition-colors text-[#F8E9D8]/90">
+                                <Link to="/video/" className="flex items-center gap-4 group/link hover:text-white transition-colors text-[#F8E9D8]/90">
                                     <span className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center group-hover/link:bg-white/10 transition-colors shadow-lg shadow-black/20 text-base">🎥</span>
                                     <span>Відеогалерея</span>
                                 </Link>
@@ -55,19 +55,19 @@ function Footer() {
                                 <span className="hidden lg:block opacity-0 group-hover:opacity-100 transition-opacity text-white text-[10px]">▶</span>
                                 Всі торти
                             </Link></li>
-                            <li><Link to="/fillings/" className="hover:text-amber-100 transition-all duration-300 flex items-center justify-center lg:justify-start gap-2 group text-gray-100">
+                            <li><Link to="/nachynky/" className="hover:text-amber-100 transition-all duration-300 flex items-center justify-center lg:justify-start gap-2 group text-gray-100">
                                 <span className="hidden lg:block opacity-0 group-hover:opacity-100 transition-opacity text-white text-[10px]">▶</span>
                                 Начинки
                             </Link></li>
-                            <li><Link to="/delivery/" className="hover:text-amber-100 transition-all duration-300 flex items-center justify-center lg:justify-start gap-2 group text-gray-100">
+                            <li><Link to="/dostavka/" className="hover:text-amber-100 transition-all duration-300 flex items-center justify-center lg:justify-start gap-2 group text-gray-100">
                                 <span className="hidden lg:block opacity-0 group-hover:opacity-100 transition-opacity text-white text-[10px]">▶</span>
                                 Доставка
                             </Link></li>
-                            <li><Link to="/about/" className="hover:text-amber-100 transition-all duration-300 flex items-center justify-center lg:justify-start gap-2 group text-gray-100">
+                            <li><Link to="/pro-nas/" className="hover:text-amber-100 transition-all duration-300 flex items-center justify-center lg:justify-start gap-2 group text-gray-100">
                                 <span className="hidden lg:block opacity-0 group-hover:opacity-100 transition-opacity text-white text-[10px]">▶</span>
                                 Про нас
                             </Link></li>
-                            <li><Link to="/reviews/" className="hover:text-amber-100 transition-all duration-300 flex items-center justify-center lg:justify-start gap-2 group text-gray-100">
+                            <li><Link to="/vidguky/" className="hover:text-amber-100 transition-all duration-300 flex items-center justify-center lg:justify-start gap-2 group text-gray-100">
                                 <span className="hidden lg:block opacity-0 group-hover:opacity-100 transition-opacity text-white text-[10px]">▶</span>
                                 Відгуки
                             </Link></li>

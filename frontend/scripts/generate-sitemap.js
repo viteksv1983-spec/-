@@ -59,11 +59,14 @@ function getProductUrl(cake) {
 }
 
 async function fetchCakes() {
+    console.log(`\n⏳ Запит до ${API_URL} для Sitemap...`);
     try {
-        const response = await axios.get(API_URL, { timeout: 60000 });
+        const response = await axios.get(API_URL, { timeout: 5000 });
+        console.log(`✅ Успішно отримано ${response.data.length} товарів для Sitemap.`);
         return response.data;
     } catch (error) {
-        console.error("Error fetching cakes:", error.message);
+        console.log(`⚠️ УВАГА: Бекенд недоступний або "спить" (Render Free Tier) - ${error.message}.`);
+        console.log(`⏭️ Пропуск динамічних товарів для Sitemap. Базові та SEO-категорії будуть згенеровані.`);
         return [];
     }
 }
@@ -98,8 +101,8 @@ async function generateSitemap() {
         addUrl('/', '1.0', 'daily');
 
         // === Tier 2: Main pages (0.9) ===
-        // Removed /cakes/ entirely. All structural routes end in /
-        ['/holiday/', '/delivery/', '/about/', '/reviews/', '/fillings/', '/torty-na-zamovlennya/'].forEach(p => {
+        // Structural routes end in /
+        ['/dostavka/', '/pro-nas/', '/vidguky/', '/nachynky/', '/torty-na-zamovlennya/'].forEach(p => {
             addUrl(p, '0.9', 'daily');
         });
 

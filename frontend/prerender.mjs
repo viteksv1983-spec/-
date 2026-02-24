@@ -89,15 +89,15 @@ async function prerender() {
     // 2. Launch Puppeteer
     let browser;
     try {
-        const puppeteer = await import('puppeteer');
+        const puppeteer = await import('puppeteer-core');
+        const chromium = await import('@sparticuz/chromium');
+
         browser = await puppeteer.default.launch({
-            headless: 'new',
-            args: [
-                '--no-sandbox',
-                '--disable-setuid-sandbox',
-                '--disable-dev-shm-usage',
-                '--disable-gpu',
-            ],
+            args: chromium.default.args,
+            defaultViewport: chromium.default.defaultViewport,
+            executablePath: await chromium.default.executablePath(),
+            headless: chromium.default.headless,
+            ignoreHTTPSErrors: true,
         });
 
         console.log('   ✅ Puppeteer browser launched\n');

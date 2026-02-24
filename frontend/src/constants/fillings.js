@@ -1,68 +1,121 @@
 export const FILLINGS = [
+    // === Шоколадні ===
     {
-        id: "blueberry-orange",
-        name: "Чорнично-апельсинова",
-        description: "Чорнично-апельсиновий бісквіт, апельсиновий вершковий крем, чорничний соус.",
-        image: "/images/fillings/blueberry-orange.png"
+        id: "chocolate-truffle",
+        category: "chocolate",
+        name: "Шоколадний трюфель",
+        description: "Насичений шоколадний бісквіт, просочений шоколадним лікером, з ніжним ганашем на основі бельгійського шоколаду. Справжня насолода для поціновувачів какао.",
+        image: "/images/fillings/truffle.jpg"
     },
     {
-        id: "coconut",
-        name: "Кокосова",
-        description: "Кокосовий бісквіт, просочений сиропом на основі згущеного молока. Кокосовий крем у поєднанні з мигдальним хрустким шаром.",
-        image: "/images/fillings/coconut.jpg"
+        id: "snickers",
+        category: "chocolate",
+        name: "Снікерс",
+        description: "Поєднання шоколадного бісквіта, домашньої солоної карамелі, смаженого арахісу та повітряного арахісового мусу. Легендарний смак у форматі торта.",
+        image: "/images/fillings/snickers.jpg"
     },
     {
-        id: "strawberry-basil",
-        name: "Полунично-базилікова",
-        description: "Ванільні бісквіти просочені полуничним фрешем, полунично-базиліковий крем на основі сиру Филядельфия з часточками полуниці.",
-        image: "/images/fillings/strawberry-basil.jpg"
-    },
-    {
-        id: "lavender",
-        name: "Лавандова",
-        description: "В основі торта лавандовий бісквіт, просочений лавандовим сиропом, крем-сир, шоколадно-чорничний мус у поєднанні з чорничним соусом.",
-        image: "/images/fillings/lavender.jpg"
-    },
-    {
-        id: "milk-girl",
-        name: "Молочна дівчинка",
-        description: "Поєднання шоколадного та білого бісквітів, просочених молочним сиропом, з ніжним кремом зі згущеного молока та шоколадною глазур'ю.",
-        image: "/images/fillings/milk-girl.jpg"
-    },
-    {
-        id: "forest-berries",
-        name: "Лісові ягоди",
-        description: "Ягідний торт, який складається з шоколадних бісквітів, просочених ванільним сиропом, ягідного мусу на основі сиру Філадельфія, пюре малини та чорниці.",
-        image: "/images/fillings/forest-berries.jpg"
-    },
-    {
-        id: "cherry-paradise",
-        name: "Вишневий рай",
-        description: "Поєднання повітряного бісквіта з вишневим смаком, ніжного крема на основі сиру Філадельфія та маскарпоне, білого шоколаду.",
-        image: "/images/fillings/cherry-paradise.jpg"
-    },
-    {
-        id: "mango-pineapple",
-        name: "Маракуйя-ананас",
-        description: "Білий бісквіт, просочений сиропом, ванільний крем з додаванням пюре маракуйї та шматочків ананаса.",
-        image: "/images/fillings/mango-pineapple.jpg"
-    },
-    {
-        id: "apricot",
-        name: "Абрикосова",
-        description: "Ванільний бісквіт, просочений цукровим сиропом та лікером куантро, вершково-сирний крем, абрикосова начинка.",
-        image: "/images/fillings/apricot.jpg"
-    },
-    {
-        id: "pear",
-        name: "Грушева",
-        description: "Білосніжний бісквіт просочений грушевим сиропом, ванільний крем з ламтиками карамелізованої груші.",
-        image: "/images/fillings/pear.jpg"
+        id: "chocolate-mousse-filling",
+        category: "chocolate",
+        name: "Шоколадний мус",
+        description: "Легкий та повітряний мус на основі темного та молочного шоколаду, що тане в роті. Ідеально підходить для любителів ніжних десертів.",
+        image: "/images/fillings/chocolate-mous.jpg"
     },
     {
         id: "chocolate-blueberry",
+        category: "chocolate",
         name: "Шоколадно-чорнична",
-        description: "Ніжний шоколадний бісквіт на кефірній основі чергується з ароматним чорничним пюре, прошарком чорничного конфі та вдало доповнюється шоколадним мусом. Тільки для одноповерхових тортів.",
+        description: "Ніжний шоколадний бісквіт на кефірній основі з ароматним чорничним пюре та прошарком чорничного конфі. Тільки для одноповерхових тортів.",
         image: "/images/fillings/chocolate-blueberry.jpg"
+    },
+
+    // === Фруктові та ягідні ===
+    {
+        id: "strawberry-cream",
+        category: "fruit",
+        name: "Полуниця-вершки",
+        description: "Класичне поєднання ванільного бісквіта, легкого вершкового крему та свіжої полуниці. Ніжний та зрозумілий кожному смак.",
+        image: "/images/fillings/strawberry-cream.jpg"
+    },
+    {
+        id: "pistachio-raspberry-filling",
+        category: "fruit",
+        name: "Фісташка-малина",
+        description: "Неймовірний дует ароматного фісташкового бісквіта та кислинки малинового конфі. Один із найпопулярніших виборів наших клієнтів.",
+        image: "/images/fillings/pistachio-raspberry.jpg"
+    },
+    {
+        id: "forest-berries",
+        category: "fruit",
+        name: "Лісова ягода",
+        description: "Шоколадні бісквіти, ягідний мус на основі сиру Філадельфія, пюре малини та чорниці. Справжній ягідний вибух.",
+        image: "/images/fillings/forest-berries.jpg"
+    },
+    {
+        id: "mango-passionfruit",
+        category: "fruit",
+        name: "Манго-маракуйя",
+        description: "Екзотичне поєднання ванільного бісквіта з тропічним мусом із манго та прошарком кисленької маракуйї. Смак літа в кожному шматочку.",
+        image: "/images/fillings/mango-passionfruit.jpg"
+    },
+    {
+        id: "blueberry-orange",
+        category: "fruit",
+        name: "Чорнично-апельсинова",
+        description: "Чорнично-апельсиновий бісквіт, апельсиновий вершковий крем та чорничний соус. Незвичайне та дуже свіже поєднання.",
+        image: "/images/fillings/blueberry-orange.png"
+    },
+
+    // === Класичні ===
+    {
+        id: "red-velvet",
+        category: "classic",
+        name: "Червоний оксамит",
+        description: "Яскраво-червоні коржі з ледь помітним смаком какао, поєднані з оксамитовим крем-сиром. Ефектний вигляд та незабутній смак.",
+        image: "/images/fillings/red-velvet.jpg"
+    },
+    {
+        id: "vanilla-biscuit",
+        category: "classic",
+        name: "Ванільний бісквіт",
+        description: "Вишукана класика: вологий ванільний бісквіт та легкий крем на основі маскарпоне. Можна додати ягоди або фрукти за бажанням.",
+        image: "/images/fillings/vanilla.jpg"
+    },
+    {
+        id: "caramel-banana",
+        category: "classic",
+        name: "Карамель-банан",
+        description: "Ванільний бісквіт, домашня карамель та шматочки карамелізованого банана. Смак, який обожнюють і діти, і дорослі.",
+        image: "/images/fillings/caramel-banana.jpg"
+    },
+    {
+        id: "milk-girl",
+        category: "classic",
+        name: "Молочна дівчинка",
+        description: "Ніжні коржі на основі згущеного молока з вершковим кремом. Дуже м'який торт, який буквально тане в роті.",
+        image: "/images/fillings/milk-girl.jpg"
+    },
+
+    // === Мусові ===
+    {
+        id: "lemon-mousse",
+        category: "mousse",
+        name: "Лимонний мус",
+        description: "Освіжаючий лимонний мус з легким цитрусовим ароматом та ніжним бісквітом. Ідеальний вибір для шанувальників кислинки.",
+        image: "/images/fillings/lemon-mousse.jpg"
+    },
+    {
+        id: "pistachio-mousse",
+        category: "mousse",
+        name: "Фісташковий мус",
+        description: "Ніжний мус із натуральної фісташкової пасти в поєднанні з ягідним прошарком. Витончений десерт для гурманів.",
+        image: "/images/fillings/pistachio-mousse.jpg"
+    },
+    {
+        id: "chocolate-caramel-mousse",
+        category: "mousse",
+        name: "Шоколадно-карамельний мус",
+        description: "Гармонія темного шоколаду та золотої карамелі в легкому мусі. Розкішний десерт для святкового вечора.",
+        image: "/images/fillings/choco-caramel.jpg"
     }
 ];
