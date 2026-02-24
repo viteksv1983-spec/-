@@ -105,32 +105,31 @@ function saveReviews(reviewsArr) {
     fs.writeFileSync(DATA_FILE, fileContent, 'utf-8');
 }
 
-// Strict Extract Texts - только из реальных комментариев
+// Strict Extract Texts - хирургическое извлечение (игнорирует caption, owner, preview_comment)
 function extractStrictCommentsFromJSON(obj) {
     let texts = [];
-    let stack = [obj];
-    while (stack.length > 0) {
-        let current = stack.pop();
-        if (typeof current === 'object' && current !== null) {
+    const traverse = (node) => {
+        if (!node || typeof node !== 'object') return;
 
-            // Если мы дошли до ноды комментария
-            if (current.hasOwnProperty('text') && typeof current.text === 'string') {
-                // Проверяем, что это не caption (в caption обычно нет этих ключей рядом)
-                // Или просто берем текст, если мы внутри edge_threaded_comments / edge_media_to_comment
-                texts.push(current.text);
-            }
+        // Листья - текст комментария (с проверкой подлинности - обычно есть id, pk или created_at)
+        if (node.text && typeof node.text === 'string' && (node.id || node.pk || node.created_at || node.has_liked !== undefined)) {
+            texts.push(node.text);
+        }
 
-            for (let k in current) {
-                // Идем дальше только если ключ похож на контейнер комментов
-                if (k === 'edge_threaded_comments' || k === 'edge_media_to_comment' || k === 'comments' || k === 'edges' || k === 'node') {
-                    stack.push(current[k]);
-                } else if (Array.isArray(current[k])) {
-                    // Разворачиваем массивы
-                    stack.push(...current[k]);
+        // Белые списки ключей для безопасного спуска 
+        // Мы НЕ обходим ключи вроде edge_media_to_caption, owner, preview_comment!
+        const safeKeys = ['data', 'shortcode_media', 'edge_media_to_comment', 'edge_threaded_comments', 'edges', 'node', 'comments', 'comment'];
+        for (const key of safeKeys) {
+            if (node[key]) {
+                if (Array.isArray(node[key])) {
+                    node[key].forEach(traverse);
+                } else {
+                    traverse(node[key]);
                 }
             }
         }
-    }
+    };
+    traverse(obj);
     return texts;
 }
 
@@ -268,12 +267,30 @@ async function fullyLoadComments(page) {
     // 4. Ожидание завершения запросов XHR/Fetch
     await page.waitForNetworkIdle({ idleTime: 2000, timeout: 8000 }).catch(() => { });
 
-    // 5. Fallback DOM extraction
+    // 5. Fallback DOM extraction (Умный фильтр)
     const domTexts = await page.evaluate(() => {
-        const comments = document.querySelectorAll('article ul li span');
-        return Array.from(comments)
-            .map(n => n.innerText?.trim())
-            .filter(t => t && t.length > 5);
+        const lists = document.querySelectorAll('article ul li, div[role="dialog"] ul li');
+        const result = [];
+        for (const li of lists) {
+            const spans = li.querySelectorAll('span');
+            for (const span of spans) {
+                const text = span.innerText || span.textContent || '';
+                const t = text.trim();
+                if (t.length > 5 && !t.match(/^[0-9]+$/)) {
+                    // Фильтр от системного мусора
+                    const lower = t.toLowerCase();
+                    const isButton = lower.includes('view') || lower.includes('repl') || lower.includes('ответ') || lower === 'like' || lower === 'нравится' || lower === 'see translation';
+
+                    // Проверка, что это не никнейм. Обычно никнейм - это первый a или span с ролью
+                    const isUsername = span.tagName === 'A' || span.closest('a') !== null;
+
+                    if (!isButton && !isUsername) {
+                        result.push(t);
+                    }
+                }
+            }
+        }
+        return result;
     });
 
     return {
@@ -522,17 +539,20 @@ async function scrapeInstagram() {
 
             // 6. Anti-Race Condition Sequence
             await page.waitForNetworkIdle({ idleTime: 2000, timeout: 8000 }).catch(() => { });
-            await delay(2000); // Базовая задержка перед проверкой
 
             // Дополнительная проверка на Late GraphQL pagination (С хирургической точностью)
             await page.waitForResponse(res => {
                 const url = res.url();
                 const isGraphQL = url.includes('graphql');
                 const isFetch = res.request().resourceType() === 'fetch';
+                const isJson = res.headers()['content-type']?.includes('application/json');
+                const isPostOrGet = res.request().method() === 'POST' || res.request().method() === 'GET';
                 const containsShortcode = shortcode && url.includes(shortcode);
 
-                return isGraphQL && isFetch && containsShortcode;
+                return isGraphQL && isFetch && isPostOrGet && isJson && containsShortcode;
             }, { timeout: 2500 }).catch(() => { });
+
+            await delay(1000); // Micro-delay для финальной отработки listener'а
 
             graphQlTextsCount = currentPostTexts.size; // Финальный размер GraphQL данных
 
@@ -608,8 +628,11 @@ async function scrapeInstagram() {
 
         } finally {
             // --- 3. Memory Safety & Cleanup ---
-            // Гарантируем отвязку, даже в случае ошибок выше
-            try { page.off('response', postGraphQLHandler); } catch (e) { }
+            // Гарантируем 100% очистку listener'ов и переподключение глобального
+            try {
+                page.removeAllListeners('response');
+                page.on('response', globalResponseHandler);
+            } catch (e) { }
         }
 
         // Пауза перед следующим постом
