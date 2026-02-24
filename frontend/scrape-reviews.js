@@ -440,9 +440,11 @@ async function scrapeInstagram() {
                         const json = await response.json();
 
                         // Strict filter (Structural check to avoid expensive stringify)
-                        const hasComments = json?.data?.shortcode_media?.edge_media_to_comment ||
-                            json?.data?.shortcode_media?.edge_threaded_comments ||
-                            json?.comments;
+                        const media = json?.data?.shortcode_media;
+                        const hasComments = media?.edge_media_to_comment ||
+                            media?.edge_threaded_comments ||
+                            json?.comments ||
+                            json?.data?.comment;
                         if (!hasComments) {
                             return;
                         }
