@@ -441,6 +441,7 @@ async function scrapeInstagram() {
             continue;
         }
 
+        const postStart = Date.now();
         let currentPostTexts = new Set();
         let successLoad = false;
         let retries = 0;
@@ -497,6 +498,10 @@ async function scrapeInstagram() {
 
                     const gotoResponse = await page.goto(link, { waitUntil: 'domcontentloaded', timeout: 45000 });
                     const status = gotoResponse ? gotoResponse.status() : 200;
+
+                    if (page.url().includes('/login') || page.url().includes('/challenge')) {
+                        throw new Error('Checkpoint detected after navigation');
+                    }
 
                     if (status === 429 || is429) {
                         throw new Error('HTTP 429');
@@ -564,6 +569,9 @@ async function scrapeInstagram() {
 
             await delay(1000); // Micro-delay для финальной отработки listener'а
 
+            // Гарантированно и детерминированно отвязываем listener СРАЗУ после GraphQL-цикла
+            try { page.off('response', postGraphQLHandler); } catch (e) { }
+
             graphQlTextsCount = currentPostTexts.size; // Финальный размер GraphQL данных
 
             let domTextsCount = 0;
@@ -596,6 +604,11 @@ async function scrapeInstagram() {
             }
 
             await randomDelay(2000, 3000);
+
+            if (Date.now() - postStart > 90000) {
+                log.warn(`Лимит времени поста превышен (ожидание > 90s). Пропуск.`);
+                continue;
+            }
 
             // Текст процессируется синхронно
             let foundKeyword = null;
