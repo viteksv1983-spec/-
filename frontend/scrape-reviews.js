@@ -519,9 +519,9 @@ async function scrapeInstagram() {
                         break;
                     }
                     if (globalRateLimitHits >= 5) {
-                        log.error('Слишком много 429 (Глобальный лимит). Прерывание скрипта.');
-                        isCheckpoint = true;
-                        break;
+                        log.error('Глобальный 429 (Слишком много запросов). Полная остановка скрипта.');
+                        await browser.close();
+                        process.exit(1);
                     }
 
                     let curWait = isRateLimit ? baseWaitTime : 15000;
@@ -586,10 +586,10 @@ async function scrapeInstagram() {
                 await page.goto(link, { waitUntil: 'domcontentloaded', timeout: 45000 }).catch(() => { });
                 await randomDelay(4000, 6000);
 
-                const fallbackTexts = await evaluateDOMFallback(page);
-                if (fallbackTexts && fallbackTexts.length > 0) {
-                    fallbackTexts.forEach(t => currentPostTexts.add(t));
-                    log.info(`[POST #${i + 1}] Soft Reload помог извлечь ${fallbackTexts.length} текстов через DOM.`);
+                const reloadResult = await fullyLoadComments(page);
+                if (reloadResult.texts && reloadResult.texts.length > 0) {
+                    reloadResult.texts.forEach(t => currentPostTexts.add(t));
+                    log.info(`[POST #${i + 1}] Soft Reload извлёк ${reloadResult.texts.length} текстов через DOM.`);
                 } else {
                     log.warn(`[POST #${i + 1}] Soft Reload не дал результатов. Пропускаем.`);
                 }
