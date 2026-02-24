@@ -110,7 +110,7 @@ async function scrapeInstagram() {
         const prevSize = postLinks.size;
         links.forEach(link => postLinks.add(link));
 
-        console.log(`\r👁️ Вижу ${links.length} ссылок на странице (собран: ${postLinks.size} / ${POSTS_TO_CHECK})`);
+        process.stdout.write(`\r👁️ Вижу ${links.length} ссылок на странице (собран: ${postLinks.size} / ${POSTS_TO_CHECK})`);
 
         if (postLinks.size >= POSTS_TO_CHECK) break;
 
@@ -154,10 +154,10 @@ async function scrapeInstagram() {
             // Имитация чтения человеком (задержка 3-4 сек)
             await delay(3000 + Math.floor(Math.random() * 1000));
 
-            // Логика разворота всех комментариев (максимум 5 раз)
+            // Логика разворота всех комментариев (максимум 7 раз)
             let commentsExpanded = true;
             let expandClickCount = 0;
-            while (commentsExpanded && expandClickCount < 5) {
+            while (commentsExpanded && expandClickCount < 7) {
                 commentsExpanded = await page.evaluate(() => {
                     const elements = Array.from(document.querySelectorAll('div[role="button"], button, span, svg'));
                     const targetWords = ['view', 'all', 'comments', 'посмотре', 'все', 'комментари', 'більше', 'коментар', 'load', 'more'];
@@ -188,26 +188,33 @@ async function scrapeInstagram() {
 
                 if (commentsExpanded) {
                     expandClickCount++;
-                    process.stdout.write(`\r   🔄 Разворачиваю комментарии... Нашел и кликнул по ссылке (${expandClickCount}/5).   `);
+                    process.stdout.write(`\r   🔄 Разворачиваю комментарии... Нашел и кликнул по ссылке (${expandClickCount}/7).   `);
                     await delay(1000); // 1 секунда для подгрузки
                 }
             }
             if (expandClickCount > 0) console.log(''); // Перенос строки после логгера
 
-            // Дополнительная задержка 2с для финальной загрузки комментариев
+            // Принудительное чтение: пауза 2с
             await delay(2000);
 
-            // Извлечение всех текстов поста (описание + комментарии)
+            // Извлечение всех текстов поста
             const extractedTexts = await page.evaluate(() => {
                 const texts = [];
-                const elements = document.querySelectorAll('span[dir="auto"], h1[dir="auto"], div[role="listitem"] span');
+                // Максимально широкий поиск: все span
+                const elements = document.querySelectorAll('span');
                 elements.forEach(el => {
-                    if (el.innerText && el.innerText.trim().length > 0) {
-                        texts.push(el.innerText.trim());
+                    const txt = el.innerText ? el.innerText.trim() : '';
+                    if (txt.length > 5 && txt !== 'Ответить' && txt !== 'Reply' && txt !== 'Hide replies' && txt !== 'Скрыть ответы' && !txt.match(/^[0-9]+[dhw]$/)) {
+                        texts.push(txt);
                     }
                 });
                 return texts;
             });
+
+            const totalAnalyzedChars = extractedTexts.join(' ').length;
+            if (totalAnalyzedChars > 0) {
+                console.log(`   👁️ Анализирую ${totalAnalyzedChars} символов текста из комментариев...`);
+            }
 
             let foundReview = false;
             let previewText = '';
@@ -215,12 +222,8 @@ async function scrapeInstagram() {
 
             for (const text of extractedTexts) {
                 const lowerText = text.toLowerCase();
-
-                if (text.length > 5) {
-                    console.log(`   📖 Текст прочитан: "${text.replace(/\n/g, ' ').substring(0, 50)}..."`);
-                }
-
                 const isReview = KEYWORDS.some(word => lowerText.includes(word));
+
                 if (isReview) {
                     foundReview = true;
                     targetReviewText = text;
@@ -256,11 +259,9 @@ async function scrapeInstagram() {
                         sourceUrl: link // добавляем ссылку на оригинал (опционально)
                     });
 
-                    // Сохраняем каждые 10 отзывов для надежности
-                    if (reviewCount % 10 === 0) {
-                        saveReviews(reviewsArr);
-                        console.log(`\n💾 Автосохранение... (сохранено ${reviewCount} отзывов)`);
-                    }
+                    // Сохраняем сразу же, как только нашли ключ
+                    saveReviews(reviewsArr);
+                    console.log(`\n💾 Автосохранение... (сохранено ${reviewCount} отзывов)`);
 
                     previewText = targetReviewText.replace(/\n/g, ' ').substring(0, 50) + '...';
                 }
