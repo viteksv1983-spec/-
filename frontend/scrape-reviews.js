@@ -319,6 +319,8 @@ async function scrapeInstagram() {
             if (req.resourceType() === 'xhr' || req.resourceType() === 'fetch') {
                 if (url.includes('graphql') || url.includes('/comments/')) {
                     try {
+                        if (!response.headers()['content-type']?.includes('application/json')) return;
+
                         const json = await response.json();
                         const texts = extractAllTextsFromJSON(json);
                         texts.forEach(t => {
