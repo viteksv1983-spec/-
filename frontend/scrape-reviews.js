@@ -522,7 +522,14 @@ async function scrapeInstagram() {
 
             // 6. Anti-Race Condition Sequence
             await page.waitForNetworkIdle({ idleTime: 2000, timeout: 8000 }).catch(() => { });
-            await delay(1500); // Микрозадержка для delayed pagination (Instagram delayed GraphQL)
+            await delay(2000); // Базовая задержка перед проверкой
+
+            // Дополнительная проверка на Late GraphQL pagination
+            await page.waitForResponse(res =>
+                res.url().includes('graphql') && res.request().resourceType() === 'fetch',
+                { timeout: 2500 }
+            ).catch(() => { });
+
             graphQlTextsCount = currentPostTexts.size; // Финальный размер GraphQL данных
 
             let domTextsCount = 0;
