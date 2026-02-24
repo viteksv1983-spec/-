@@ -10,8 +10,8 @@ const __dirname = path.dirname(__filename);
 
 // --- Настройки поиска ---
 const TARGET_ACCOUNT = 'liudmilaprikhodko';
-const POSTS_TO_CHECK = 1000;
-const CONCURRENT_PAGES = 3; // Количество одновременных вкладок (Параллельная обработка)
+const POSTS_TO_CHECK = 100; // Отладка на 100 постов
+const CONCURRENT_PAGES = 3; // Кол-во параллельных вкладок
 
 const KEYWORDS = [
     'відгук', 'дякую', 'замовлення', 'смачно', 'торт', 'тортик',
@@ -61,11 +61,10 @@ function determineCategory(text) {
 }
 
 function saveReviews(reviewsArr) {
-    const fileContent = `// Автоматически сгенерировано скриптом scrape-reviews.js (High Performance/Concurrent Edition)\n\nexport const reviewsData = ${JSON.stringify(reviewsArr, null, 4)};\n`;
+    const fileContent = `// Автоматически сгенерировано скриптом scrape-reviews.js (Senior Edition)\n\nexport const reviewsData = ${JSON.stringify(reviewsArr, null, 4)};\n`;
     fs.writeFileSync(DATA_FILE, fileContent, 'utf-8');
 }
 
-// Глобальные переменные для результатов
 let globalReviewCount = 0;
 const reviewsArr = [];
 
@@ -73,39 +72,40 @@ const reviewsArr = [];
 async function processPost(browser, link, postIndex) {
     const page = await browser.newPage();
 
-    // Блокируем лишние ресурсы для ускорения (картинки интерфейса, шрифты и тд, но оставляем основные img)
-    await page.setRequestInterception(true);
-    page.on('request', (req) => {
-        if (['font', 'stylesheet'].includes(req.resourceType())) {
-            req.abort();
-        } else {
-            req.continue();
-        }
-    });
+    // Стабильность страницы: открываем в нормальном разрешении
+    await page.setViewport({ width: 1280, height: 1000 });
 
     try {
         await page.goto(link, { waitUntil: 'domcontentloaded', timeout: 60000 });
-
-        // Стартовая задержка для прогрузки интерфейса
         await delay(3000 + Math.floor(Math.random() * 1000));
 
+        // Проверка на белый экран
+        const bodyLength = await page.evaluate(() => document.body.innerHTML.length);
+        if (bodyLength < 1000) {
+            console.log(`⚠️ Пост #${postIndex}: Обнаружена некорректная загрузка (белый экран), перезагружаю страницу...`);
+            await page.reload({ waitUntil: 'domcontentloaded', timeout: 60000 });
+            await delay(4000);
+        }
+
         let expandClickCount = 0;
-        let lastElementCount = 0;
 
-        // Фикс "бесконечного клика": Умное ожидание и счетчик элементов
-        while (true) {
-            // Считаем объем видимого текста до клика
-            const currentElementCount = await page.evaluate(() => document.querySelectorAll('span, div[role="listitem"]').length);
+        // Умный кликер комментариев
+        while (expandClickCount < 5) {
+            // Запоминаем текущий объем текста перед кликом
+            const currentCharCount = await page.evaluate(() => {
+                const article = document.querySelector('article');
+                return article ? article.innerText.length : 0;
+            });
 
-            // Пытаемся развернуть ветки
+            // Ищем и кликаем "Посмотреть все комментарии"
             const clicked = await page.evaluate(() => {
                 const buttons = Array.from(document.querySelectorAll('div[role="button"], button, svg circle'));
-                const targetWords = ['view', 'all', 'comments', 'посмотре', 'все', 'комментари', 'більше', 'load', 'more', 'ответ', 'replies', 'ответов'];
+                const targetWords = ['view', 'all', 'comments', 'посмотре', 'все', 'комментари', 'більше', 'load', 'more', 'ответ', 'replies', 'ответов', '+'];
 
                 for (let btn of buttons) {
                     const txt = (btn.innerText || btn.getAttribute('aria-label') || '').toLowerCase();
-                    // Проверяем, что это именно кнопка разворачивания
-                    const isExpandBtn = targetWords.some(w => txt.includes(w)) || txt.includes('+');
+                    const isExpandBtn = targetWords.some(w => txt.includes(w)) || txt === '+';
+
                     if (isExpandBtn && txt.length > 0 && txt.length < 40) {
                         let clickable = btn;
                         while (clickable && clickable.tagName !== 'BUTTON' && clickable.getAttribute('role') !== 'button' && clickable.tagName !== 'DIV') {
@@ -114,7 +114,7 @@ async function processPost(browser, link, postIndex) {
                         }
                         if (clickable && typeof clickable.click === 'function') {
                             clickable.click();
-                            return true; // Кликнули
+                            return true;
                         }
                     }
                 }
@@ -122,63 +122,60 @@ async function processPost(browser, link, postIndex) {
             });
 
             if (!clicked) {
-                break; // Кнопок больше нет
+                break; // Нет больше кнопок
             }
 
             expandClickCount++;
 
-            // Smart Wait: Ожидание 2 секунды после клика, чтобы данные пришли с сервера
+            // Умное ожидание: Instagram динамичен
             await delay(2000);
 
-            // Проверяем, изменилось ли количество элементов (защита от зацикливания)
-            const newElementCount = await page.evaluate(() => document.querySelectorAll('span, div[role="listitem"]').length);
+            // Проверяем, увеличилось ли количество текста
+            const newCharCount = await page.evaluate(() => {
+                const article = document.querySelector('article');
+                return article ? article.innerText.length : 0;
+            });
 
-            if (newElementCount <= currentElementCount) {
-                // Сервер не отдал новые данные (или завис) -> выходим
+            if (newCharCount <= currentCharCount) {
+                // Если текст не прибавился, прекращаем кликать (предотвращает зависание)
                 break;
             }
         }
 
-        console.log(`\n📌 Пост #${postIndex}: развернуто ${expandClickCount} веток комментариев`);
+        if (expandClickCount > 0) {
+            console.log(`📌 Пост #${postIndex}: развернуто ${expandClickCount} веток комментариев`);
+        }
 
-        // Логика сбора текста (DOM Extraction)
-        // Точный селектор: берем текст из комментов и обходим мусор
-        const extractedTexts = await page.evaluate(() => {
-            const texts = [];
-            // Ищем внутри ul > div > li, а также общие span на случай другой верстки
-            const commentNodes = document.querySelectorAll('article ul span, article div[role="listitem"] span[dir="auto"], h1[dir="auto"]');
+        // Захват текста (DOM Extraction)
+        // Собираем ВЕСЬ текстовый контент из блока комментариев article ul
+        const extractedText = await page.evaluate(() => {
+            const commentsContainer = document.querySelector('article ul') || document.querySelector('article');
+            if (!commentsContainer) return '';
 
-            commentNodes.forEach(node => {
-                const txt = node.innerText ? node.innerText.trim() : '';
-                // Фильтруем имена, даты и кнопки
-                if (txt.length >= 10 && !txt.match(/^[0-9]+[dhwsмч]$/i) && txt !== 'Ответить' && txt !== 'Reply') {
-                    texts.push(txt);
-                }
-            });
-            // Возвращаем уникальные тексты, чтобы не было дублей
-            return Array.from(new Set(texts));
+            // Получаем весь видимый текст, чистим от базового системного мусора
+            let text = commentsContainer.innerText || '';
+            text = text.replace(/Ответить|Reply|Hide replies|Посмотреть перевод|-/g, ' ');
+            // Удаляем временные метки "3 дн", "5 ч" и тд
+            text = text.replace(/(\d+)\s*(ч|д|н|дн|недель|h|d|w)\b/gi, ' ');
+            return text;
         });
 
-        const totalAnalyzedChars = extractedTexts.join(' ').length;
-        console.log(`� Прочитано символов: ${totalAnalyzedChars} (Пост #${postIndex})`);
+        const totalAnalyzedChars = extractedText.length;
+        console.log(`📈 Проанализировано ${totalAnalyzedChars} символов в комментариях поста #${postIndex}`);
 
         let foundKeyword = null;
-        let targetText = '';
 
-        // Фильтрация по KEYWORDS
-        for (const txt of extractedTexts) {
-            const lowerTxt = txt.toLowerCase();
-            const matchedKw = KEYWORDS.find(kw => lowerTxt.includes(kw));
-
-            if (matchedKw) {
-                foundKeyword = matchedKw;
-                targetText = txt;
+        // Фильтруем массив(текст) по KEYWORDS
+        const lowerTxt = extractedText.toLowerCase();
+        for (const kw of KEYWORDS) {
+            if (lowerTxt.includes(kw)) {
+                foundKeyword = kw;
                 break;
             }
         }
 
         if (foundKeyword) {
-            console.log(`✨ Статус: Ключевое слово '${foundKeyword}' найдено! Сохраняю... (Пост #${postIndex})`);
+            console.log(`✨ Успех! Найден ключ: [${foundKeyword}] (Пост #${postIndex})`);
 
             const imgUrl = await page.evaluate(() => {
                 const img = document.querySelector('article img[style*="object-fit: cover"]') || document.querySelector('article img[class*="x5yr21d"]');
@@ -195,14 +192,14 @@ async function processPost(browser, link, postIndex) {
                     reviewsArr.push({
                         id: globalReviewCount,
                         clientName: 'Людмила Приходько (Instagram)',
-                        text: targetText,
+                        // Сохраняем адекватный отрывок, чтобы карточка обзора помещала его
+                        text: extractedText.substring(0, 1000).trim() + '...',
                         image: `/images/reviews/${filename}`,
-                        category: determineCategory(targetText),
+                        category: determineCategory(extractedText),
                         rating: 5,
-                        sourceUrl: link
+                        sourceUrl: link // ссылка на пост
                     });
 
-                    // Сохранение прямо по факту нахождения
                     saveReviews(reviewsArr);
                 }
             }
@@ -216,7 +213,7 @@ async function processPost(browser, link, postIndex) {
 
 // --- Основной скрипт ---
 async function scrapeInstagram() {
-    console.log(`🚀 Запуск Senior Level Scraper (Concurrent Threads: ${CONCURRENT_PAGES})...`);
+    console.log(`🚀 Запуск Senior Edition Scraper (Concurrent Threads: ${CONCURRENT_PAGES})...`);
 
     const browser = await puppeteer.launch({
         headless: false,
@@ -225,8 +222,8 @@ async function scrapeInstagram() {
     });
 
     const page = await browser.newPage();
+    await page.setViewport({ width: 1280, height: 1000 });
 
-    // 1. Ручная авторизация
     console.log('🔗 Переход на страницу логина...');
     await page.goto('https://www.instagram.com/accounts/login/', { waitUntil: 'networkidle2' });
 
@@ -235,7 +232,6 @@ async function scrapeInstagram() {
     await askQuestion('⚠️ Нажмите ENTER в ТЕРМИНАЛЕ после успешного входа... ');
     console.log('=============================================\n');
 
-    // 2. Сбор ссылок на посты
     console.log(`🔍 Переход на профиль @${TARGET_ACCOUNT}...`);
     await page.goto(`https://www.instagram.com/${TARGET_ACCOUNT}/`, { waitUntil: 'networkidle2', timeout: 60000 });
 
@@ -253,7 +249,7 @@ async function scrapeInstagram() {
         if (postLinks.size >= POSTS_TO_CHECK) break;
 
         await page.evaluate(() => window.scrollBy(0, window.innerHeight * 2));
-        await delay(3000 + Math.random() * 1000); // Smart Wait при скролле ленты
+        await delay(3000 + Math.random() * 1000);
 
         if (postLinks.size === prevSize) {
             scrollAttempts++;
@@ -269,23 +265,17 @@ async function scrapeInstagram() {
     const linksArray = Array.from(postLinks).slice(0, POSTS_TO_CHECK);
     console.log(`\n✅ Сбор ссылок завершен. Постов для анализа: ${linksArray.length}\n`);
 
-    // Закрываем основную вкладку перед пулом
     await page.close();
 
-    // 3. Параллельная обработка (Concurrent Processing)
+    // Параллельная загрузка
     for (let i = 0; i < linksArray.length; i += CONCURRENT_PAGES) {
         const chunk = linksArray.slice(i, i + CONCURRENT_PAGES);
-
         console.log(`\n⚙️  Запуск потоков для постов ${i + 1} - ${i + chunk.length}...`);
 
-        // Создаем массив промисов
         const promises = chunk.map((link, idx) => processPost(browser, link, i + 1 + idx));
-
-        // Дожидаемся завершения пачки
         await Promise.all(promises);
     }
 
-    // 4. Финал
     console.log(`\n\n🎉 Парсинг полностью завершен!`);
     if (globalReviewCount > 0) {
         console.log(`✅ Найдено и сохранено отзывов: ${globalReviewCount} в ${DATA_FILE}`);
