@@ -105,17 +105,28 @@ function saveReviews(reviewsArr) {
     fs.writeFileSync(DATA_FILE, fileContent, 'utf-8');
 }
 
-function extractAllTextsFromJSON(obj) {
+// Strict Extract Texts - только из реальных комментариев
+function extractStrictCommentsFromJSON(obj) {
     let texts = [];
     let stack = [obj];
     while (stack.length > 0) {
         let current = stack.pop();
         if (typeof current === 'object' && current !== null) {
+
+            // Если мы дошли до ноды комментария
+            if (current.hasOwnProperty('text') && typeof current.text === 'string') {
+                // Проверяем, что это не caption (в caption обычно нет этих ключей рядом)
+                // Или просто берем текст, если мы внутри edge_threaded_comments / edge_media_to_comment
+                texts.push(current.text);
+            }
+
             for (let k in current) {
-                if (k === 'text' && typeof current[k] === 'string') {
-                    texts.push(current[k]);
-                } else if (typeof current[k] === 'object') {
+                // Идем дальше только если ключ похож на контейнер комментов
+                if (k === 'edge_threaded_comments' || k === 'edge_media_to_comment' || k === 'comments' || k === 'edges' || k === 'node') {
                     stack.push(current[k]);
+                } else if (Array.isArray(current[k])) {
+                    // Разворачиваем массивы
+                    stack.push(...current[k]);
                 }
             }
         }
@@ -126,10 +137,13 @@ function extractAllTextsFromJSON(obj) {
 // Профессиональная загрузка комментариев (Production Stable)
 async function fullyLoadComments(page) {
     let clicksCount = 0;
-    const maxIterations = 20;
+    const maxIterations = 25; // Увеличено до 25
     let iterations = 0;
     let previousHeight = 0;
     let sameHeightCount = 0;
+    let previousCommentsCount = 0;
+    const maxRuntimeMs = 20000; // 20 секунд макс
+    const startTime = Date.now();
 
     while (iterations < maxIterations) {
         iterations++;
@@ -204,8 +218,13 @@ async function fullyLoadComments(page) {
             await new Promise(r => setTimeout(r, 1500 + Math.random() * 500)); // 1.5-2s
         }
 
-        // 3. Условие выхода (нет роста scrollHeight 2 итерации подряд)
-        if (scrollResult === previousHeight) {
+        // Проверка количества комментариев в DOM
+        const currentCommentsCount = await page.evaluate(() => {
+            return document.querySelectorAll('article ul li span, div[role="dialog"] ul li span').length;
+        });
+
+        // 3. Условие выхода (нет роста scrollHeight И нет роста комментов)
+        if (scrollResult === previousHeight && currentCommentsCount === previousCommentsCount) {
             sameHeightCount++;
             if (sameHeightCount >= 2 && !clicked) {
                 break;
@@ -213,7 +232,15 @@ async function fullyLoadComments(page) {
         } else {
             sameHeightCount = 0;
         }
+
         previousHeight = scrollResult;
+        previousCommentsCount = currentCommentsCount;
+
+        // Лимит по времени
+        if (Date.now() - startTime > maxRuntimeMs) {
+            log.warn('Достигнут лимит времени fullyLoadComments (20s)');
+            break;
+        }
     }
 
     // 4. Ожидание завершения запросов XHR/Fetch
@@ -389,11 +416,18 @@ async function scrapeInstagram() {
                         if (!response.headers()['content-type']?.includes('application/json')) return;
 
                         const json = await response.json();
-                        const texts = extractAllTextsFromJSON(json);
+
+                        // Strict filter (только если в ответе есть комменты)
+                        const jsonStr = JSON.stringify(json);
+                        if (!jsonStr.includes('edge_threaded_comments') && !jsonStr.includes('edge_media_to_comment') && !jsonStr.includes('"comments"')) {
+                            return;
+                        }
+
+                        const texts = extractStrictCommentsFromJSON(json);
                         texts.forEach(t => {
                             if (t.length > 5 && !t.match(/^[0-9]+$/)) currentPostTexts.add(t);
                         });
-                        log.debug(`[GRAPHQL CAPTURED] Извлечено текстов: ${texts.length}`);
+                        if (texts.length > 0) log.debug(`[GRAPHQL CAPTURED] Извлечено текстов: ${texts.length}`);
                     } catch (e) {
                         // Игнорируем ошибки парсинга
                     }
@@ -421,6 +455,7 @@ async function scrapeInstagram() {
                     }
 
                     // Post load stabilization
+                    await page.waitForSelector('article', { timeout: 10000 }).catch(() => { });
                     await randomDelay(3000, 5000); // Ожидаем GraphQL ответы и стабилизацию DOM
                     successLoad = true;
 
@@ -445,12 +480,12 @@ async function scrapeInstagram() {
                     if (isRateLimit) baseWaitTime = Math.min(baseWaitTime * 2, 240000); // Max 4 минуты
                 }
             }
+            let graphQlTextsCount = currentPostTexts.size; // Запоминаем сколько пришло из GraphQL
 
             if (!successLoad || isCheckpoint) {
                 continue;
             }
 
-            // --- Мягкое раскрытие комментариев ---
             // --- Профессиональная загрузка комментариев ---
             await randomDelay(3000, 5000);
 
@@ -459,75 +494,86 @@ async function scrapeInstagram() {
                 log.info(`[POST #${i + 1}] Expanded: ${clicksCount} clicks, ${totalScrolls} scrolls (H: ${finalHeight}px)`);
             }
 
+            // 6. Anti-Race Condition Sequence
+            await page.waitForNetworkIdle({ idleTime: 2000, timeout: 8000 }).catch(() => { });
+            page.off('response', postGraphQLHandler);
+            graphQlTextsCount = currentPostTexts.size; // Финальный размер GraphQL данных
+
+            let domTextsCount = 0;
             // Добавляем DOM Fallback тексты
             if (texts && texts.length > 0) {
-                texts.forEach(t => currentPostTexts.add(t));
-                log.debug(`[DOM FALLBACK] Добавлено текстов: ${texts.length}`);
+                texts.forEach(t => {
+                    const before = currentPostTexts.size;
+                    currentPostTexts.add(t);
+                    if (currentPostTexts.size > before) domTextsCount++;
+                });
             }
 
-            await randomDelay(2000, 4000);
+            // 4. Debug Counters
+            log.info(`[POST #${i + 1}] GraphQL texts: ${graphQlTextsCount} | DOM texts added: ${domTextsCount} | Unique total: ${currentPostTexts.size}`);
+
+            await randomDelay(2000, 3000);
+
+            // Текст процессируется синхронно
+            let foundKeyword = null;
+            let targetText = '';
+
+            for (const text of currentPostTexts) {
+                const lowerTxt = text.toLowerCase();
+                const matchedKw = KEYWORDS.find(kw => lowerTxt.includes(kw));
+
+                if (matchedKw) {
+                    foundKeyword = matchedKw;
+                    targetText = text;
+                    break;
+                }
+            }
+
+            if (foundKeyword) {
+                log.succ(`Найдено совпадение! Ключ: [${foundKeyword}]`);
+
+                try {
+                    const imgUrl = await page.evaluate(() => {
+                        const img = document.querySelector('article img[style*="object-fit: cover"]') || document.querySelector('article img[class*="x5yr21d"]');
+                        return img ? img.src : null;
+                    });
+
+                    if (imgUrl) {
+                        globalReviewCount++;
+                        const filename = `review-${i + 1}-${globalReviewCount}.jpg`;
+                        const filepath = path.join(OUTPUT_DIR, filename);
+
+                        const downloaded = await downloadImage(imgUrl, filepath);
+                        if (downloaded) {
+                            reviewsArr.push({
+                                id: globalReviewCount,
+                                clientName: 'Instagram Відгук',
+                                text: targetText.substring(0, 1000).trim(),
+                                image: `/images/reviews/${filename}`,
+                                category: determineCategory(targetText),
+                                rating: 5,
+                                sourceUrl: link
+                            });
+
+                            saveReviews(reviewsArr);
+                            log.info(`Отзыв сохранен. Всего собрано: ${globalReviewCount}`);
+                        }
+                    }
+                } catch (e) {
+                    log.error(`Не удалось сохранить картинку для поста: ${e.message}`);
+                }
+            } else {
+                log.info(`Нет совпадений. (Текстов: ${currentPostTexts.size})`);
+            }
+
+            // Очистка Set и переменных
+            currentPostTexts.clear();
+
         } finally {
             // --- 3. Memory Safety & Cleanup ---
-            // Обязательно снимаем обработчик текущего поста, устраняем утечку памяти и смешивание комментов
-            // ничего не делаем тут
+            // Гарантируем отвязку, даже в случае ошибок выше
+            try { page.off('response', postGraphQLHandler); } catch (e) { }
         }
-
-        // --- 4. Защита от Race Conditions ---
-        // Текст процессируется синхронно, только когда страница полностью загружена и Network listeners сняты.
-        page.off('response', postGraphQLHandler);
-        let foundKeyword = null;
-        let targetText = '';
-
-        for (const text of currentPostTexts) {
-            const lowerTxt = text.toLowerCase();
-            const matchedKw = KEYWORDS.find(kw => lowerTxt.includes(kw));
-
-            if (matchedKw) {
-                foundKeyword = matchedKw;
-                targetText = text;
-                break;
-            }
-        }
-
-        if (foundKeyword) {
-            log.succ(`Найдено совпадение! Ключ: [${foundKeyword}]`);
-
-            try {
-                const imgUrl = await page.evaluate(() => {
-                    const img = document.querySelector('article img[style*="object-fit: cover"]') || document.querySelector('article img[class*="x5yr21d"]');
-                    return img ? img.src : null;
-                });
-
-                if (imgUrl) {
-                    globalReviewCount++;
-                    const filename = `review-${i + 1}-${globalReviewCount}.jpg`;
-                    const filepath = path.join(OUTPUT_DIR, filename);
-
-                    const downloaded = await downloadImage(imgUrl, filepath);
-                    if (downloaded) {
-                        reviewsArr.push({
-                            id: globalReviewCount,
-                            clientName: 'Instagram Відгук',
-                            text: targetText.substring(0, 1000).trim(),
-                            image: `/images/reviews/${filename}`,
-                            category: determineCategory(targetText),
-                            rating: 5,
-                            sourceUrl: link
-                        });
-
-                        saveReviews(reviewsArr);
-                        log.info(`Отзыв сохранен. Всего собрано: ${globalReviewCount}`);
-                    }
-                }
-            } catch (e) {
-                log.error(`Не удалось сохранить картинку для поста: ${e.message}`);
-            }
-        } else {
-            log.info(`Нет совпадений. (Текстов: ${currentPostTexts.size})`);
-        }
-
-        // Очистка Set и переменных
-        currentPostTexts.clear();
 
         // Пауза перед следующим постом
         const nextDelay = applyJitter(3000, 0.5); // 1.5 - 4.5 сек
