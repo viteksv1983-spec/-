@@ -53,6 +53,8 @@ if (!fs.existsSync(OUTPUT_DIR)) fs.mkdirSync(OUTPUT_DIR, { recursive: true });
 if (!fs.existsSync(path.dirname(DATA_FILE))) fs.mkdirSync(path.dirname(DATA_FILE), { recursive: true });
 
 // --- Вспомогательные функции ---
+const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+
 const randomDelay = (min = 2000, max = 5000) => {
     const ms = Math.floor(Math.random() * (max - min + 1)) + min;
     return new Promise(resolve => setTimeout(resolve, ms));
@@ -147,9 +149,7 @@ async function scrapeInstagram() {
             '--no-sandbox',
             '--disable-setuid-sandbox',
             '--disable-blink-features=AutomationControlled',
-            '--start-maximized',
-            '--disable-web-security',
-            '--disable-features=IsolateOrigins,site-per-process'
+            '--start-maximized'
         ]
     });
 
@@ -160,7 +160,6 @@ async function scrapeInstagram() {
     await page.evaluateOnNewDocument(() => {
         Object.defineProperty(navigator, 'webdriver', { get: () => false });
         Object.defineProperty(navigator, 'languages', { get: () => ['ru-RU', 'ru', 'en-US', 'en'] });
-        Object.defineProperty(navigator, 'plugins', { get: () => [1, 2, 3] });
     });
 
     // Обработчик проверки на Checkpoint/Rate limit
@@ -298,63 +297,64 @@ async function scrapeInstagram() {
 
         log.post(i + 1, `Анализ: ${link}`);
 
-        // --- 2. Retry Логика и 429 RateLimit Handler ---
-        while (retries < 3 && !successLoad) {
-            try {
-                is429 = false;
-                await randomDelay(1000, 2000); // Random pause before action
-
-                const gotoResponse = await page.goto(link, { waitUntil: 'domcontentloaded', timeout: 45000 });
-                const status = gotoResponse ? gotoResponse.status() : 200;
-
-                if (status === 429 || is429) {
-                    throw new Error('HTTP 429');
-                }
-
-                // Post load stabilization
-                await randomDelay(3000, 5000); // Ожидаем GraphQL ответы и стабилизацию DOM
-                successLoad = true;
-
-            } catch (err) {
-                retries++;
-                const isRateLimit = err.message.includes('429');
-                log.warn(`[RETRY ${retries}/3] Ошибка загрузки поста: ${isRateLimit ? 'Rate Limit (429)' : err.message}`);
-
-                if (isCheckpoint) break; // Сразу выходим при чекпоинте
-
-                if (retries >= 3) {
-                    log.warn(`Пропуск поста.`);
-                    break;
-                }
-
-                let curWait = isRateLimit ? baseWaitTime : 15000;
-                curWait = applyJitter(curWait, 0.3); // Добавляем до 30% джиттера
-
-                log.info(`Ожидание ${Math.round(curWait / 1000)} сек. перед повтором...`);
-                await delay(curWait);
-
-                if (isRateLimit) baseWaitTime = Math.min(baseWaitTime * 2, 240000); // Max 4 минуты
-            }
-        }
-
-        // --- 3. Memory Safety & Cleanup ---
-        // Обязательно снимаем обработчик текущего поста, устраняем утечку памяти и смешивание комментов
-        page.off('response', postGraphQLHandler);
-
-        if (!successLoad || isCheckpoint) {
-            currentPostTexts.clear();
-            continue;
-        }
-
-        // Fallback: забираем DOM текст для гарантии
         try {
-            const domTexts = await page.evaluate(() => {
-                const spans = document.querySelectorAll('article span, article div[role="listitem"] span');
-                return Array.from(spans).map(s => s.innerText ? s.innerText.trim() : '').filter(t => t.length > 5 && !t.match(/^[0-9]+[dhwsмч]$/i));
-            });
-            domTexts.forEach(t => currentPostTexts.add(t));
-        } catch (e) {
-            log.error(`Ошибка при чтении DOM: ${e.message}`);
+            // --- 2. Retry Логика и 429 RateLimit Handler ---
+            while (retries < 3 && !successLoad) {
+                try {
+                    is429 = false;
+                    await randomDelay(1000, 2000); // Random pause before action
+
+                    const gotoResponse = await page.goto(link, { waitUntil: 'domcontentloaded', timeout: 45000 });
+                    const status = gotoResponse ? gotoResponse.status() : 200;
+
+                    if (status === 429 || is429) {
+                        throw new Error('HTTP 429');
+                    }
+
+                    // Post load stabilization
+                    await randomDelay(3000, 5000); // Ожидаем GraphQL ответы и стабилизацию DOM
+                    successLoad = true;
+
+                } catch (err) {
+                    retries++;
+                    const isRateLimit = err.message.includes('429');
+                    log.warn(`[RETRY ${retries}/3] Ошибка загрузки поста: ${isRateLimit ? 'Rate Limit (429)' : err.message}`);
+
+                    if (isCheckpoint) break; // Сразу выходим при чекпоинте
+
+                    if (retries >= 3) {
+                        log.warn(`Пропуск поста.`);
+                        break;
+                    }
+
+                    let curWait = isRateLimit ? baseWaitTime : 15000;
+                    curWait = applyJitter(curWait, 0.3); // Добавляем до 30% джиттера
+
+                    log.info(`Ожидание ${Math.round(curWait / 1000)} сек. перед повтором...`);
+                    await delay(curWait);
+
+                    if (isRateLimit) baseWaitTime = Math.min(baseWaitTime * 2, 240000); // Max 4 минуты
+                }
+            }
+
+            if (!successLoad || isCheckpoint) {
+                continue;
+            }
+
+            // Fallback: забираем DOM текст для гарантии
+            try {
+                const domTexts = await page.evaluate(() => {
+                    const spans = document.querySelectorAll('article span, article div[role="listitem"] span');
+                    return Array.from(spans).map(s => s.innerText ? s.innerText.trim() : '').filter(t => t.length > 5 && !t.match(/^[0-9]+[dhwsмч]$/i));
+                });
+                domTexts.forEach(t => currentPostTexts.add(t));
+            } catch (e) {
+                log.error(`Ошибка при чтении DOM: ${e.message}`);
+            }
+        } finally {
+            // --- 3. Memory Safety & Cleanup ---
+            // Обязательно снимаем обработчик текущего поста, устраняем утечку памяти и смешивание комментов
+            page.off('response', postGraphQLHandler);
         }
 
         // --- 4. Защита от Race Conditions ---
@@ -412,7 +412,6 @@ async function scrapeInstagram() {
 
         // Очистка Set и переменных
         currentPostTexts.clear();
-        currentPostTexts = null;
 
         // Пауза перед следующим постом
         const nextDelay = applyJitter(3000, 0.5); // 1.5 - 4.5 сек
