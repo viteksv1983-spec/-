@@ -524,11 +524,15 @@ async function scrapeInstagram() {
             await page.waitForNetworkIdle({ idleTime: 2000, timeout: 8000 }).catch(() => { });
             await delay(2000); // Базовая задержка перед проверкой
 
-            // Дополнительная проверка на Late GraphQL pagination
-            await page.waitForResponse(res =>
-                res.url().includes('graphql') && res.request().resourceType() === 'fetch',
-                { timeout: 2500 }
-            ).catch(() => { });
+            // Дополнительная проверка на Late GraphQL pagination (С хирургической точностью)
+            await page.waitForResponse(res => {
+                const url = res.url();
+                const isGraphQL = url.includes('graphql');
+                const isFetch = res.request().resourceType() === 'fetch';
+                const containsShortcode = shortcode && url.includes(shortcode);
+
+                return isGraphQL && isFetch && containsShortcode;
+            }, { timeout: 2500 }).catch(() => { });
 
             graphQlTextsCount = currentPostTexts.size; // Финальный размер GraphQL данных
 
