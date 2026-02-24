@@ -126,29 +126,36 @@ function extractAllTextsFromJSON(obj) {
 // Профессиональная загрузка комментариев (Production Stable)
 async function fullyLoadComments(page) {
     let clicksCount = 0;
-    const maxIterations = 15;
+    const maxIterations = 20;
     let iterations = 0;
     let previousHeight = 0;
+    let sameHeightCount = 0;
 
     while (iterations < maxIterations) {
         iterations++;
 
-        // 1. Ищем scrollable контейнер и скроллим
+        // 1. Ищем ЛЮБОЙ scrollable контейнер
         const scrollResult = await page.evaluate(() => {
             const getScrollable = () => {
-                const roots = document.querySelectorAll('article, div[role="dialog"]');
+                const roots = document.querySelectorAll('article, div[role="dialog"], div[role="presentation"]');
+                let bestScrollable = null;
+                let maxScrollHeight = 0;
+
                 for (const root of roots) {
-                    const elements = root.querySelectorAll('*');
+                    const elements = root.querySelectorAll('div');
                     for (const el of elements) {
-                        if (el.scrollHeight > el.clientHeight && el.clientHeight > 200) {
+                        if (el.scrollHeight > el.clientHeight && el.clientHeight > 150) {
                             const style = window.getComputedStyle(el);
-                            if (style.overflowY === 'auto' || style.overflowY === 'scroll' || style.overflowY === 'overlay') {
-                                return el;
+                            if (style.overflowY !== 'visible') {
+                                if (el.scrollHeight > maxScrollHeight) {
+                                    maxScrollHeight = el.scrollHeight;
+                                    bestScrollable = el;
+                                }
                             }
                         }
                     }
                 }
-                return null;
+                return bestScrollable;
             };
 
             const container = getScrollable();
@@ -161,17 +168,23 @@ async function fullyLoadComments(page) {
             }
         });
 
-        const waitTimeScroll = Math.floor(Math.random() * (1200 - 800 + 1)) + 800; // 800-1200ms
+        const waitTimeScroll = Math.floor(Math.random() * (1300 - 900 + 1)) + 900; // 900-1300ms
         await new Promise(r => setTimeout(r, waitTimeScroll));
 
         // 2. Ищем и кликаем кнопки
         const clicked = await page.evaluate(() => {
-            const buttons = Array.from(document.querySelectorAll('button, div[role="button"], svg circle'));
+            const buttons = Array.from(document.querySelectorAll('button, div[role="button"]'));
             const targetWords = ['view', 'repl', 'ответ', 'все', 'more'];
 
             for (let btn of buttons) {
                 const text = (btn.innerText || btn.getAttribute('aria-label') || '').toLowerCase();
-                if (targetWords.some(w => text.includes(w)) && text.length > 0 && text.length < 60) {
+
+                // Проверка видимости
+                if (btn.offsetWidth === 0 || btn.offsetHeight === 0) continue;
+                const style = window.getComputedStyle(btn);
+                if (style.display === 'none' || style.visibility === 'hidden' || style.opacity === '0') continue;
+
+                if (targetWords.some(w => text.includes(w)) && text.length > 0 && text.length < 80) {
                     let clickable = btn;
                     while (clickable && clickable.tagName !== 'BUTTON' && clickable.getAttribute('role') !== 'button' && clickable.tagName !== 'DIV') {
                         if (!clickable.parentElement) break;
@@ -191,25 +204,35 @@ async function fullyLoadComments(page) {
             await new Promise(r => setTimeout(r, 1500 + Math.random() * 500)); // 1.5-2s
         }
 
-        // 3. Условие выхода (нет роста scrollHeight и не было кликов)
-        if (scrollResult === previousHeight && !clicked) {
-            break;
+        // 3. Условие выхода (нет роста scrollHeight 2 итерации подряд)
+        if (scrollResult === previousHeight) {
+            sameHeightCount++;
+            if (sameHeightCount >= 2 && !clicked) {
+                break;
+            }
+        } else {
+            sameHeightCount = 0;
         }
         previousHeight = scrollResult;
     }
 
     // 4. Ожидание завершения запросов XHR/Fetch
-    await page.waitForNetworkIdle({ idleTime: 1500, timeout: 5000 }).catch(() => { });
+    await page.waitForNetworkIdle({ idleTime: 2000, timeout: 8000 }).catch(() => { });
 
     // 5. Fallback DOM extraction
     const domTexts = await page.evaluate(() => {
-        const nodes = document.querySelectorAll('article ul li span, div[role="dialog"] ul li span');
-        return Array.from(nodes)
+        const comments = document.querySelectorAll('article ul li span');
+        return Array.from(comments)
             .map(n => n.innerText?.trim())
             .filter(t => t && t.length > 5);
     });
 
-    return { clicks: clicksCount, texts: domTexts };
+    return {
+        clicksCount,
+        totalScrolls: iterations,
+        finalHeight: previousHeight,
+        texts: domTexts
+    };
 }
 
 // Извлечение шорткода поста из URL
@@ -431,9 +454,9 @@ async function scrapeInstagram() {
             // --- Профессиональная загрузка комментариев ---
             await randomDelay(3000, 5000);
 
-            const { clicks, texts } = await fullyLoadComments(page);
-            if (clicks > 0) {
-                log.info(`[POST #${i + 1}] Expanded comments: ${clicks}`);
+            const { clicksCount, totalScrolls, finalHeight, texts } = await fullyLoadComments(page);
+            if (clicksCount > 0 || totalScrolls > 0) {
+                log.info(`[POST #${i + 1}] Expanded: ${clicksCount} clicks, ${totalScrolls} scrolls (H: ${finalHeight}px)`);
             }
 
             // Добавляем DOM Fallback тексты
