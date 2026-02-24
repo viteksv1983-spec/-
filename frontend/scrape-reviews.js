@@ -148,9 +148,25 @@ async function fullyLoadComments(page) {
     while (iterations < maxIterations) {
         iterations++;
 
-        // 1. Ищем ЛЮБОЙ scrollable контейнер
+        // 1. Ищем scrollable контейнер, начиная от списка комментариев (ul)
         const scrollResult = await page.evaluate(() => {
             const getScrollable = () => {
+                // Приоритет: родительский скролл-блок списка ul
+                const ul = document.querySelector('article ul, div[role="dialog"] ul');
+                if (ul) {
+                    let parent = ul.parentElement;
+                    while (parent && parent !== document.body) {
+                        if (parent.scrollHeight > parent.clientHeight && parent.clientHeight > 150) {
+                            const style = window.getComputedStyle(parent);
+                            if (style.overflowY !== 'visible') {
+                                return parent;
+                            }
+                        }
+                        parent = parent.parentElement;
+                    }
+                }
+
+                // Fallback: самый большой scrollable div
                 const roots = document.querySelectorAll('article, div[role="dialog"], div[role="presentation"]');
                 let bestScrollable = null;
                 let maxScrollHeight = 0;
@@ -417,9 +433,11 @@ async function scrapeInstagram() {
 
                         const json = await response.json();
 
-                        // Strict filter (только если в ответе есть комменты)
-                        const jsonStr = JSON.stringify(json);
-                        if (!jsonStr.includes('edge_threaded_comments') && !jsonStr.includes('edge_media_to_comment') && !jsonStr.includes('"comments"')) {
+                        // Strict filter (Structural check to avoid expensive stringify)
+                        const hasComments = json?.data?.shortcode_media?.edge_media_to_comment ||
+                            json?.data?.shortcode_media?.edge_threaded_comments ||
+                            json?.comments;
+                        if (!hasComments) {
                             return;
                         }
 
@@ -496,7 +514,6 @@ async function scrapeInstagram() {
 
             // 6. Anti-Race Condition Sequence
             await page.waitForNetworkIdle({ idleTime: 2000, timeout: 8000 }).catch(() => { });
-            page.off('response', postGraphQLHandler);
             graphQlTextsCount = currentPostTexts.size; // Финальный размер GraphQL данных
 
             let domTextsCount = 0;
