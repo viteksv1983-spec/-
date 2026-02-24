@@ -105,18 +105,18 @@ async function scrapeInstagram() {
     let scrollAttempts = 0;
 
     while (postLinks.size < POSTS_TO_CHECK) {
-        // Парсим обычные посты и рилсы
-        const links = await page.$$eval('article a[href^="/p/"], article a[href^="/reel/"]', anchors => anchors.map(a => a.href));
+        // Парсим обычные посты используя универсальный селектор
+        const links = await page.$$eval('a[href*="/p/"]', anchors => anchors.map(a => a.href));
         const prevSize = postLinks.size;
         links.forEach(link => postLinks.add(link));
 
-        process.stdout.write(`\rСобрано ссылок: ${postLinks.size} / ${POSTS_TO_CHECK}`);
+        console.log(`\r👁️ Вижу ${links.length} ссылок на странице (собран: ${postLinks.size} / ${POSTS_TO_CHECK})`);
 
         if (postLinks.size >= POSTS_TO_CHECK) break;
 
         // Скроллим вниз
         await page.evaluate(() => window.scrollBy(0, window.innerHeight * 2));
-        await delay(1500 + Math.random() * 1000); // 1.5 - 2.5 секунды
+        await delay(3000 + Math.random() * 1000); // 3-4 секунды для тяжелого аккаунта
 
         if (postLinks.size === prevSize) {
             scrollAttempts++;
@@ -203,7 +203,7 @@ async function scrapeInstagram() {
                             console.log(`\n💾 Автосохранение... (сохранено ${reviewCount} отзывов)`);
                         }
 
-                        previewText = textContent.replace(/\ng/, ' ').substring(0, 50) + '...';
+                        previewText = textContent.replace(/\n/g, ' ').substring(0, 50) + '...';
                     }
                 }
             }
