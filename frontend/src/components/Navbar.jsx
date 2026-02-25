@@ -148,13 +148,13 @@ function Navbar() {
             {/* Десктоп версия */}
             <div className="bg-white border-t border-gray-100 py-4 overflow-x-auto scrollbar-hide hidden md:block">
                 <div className="container mx-auto px-4 md:px-6 flex items-center justify-center space-x-8 md:space-x-12 font-bold text-[12px] uppercase tracking-widest flex-nowrap">
-                    <Link to="/torty-na-zamovlennya/" className={`transition-all whitespace-nowrap font-black border-b-2 pb-0.5 ${location.pathname.startsWith('/torty-na-zamovlennya') ? 'text-[#B8860B] border-[#D8A055]' : 'text-gray-900 border-transparent hover:text-[#B8860B] hover:border-[#D8A055]'}`}>Торти на замовлення</Link>
-                    <Link to="/bento-torty/" className={`transition-all whitespace-nowrap border-b-2 pb-0.5 ${location.pathname.startsWith('/bento-torty') ? 'text-[#B8860B] font-black border-[#D8A055]' : 'text-gray-900 border-transparent hover:text-[#B8860B]'}`}>Бенто тортики</Link>
-                    <Link to="/biskvitni-torty/" className={`transition-all whitespace-nowrap border-b-2 pb-0.5 ${location.pathname.startsWith('/biskvitni-torty') ? 'text-[#B8860B] font-black border-[#D8A055]' : 'text-gray-900 border-transparent hover:text-[#B8860B]'}`}>Бісквітні торти</Link>
-                    <Link to="/musovi-torty/" className={`transition-all whitespace-nowrap border-b-2 pb-0.5 ${location.pathname.startsWith('/musovi-torty') ? 'text-[#B8860B] font-black border-[#D8A055]' : 'text-gray-900 border-transparent hover:text-[#B8860B]'}`}>Мусові торти</Link>
-                    <Link to="/kapkeyky/" className={`transition-all whitespace-nowrap border-b-2 pb-0.5 ${location.pathname.startsWith('/kapkeyky') ? 'text-[#B8860B] font-black border-[#D8A055]' : 'text-gray-900 border-transparent hover:text-[#B8860B]'}`}>Капкейки</Link>
-                    <Link to="/imbirni-pryanyky/" className={`transition-all whitespace-nowrap border-b-2 pb-0.5 ${location.pathname.startsWith('/imbirni-pryanyky') ? 'text-[#B8860B] font-black border-[#D8A055]' : 'text-gray-900 border-transparent hover:text-[#B8860B]'}`}>Імбирні пряники</Link>
-                    <Link to="/nachynky/" className={`transition-all whitespace-nowrap border-b-2 pb-0.5 ${location.pathname.startsWith('/nachynky') ? 'text-[#B8860B] font-black border-[#D8A055]' : 'text-gray-900 border-transparent hover:text-[#B8860B]'}`}>Начинки</Link>
+                    <Link to="/torty-na-zamovlennya/" className={`transition-all whitespace-nowrap font-black border-b-2 pb-0.5 ${location.pathname.startsWith('/torty-na-zamovlennya') ? 'text-[#8B6508] border-[#8B6508]' : 'text-gray-900 border-transparent hover:text-[#8B6508] hover:border-[#8B6508]'}`}>Торти на замовлення</Link>
+                    <Link to="/bento-torty/" className={`transition-all whitespace-nowrap border-b-2 pb-0.5 ${location.pathname.startsWith('/bento-torty') ? 'text-[#8B6508] font-black border-[#8B6508]' : 'text-gray-900 border-transparent hover:text-[#8B6508]'}`}>Бенто тортики</Link>
+                    <Link to="/biskvitni-torty/" className={`transition-all whitespace-nowrap border-b-2 pb-0.5 ${location.pathname.startsWith('/biskvitni-torty') ? 'text-[#8B6508] font-black border-[#8B6508]' : 'text-gray-900 border-transparent hover:text-[#8B6508]'}`}>Бісквітні торти</Link>
+                    <Link to="/musovi-torty/" className={`transition-all whitespace-nowrap border-b-2 pb-0.5 ${location.pathname.startsWith('/musovi-torty') ? 'text-[#8B6508] font-black border-[#8B6508]' : 'text-gray-900 border-transparent hover:text-[#8B6508]'}`}>Мусові торти</Link>
+                    <Link to="/kapkeyky/" className={`transition-all whitespace-nowrap border-b-2 pb-0.5 ${location.pathname.startsWith('/kapkeyky') ? 'text-[#8B6508] font-black border-[#8B6508]' : 'text-gray-900 border-transparent hover:text-[#8B6508]'}`}>Капкейки</Link>
+                    <Link to="/imbirni-pryanyky/" className={`transition-all whitespace-nowrap border-b-2 pb-0.5 ${location.pathname.startsWith('/imbirni-pryanyky') ? 'text-[#8B6508] font-black border-[#8B6508]' : 'text-gray-900 border-transparent hover:text-[#8B6508]'}`}>Імбирні пряники</Link>
+                    <Link to="/nachynky/" className={`transition-all whitespace-nowrap border-b-2 pb-0.5 ${location.pathname.startsWith('/nachynky') ? 'text-[#8B6508] font-black border-[#8B6508]' : 'text-gray-900 border-transparent hover:text-[#8B6508]'}`}>Начинки</Link>
                 </div>
             </div>
 
@@ -166,16 +166,16 @@ function Navbar() {
                         <div className="flex items-center gap-4 font-bold text-[11px] uppercase tracking-widest min-w-max pr-3">
                             <Link
                                 to="/torty-na-zamovlennya/"
-                                className={`whitespace-nowrap border-b-2 pb-0.5 transition-colors ${location.pathname.startsWith('/torty-na-zamovlennya') || location.pathname === '/' ? 'text-[#B8860B] border-[#D8A055] font-black' : 'text-gray-700 border-transparent'}`}
+                                className={`whitespace-nowrap border-b-2 pb-0.5 transition-colors ${location.pathname.startsWith('/torty-na-zamovlennya') || location.pathname === '/' ? 'text-[#8B6508] border-[#8B6508] font-black' : 'text-gray-700 border-transparent'}`}
                             >
                                 Торти на замовлення
                             </Link>
-                            <Link to="/bento-torty/" className={`whitespace-nowrap border-b-2 pb-0.5 ${location.pathname.startsWith('/bento-torty') ? 'text-[#B8860B] border-[#D8A055] font-black' : 'text-gray-600 border-transparent'}`}>Бенто</Link>
-                            <Link to="/biskvitni-torty/" className={`whitespace-nowrap border-b-2 pb-0.5 ${location.pathname.startsWith('/biskvitni-torty') ? 'text-[#B8860B] border-[#D8A055] font-black' : 'text-gray-600 border-transparent'}`}>Бісквітні</Link>
-                            <Link to="/musovi-torty/" className={`whitespace-nowrap border-b-2 pb-0.5 ${location.pathname.startsWith('/musovi-torty') ? 'text-[#B8860B] border-[#D8A055] font-black' : 'text-gray-600 border-transparent'}`}>Мусові</Link>
-                            <Link to="/kapkeyky/" className={`whitespace-nowrap border-b-2 pb-0.5 ${location.pathname.startsWith('/kapkeyky') ? 'text-[#B8860B] border-[#D8A055] font-black' : 'text-gray-600 border-transparent'}`}>Капкейки</Link>
-                            <Link to="/imbirni-pryanyky/" className={`whitespace-nowrap border-b-2 pb-0.5 ${location.pathname.startsWith('/imbirni-pryanyky') ? 'text-[#B8860B] border-[#D8A055] font-black' : 'text-gray-600 border-transparent'}`}>Імбирні пряники</Link>
-                            <Link to="/nachynky/" className={`whitespace-nowrap border-b-2 pb-0.5 ${location.pathname.startsWith('/nachynky') ? 'text-[#B8860B] border-[#D8A055] font-black' : 'text-gray-600 border-transparent'}`}>Начинки</Link>
+                            <Link to="/bento-torty/" className={`whitespace-nowrap border-b-2 pb-0.5 ${location.pathname.startsWith('/bento-torty') ? 'text-[#8B6508] border-[#8B6508] font-black' : 'text-gray-600 border-transparent'}`}>Бенто</Link>
+                            <Link to="/biskvitni-torty/" className={`whitespace-nowrap border-b-2 pb-0.5 ${location.pathname.startsWith('/biskvitni-torty') ? 'text-[#8B6508] border-[#8B6508] font-black' : 'text-gray-600 border-transparent'}`}>Бісквітні</Link>
+                            <Link to="/musovi-torty/" className={`whitespace-nowrap border-b-2 pb-0.5 ${location.pathname.startsWith('/musovi-torty') ? 'text-[#8B6508] border-[#8B6508] font-black' : 'text-gray-600 border-transparent'}`}>Мусові</Link>
+                            <Link to="/kapkeyky/" className={`whitespace-nowrap border-b-2 pb-0.5 ${location.pathname.startsWith('/kapkeyky') ? 'text-[#8B6508] border-[#8B6508] font-black' : 'text-gray-600 border-transparent'}`}>Капкейки</Link>
+                            <Link to="/imbirni-pryanyky/" className={`whitespace-nowrap border-b-2 pb-0.5 ${location.pathname.startsWith('/imbirni-pryanyky') ? 'text-[#8B6508] border-[#8B6508] font-black' : 'text-gray-600 border-transparent'}`}>Імбирні пряники</Link>
+                            <Link to="/nachynky/" className={`whitespace-nowrap border-b-2 pb-0.5 ${location.pathname.startsWith('/nachynky') ? 'text-[#8B6508] border-[#8B6508] font-black' : 'text-gray-600 border-transparent'}`}>Начинки</Link>
                         </div>
                     </div>
                     {/* Иконки справа */}

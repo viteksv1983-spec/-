@@ -847,7 +847,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                     <div className="text-center py-20">
                         <div className="text-5xl mb-5 opacity-30">🔍</div>
                         <p className="text-gray-500 text-base font-medium mb-2">Нічого не знайдено</p>
-                        <p className="text-gray-400 text-sm mb-6">Спробуйте змінити параметри фільтра</p>
+                        <p className="text-gray-500 text-sm mb-6">Спробуйте змінити параметри фільтра</p>
                         <button
                             onClick={resetFilters}
                             className="inline-block text-[#7A0019] font-bold uppercase tracking-widest text-xs border-b-2 border-[#7A0019] pb-1 hover:text-[#9C142B] transition-all"
@@ -943,17 +943,17 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                                         <div className="flex items-center justify-center gap-1 mb-1.5">
                                             <div className="flex items-center gap-px">
                                                 {[1, 2, 3, 4, 5].map(s => (
-                                                    <svg key={s} className="w-3 h-3 md:w-3.5 md:h-3.5 text-[#E8C064]" viewBox="0 0 20 20" fill="currentColor">
+                                                    <svg key={s} className="w-3 h-3 md:w-3.5 md:h-3.5 text-[#9C751E]" viewBox="0 0 20 20" fill="currentColor">
                                                         <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                                                     </svg>
                                                 ))}
                                             </div>
-                                            <span className="text-[10px] md:text-xs text-gray-400 font-medium ml-0.5">{rating.count}</span>
+                                            <span className="text-[10px] md:text-xs text-gray-500 font-medium ml-0.5">{rating.count}</span>
                                         </div>
 
                                         {/* Weight + Availability */}
                                         <div className="flex flex-col items-center gap-0.5 mb-2 md:mb-3">
-                                            <span className="text-[10px] md:text-xs text-gray-400 font-medium uppercase tracking-wide">{weight}</span>
+                                            <span className="text-[10px] md:text-xs text-gray-500 font-medium uppercase tracking-wide">{weight}</span>
                                             <div className="flex items-center gap-1">
                                                 <span className="w-1.5 h-1.5 rounded-full bg-green-500 inline-block" />
                                                 <span className="text-[9px] md:text-[10px] text-green-600 font-bold uppercase tracking-wider">Можливе замовлення</span>
@@ -967,7 +967,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                                                     style={{ fontFamily: "'Oswald', sans-serif" }}>
                                                     {cake.price}
                                                 </span>
-                                                <span className="text-[10px] md:text-xs text-gray-400 font-bold">₴</span>
+                                                <span className="text-[10px] md:text-xs text-gray-500 font-bold">₴</span>
                                             </div>
 
                                             <div className="flex items-center gap-1 md:gap-1.5">
@@ -979,7 +979,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                                                 </button>
                                                 <button
                                                     onClick={(e) => { e.preventDefault(); handleAddToCart(cake); }}
-                                                    className="w-8 h-8 md:w-10 md:h-10 flex-shrink-0 bg-[#E8C064] hover:bg-[#D4A83C] text-white rounded-lg md:rounded-xl flex items-center justify-center active:scale-95 transition-all shadow-sm"
+                                                    className="w-8 h-8 md:w-10 md:h-10 flex-shrink-0 bg-[#E8C064] hover:bg-[#D4A83C] text-[#5A0014] rounded-lg md:rounded-xl flex items-center justify-center active:scale-95 transition-all shadow-sm"
                                                     aria-label="Додати в кошик"
                                                 >
                                                     <svg className="w-4 h-4 md:w-5 md:h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
@@ -1094,20 +1094,20 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                                 </p>
                                 <ul className="space-y-3 mb-6 w-full max-w-sm mx-auto text-left">
                                     <li className="flex items-start gap-3 text-gray-700 font-medium">
-                                        <span className="w-6 h-6 rounded-full bg-[#E8C064]/20 flex items-center justify-center flex-shrink-0 mt-0.5 text-xs text-[#B8860B]">✓</span>
+                                        <span className="w-6 h-6 rounded-full bg-[#E8C064]/20 flex items-center justify-center flex-shrink-0 mt-0.5 text-xs text-[#8B6508]">✓</span>
                                         Базова вартість — від 750 грн за кг
                                     </li>
                                     <li className="flex items-start gap-3 text-gray-700 font-medium">
-                                        <span className="w-6 h-6 rounded-full bg-[#E8C064]/20 flex items-center justify-center flex-shrink-0 mt-0.5 text-xs text-[#B8860B]">✓</span>
+                                        <span className="w-6 h-6 rounded-full bg-[#E8C064]/20 flex items-center justify-center flex-shrink-0 mt-0.5 text-xs text-[#8B6508]">✓</span>
                                         Створення логотипу — розраховується індивідуально
                                     </li>
                                     <li className="flex items-start gap-3 text-gray-700 font-medium">
-                                        <span className="w-6 h-6 rounded-full bg-[#E8C064]/20 flex items-center justify-center flex-shrink-0 mt-0.5 text-xs text-[#B8860B]">✓</span>
+                                        <span className="w-6 h-6 rounded-full bg-[#E8C064]/20 flex items-center justify-center flex-shrink-0 mt-0.5 text-xs text-[#8B6508]">✓</span>
                                         Можливість брендування капкейків, макаронів та пряників
                                     </li>
                                 </ul>
                                 <div className="w-full text-center">
-                                    <a href="tel:0979081504" className="inline-block px-10 py-4 font-black text-sm uppercase tracking-widest rounded-full transition-all hover:scale-105 bg-[#E8C064] hover:bg-[#D4A83C] text-white shadow-[#E8C064]/30 shadow-lg mx-auto">
+                                    <a href="tel:0979081504" className="inline-block px-10 py-4 font-black text-sm uppercase tracking-widest rounded-full transition-all hover:scale-105 bg-[#E8C064] hover:bg-[#D4A83C] text-[#5A0014] shadow-[#E8C064]/30 shadow-lg mx-auto">
                                         Отримати комерційну пропозицію
                                     </a>
                                 </div>
@@ -1271,19 +1271,19 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                                 </p>
                                 <ul className="space-y-3 mb-6 w-full max-w-sm mx-auto text-left">
                                     <li className="flex items-start gap-3 text-gray-700 font-medium">
-                                        <span className="w-6 h-6 rounded-full bg-[#E8C064]/20 flex items-center justify-center flex-shrink-0 mt-0.5 text-xs text-[#B8860B]">✓</span>
+                                        <span className="w-6 h-6 rounded-full bg-[#E8C064]/20 flex items-center justify-center flex-shrink-0 mt-0.5 text-xs text-[#8B6508]">✓</span>
                                         Мінімальна вага весільного торта — від 1 кг
                                     </li>
                                     <li className="flex items-start gap-3 text-gray-700 font-medium">
-                                        <span className="w-6 h-6 rounded-full bg-[#E8C064]/20 flex items-center justify-center flex-shrink-0 mt-0.5 text-xs text-[#B8860B]">✓</span>
+                                        <span className="w-6 h-6 rounded-full bg-[#E8C064]/20 flex items-center justify-center flex-shrink-0 mt-0.5 text-xs text-[#8B6508]">✓</span>
                                         Середня вага для весілля на 50 гостей — 5–6 кг
                                     </li>
                                     <li className="flex items-start gap-3 text-gray-700 font-medium">
-                                        <span className="w-6 h-6 rounded-full bg-[#E8C064]/20 flex items-center justify-center flex-shrink-0 mt-0.5 text-xs text-[#B8860B]">✓</span>
+                                        <span className="w-6 h-6 rounded-full bg-[#E8C064]/20 flex items-center justify-center flex-shrink-0 mt-0.5 text-xs text-[#8B6508]">✓</span>
                                         Вартість — від 650 грн за кг
                                     </li>
                                     <li className="flex items-start gap-3 text-gray-700 font-medium">
-                                        <span className="w-6 h-6 rounded-full bg-[#E8C064]/20 flex items-center justify-center flex-shrink-0 mt-0.5 text-xs text-[#B8860B]">✓</span>
+                                        <span className="w-6 h-6 rounded-full bg-[#E8C064]/20 flex items-center justify-center flex-shrink-0 mt-0.5 text-xs text-[#8B6508]">✓</span>
                                         Фінальна ціна розраховується після погодження дизайну
                                     </li>
                                 </ul>
@@ -1291,7 +1291,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                                     Ми одразу озвучуємо точну вартість без прихованих доплат.
                                 </p>
                                 <div className="w-full text-center">
-                                    <a href="tel:0979081504" className="inline-block px-10 py-4 font-black text-sm uppercase tracking-widest rounded-full transition-all hover:scale-105 bg-[#E8C064] hover:bg-[#D4A83C] text-white shadow-[#E8C064]/30 shadow-lg mx-auto">
+                                    <a href="tel:0979081504" className="inline-block px-10 py-4 font-black text-sm uppercase tracking-widest rounded-full transition-all hover:scale-105 bg-[#E8C064] hover:bg-[#D4A83C] text-[#5A0014] shadow-[#E8C064]/30 shadow-lg mx-auto">
                                         Розрахувати вартість
                                     </a>
                                 </div>
@@ -1474,7 +1474,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                                         <h3 className="font-black text-gray-900 uppercase text-sm tracking-wide mb-1 group-hover:text-[#7A0019] transition-colors" style={{ fontFamily: "'Oswald', sans-serif" }}>
                                             {cat.title}
                                         </h3>
-                                        <p className="text-xs text-gray-400">{cat.desc}</p>
+                                        <p className="text-xs text-gray-500">{cat.desc}</p>
                                     </Link>
                                 ))}
                             </div>
@@ -1551,19 +1551,19 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                                 </p>
                                 <ul className="space-y-3 mb-6 w-full max-w-sm mx-auto text-left">
                                     <li className="flex items-start gap-3 text-gray-700 font-medium">
-                                        <span className="w-6 h-6 rounded-full bg-[#E8C064]/20 flex items-center justify-center flex-shrink-0 mt-0.5 text-xs text-[#B8860B]">✓</span>
+                                        <span className="w-6 h-6 rounded-full bg-[#E8C064]/20 flex items-center justify-center flex-shrink-0 mt-0.5 text-xs text-[#8B6508]">✓</span>
                                         Мінімальна вага дитячого торта — від 1.5 кг
                                     </li>
                                     <li className="flex items-start gap-3 text-gray-700 font-medium">
-                                        <span className="w-6 h-6 rounded-full bg-[#E8C064]/20 flex items-center justify-center flex-shrink-0 mt-0.5 text-xs text-[#B8860B]">✓</span>
+                                        <span className="w-6 h-6 rounded-full bg-[#E8C064]/20 flex items-center justify-center flex-shrink-0 mt-0.5 text-xs text-[#8B6508]">✓</span>
                                         Вартість — від 650 грн за кг
                                     </li>
                                     <li className="flex items-start gap-3 text-gray-700 font-medium">
-                                        <span className="w-6 h-6 rounded-full bg-[#E8C064]/20 flex items-center justify-center flex-shrink-0 mt-0.5 text-xs text-[#B8860B]">✓</span>
+                                        <span className="w-6 h-6 rounded-full bg-[#E8C064]/20 flex items-center justify-center flex-shrink-0 mt-0.5 text-xs text-[#8B6508]">✓</span>
                                         Декор (фігурки, пряники, фотодрук) розраховується індивідуально
                                     </li>
                                     <li className="flex items-start gap-3 text-gray-700 font-medium">
-                                        <span className="w-6 h-6 rounded-full bg-[#E8C064]/20 flex items-center justify-center flex-shrink-0 mt-0.5 text-xs text-[#B8860B]">✓</span>
+                                        <span className="w-6 h-6 rounded-full bg-[#E8C064]/20 flex items-center justify-center flex-shrink-0 mt-0.5 text-xs text-[#8B6508]">✓</span>
                                         Можливість сховати "сюрприз" всередині торта
                                     </li>
                                 </ul>
@@ -1781,15 +1781,15 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                                 <div className="space-y-4 mb-8 relative z-10">
                                     <div className="flex justify-between border-b border-white/20 pb-2">
                                         <span className="font-medium">Базова вартість</span>
-                                        <span className="font-black text-[#E8C064]">від 650 грн/кг</span>
+                                        <span className="font-black text-[#9C751E]">від 650 грн/кг</span>
                                     </div>
                                     <div className="flex justify-between border-b border-white/20 pb-2">
                                         <span className="font-medium">Декор (фігурки, топпери)</span>
-                                        <span className="font-black text-[#E8C064]">індивідуально</span>
+                                        <span className="font-black text-[#9C751E]">індивідуально</span>
                                     </div>
                                     <div className="flex justify-between border-b border-white/20 pb-2">
                                         <span className="font-medium">Мінімальна вага</span>
-                                        <span className="font-black text-[#E8C064]">від 1.5 кг</span>
+                                        <span className="font-black text-[#9C751E]">від 1.5 кг</span>
                                     </div>
                                 </div>
                                 <div className="relative z-10">
@@ -1929,19 +1929,19 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                                 </p>
                                 <ul className="space-y-3 mb-8 w-full max-w-sm mx-auto text-left">
                                     <li className="flex items-start gap-3 text-gray-700 font-medium border-b border-[#E8C064]/30 pb-2">
-                                        <span className="w-6 h-6 rounded-full bg-[#E8C064]/20 flex items-center justify-center flex-shrink-0 mt-0.5 text-xs text-[#B8860B]">✓</span>
+                                        <span className="w-6 h-6 rounded-full bg-[#E8C064]/20 flex items-center justify-center flex-shrink-0 mt-0.5 text-xs text-[#8B6508]">✓</span>
                                         <span>Святкові торти — <strong>від 650 грн за 1 кг</strong></span>
                                     </li>
                                     <li className="flex items-start gap-3 text-gray-700 font-medium border-b border-[#E8C064]/30 pb-2">
-                                        <span className="w-6 h-6 rounded-full bg-[#E8C064]/20 flex items-center justify-center flex-shrink-0 mt-0.5 text-xs text-[#B8860B]">✓</span>
+                                        <span className="w-6 h-6 rounded-full bg-[#E8C064]/20 flex items-center justify-center flex-shrink-0 mt-0.5 text-xs text-[#8B6508]">✓</span>
                                         <span>Бенто-формат — <strong>від 300 грн</strong></span>
                                     </li>
                                     <li className="flex items-start gap-3 text-gray-700 font-medium border-b border-[#E8C064]/30 pb-2">
-                                        <span className="w-6 h-6 rounded-full bg-[#E8C064]/20 flex items-center justify-center flex-shrink-0 mt-0.5 text-xs text-[#B8860B]">✓</span>
+                                        <span className="w-6 h-6 rounded-full bg-[#E8C064]/20 flex items-center justify-center flex-shrink-0 mt-0.5 text-xs text-[#8B6508]">✓</span>
                                         <span>Ювілейні композиції — <strong>індивідуально</strong></span>
                                     </li>
                                     <li className="flex items-start gap-3 text-gray-700 font-medium">
-                                        <span className="w-6 h-6 rounded-full bg-[#E8C064]/20 flex items-center justify-center flex-shrink-0 mt-0.5 text-xs text-[#B8860B]">✓</span>
+                                        <span className="w-6 h-6 rounded-full bg-[#E8C064]/20 flex items-center justify-center flex-shrink-0 mt-0.5 text-xs text-[#8B6508]">✓</span>
                                         <span>Мінімальна вага стандартного торта — <strong>від 1 кг</strong></span>
                                     </li>
                                 </ul>
@@ -2136,15 +2136,15 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                                 </p>
                                 <ul className="space-y-3 mb-8 w-full max-w-sm mx-auto text-left">
                                     <li className="flex items-start gap-3 text-gray-700 font-medium border-b border-[#E8C064]/30 pb-2">
-                                        <span className="w-6 h-6 rounded-full bg-[#E8C064]/20 flex items-center justify-center flex-shrink-0 mt-0.5 text-xs text-[#B8860B]">✓</span>
+                                        <span className="w-6 h-6 rounded-full bg-[#E8C064]/20 flex items-center justify-center flex-shrink-0 mt-0.5 text-xs text-[#8B6508]">✓</span>
                                         <span>Торти — <strong>від 650 грн/кг</strong></span>
                                     </li>
                                     <li className="flex items-start gap-3 text-gray-700 font-medium border-b border-[#E8C064]/30 pb-2">
-                                        <span className="w-6 h-6 rounded-full bg-[#E8C064]/20 flex items-center justify-center flex-shrink-0 mt-0.5 text-xs text-[#B8860B]">✓</span>
+                                        <span className="w-6 h-6 rounded-full bg-[#E8C064]/20 flex items-center justify-center flex-shrink-0 mt-0.5 text-xs text-[#8B6508]">✓</span>
                                         <span>Дизайни з об'ємними цифрами — <strong>індивідуально</strong></span>
                                     </li>
                                     <li className="flex items-start gap-3 text-gray-700 font-medium">
-                                        <span className="w-6 h-6 rounded-full bg-[#E8C064]/20 flex items-center justify-center flex-shrink-0 mt-0.5 text-xs text-[#B8860B]">✓</span>
+                                        <span className="w-6 h-6 rounded-full bg-[#E8C064]/20 flex items-center justify-center flex-shrink-0 mt-0.5 text-xs text-[#8B6508]">✓</span>
                                         <span>Мінімальна вага — <strong>від 1 кг</strong></span>
                                     </li>
                                 </ul>
@@ -2201,7 +2201,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                                 <p className="text-gray-600 leading-relaxed mb-4">
                                     Ми пропонуємо понад 15 класичних і авторських смакових комбінацій. Зробіть торт ніжним і легким або насичено шоколадним за вашим вибором.
                                 </p>
-                                <Link to="/nachynky/" className="inline-block mt-2 font-bold text-[#E8C064] hover:text-[#D4A83C] uppercase tracking-widest text-sm border-b-2 border-[#E8C064] pb-1 transition-colors">
+                                <Link to="/nachynky/" className="inline-block mt-2 font-bold text-[#9C751E] hover:text-[#D4A83C] uppercase tracking-widest text-sm border-b-2 border-[#E8C064] pb-1 transition-colors">
                                     Переглянути всі начинки →
                                 </Link>
                             </div>
@@ -2212,7 +2212,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                                 <p className="text-gray-600 leading-relaxed mb-4">
                                     Печерський, Шевченківський, Голосіївський, Дарницький, Оболонський, Подільський, Солом’янський та інші райони. Гарантуємо вчасну та безпечну доставку.
                                 </p>
-                                <Link to="/delivery/" className="inline-block mt-2 font-bold text-[#E8C064] hover:text-[#D4A83C] uppercase tracking-widest text-sm border-b-2 border-[#E8C064] pb-1 transition-colors">
+                                <Link to="/delivery/" className="inline-block mt-2 font-bold text-[#9C751E] hover:text-[#D4A83C] uppercase tracking-widest text-sm border-b-2 border-[#E8C064] pb-1 transition-colors">
                                     Умови доставки →
                                 </Link>
                             </div>
@@ -2356,15 +2356,15 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                             </p>
                             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-3xl mx-auto text-left">
                                 <div className="flex items-center gap-3 bg-[#FAFAFA] p-4 rounded-xl border border-gray-100">
-                                    <span className="text-[#E8C064] text-xl">✓</span>
+                                    <span className="text-[#9C751E] text-xl">✓</span>
                                     <span className="font-bold text-gray-800 text-sm">Торти — від 650 грн/кг</span>
                                 </div>
                                 <div className="flex items-center gap-3 bg-[#FAFAFA] p-4 rounded-xl border border-gray-100">
-                                    <span className="text-[#E8C064] text-xl">✓</span>
+                                    <span className="text-[#9C751E] text-xl">✓</span>
                                     <span className="font-bold text-gray-800 text-sm">Складні квіткові композиції — розрахунок індивідуально</span>
                                 </div>
                                 <div className="flex items-center gap-3 bg-[#FAFAFA] p-4 rounded-xl border border-gray-100">
-                                    <span className="text-[#E8C064] text-xl">✓</span>
+                                    <span className="text-[#9C751E] text-xl">✓</span>
                                     <span className="font-bold text-gray-800 text-sm">Мінімальна вага — від 1 кг</span>
                                 </div>
                             </div>
@@ -2381,7 +2381,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                                 <p className="text-gray-600 leading-relaxed mb-4">
                                     Ми пропонуємо понад 15 авторських начинок: Фісташка-малина, Полуниця-вершки, Шоколадний мус, Лимонний крем та інші вишукані смаки.
                                 </p>
-                                <Link to="/nachynky/" className="inline-block mt-2 font-bold text-[#E8C064] hover:text-[#D4A83C] uppercase tracking-widest text-sm border-b-2 border-[#E8C064] pb-1 transition-colors">
+                                <Link to="/nachynky/" className="inline-block mt-2 font-bold text-[#9C751E] hover:text-[#D4A83C] uppercase tracking-widest text-sm border-b-2 border-[#E8C064] pb-1 transition-colors">
                                     Ознайомитися з начинками →
                                 </Link>
                             </div>
@@ -2392,7 +2392,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                                 <p className="text-gray-600 leading-relaxed mb-4">
                                     Ми доставляємо замовлення у всі райони Києва: Печерський, Шевченківський, Голосіївський, Дарницький, Оболонський, Подільський та інші.
                                 </p>
-                                <Link to="/delivery/" className="inline-block mt-2 font-bold text-[#E8C064] hover:text-[#D4A83C] uppercase tracking-widest text-sm border-b-2 border-[#E8C064] pb-1 transition-colors">
+                                <Link to="/delivery/" className="inline-block mt-2 font-bold text-[#9C751E] hover:text-[#D4A83C] uppercase tracking-widest text-sm border-b-2 border-[#E8C064] pb-1 transition-colors">
                                     Деталі доставки →
                                 </Link>
                             </div>
@@ -2536,15 +2536,15 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                             </p>
                             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-3xl mx-auto text-left">
                                 <div className="flex items-center gap-3 bg-[#FAFAFA] p-4 rounded-xl border border-gray-200">
-                                    <span className="text-[#E8C064] text-xl">✓</span>
+                                    <span className="text-[#9C751E] text-xl">✓</span>
                                     <span className="font-bold text-gray-800 text-sm">Торти — від 650 грн/кг</span>
                                 </div>
                                 <div className="flex items-center gap-3 bg-[#FAFAFA] p-4 rounded-xl border border-gray-200">
-                                    <span className="text-[#E8C064] text-xl">✓</span>
+                                    <span className="text-[#9C751E] text-xl">✓</span>
                                     <span className="font-bold text-gray-800 text-sm">Тематичні композиції — розрахунок індивідуально</span>
                                 </div>
                                 <div className="flex items-center gap-3 bg-[#FAFAFA] p-4 rounded-xl border border-gray-200">
-                                    <span className="text-[#E8C064] text-xl">✓</span>
+                                    <span className="text-[#9C751E] text-xl">✓</span>
                                     <span className="font-bold text-gray-800 text-sm">Мінімальна вага — від 1 кг</span>
                                 </div>
                             </div>
@@ -2561,7 +2561,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                                 <p className="text-gray-600 leading-relaxed mb-4">
                                     Ми пропонуємо понад 15 авторських насичених начинок: Шоколадний трюфель, Снікерс, Фісташка-малина, Карамель-горіх та інші.
                                 </p>
-                                <Link to="/nachynky/" className="inline-block mt-2 font-bold text-[#E8C064] hover:text-[#D4A83C] uppercase tracking-widest text-sm border-b-2 border-[#E8C064] pb-1 transition-colors">
+                                <Link to="/nachynky/" className="inline-block mt-2 font-bold text-[#9C751E] hover:text-[#D4A83C] uppercase tracking-widest text-sm border-b-2 border-[#E8C064] pb-1 transition-colors">
                                     Переглянути всі начинки →
                                 </Link>
                             </div>
@@ -2572,7 +2572,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                                 <p className="text-gray-600 leading-relaxed mb-4">
                                     Ми доставляємо замовлення у всі райони Києва: Печерський, Шевченківський, Голосіївський, Дарницький, Оболонський, Подільський, Солом’янський та інші.
                                 </p>
-                                <Link to="/delivery/" className="inline-block mt-2 font-bold text-[#E8C064] hover:text-[#D4A83C] uppercase tracking-widest text-sm border-b-2 border-[#E8C064] pb-1 transition-colors">
+                                <Link to="/delivery/" className="inline-block mt-2 font-bold text-[#9C751E] hover:text-[#D4A83C] uppercase tracking-widest text-sm border-b-2 border-[#E8C064] pb-1 transition-colors">
                                     Все про доставку →
                                 </Link>
                             </div>
@@ -2720,13 +2720,13 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                             </div>
                             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-center">
                                 <Link to="/torty-na-zamovlennya/na-den-narodzhennya/" className="p-4 border rounded-xl hover:border-[#E8C064] transition-colors group">
-                                    <div className="font-bold text-[#7A0019] group-hover:text-[#E8C064]">На День Народження →</div>
+                                    <div className="font-bold text-[#7A0019] group-hover:text-[#9C751E]">На День Народження →</div>
                                 </Link>
                                 <Link to="/torty-na-zamovlennya/dlya-zhinok/" className="p-4 border rounded-xl hover:border-[#E8C064] transition-colors group">
-                                    <div className="font-bold text-[#7A0019] group-hover:text-[#E8C064]">Жіночі бенто →</div>
+                                    <div className="font-bold text-[#7A0019] group-hover:text-[#9C751E]">Жіночі бенто →</div>
                                 </Link>
                                 <Link to="/torty-na-zamovlennya/dlya-cholovikiv/" className="p-4 border rounded-xl hover:border-[#E8C064] transition-colors group">
-                                    <div className="font-bold text-[#7A0019] group-hover:text-[#E8C064]">Для чоловіків →</div>
+                                    <div className="font-bold text-[#7A0019] group-hover:text-[#9C751E]">Для чоловіків →</div>
                                 </Link>
                             </div>
                         </div>
@@ -2742,7 +2742,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                                 <p className="text-gray-600 leading-relaxed mb-4">
                                     Ми використовуємо преміальні інгредієнти для кожного міні-торта. Виберіть свій ідеальний смак у розділі з нашими фірмовими розробками.
                                 </p>
-                                <Link to="/nachynky/" className="inline-block mt-2 font-bold text-[#E8C064] hover:text-[#D4A83C] uppercase tracking-widest text-sm border-b-2 border-[#E8C064] pb-1 transition-colors">
+                                <Link to="/nachynky/" className="inline-block mt-2 font-bold text-[#9C751E] hover:text-[#D4A83C] uppercase tracking-widest text-sm border-b-2 border-[#E8C064] pb-1 transition-colors">
                                     Всі начинки →
                                 </Link>
                             </div>
@@ -2753,7 +2753,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                                 <p className="text-gray-600 leading-relaxed mb-4">
                                     Ми доставляємо бенто торти у всі райони Києва: Печерський, Шевченківський, Голосіївський, Дарницький, Оболонський, Подільський, Солом’янський та інші.
                                 </p>
-                                <Link to="/delivery/" className="inline-block mt-2 font-bold text-[#E8C064] hover:text-[#D4A83C] uppercase tracking-widest text-sm border-b-2 border-[#E8C064] pb-1 transition-colors">
+                                <Link to="/delivery/" className="inline-block mt-2 font-bold text-[#9C751E] hover:text-[#D4A83C] uppercase tracking-widest text-sm border-b-2 border-[#E8C064] pb-1 transition-colors">
                                     Деталі доставки →
                                 </Link>
                             </div>
@@ -2763,7 +2763,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                     {/* ── БЛОК 7: CTA БЛОК ── */}
                     <div className="relative py-12 md:py-16 overflow-hidden bg-[#7A0019] rounded-3xl mx-4 md:mx-8 my-8 shadow-xl">
                         <div className="container mx-auto px-6 text-center relative z-10">
-                            <p className="text-[#E8C064] font-bold uppercase tracking-widest text-xs mb-3">Хочете зробити сюрприз?</p>
+                            <p className="text-[#9C751E] font-bold uppercase tracking-widest text-xs mb-3">Хочете зробити сюрприз?</p>
                             <h3 className="text-3xl md:text-4xl font-black mb-6 tracking-tight text-white" style={{ fontFamily: "'Oswald', sans-serif" }}>
                                 Замовте бенто торт вже сьогодні
                             </h3>
@@ -2918,7 +2918,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                                 Ми використовуємо тільки натуральні інгредієнти, щоб ваші десерти були не лише красивими, але й безпечними та смачними. Обирайте начинку під ваш смак.
                             </p>
                             <div className="flex flex-wrap gap-4 justify-center">
-                                <Link to="/nachynky/" className="inline-block font-bold text-[#E8C064] hover:text-[#D4A83C] uppercase tracking-widest text-sm border-b-2 border-[#E8C064] pb-1 transition-colors">Всі начинки →</Link>
+                                <Link to="/nachynky/" className="inline-block font-bold text-[#9C751E] hover:text-[#D4A83C] uppercase tracking-widest text-sm border-b-2 border-[#E8C064] pb-1 transition-colors">Всі начинки →</Link>
                                 <Link to="/biskvitni-torty/" className="inline-block font-bold text-gray-500 hover:text-gray-700 uppercase tracking-widest text-sm border-b-2 border-gray-200 hover:border-gray-400 pb-1 transition-colors">Бісквітні →</Link>
                                 <Link to="/musovi-torty/" className="inline-block font-bold text-gray-500 hover:text-gray-700 uppercase tracking-widest text-sm border-b-2 border-gray-200 hover:border-gray-400 pb-1 transition-colors">Мусові →</Link>
                             </div>
@@ -3092,19 +3092,19 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                             </h2>
                             <ul className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-8 text-left">
                                 <li className="flex flex-col items-center text-center">
-                                    <div className="w-12 h-12 rounded-full bg-[#E8C064]/20 flex items-center justify-center text-[#E8C064] mb-3">✓</div>
+                                    <div className="w-12 h-12 rounded-full bg-[#E8C064]/20 flex items-center justify-center text-[#9C751E] mb-3">✓</div>
                                     <strong className="block text-gray-900 text-sm">Тематичні кольори</strong>
                                 </li>
                                 <li className="flex flex-col items-center text-center">
-                                    <div className="w-12 h-12 rounded-full bg-[#E8C064]/20 flex items-center justify-center text-[#E8C064] mb-3">✓</div>
+                                    <div className="w-12 h-12 rounded-full bg-[#E8C064]/20 flex items-center justify-center text-[#9C751E] mb-3">✓</div>
                                     <strong className="block text-gray-900 text-sm">Святкові елементи декору</strong>
                                 </li>
                                 <li className="flex flex-col items-center text-center">
-                                    <div className="w-12 h-12 rounded-full bg-[#E8C064]/20 flex items-center justify-center text-[#E8C064] mb-3">✓</div>
+                                    <div className="w-12 h-12 rounded-full bg-[#E8C064]/20 flex items-center justify-center text-[#9C751E] mb-3">✓</div>
                                     <strong className="block text-gray-900 text-sm">Індивідуальні написи</strong>
                                 </li>
                                 <li className="flex flex-col items-center text-center">
-                                    <div className="w-12 h-12 rounded-full bg-[#E8C064]/20 flex items-center justify-center text-[#E8C064] mb-3">✓</div>
+                                    <div className="w-12 h-12 rounded-full bg-[#E8C064]/20 flex items-center justify-center text-[#9C751E] mb-3">✓</div>
                                     <strong className="block text-gray-900 text-sm">Фото або логотип (за потреби)</strong>
                                 </li>
                             </ul>
@@ -3317,19 +3317,19 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                             </h2>
                             <ul className="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-8 text-left">
                                 <li className="flex flex-col items-center text-center">
-                                    <div className="w-12 h-12 rounded-full bg-[#E8C064]/20 flex items-center justify-center text-[#E8C064] mb-3">✓</div>
+                                    <div className="w-12 h-12 rounded-full bg-[#E8C064]/20 flex items-center justify-center text-[#9C751E] mb-3">✓</div>
                                     <strong className="block text-gray-900 text-sm">3D-фігурки</strong>
                                 </li>
                                 <li className="flex flex-col items-center text-center">
-                                    <div className="w-12 h-12 rounded-full bg-[#E8C064]/20 flex items-center justify-center text-[#E8C064] mb-3">✓</div>
+                                    <div className="w-12 h-12 rounded-full bg-[#E8C064]/20 flex items-center justify-center text-[#9C751E] mb-3">✓</div>
                                     <strong className="block text-gray-900 text-sm">Спортивна символіка</strong>
                                 </li>
                                 <li className="flex flex-col items-center text-center">
-                                    <div className="w-12 h-12 rounded-full bg-[#E8C064]/20 flex items-center justify-center text-[#E8C064] mb-3">✓</div>
+                                    <div className="w-12 h-12 rounded-full bg-[#E8C064]/20 flex items-center justify-center text-[#9C751E] mb-3">✓</div>
                                     <strong className="block text-gray-900 text-sm">Фото або логотип</strong>
                                 </li>
                                 <li className="flex flex-col items-center text-center">
-                                    <div className="w-12 h-12 rounded-full bg-[#E8C064]/20 flex items-center justify-center text-[#E8C064] mb-3">✓</div>
+                                    <div className="w-12 h-12 rounded-full bg-[#E8C064]/20 flex items-center justify-center text-[#9C751E] mb-3">✓</div>
                                     <strong className="block text-gray-900 text-sm">Персональні написи</strong>
                                 </li>
                             </ul>
@@ -3585,15 +3585,15 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-10 relative z-10">
                                     <div className="p-4 rounded-2xl bg-white/10 backdrop-blur-sm border border-white/20">
                                         <p className="text-xs uppercase tracking-widest opacity-70 mb-1">Ціна від</p>
-                                        <p className="text-2xl font-black text-[#E8C064]">650 ₴/кг</p>
+                                        <p className="text-2xl font-black text-[#9C751E]">650 ₴/кг</p>
                                     </div>
                                     <div className="p-4 rounded-2xl bg-white/10 backdrop-blur-sm border border-white/20">
                                         <p className="text-xs uppercase tracking-widest opacity-70 mb-1">Мінімальна вага</p>
-                                        <p className="text-2xl font-black text-[#E8C064]">від 1 кг</p>
+                                        <p className="text-2xl font-black text-[#9C751E]">від 1 кг</p>
                                     </div>
                                     <div className="p-4 rounded-2xl bg-white/10 backdrop-blur-sm border border-white/20">
                                         <p className="text-xs uppercase tracking-widest opacity-70 mb-1">Складний декор</p>
-                                        <p className="text-sm font-bold uppercase text-[#E8C064]">Індивідуально</p>
+                                        <p className="text-sm font-bold uppercase text-[#9C751E]">Індивідуально</p>
                                     </div>
                                 </div>
                                 <div className="flex flex-col sm:flex-row gap-4 justify-center relative z-10">
@@ -3748,15 +3748,15 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-10 relative z-10">
                                     <div className="p-4 rounded-2xl bg-white/10 backdrop-blur-sm border border-white/20">
                                         <p className="text-xs uppercase tracking-widest opacity-70 mb-1">Ціна від</p>
-                                        <p className="text-2xl font-black text-[#E8C064]">80–120 ₴/шт</p>
+                                        <p className="text-2xl font-black text-[#9C751E]">80–120 ₴/шт</p>
                                     </div>
                                     <div className="p-4 rounded-2xl bg-white/10 backdrop-blur-sm border border-white/20">
                                         <p className="text-xs uppercase tracking-widest opacity-70 mb-1">Мінімальне замовлення</p>
-                                        <p className="text-2xl font-black text-[#E8C064]">від 6 шт</p>
+                                        <p className="text-2xl font-black text-[#9C751E]">від 6 шт</p>
                                     </div>
                                     <div className="p-4 rounded-2xl bg-white/10 backdrop-blur-sm border border-white/20">
                                         <p className="text-xs uppercase tracking-widest opacity-70 mb-1">Великі партії</p>
-                                        <p className="text-sm font-bold uppercase text-[#E8C064]">Індивідуально</p>
+                                        <p className="text-sm font-bold uppercase text-[#9C751E]">Індивідуально</p>
                                     </div>
                                 </div>
                                 <div className="flex flex-col sm:flex-row gap-4 justify-center relative z-10">
@@ -3921,15 +3921,15 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-10 relative z-10">
                                     <div className="p-4 rounded-2xl bg-white/10 backdrop-blur-sm border border-white/20">
                                         <p className="text-xs uppercase tracking-widest opacity-70 mb-1">Ціна від</p>
-                                        <p className="text-2xl font-black text-[#E8C064]">70–100 ₴/шт</p>
+                                        <p className="text-2xl font-black text-[#9C751E]">70–100 ₴/шт</p>
                                     </div>
                                     <div className="p-4 rounded-2xl bg-white/10 backdrop-blur-sm border border-white/20">
                                         <p className="text-xs uppercase tracking-widest opacity-70 mb-1">Мінімальне замовлення</p>
-                                        <p className="text-2xl font-black text-[#E8C064]">від 10 шт</p>
+                                        <p className="text-2xl font-black text-[#9C751E]">від 10 шт</p>
                                     </div>
                                     <div className="p-4 rounded-2xl bg-white/10 backdrop-blur-sm border border-white/20">
                                         <p className="text-xs uppercase tracking-widest opacity-70 mb-1">Великі партії</p>
-                                        <p className="text-sm font-bold uppercase text-[#E8C064]">Індивідуально</p>
+                                        <p className="text-sm font-bold uppercase text-[#9C751E]">Індивідуально</p>
                                     </div>
                                 </div>
                                 <div className="flex flex-col sm:flex-row gap-4 justify-center relative z-10">
@@ -4099,15 +4099,15 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-10 relative z-10">
                                     <div className="p-4 rounded-2xl bg-white/10 backdrop-blur-sm border border-white/20">
                                         <p className="text-xs uppercase tracking-widest opacity-70 mb-1">Ціна від</p>
-                                        <p className="text-2xl font-black text-[#E8C064]">750 ₴/кг</p>
+                                        <p className="text-2xl font-black text-[#9C751E]">750 ₴/кг</p>
                                     </div>
                                     <div className="p-4 rounded-2xl bg-white/10 backdrop-blur-sm border border-white/20">
                                         <p className="text-xs uppercase tracking-widest opacity-70 mb-1">Мінімальна вага</p>
-                                        <p className="text-2xl font-black text-[#E8C064]">від 1 кг</p>
+                                        <p className="text-2xl font-black text-[#9C751E]">від 1 кг</p>
                                     </div>
                                     <div className="p-4 rounded-2xl bg-white/10 backdrop-blur-sm border border-white/20">
                                         <p className="text-xs uppercase tracking-widest opacity-70 mb-1">Складний дизайн</p>
-                                        <p className="text-sm font-bold uppercase text-[#E8C064]">Індивідуально</p>
+                                        <p className="text-sm font-bold uppercase text-[#9C751E]">Індивідуально</p>
                                     </div>
                                 </div>
                                 <div className="flex flex-col sm:flex-row gap-4 justify-center relative z-10">
@@ -4241,7 +4241,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                                     <strong className="block text-gray-900 text-sm">Квіти та пастель</strong>
                                 </li>
                                 <li className="flex flex-col items-center text-center">
-                                    <div className="w-12 h-12 rounded-full bg-gray-50 flex items-center justify-center text-gray-400 mb-3">✍️</div>
+                                    <div className="w-12 h-12 rounded-full bg-gray-50 flex items-center justify-center text-gray-500 mb-3">✍️</div>
                                     <strong className="block text-gray-900 text-sm">Мінімалізм</strong>
                                 </li>
                                 <li className="flex flex-col items-center text-center">
@@ -4458,7 +4458,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                                     <strong className="block text-gray-900 text-sm">Патріотичні написи</strong>
                                 </li>
                                 <li className="flex flex-col items-center text-center">
-                                    <div className="w-12 h-12 rounded-full bg-gray-100 flex items-center justify-center text-gray-400 mb-3">✓</div>
+                                    <div className="w-12 h-12 rounded-full bg-gray-100 flex items-center justify-center text-gray-500 mb-3">✓</div>
                                     <strong className="block text-gray-900 text-sm">Мінімалізм</strong>
                                 </li>
                             </ul>
@@ -4683,28 +4683,28 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                                     </h2>
                                     <ul className="space-y-5 mb-8">
                                         <li className="flex items-start">
-                                            <div className="flex-shrink-0 w-8 h-8 rounded-full bg-[#E8C064]/20 flex items-center justify-center text-[#E8C064] mr-4 mt-1">✓</div>
+                                            <div className="flex-shrink-0 w-8 h-8 rounded-full bg-[#E8C064]/20 flex items-center justify-center text-[#9C751E] mr-4 mt-1">✓</div>
                                             <div>
                                                 <strong className="block text-gray-900 mb-1">Професійні атрибути</strong>
                                                 <span className="text-gray-600 block leading-relaxed text-sm">Ліпка зі солодкої мастики чи шоколаду: стетоскоп, книга, калькулятор, пістолет або будівельна каска.</span>
                                             </div>
                                         </li>
                                         <li className="flex items-start">
-                                            <div className="flex-shrink-0 w-8 h-8 rounded-full bg-[#E8C064]/20 flex items-center justify-center text-[#E8C064] mr-4 mt-1">✓</div>
+                                            <div className="flex-shrink-0 w-8 h-8 rounded-full bg-[#E8C064]/20 flex items-center justify-center text-[#9C751E] mr-4 mt-1">✓</div>
                                             <div>
                                                 <strong className="block text-gray-900 mb-1">Написи та побажання</strong>
                                                 <span className="text-gray-600 block leading-relaxed text-sm">Теплі слова, жартівливі фрази або подяка, нанесені кондитерським кремом.</span>
                                             </div>
                                         </li>
                                         <li className="flex items-start">
-                                            <div className="flex-shrink-0 w-8 h-8 rounded-full bg-[#E8C064]/20 flex items-center justify-center text-[#E8C064] mr-4 mt-1">✓</div>
+                                            <div className="flex-shrink-0 w-8 h-8 rounded-full bg-[#E8C064]/20 flex items-center justify-center text-[#9C751E] mr-4 mt-1">✓</div>
                                             <div>
                                                 <strong className="block text-gray-900 mb-1">Логотип організації</strong>
                                                 <span className="text-gray-600 block leading-relaxed text-sm">Перенесення символіки компанії або підрозділу на торт за допомогою <Link to="/torty-na-zamovlennya/foto-torty/" className="text-[#7A0019] border-b border-[#7A0019] hover:text-[#5a151f]">харчового друку</Link>.</span>
                                             </div>
                                         </li>
                                         <li className="flex items-start">
-                                            <div className="flex-shrink-0 w-8 h-8 rounded-full bg-[#E8C064]/20 flex items-center justify-center text-[#E8C064] mr-4 mt-1">✓</div>
+                                            <div className="flex-shrink-0 w-8 h-8 rounded-full bg-[#E8C064]/20 flex items-center justify-center text-[#9C751E] mr-4 mt-1">✓</div>
                                             <div>
                                                 <strong className="block text-gray-900 mb-1">Сучасний мінімалізм</strong>
                                                 <span className="text-gray-600 block leading-relaxed text-sm">Для тих, хто віддає перевагу стильному та креативному підходу без зайвого декору.</span>
@@ -4724,7 +4724,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                             </h2>
                             <div className="flex flex-col md:flex-row justify-center gap-6 mb-10">
                                 <div className="bg-[#FAFAFA] md:w-1/3 py-8 px-6 rounded-[2rem] border border-gray-100">
-                                    <div className="text-4xl font-black text-gray-900 mb-2">Від 700 ₴<span className="text-xl text-gray-400 font-medium">/кг</span></div>
+                                    <div className="text-4xl font-black text-gray-900 mb-2">Від 700 ₴<span className="text-xl text-gray-500 font-medium">/кг</span></div>
                                     <p className="text-gray-500 uppercase tracking-wider text-xs font-bold font-sans">Базова вартість начинки</p>
                                 </div>
                                 <div className="bg-[#FAFAFA] md:w-1/3 py-8 px-6 rounded-[2rem] border border-gray-100">
@@ -4939,7 +4939,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                                 Ми використовуємо тільки натуральні інгредієнти, щоб наші десерти були безпечними та смачними. Обирайте від класичних варіантів до вишуканих мусів.
                             </p>
                             <div className="flex flex-wrap gap-4 justify-center">
-                                <Link to="/nachynky/" className="inline-block font-bold text-[#E8C064] hover:text-[#D4A83C] uppercase tracking-widest text-sm border-b-2 border-[#E8C064] pb-1 transition-colors">Всі начинки →</Link>
+                                <Link to="/nachynky/" className="inline-block font-bold text-[#9C751E] hover:text-[#D4A83C] uppercase tracking-widest text-sm border-b-2 border-[#E8C064] pb-1 transition-colors">Всі начинки →</Link>
                                 <Link to="/biskvitni-torty/" className="inline-block font-bold text-gray-500 hover:text-gray-700 uppercase tracking-widest text-sm border-b-2 border-gray-200 hover:border-gray-400 pb-1 transition-colors">Бісквітні →</Link>
                                 <Link to="/musovi-torty/" className="inline-block font-bold text-gray-500 hover:text-gray-700 uppercase tracking-widest text-sm border-b-2 border-gray-200 hover:border-gray-400 pb-1 transition-colors">Мусові →</Link>
                             </div>
@@ -5245,7 +5245,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                     {category && (
                         <nav className="max-w-4xl mx-auto px-4 md:px-8 pb-12" aria-label="Корисні посилання">
                             <div className="border-t border-gray-100 pt-8">
-                                <h3 className="text-sm font-bold text-gray-400 uppercase tracking-widest mb-4">Дивіться також</h3>
+                                <h3 className="text-sm font-bold text-gray-500 uppercase tracking-widest mb-4">Дивіться також</h3>
                                 <div className="flex flex-wrap gap-2">
                                     <Link to="/" className="inline-block px-4 py-2 text-xs font-bold uppercase tracking-wider border border-gray-200 rounded-full text-gray-600 hover:border-[#7A0019] hover:text-[#7A0019] transition-all">Головна</Link>
                                     <Link to="/nachynky/" className="inline-block px-4 py-2 text-xs font-bold uppercase tracking-wider border border-gray-200 rounded-full text-gray-600 hover:border-[#7A0019] hover:text-[#7A0019] transition-all">Начинки</Link>
@@ -5291,7 +5291,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                                         </label>
                                         <div className="flex items-center gap-3 mb-4">
                                             <div className="flex-1">
-                                                <span className="text-[10px] text-gray-400 font-bold uppercase block mb-1">Від</span>
+                                                <span className="text-[10px] text-gray-500 font-bold uppercase block mb-1">Від</span>
                                                 <input
                                                     type="number"
                                                     value={priceRange[0]}
@@ -5301,7 +5301,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                                             </div>
                                             <div className="w-4 h-0.5 bg-gray-300 mt-5" />
                                             <div className="flex-1">
-                                                <span className="text-[10px] text-gray-400 font-bold uppercase block mb-1">До</span>
+                                                <span className="text-[10px] text-gray-500 font-bold uppercase block mb-1">До</span>
                                                 <input
                                                     type="number"
                                                     value={priceRange[1]}
@@ -5354,7 +5354,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                                     </button>
                                     <button
                                         onClick={() => setIsFilterOpen(false)}
-                                        className="flex-1 h-12 bg-[#E8C064] hover:bg-[#D4A83C] text-white rounded-xl font-black uppercase tracking-wider text-sm flex items-center justify-center gap-2 shadow-md active:scale-95 transition-all"
+                                        className="flex-1 h-12 bg-[#E8C064] hover:bg-[#D4A83C] text-[#5A0014] rounded-xl font-black uppercase tracking-wider text-sm flex items-center justify-center gap-2 shadow-md active:scale-95 transition-all"
                                     >
                                         Показати {processedCakes.length} {processedCakes.length === 1 ? 'товар' : processedCakes.length < 5 ? 'товари' : 'товарів'}
                                     </button>

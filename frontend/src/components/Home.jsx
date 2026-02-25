@@ -421,60 +421,50 @@ function Home() {
             </div>
 
             {/* Visual Impact Section - Premium Value Proportions */}
-            <div className="relative py-24 md:py-36 overflow-hidden bg-[#FDFBF7]">
-                <div className="container mx-auto px-6 relative z-10">
-                    <div className="max-w-5xl mx-auto text-center">
-                        <div className="text-xs font-bold uppercase tracking-[0.3em] text-[#B8860B] mb-6">Наші принципи</div>
-                        <h2 className="text-5xl md:text-8xl lg:text-[110px] font-black mb-10 leading-none uppercase tracking-tighter" style={{ fontFamily: "'Oswald', sans-serif" }}>
-                            <span className="text-[#E8C064] block md:inline">СМАК</span>
-                            <span className="text-gray-300 mx-4 hidden md:inline">/</span>
-                            <span className="text-gray-900 block md:inline">ЯКІСТЬ</span>
-                            <span className="text-gray-300 mx-4 hidden md:inline">/</span>
-                            <span className="text-[#E8C064] block md:inline">ЦІНА</span>
-                        </h2>
-                        <div className="flex items-center justify-center gap-4">
-                            <div className="h-[1px] w-12 bg-[#E8C064]/40"></div>
-                            <p className="text-xl md:text-3xl font-medium italic text-gray-500" style={{ fontFamily: "'Dancing Script', cursive" }}>
-                                це наші головні цінності
-                            </p>
-                            <div className="h-[1px] w-12 bg-[#E8C064]/40"></div>
-                        </div>
-                    </div>
+            <section className="relative py-24 md:py-36 overflow-hidden bg-[#FDFBF7]">
+                <div className="max-w-5xl mx-auto px-6 text-center relative z-10">
+                    <div className="text-xs font-bold uppercase tracking-[0.3em] text-[#8B6508] mb-6">Наші принципи</div>
+                    <h2 className="text-5xl md:text-8xl lg:text-[110px] font-black mb-10 leading-none uppercase tracking-tighter" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                        <span className="text-[#9C751E]">СМАК</span>
+                        <span className="text-gray-300 hidden md:inline"> / </span>
+                        <span className="text-gray-900">ЯКІСТЬ</span>
+                        <span className="text-gray-300 hidden md:inline"> / </span>
+                        <span className="text-[#9C751E]">ЦІНА</span>
+                    </h2>
+                    <p className="text-xl md:text-3xl font-medium italic text-gray-500 border-t border-b border-[#E8C064]/20 py-3 inline-block" style={{ fontFamily: "'Dancing Script', cursive" }}>
+                        це наші головні цінності
+                    </p>
                 </div>
-            </div>
+            </section>
 
             {/* About Section - Confectioner Spotlight */}
             <div className="relative py-24 overflow-hidden bg-[#FDFBF7]">
                 <div className="container mx-auto px-6 relative z-10">
                     <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
                         {/* Image Column */}
-                        <div className="w-full lg:w-1/2 animate-fade-in-delayed">
-                            <div className="relative group">
-                                <div className="relative rounded-[2rem] overflow-hidden shadow-xl transform transition duration-500 group-hover:scale-[1.02] border border-gray-100">
-                                    <img
-                                        src="/images/confectioner.webp"
-                                        alt="Шеф-кондитер Antreme з авторським тортом у Києві"
-                                        className="w-full h-auto object-cover"
-                                        width="600"
-                                        height="800"
-                                        loading="lazy"
-                                    />
-                                    <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-8">
-                                        <h3 className="text-white text-2xl font-bold" style={{ fontFamily: "'Oswald', sans-serif" }}>Людмила Приходько</h3>
-                                        <p className="text-[#E8C064] font-medium">Шеф-кондитер</p>
-                                    </div>
+                        <div className="w-full lg:w-1/2 animate-fade-in-delayed group">
+                            <div className="relative rounded-[2rem] overflow-hidden shadow-xl transform transition duration-500 group-hover:scale-[1.02] border border-gray-100">
+                                <img
+                                    src="/images/confectioner.webp"
+                                    alt="Шеф-кондитер Antreme з авторським тортом у Києві"
+                                    className="w-full h-auto object-cover"
+                                    width="600"
+                                    height="800"
+                                    loading="lazy"
+                                />
+                                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-8">
+                                    <h3 className="text-white text-2xl font-bold" style={{ fontFamily: "'Oswald', sans-serif" }}>Людмила Приходько</h3>
+                                    <p className="text-[#9C751E] font-medium">Шеф-кондитер</p>
                                 </div>
                             </div>
                         </div>
 
                         {/* Content Column */}
                         <div className="w-full lg:w-1/2 relative flex flex-col items-center text-center">
-                            <div className="mb-4 animate-fade-in">
-                                <img src={logo} alt="Antreme — авторська кондитерська тортів у Києві" className="w-[380px] h-auto object-contain" loading="lazy" />
-                            </div>
+                            <img src={logo} alt="Antreme — авторська кондитерська тортів у Києві" className="w-[380px] h-auto object-contain mb-4 animate-fade-in" loading="lazy" />
 
                             <h2 className="text-4xl md:text-5xl font-black text-gray-900 mb-6 leading-tight animate-fade-in uppercase tracking-tight" style={{ fontFamily: "'Oswald', sans-serif" }}>
-                                ТОРТИ З <span className="text-[#7A0019]">ДУШЕЮ</span> ТА <span className="text-[#E8C064]">ЛЮБОВ'Ю</span>
+                                ТОРТИ З <span className="text-[#7A0019]">ДУШЕЮ</span> ТА <span className="text-[#9C751E]">ЛЮБОВ'Ю</span>
                             </h2>
 
                             <p className="text-lg text-gray-500 mb-10 leading-relaxed font-light animate-fade-in-delayed max-w-xl mx-auto italic">
@@ -550,7 +540,7 @@ function Home() {
             <div className="relative pt-10 md:pt-20 pb-16 md:pb-20 overflow-hidden bg-[#FDFBF7]">
                 <div className="container mx-auto px-6 relative z-10">
                     <div className="text-center mb-8 md:mb-14 animate-fade-in">
-                        <div className="text-xs font-bold uppercase tracking-[0.3em] text-[#B8860B] mb-3">Популярні</div>
+                        <div className="text-xs font-bold uppercase tracking-[0.3em] text-[#8B6508] mb-3">Популярні</div>
                         <h2 className="text-3xl md:text-5xl font-black text-gray-900 mb-2 md:mb-4" style={{ fontFamily: "'Oswald', sans-serif" }}>
                             Обирають найчастіше
                         </h2>
@@ -601,7 +591,7 @@ function Home() {
 
                                             {/* Price & Action Section */}
                                             <div className="w-full flex-col flex items-center mt-3">
-                                                <div className="text-[22px] md:text-[26px] font-black text-[#B8860B] flex items-baseline justify-center mb-4 leading-none">
+                                                <div className="text-[22px] md:text-[26px] font-black text-[#8B6508] flex items-baseline justify-center mb-4 leading-none">
                                                     {cake.price} <span className="text-[12px] md:text-[14px] font-bold text-gray-500 ml-1.5 uppercase">грн</span>
                                                 </div>
 
@@ -620,7 +610,7 @@ function Home() {
                                                             e.preventDefault();
                                                             handleAddToCart(cake);
                                                         }}
-                                                        className="w-10 h-10 md:w-12 md:h-12 flex-shrink-0 bg-[#E8C064] hover:bg-[#D4A83C] text-white rounded-[10px] md:rounded-xl flex items-center justify-center transition-all active:scale-95 group/cart"
+                                                        className="w-10 h-10 md:w-12 md:h-12 flex-shrink-0 bg-[#E8C064] hover:bg-[#D4A83C] text-[#5A0014] rounded-[10px] md:rounded-xl flex items-center justify-center transition-all active:scale-95 group/cart"
                                                         aria-label="Додати в кошик"
                                                     >
                                                         <svg className="w-4 h-4 md:w-5 md:h-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
@@ -636,7 +626,7 @@ function Home() {
                                 ))}
                             </div>
                             <div className="text-center mt-12 animate-fade-in-delayed">
-                                <Link to="/torty-na-zamovlennya/" className="group inline-flex items-center gap-3 px-12 py-5 font-black uppercase text-sm tracking-wider transition-all hover:scale-105 duration-300 rounded-full bg-[#E8C064] hover:bg-[#D4A83C] text-white shadow-md">
+                                <Link to="/torty-na-zamovlennya/" className="group inline-flex items-center gap-3 px-12 py-5 font-black uppercase text-sm tracking-wider transition-all hover:scale-105 duration-300 rounded-full bg-[#E8C064] hover:bg-[#D4A83C] text-[#5A0014] shadow-md">
                                     Всі пропозиції
                                     <span className="group-hover:translate-x-2 transition-transform duration-300">→</span>
                                 </Link>
@@ -655,7 +645,7 @@ function Home() {
             <div className="py-16 md:py-24 max-w-7xl mx-auto px-4 md:px-10">
                 <div className="text-center mb-12 md:mb-16">
                     <h2 className="text-3xl md:text-5xl font-black text-gray-900 uppercase tracking-tight mb-4" style={{ fontFamily: "'Oswald', sans-serif" }}>
-                        Як зробити <span className="text-[#E8C064]">замовлення</span>?
+                        Як зробити <span className="text-[#9C751E]">замовлення</span>?
                     </h2>
                     <p className="text-gray-500 font-medium italic max-w-xl mx-auto" style={{ fontFamily: "'Dancing Script', cursive" }}>
                         Всього 4 прості кроки до ідеального свята
@@ -709,7 +699,7 @@ function Home() {
                 <div className="container mx-auto px-4 md:px-8">
                     {/* Section Header */}
                     <div className="text-center mb-10 md:mb-14">
-                        <div className="text-xs font-bold uppercase tracking-[0.3em] text-[#B8860B] mb-3">Доставка</div>
+                        <div className="text-xs font-bold uppercase tracking-[0.3em] text-[#8B6508] mb-3">Доставка</div>
                         <h2 className="text-3xl md:text-5xl font-black text-gray-900 uppercase tracking-tight mb-3" style={{ fontFamily: "'Oswald', sans-serif" }}>
                             Доставляємо у <span className="text-[#7A0019]">всі райони Києва</span>
                         </h2>
@@ -758,7 +748,7 @@ function Home() {
                                     <div className="w-12 h-12 rounded-xl bg-[#F0FFF4] flex items-center justify-center text-2xl">🏪</div>
                                     <div>
                                         <h3 className="font-black text-gray-900 uppercase text-sm tracking-wide" style={{ fontFamily: "'Oswald', sans-serif" }}>Самовивіз</h3>
-                                        <p className="text-xs text-gray-400">г. Київ, вул. Прирічна 11</p>
+                                        <p className="text-xs text-gray-500">г. Київ, вул. Прирічна 11</p>
                                     </div>
                                 </div>
                                 <p className="text-gray-500 text-sm leading-relaxed">
@@ -804,7 +794,7 @@ function Home() {
                         <h2 className="text-2xl md:text-4xl font-black text-gray-900 uppercase tracking-tight mb-2" style={{ fontFamily: "'Oswald', sans-serif" }}>
                             Відгуки клієнтів
                         </h2>
-                        <p className="text-gray-400 text-sm md:text-base italic" style={{ fontFamily: "'Dancing Script', cursive" }}>
+                        <p className="text-gray-500 text-sm md:text-base italic" style={{ fontFamily: "'Dancing Script', cursive" }}>
                             Реальні відгуки з Instagram та месенджерів
                         </p>
                     </div>
@@ -855,12 +845,12 @@ function Home() {
                                 <div key={review.id} className="shrink-0 w-[80vw] md:w-[340px] lg:w-[360px]" style={{ scrollSnapAlign: 'start' }}>
                                     <div className="bg-white rounded-2xl md:rounded-3xl p-5 md:p-7 shadow-[0_4px_20px_rgba(0,0,0,0.06)] hover:shadow-[0_8px_30px_rgba(0,0,0,0.1)] transition-all duration-300 h-full flex flex-col border border-gray-50">
                                         {/* Quote icon */}
-                                        <div className="text-[#E8C064]/30 text-4xl font-serif leading-none mb-2 select-none">"</div>
+                                        <div className="text-[#9C751E]/30 text-4xl font-serif leading-none mb-2 select-none">"</div>
 
                                         {/* Stars */}
                                         <div className="flex items-center gap-0.5 mb-3">
                                             {[1, 2, 3, 4, 5].map(s => (
-                                                <svg key={s} className="w-3.5 h-3.5 text-[#E8C064]" viewBox="0 0 20 20" fill="currentColor">
+                                                <svg key={s} className="w-3.5 h-3.5 text-[#9C751E]" viewBox="0 0 20 20" fill="currentColor">
                                                     <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                                                 </svg>
                                             ))}
@@ -878,7 +868,7 @@ function Home() {
                                             </div>
                                             <div>
                                                 <div className="text-xs font-bold text-gray-900">{review.author}</div>
-                                                <div className="text-[10px] text-gray-400 font-medium flex items-center gap-1">
+                                                <div className="text-[10px] text-gray-500 font-medium flex items-center gap-1">
                                                     <svg className="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg>
                                                     Перевірений покупець
                                                 </div>
