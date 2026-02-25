@@ -407,8 +407,8 @@ function Home() {
                                     <p className="text-gray-700 mb-4 text-[11px] md:text-[13px] font-medium leading-snug whitespace-pre-line">
                                         {desc}
                                     </p>
-                                    <Link to={getCategoryUrl(cat.slug)} className="inline-block bg-white text-gray-800 border border-gray-200 px-5 py-2 font-black uppercase text-[10px] md:text-[11px] tracking-[0.15em] transition-all shadow-sm hover:shadow-md hover:bg-gray-900 hover:text-white rounded-full">
-                                        Дивитись {cat.name} →
+                                    <Link to={getCategoryUrl(cat.slug)} className="inline-block bg-white text-gray-800 border border-gray-200 px-[20px] py-[12px] text-center font-black uppercase text-[10px] md:text-[11px] tracking-[0.15em] transition-all duration-300 shadow-sm rounded-full hover:shadow-md hover:-translate-y-0.5 hover:bg-gray-50 relative z-10 w-max">
+                                        Дивитись {cat.name}
                                     </Link>
                                 </div>
                                 <div className="relative flex-shrink-0 w-[110px] md:w-[150px] self-end pr-2 md:pr-4 pb-2 md:pb-4">
