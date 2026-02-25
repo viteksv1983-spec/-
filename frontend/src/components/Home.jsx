@@ -226,7 +226,22 @@ function Home() {
         ]
     };
 
-    const combinedSchema = [homeSchema, faqSchema];
+    const productSchema = featuredCakes.map(cake => ({
+        "@context": "https://schema.org",
+        "@type": "Product",
+        "name": cake.name,
+        "image": cake.image_url ? (cake.image_url.startsWith('http') ? cake.image_url : `https://antreme.kyiv.ua${cake.image_url}`) : "",
+        "description": `Авторський торт "${cake.name}" на замовлення в Києві. Індивідуальний дизайн, натуральні інгредієнти.`,
+        "offers": {
+            "@type": "Offer",
+            "price": cake.price,
+            "priceCurrency": "UAH",
+            "availability": "https://schema.org/InStock",
+            "url": `https://antreme.kyiv.ua${getProductUrl(cake)}`
+        }
+    }));
+
+    const combinedSchema = [homeSchema, faqSchema, ...productSchema];
 
     return (
         <div className="min-h-screen bg-[#FDFBF7]">
@@ -303,7 +318,7 @@ function Home() {
                     <div className="relative flex flex-col order-1 px-5 md:px-12 lg:px-16 pt-8 pb-4 md:pb-16 md:pt-16 md:pr-[45%] lg:pr-[42%] md:min-h-[440px] lg:min-h-[480px] justify-center" style={{ zIndex: 10 }}>
                         <div className="w-[65%] md:w-auto">
                             <h1 className="text-[28px] md:text-[40px] lg:text-[50px] xl:text-[56px] font-black text-white leading-[1.15] mb-2 md:mb-3 tracking-tight max-w-[200px] md:max-w-none" style={{ fontFamily: "'Oswald', sans-serif" }}>
-                                Торти на замовлення в Києві
+                                Торти на замовлення в Києві — кондитерська Antreme
                             </h1>
                             <div className="text-[#F5C24D] text-[11px] md:text-[13px] lg:text-[14px] font-black leading-tight mb-2 md:mb-5 tracking-[0.1em] uppercase" style={{ fontFamily: "'Oswald', sans-serif" }}>
                                 КОНДИТЕРСЬКА <br className="md:hidden" />
@@ -393,7 +408,7 @@ function Home() {
                                         {desc}
                                     </p>
                                     <Link to={getCategoryUrl(cat.slug)} className="inline-block bg-white text-gray-800 border border-gray-200 px-5 py-2 font-black uppercase text-[10px] md:text-[11px] tracking-[0.15em] transition-all shadow-sm hover:shadow-md hover:bg-gray-900 hover:text-white rounded-full">
-                                        ПЕРЕГЛЯНУТИ
+                                        Дивитись {cat.name} →
                                     </Link>
                                 </div>
                                 <div className="relative flex-shrink-0 w-[110px] md:w-[150px] self-end pr-2 md:pr-4 pb-2 md:pb-4">
@@ -455,7 +470,7 @@ function Home() {
                         {/* Content Column */}
                         <div className="w-full lg:w-1/2 relative flex flex-col items-center text-center">
                             <div className="mb-4 animate-fade-in">
-                                <img src={logo} alt="" className="w-[380px] h-auto object-contain" loading="lazy" aria-hidden="true" />
+                                <img src={logo} alt="Antreme — авторська кондитерська тортів у Києві" className="w-[380px] h-auto object-contain" loading="lazy" />
                             </div>
 
                             <h2 className="text-4xl md:text-5xl font-black text-gray-900 mb-6 leading-tight animate-fade-in uppercase tracking-tight" style={{ fontFamily: "'Oswald', sans-serif" }}>
@@ -699,7 +714,7 @@ function Home() {
                             Доставляємо у <span className="text-[#7A0019]">всі райони Києва</span>
                         </h2>
                         <p className="text-gray-500 text-sm md:text-base max-w-xl mx-auto">
-                            Швидка та бережна доставка вашого торту на таксі — у будь-який район міста
+                            Швидка та бережна доставка вашого торту на таксі у всі райони: <strong>Печерський, Оболонь, Троєщина, Позняки, Дарниця, Голосіїв, Шевченківський та Солом'янський.</strong>
                         </p>
                     </div>
 
@@ -891,12 +906,12 @@ function Home() {
                 <article className="bg-white rounded-3xl p-8 md:p-12 shadow-[0_8px_30px_rgba(0,0,0,0.04)] border border-gray-100 mb-12">
                     <div className="prose prose-sm md:prose-base max-w-none text-gray-600 space-y-4">
 
-                        {/* H1 — sr-only: hero вже має видимий H1, цей для Google */}
-                        <h1 className="sr-only">Торти на замовлення в Києві — авторська кондитерська Antreme</h1>
+                        {/* SEO Context for Google */}
+                        <div className="sr-only">Авторські кондитерські вироби ручної роботи у Києві</div>
 
-                        <p>Antreme — це авторська кондитерська в Києві з понад 20-річним досвідом роботи. Ми спеціалізуємося на виготовленні <strong>тортів на замовлення в Києві</strong> для приватних подій, весіль, корпоративів та сімейних свят. Кожен торт створюється індивідуально — без шаблонів і масового виробництва.</p>
+                        <p>Antreme — це авторська кондитерська в Києві з понад 20-річним досвідом роботи. Ми спеціалізуємося на виготовленні <strong>тортів на замовлення в Києві</strong> для приватних подій, весіль, корпоративів та сімейних свят. Якщо ви хочете <strong>купити торт у Києві</strong> з унікальним дизайном, ми створимо його індивідуально — без шаблонів і масового виробництва.</p>
 
-                        <p>Якщо ви шукаєте, де <strong>замовити торт у Києві</strong>, який відповідатиме формату вашої події, стилю заходу та очікуванням гостей — Antreme працює саме в цьому сегменті. Ми створюємо кондитерські рішення, а не просто десерти.</p>
+                        <p>Якщо ви шукаєте, де <strong>замовити торт у Києві</strong> або дізнатись актуальна <strong>ціна торта на замовлення</strong>, яка відповідатиме формату вашої події — Antreme пропонує преміальну якість. Ми створюємо кондитерські рішення, а не просто десерти.</p>
 
                         <h2 className="text-2xl md:text-3xl font-black text-gray-900 mt-8 mb-3 uppercase tracking-tight" style={{ fontFamily: "'Oswald', sans-serif" }}>
                             20 років досвіду та понад 6000 виконаних замовлень у Києві
@@ -943,7 +958,7 @@ function Home() {
                         <p>Індивідуальні написи, тематичні рішення, корпоративний стиль. <Link to="/torty-na-zamovlennya/na-den-narodzhennya/" className="text-[#7A0019] font-semibold underline underline-offset-2 hover:text-[#9C142B]">Переглянути →</Link></p>
 
                         <h3 className="text-lg font-bold text-gray-900 mt-5 mb-2">Дитячі торти</h3>
-                        <p>Контроль складу, погодження алергенів та безпечні барвники. <Link to="/torty-na-zamovlennya/dytyachi/" className="text-[#7A0019] font-semibold underline underline-offset-2 hover:text-[#9C142B]">Переглянути →</Link></p>
+                        <p>Ви можете <strong>замовити дитячий торт Київ</strong> з улюбленими героями вашої дитини. Ми гарантуємо контроль складу, погодження алергенів та використовуємо тільки безпечні барвники. <Link to="/torty-na-zamovlennya/dytyachi/" className="text-[#7A0019] font-semibold underline underline-offset-2 hover:text-[#9C142B]">Переглянути →</Link></p>
 
                         <h3 className="text-lg font-bold text-gray-900 mt-5 mb-2">Бенто-торти</h3>
                         <p>Компактний формат для персональних привітань. <Link to="/bento-torty/" className="text-[#7A0019] font-semibold underline underline-offset-2 hover:text-[#9C142B]">Переглянути →</Link></p>
