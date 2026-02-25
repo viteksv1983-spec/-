@@ -399,15 +399,15 @@ function Home() {
                         const desc = categoryDescriptions[cat.slug] || 'Ексклюзивні торти\nна замовлення';
 
                         return (
-                            <div key={cat.slug} className={`group relative flex flex-row items-center ${style.bg} rounded-[1.5rem] md:rounded-[2rem] ${style.shadow} transition-all duration-500 overflow-visible ${style.border} border hover:-translate-y-1 min-h-[130px] md:min-h-[160px] `}>
-                                <div className="flex-1 px-5 md:px-7 py-5 md:py-7 z-10 w-[60%]">
+                            <div key={cat.slug} className={`group relative flex flex-row items-stretch ${style.bg} rounded-[1.5rem] md:rounded-[2rem] ${style.shadow} transition-all duration-500 overflow-visible ${style.border} border hover:-translate-y-1 min-h-[130px] md:min-h-[160px] `}>
+                                <div className="flex-1 px-5 md:px-7 py-5 md:py-7 z-10 w-[60%] flex flex-col items-start">
                                     <h2 className="text-[17px] md:text-[20px] lg:text-[22px] font-black text-gray-900 mb-1.5 uppercase tracking-tight leading-tight" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                                         {cat.name}
                                     </h2>
-                                    <p className="text-gray-700 mb-4 text-[11px] md:text-[13px] font-medium leading-snug whitespace-pre-line">
+                                    <p className="text-gray-700 mb-4 text-[11px] md:text-[13px] font-medium leading-snug whitespace-pre-line flex-grow">
                                         {desc}
                                     </p>
-                                    <Link to={getCategoryUrl(cat.slug)} className="inline-block bg-white text-gray-800 border border-gray-200 px-[20px] py-[12px] text-center font-black uppercase text-[10px] md:text-[11px] tracking-[0.15em] transition-all duration-300 shadow-sm rounded-full hover:shadow-md hover:-translate-y-0.5 hover:bg-gray-50 relative z-10 w-max">
+                                    <Link to={getCategoryUrl(cat.slug)} className="mt-auto inline-block bg-white/70 backdrop-blur-sm text-gray-800 border border-white/60 px-[18px] py-[10px] text-center font-bold uppercase text-[10px] md:text-[11px] tracking-[0.12em] transition-all duration-300 shadow-[0_2px_10px_rgba(0,0,0,0.03)] rounded-full hover:shadow-[0_6px_15px_rgba(0,0,0,0.08)] hover:-translate-y-[2px] hover:bg-white relative z-10 w-max">
                                         Дивитись {cat.name}
                                     </Link>
                                 </div>
