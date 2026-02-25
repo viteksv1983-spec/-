@@ -412,7 +412,7 @@ function Home() {
                                     </Link>
                                 </div>
                                 <div className="relative flex-shrink-0 w-[110px] md:w-[150px] self-end pr-2 md:pr-4 pb-2 md:pb-4">
-                                    <img src={imgUrl} alt={categoryAltTexts[cat.slug] || `${cat.name} на замовлення Київ`} className="w-full h-auto max-h-[120px] md:max-h-[160px] object-contain mix-blend-multiply group-hover:scale-105 group-hover:-translate-y-1 transition-transform duration-500" loading="lazy" />
+                                    <img src={imgUrl} alt={categoryAltTexts[cat.slug] || `${cat.name} на замовлення Київ`} width="160" height="160" className="w-full h-auto max-h-[120px] md:max-h-[160px] object-contain mix-blend-multiply group-hover:scale-105 group-hover:-translate-y-1 transition-transform duration-500" loading="lazy" />
                                 </div>
                             </div>
                         )
