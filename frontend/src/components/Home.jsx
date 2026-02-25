@@ -404,7 +404,7 @@ function Home() {
                                     <h2 className="text-[17px] md:text-[20px] lg:text-[22px] font-black text-gray-900 mb-1.5 uppercase tracking-tight leading-tight" style={{ fontFamily: "'Oswald', sans-serif" }}>
                                         {cat.name}
                                     </h2>
-                                    <p className="text-gray-500 mb-4 text-[11px] md:text-[13px] font-medium leading-snug whitespace-pre-line">
+                                    <p className="text-gray-700 mb-4 text-[11px] md:text-[13px] font-medium leading-snug whitespace-pre-line">
                                         {desc}
                                     </p>
                                     <Link to={getCategoryUrl(cat.slug)} className="inline-block bg-white text-gray-800 border border-gray-200 px-5 py-2 font-black uppercase text-[10px] md:text-[11px] tracking-[0.15em] transition-all shadow-sm hover:shadow-md hover:bg-gray-900 hover:text-white rounded-full">
@@ -687,7 +687,7 @@ function Home() {
                         <a href="tel:0979081504" className="inline-flex items-center gap-2 px-10 py-4 font-black text-sm uppercase tracking-widest rounded-full transition-all hover:scale-105 border border-white/30 text-white hover:border-white/60 hover:bg-white/10">
                             📞 097 908 15 04
                         </a>
-                        <Link to="/torty-na-zamovlennya/" className="inline-block px-12 py-4 font-black text-sm uppercase tracking-widest rounded-full transition-all hover:scale-105 bg-[#E8C064] hover:bg-[#D4A83C] text-white shadow-md">
+                        <Link to="/torty-na-zamovlennya/" className="inline-block px-12 py-4 font-black text-sm uppercase tracking-widest rounded-full transition-all hover:scale-105 bg-[#E8C064] hover:bg-[#D4A83C] text-[#5A0014] shadow-md">
                             Обрати Торт
                         </Link>
                     </div>
@@ -731,13 +731,13 @@ function Home() {
                                     <div className="w-12 h-12 rounded-xl bg-[#FFF8E7] flex items-center justify-center text-2xl">🚕</div>
                                     <div>
                                         <h3 className="font-black text-gray-900 uppercase text-sm tracking-wide" style={{ fontFamily: "'Oswald', sans-serif" }}>Доставка на таксі</h3>
-                                        <p className="text-xs text-gray-400">По всьому Києву</p>
+                                        <p className="text-xs text-gray-500">По всьому Києву</p>
                                     </div>
                                 </div>
                                 <p className="text-gray-500 text-sm leading-relaxed mb-3">
                                     Ви сплачуєте лише вартість поїздки таксі. Кондитер особисто передає торт водію з інструкціями щодо бережного перевезення.
                                 </p>
-                                <div className="flex items-center gap-2 text-[#B8860B] font-black text-sm">
+                                <div className="flex items-center gap-2 text-[#8B6508] font-black text-sm">
                                     <span>⏱</span> 30–90 хвилин по місту
                                 </div>
                             </div>

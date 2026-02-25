@@ -75,7 +75,7 @@ function Delivery() {
                                     style={{ fontFamily: "'Oswald', sans-serif" }}>{item.title}</h3>
                                 <p className="text-gray-500 mb-5 text-sm">{item.desc}</p>
                                 <div className="text-2xl font-black mb-2" style={{ color: item.priceColor }}>{item.price}</div>
-                                <p className="text-xs text-gray-400">{item.sub}</p>
+                                <p className="text-xs text-gray-500">{item.sub}</p>
                             </div>
                         ))}
                     </div>
