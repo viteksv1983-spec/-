@@ -407,7 +407,7 @@ function Home() {
                                     <p className="text-gray-700 mb-4 text-[11px] md:text-[13px] font-medium leading-snug whitespace-pre-line flex-grow">
                                         {desc}
                                     </p>
-                                    <Link to={getCategoryUrl(cat.slug)} className="mt-auto inline-block bg-white/70 backdrop-blur-sm text-gray-800 border border-white/60 px-[18px] py-[10px] text-center font-bold uppercase text-[10px] md:text-[11px] tracking-[0.12em] transition-all duration-300 shadow-[0_2px_10px_rgba(0,0,0,0.03)] rounded-full hover:shadow-[0_6px_15px_rgba(0,0,0,0.08)] hover:-translate-y-[2px] hover:bg-white relative z-10 w-max">
+                                    <Link to={getCategoryUrl(cat.slug)} className="mt-auto inline-block bg-[#f8f3ef] text-[#4a2e2b] border border-[#e8dfd8] px-[16px] py-[8px] text-center font-bold uppercase text-[10px] md:text-[11px] tracking-[0.12em] transition-all duration-300 shadow-[inset_0_1px_2px_rgba(255,255,255,0.8),0_2px_6px_rgba(0,0,0,0.04)] rounded-full hover:shadow-[0_4px_12px_rgba(74,46,43,0.1)] hover:-translate-y-[2px] hover:bg-[#fff9f5] relative z-10 w-max">
                                         Дивитись {cat.name}
                                     </Link>
                                 </div>
