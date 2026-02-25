@@ -624,6 +624,98 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
         });
     }
 
+    // Mousse Cakes FAQ data
+    const mousseCakesFaqData = [
+        { q: 'Чи можна зробити мусовий торт без глютену?', a: 'Так, ми можемо виготовити мусовий торт з безглютеновим бісквітом та начинкою за вашим запитом.' },
+        { q: 'За скільки днів потрібно замовляти?', a: 'Мусові торти потребують часу на стабілізацію та заморожування, тому рекомендуємо замовляти за 3-4 дні.' },
+        { q: 'Яка мінімальна вага?', a: 'Мінімальна вага мусового торта становить від 1 кілограма.' },
+        { q: 'Чи можна змінити форму?', a: 'Звісно. Ми маємо широкий вибір форм: від класичних кіл та квадратів до сердець та сучасних геометричних фігур.' },
+    ];
+
+    if (category === 'mousse') {
+        schemaData.push({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": mousseCakesFaqData.map(faq => ({
+                "@type": "Question",
+                "name": faq.q,
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": faq.a
+                }
+            }))
+        });
+    }
+
+    // Biscuit Cakes FAQ data
+    const biscuitCakesFaqData = [
+        { q: 'Яка мінімальна вага?', a: 'Мінімальна вага бісквітного торта становить від 1 кілограма.' },
+        { q: 'Чи можна змінити начинку?', a: 'Так, ви можете обрати будь-яку начинку з нашого каталогу або запропонувати свої побажання.' },
+        { q: 'За скільки днів потрібно замовляти?', a: 'Рекомендуємо робити замовлення за 3-5 днів до події.' },
+        { q: 'Чи можна додати напис?', a: 'Звісно. Ми можемо додати будь-який напис кремом, шоколадом або на їстівній основі.' },
+    ];
+
+    if (category === 'biscuit') {
+        schemaData.push({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": biscuitCakesFaqData.map(faq => ({
+                "@type": "Question",
+                "name": faq.q,
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": faq.a
+                }
+            }))
+        });
+    }
+
+    // Cupcakes FAQ data
+    const cupcakesFaqData = [
+        { q: 'Яка мінімальна кількість?', a: 'Мінімальна кількість для замовлення — від 6 штук.' },
+        { q: 'Чи можна зробити різні дизайни в одному замовленні?', a: 'Так, ми можемо оформити кожний капкейк індивідуально в межах тематики вашого свята.' },
+        { q: 'За скільки днів потрібно замовляти?', a: 'Рекомендуємо робити замовлення за 2-3 дні.' },
+        { q: 'Чи можна замовити разом з тортом?', a: 'Звісно. Ми часто створюємо кенді-бари, де капкейки та торт виконані в єдиному стилі.' },
+    ];
+
+    if (category === 'cupcakes') {
+        schemaData.push({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": cupcakesFaqData.map(faq => ({
+                "@type": "Question",
+                "name": faq.q,
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": faq.a
+                }
+            }))
+        });
+    }
+
+    // Girl's Cakes FAQ data
+    const girlCakesFaqData = [
+        { q: 'Чи можна зробити торт за моїм прикладом?', a: 'Так, ми можемо виготовити торт за вашим фото або ескізом, адаптувавши його під ваші побажання.' },
+        { q: 'За скільки днів потрібно замовляти?', a: 'Рекомендуємо робити замовлення за 3-5 днів до події. У випадку термінових замовлень, будь ласка, уточнюйте наявність вільних місць.' },
+        { q: 'Чи можна додати фото?', a: 'Звісно. Ми виконуємо якісний їстівний фотодрук на цукровому папері, що дозволяє перенести будь-яке зображення на торт.' },
+        { q: 'Яка мінімальна вага?', a: 'Мінімальна вага торта для дівчини становить від 1 кілограма.' },
+    ];
+
+    if (category === 'girl') {
+        schemaData.push({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": girlCakesFaqData.map(faq => ({
+                "@type": "Question",
+                "name": faq.q,
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": faq.a
+                }
+            }))
+        });
+    }
+
     // Patriotic Cakes FAQ data
     const patrioticCakesFaqData = [
         { q: 'Чи можна зробити торт з конкретною символікою?', a: 'Так, ми можемо додати на торт герб, прапор або будь-яку іншу національну символіку, використовуючи мастику, шоколад або їстівний фотодрук.' },
@@ -637,6 +729,29 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
             "@context": "https://schema.org",
             "@type": "FAQPage",
             "mainEntity": patrioticCakesFaqData.map(faq => ({
+                "@type": "Question",
+                "name": faq.q,
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": faq.a
+                }
+            }))
+        });
+    }
+
+    // Gingerbread FAQ data
+    const gingerbreadFaqData = [
+        { q: 'За скільки днів потрібно замовляти пряники?', a: 'Рекомендуємо робити замовлення за 5-7 днів. Для великих корпоративних партій — за 10-14 днів.' },
+        { q: 'Чи можна замовити брендований дизайн?', a: 'Так, ми виконуємо пряники з логотипами компаній будь-якої складності за допомогою харчового друку або ручного розпису.' },
+        { q: 'Чи можна зробити подарункову упаковку?', a: 'Звісно. Кожен пряник може бути упакований в індивідуальний пакетик, або ми можемо зібрати набір у святкову коробку зі стрічкою.' },
+        { q: 'Чи можливе термінове виготовлення?', a: 'Це залежить від складності декору та завантаженості виробництва. Будь ласка, зателефонуйте нам для уточнення.' },
+    ];
+
+    if (category === 'gingerbread') {
+        schemaData.push({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": gingerbreadFaqData.map(faq => ({
                 "@type": "Question",
                 "name": faq.q,
                 "acceptedAnswer": {
@@ -806,7 +921,15 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                                                                                             ? 'Сезонний торт на замовлення — Antreme Київ'
                                                                                             : category === 'hobby'
                                                                                                 ? 'Торт за хобі на замовлення — Antreme Київ'
-                                                                                                : `${cake.name} – замовити в Києві`
+                                                                                                : category === 'biscuit'
+                                                                                                    ? 'Бісквітний торт на замовлення — Antreme Київ'
+                                                                                                    : category === 'gingerbread'
+                                                                                                        ? 'Імбирні пряники на замовлення — Antreme Київ'
+                                                                                                        : category === 'cupcakes'
+                                                                                                            ? 'Капкейки на замовлення — Antreme Київ'
+                                                                                                            : category === 'mousse'
+                                                                                                                ? 'Мусовий торт на замовлення — Antreme Київ'
+                                                                                                                : `${cake.name} – замовити в Києві`
                                                         }
                                                         className="w-full h-full object-contain drop-shadow-md group-hover:scale-105 transition-transform duration-500"
                                                         loading="lazy"
@@ -3348,6 +3471,915 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                                         </button>
                                         {openFaq === i && (
                                             <div className="px-4 md:px-5 pb-4 md:pb-5">
+                                                <p className="text-gray-600 text-sm leading-relaxed">{faq.a}</p>
+                                            </div>
+                                        )}
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    </section>
+                </>
+            ) : category === 'biscuit' ? (
+                <>
+                    {/* ── БЛОК 1: HERO (SEO Інтро) ── */}
+                    <section className="category-intro mt-12 mb-8 mx-auto px-4 max-w-5xl text-center">
+                        <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-4" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                            Класичний формат, що завжди доречний
+                        </h2>
+                        <p className="intro-text max-w-3xl mx-auto italic text-gray-600 mb-4">
+                            Кондитерська Antreme виготовляє бісквітні торти у Києві з м’якими коржами та збалансованими кремами. Це універсальний варіант для будь-якої події — від дня народження до корпоративного святкування.
+                        </p>
+                        <p className="intro-text max-w-3xl mx-auto">
+                            Бісквітний торт — це поєднання ніжної текстури, натуральних інгредієнтів та можливості реалізувати будь-який дизайн.
+                        </p>
+                    </section>
+
+                    {/* ── БЛОК 2: ПОПУЛЯРНІ СМАКИ ── */}
+                    <section className="bg-white py-12 md:py-16 border-t border-gray-100">
+                        <div className="max-w-6xl mx-auto px-4 md:px-8">
+                            <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-10 text-center" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                                Популярні смаки бісквітних тортів
+                            </h2>
+                            <div className="grid grid-cols-2 lg:grid-cols-5 gap-6 mb-10">
+                                {[
+                                    { name: 'Шоколадний трюфель', icon: '🍫' },
+                                    { name: 'Полуниця з вершками', icon: '🍓' },
+                                    { name: 'Карамель – банан', icon: '🍌' },
+                                    { name: 'Лісова ягода', icon: '🫐' },
+                                    { name: 'Фісташка – малина', icon: '🟢' }
+                                ].map((flavor, idx) => (
+                                    <div key={idx} className="bg-[#FAFAFA] p-6 rounded-3xl border border-gray-50 text-center transition-transform hover:scale-105 shadow-sm">
+                                        <div className="text-3xl mb-3">{flavor.icon}</div>
+                                        <h3 className="text-sm font-bold text-gray-800">{flavor.name}</h3>
+                                    </div>
+                                ))}
+                            </div>
+                            <div className="text-center">
+                                <Link to="/nachynky/" className="inline-flex items-center text-[#7A0019] hover:text-[#5a151f] uppercase tracking-widest text-xs font-bold border-b border-[#7A0019] pb-0.5 transition-all">Дивитись всі начинки</Link>
+                            </div>
+                        </div>
+                    </section>
+
+                    {/* ── БЛОК 3: ДЛЯ ЯКИХ ПОДІЙ ── */}
+                    <section className="bg-[#FAFAFA] py-12 md:py-16 border-t border-gray-100">
+                        <div className="max-w-6xl mx-auto px-4 md:px-8">
+                            <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-10 text-center" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                                Для яких подій обирають бісквітні торти?
+                            </h2>
+                            <div className="grid grid-cols-2 md:grid-cols-5 gap-4 mb-10">
+                                {[
+                                    { name: 'День народження', icon: '🎂', link: '/torty-na-zamovlennya/na-den-narodzhennya/' },
+                                    { name: 'Ювілей', icon: '🎉', link: '/torty-na-zamovlennya/na-yuviley/' },
+                                    { name: 'Весілля', icon: '💍', link: '/torty-na-zamovlennya/vesilni/' },
+                                    { name: 'Дитяче свято', icon: '🎈', link: '/torty-na-zamovlennya/dytyachi/' },
+                                    { name: 'Корпоратив', icon: '💼', link: '/torty-na-zamovlennya/korporatyvni/' }
+                                ].map((event, idx) => (
+                                    <Link key={idx} to={event.link} className="bg-white p-4 rounded-2xl border border-gray-50 text-center transition-transform hover:scale-105 shadow-sm">
+                                        <div className="text-3xl mb-2">{event.icon}</div>
+                                        <h3 className="text-xs md:text-sm font-bold text-gray-800">{event.name}</h3>
+                                    </Link>
+                                ))}
+                            </div>
+                            <div className="text-center">
+                                <Link to="/torty-na-zamovlennya/" className="inline-flex items-center text-[#7A0019] hover:text-[#5a151f] uppercase tracking-widest text-xs font-bold border-b border-[#7A0019] pb-0.5 transition-all">Всі категорії</Link>
+                            </div>
+                        </div>
+                    </section>
+
+                    {/* ── БЛОК 4: ДИЗАЙН ── */}
+                    <section className="bg-white py-12 md:py-16 border-t border-gray-100">
+                        <div className="max-w-4xl mx-auto px-4 md:px-8 text-center">
+                            <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-8" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                                Дизайн бісквітних тортів
+                            </h2>
+                            <ul className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-8 text-left">
+                                <li className="flex flex-col items-center text-center">
+                                    <div className="w-12 h-12 rounded-full bg-gray-50 flex items-center justify-center text-[#7A0019] mb-3">✨</div>
+                                    <strong className="block text-gray-900 text-sm">Мінімалізм</strong>
+                                </li>
+                                <li className="flex flex-col items-center text-center">
+                                    <div className="w-12 h-12 rounded-full bg-gray-50 flex items-center justify-center text-[#7A0019] mb-3">🧁</div>
+                                    <strong className="block text-gray-900 text-sm">Класика</strong>
+                                </li>
+                                <li className="flex flex-col items-center text-center">
+                                    <div className="w-12 h-12 rounded-full bg-gray-50 flex items-center justify-center text-[#7A0019] mb-3">📸</div>
+                                    <strong className="block text-gray-900 text-sm">Фото-друк</strong>
+                                </li>
+                                <li className="flex flex-col items-center text-center">
+                                    <div className="w-12 h-12 rounded-full bg-gray-50 flex items-center justify-center text-[#7A0019] mb-3">🎨</div>
+                                    <strong className="block text-gray-900 text-sm">Тематичний</strong>
+                                </li>
+                            </ul>
+                            <Link to="/foto-torty/" className="inline-flex items-center text-[#7A0019] hover:text-[#5a151f] uppercase tracking-widest text-xs font-bold border-b border-[#7A0019] pb-0.5 transition-all">Фото-торти</Link>
+                        </div>
+                    </section>
+
+                    {/* ── БЛОК 5: ВАРТІСТЬ ── */}
+                    <section className="py-12 md:py-20 bg-[#FAFAFA]">
+                        <div className="max-w-4xl mx-auto px-4 md:px-8">
+                            <div className="bg-[#7A0019] rounded-[40px] p-8 md:p-12 text-center text-white relative overflow-hidden shadow-2xl">
+                                <h2 className="text-2xl md:text-3xl font-black mb-6 relative z-10 uppercase" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                                    Скільки коштує бісквітний торт?
+                                </h2>
+                                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-10 relative z-10">
+                                    <div className="p-4 rounded-2xl bg-white/10 backdrop-blur-sm border border-white/20">
+                                        <p className="text-xs uppercase tracking-widest opacity-70 mb-1">Ціна від</p>
+                                        <p className="text-2xl font-black text-[#E8C064]">650 ₴/кг</p>
+                                    </div>
+                                    <div className="p-4 rounded-2xl bg-white/10 backdrop-blur-sm border border-white/20">
+                                        <p className="text-xs uppercase tracking-widest opacity-70 mb-1">Мінімальна вага</p>
+                                        <p className="text-2xl font-black text-[#E8C064]">від 1 кг</p>
+                                    </div>
+                                    <div className="p-4 rounded-2xl bg-white/10 backdrop-blur-sm border border-white/20">
+                                        <p className="text-xs uppercase tracking-widest opacity-70 mb-1">Складний декор</p>
+                                        <p className="text-sm font-bold uppercase text-[#E8C064]">Індивідуально</p>
+                                    </div>
+                                </div>
+                                <div className="flex flex-col sm:flex-row gap-4 justify-center relative z-10">
+                                    <Link to="/torty-na-zamovlennya/" className="inline-flex items-center justify-center px-10 py-4 bg-[#E8C064] text-[#4a1c28] font-black uppercase tracking-widest text-sm rounded-full transition-all hover:scale-105 hover:bg-[#D4A83C] shadow-lg">
+                                        Оформити замовлення
+                                    </Link>
+                                    <a href="tel:0979081504" className="inline-flex items-center justify-center px-10 py-4 border-2 border-white/40 text-white font-black uppercase tracking-widest text-sm rounded-full transition-all hover:bg-white/10">
+                                        ✉️ Зателефонувати
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    {/* ── БЛОК 6: ДОСТАВКА ── */}
+                    <section className="bg-white py-12 md:py-16 border-t border-gray-100">
+                        <div className="max-w-4xl mx-auto px-4 md:px-8 text-center text-gray-800">
+                            <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-6" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                                Доставка по Києву
+                            </h2>
+                            <p className="text-sm md:text-base text-gray-600 mb-6 max-w-2xl mx-auto leading-relaxed text-left md:text-center">
+                                Ми доставляємо торти у всі райони Києва: <strong>Печерський, Шевченківський, Голосіївський, Дарницький, Оболонський, Подільський.</strong>
+                            </p>
+                            <Link to="/dostavka/" className="inline-flex items-center text-[#7A0019] hover:text-[#5a151f] font-bold text-sm tracking-widest uppercase border-b border-[#7A0019] pb-1 transition-all">
+                                Детальніше про доставку
+                            </Link>
+                        </div>
+                    </section>
+
+                    {/* ── БЛОК 7: CTA ── */}
+                    <div className="bg-[#7A0019] relative overflow-hidden py-16">
+                        <div className="max-w-4xl mx-auto px-4 md:px-8 text-center relative z-10">
+                            <h2 className="text-3xl md:text-5xl font-black text-white uppercase tracking-tight mb-6"
+                                style={{ fontFamily: "'Oswald', sans-serif" }}>
+                                Замовити бісквітний торт у Києві
+                            </h2>
+                            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                                <Link to="/torty-na-zamovlennya/" className="inline-flex items-center justify-center px-10 py-4 cursor-pointer font-black text-sm tracking-widest rounded-full transition-transform hover:scale-105 bg-[#E8C064] hover:bg-[#D4A83C] text-[#4a1c28] shadow-md">
+                                    Оформити замовлення
+                                </Link>
+                                <a href="tel:0979081504" className="inline-flex items-center justify-center gap-2 px-8 py-4 font-black text-sm tracking-widest rounded-full transition-transform hover:scale-105 border-2 border-white/40 text-white hover:bg-white/10 hover:border-white">
+                                    📞 Зателефонувати
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* ── БЛОК 8: FAQ Schema UI ── */}
+                    <section className="py-10 md:py-14 bg-[#FAFAFA]">
+                        <div className="max-w-3xl mx-auto px-4 md:px-8">
+                            <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] uppercase tracking-tight mb-8 text-center"
+                                style={{ fontFamily: "'Oswald', sans-serif" }}>
+                                Поширені запитання
+                            </h2>
+                            <div className="space-y-3">
+                                {biscuitCakesFaqData.map((faq, i) => (
+                                    <div key={i} className="bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden">
+                                        <button
+                                            onClick={() => setOpenFaq(openFaq === i ? null : i)}
+                                            className="w-full flex items-center justify-between p-4 md:p-5 text-left hover:bg-gray-50 transition-colors"
+                                        >
+                                            <h3 className="text-sm md:text-base font-bold text-gray-900 pr-4">{faq.q}</h3>
+                                            <svg className={`w-5 h-5 text-[#7A0019] flex-shrink-0 transition-transform duration-200 ${openFaq === i ? 'rotate-180' : ''}`}
+                                                fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
+                                                <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                                            </svg>
+                                        </button>
+                                        {openFaq === i && (
+                                            <div className="px-4 md:px-5 pb-4 md:pb-5 border-t border-gray-50">
+                                                <p className="text-gray-600 text-sm leading-relaxed">{faq.a}</p>
+                                            </div>
+                                        )}
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    </section>
+                </>
+            ) : category === 'cupcakes' ? (
+                <>
+                    {/* ── БЛОК 1: HERO (SEO Інтро) ── */}
+                    <section className="category-intro mt-12 mb-8 mx-auto px-4 max-w-5xl text-center">
+                        <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-4" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                            Індивідуальні капкейки для будь-якої події
+                        </h2>
+                        <p className="intro-text max-w-3xl mx-auto italic text-gray-600 mb-4">
+                            Кондитерська Antreme виготовляє капкейки у Києві з авторським декором та натуральними начинками. Це зручний формат для свят, корпоративів, дитячих заходів або як доповнення до основного торта.
+                        </p>
+                        <p className="intro-text max-w-3xl mx-auto">
+                            Капкейки можна оформити в єдиному стилі з тортом або створити окремий тематичний дизайн.
+                        </p>
+                    </section>
+
+                    {/* ── БЛОК 2: КОЛИ ЗАМОВЛЯЮТЬ ── */}
+                    <section className="bg-white py-12 md:py-16 border-t border-gray-100">
+                        <div className="max-w-6xl mx-auto px-4 md:px-8 text-center text-gray-800">
+                            <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-10 text-center" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                                Коли замовляють капкейки?
+                            </h2>
+                            <div className="grid grid-cols-2 md:grid-cols-5 gap-4 mb-10">
+                                {[
+                                    { name: 'День народження', icon: '🎂', link: '/torty-na-zamovlennya/na-den-narodzhennya/' },
+                                    { name: 'Дитяче свято', icon: '🎈', link: '/torty-na-zamovlennya/dytyachi/' },
+                                    { name: 'Gender Reveal', icon: '👶', link: '/torty-na-zamovlennya/gender-reveal/' },
+                                    { name: 'Корпоратив', icon: '💼', link: '/torty-na-zamovlennya/korporatyvni/' },
+                                    { name: 'Весілля', icon: '💍', link: '/torty-na-zamovlennya/vesilni/' }
+                                ].map((event, idx) => (
+                                    <Link key={idx} to={event.link} className="bg-[#FAFAFA] p-4 rounded-2xl border border-gray-50 transition-transform hover:scale-105 shadow-sm flex flex-col items-center">
+                                        <div className="text-3xl mb-2">{event.icon}</div>
+                                        <h3 className="text-xs md:text-sm font-bold">{event.name}</h3>
+                                    </Link>
+                                ))}
+                            </div>
+                        </div>
+                    </section>
+
+                    {/* ── БЛОК 3: ДИЗАЙН ── */}
+                    <section className="bg-[#FAFAFA] py-12 md:py-16 border-t border-gray-100">
+                        <div className="max-w-4xl mx-auto px-4 md:px-8 text-center">
+                            <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-8" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                                Дизайн капкейків
+                            </h2>
+                            <ul className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-8 text-left">
+                                <li className="flex flex-col items-center text-center">
+                                    <div className="w-12 h-12 rounded-full bg-white flex items-center justify-center text-[#7A0019] mb-3 shadow-sm">✍️</div>
+                                    <strong className="block text-gray-900 text-sm">Індивідуальні написи</strong>
+                                </li>
+                                <li className="flex flex-col items-center text-center">
+                                    <div className="w-12 h-12 rounded-full bg-white flex items-center justify-center text-[#7A0019] mb-3 shadow-sm">📸</div>
+                                    <strong className="block text-gray-900 text-sm">Фото або логотип</strong>
+                                </li>
+                                <li className="flex flex-col items-center text-center">
+                                    <div className="w-12 h-12 rounded-full bg-white flex items-center justify-center text-[#7A0019] mb-3 shadow-sm">🎨</div>
+                                    <strong className="block text-gray-900 text-sm">Тематичний декор</strong>
+                                </li>
+                                <li className="flex flex-col items-center text-center">
+                                    <div className="w-12 h-12 rounded-full bg-white flex items-center justify-center text-[#7A0019] mb-3 shadow-sm">✨</div>
+                                    <strong className="block text-gray-900 text-sm">Мінімалізм</strong>
+                                </li>
+                            </ul>
+                            <Link to="/foto-torty/" className="inline-flex items-center text-[#7A0019] hover:text-[#5a151f] uppercase tracking-widest text-xs font-bold border-b border-[#7A0019] pb-0.5 transition-all">Дивитись фото-торти</Link>
+                        </div>
+                    </section>
+
+                    {/* ── БЛОК 4: ВАРТІСТЬ ── */}
+                    <section className="py-12 md:py-20 bg-white">
+                        <div className="max-w-4xl mx-auto px-4 md:px-8">
+                            <div className="bg-[#7A0019] rounded-[40px] p-8 md:p-12 text-center text-white relative overflow-hidden shadow-2xl">
+                                <h2 className="text-2xl md:text-3xl font-black mb-6 relative z-10 uppercase" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                                    Скільки коштують капкейки?
+                                </h2>
+                                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-10 relative z-10">
+                                    <div className="p-4 rounded-2xl bg-white/10 backdrop-blur-sm border border-white/20">
+                                        <p className="text-xs uppercase tracking-widest opacity-70 mb-1">Ціна від</p>
+                                        <p className="text-2xl font-black text-[#E8C064]">80–120 ₴/шт</p>
+                                    </div>
+                                    <div className="p-4 rounded-2xl bg-white/10 backdrop-blur-sm border border-white/20">
+                                        <p className="text-xs uppercase tracking-widest opacity-70 mb-1">Мінімальне замовлення</p>
+                                        <p className="text-2xl font-black text-[#E8C064]">від 6 шт</p>
+                                    </div>
+                                    <div className="p-4 rounded-2xl bg-white/10 backdrop-blur-sm border border-white/20">
+                                        <p className="text-xs uppercase tracking-widest opacity-70 mb-1">Великі партії</p>
+                                        <p className="text-sm font-bold uppercase text-[#E8C064]">Індивідуально</p>
+                                    </div>
+                                </div>
+                                <div className="flex flex-col sm:flex-row gap-4 justify-center relative z-10">
+                                    <Link to="/torty-na-zamovlennya/" className="inline-flex items-center justify-center px-10 py-4 bg-[#E8C064] text-[#4a1c28] font-black uppercase tracking-widest text-sm rounded-full transition-all hover:scale-105 hover:bg-[#D4A83C] shadow-lg">
+                                        Замовити капкейки
+                                    </Link>
+                                    <a href="tel:0979081504" className="inline-flex items-center justify-center px-10 py-4 border-2 border-white/40 text-white font-black uppercase tracking-widest text-sm rounded-full transition-all hover:bg-white/10">
+                                        ✉️ Зателефонувати
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    {/* ── БЛОК 5: СМАКИ ── */}
+                    <section className="bg-[#FAFAFA] py-12 md:py-16 border-t border-gray-100">
+                        <div className="max-w-4xl mx-auto px-4 md:px-8 text-center">
+                            <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-10" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                                Смаки капкейків
+                            </h2>
+                            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-10">
+                                {[
+                                    { name: 'Шоколадні', icon: '🍫' },
+                                    { name: 'Ванільні', icon: '🍦' },
+                                    { name: 'Фісташкові', icon: '🟢' },
+                                    { name: 'Ягідні', icon: '🫐' }
+                                ].map((flavor, idx) => (
+                                    <div key={idx} className="bg-white p-6 rounded-3xl border border-gray-50 text-center transition-transform hover:scale-105 shadow-sm">
+                                        <div className="text-3xl mb-3">{flavor.icon}</div>
+                                        <h3 className="text-sm font-bold text-gray-800">{flavor.name}</h3>
+                                    </div>
+                                ))}
+                            </div>
+                            <Link to="/nachynky/" className="inline-flex items-center text-[#7A0019] hover:text-[#5a151f] uppercase tracking-widest text-xs font-bold border-b border-[#7A0019] pb-0.5 transition-all">Всі начинки</Link>
+                        </div>
+                    </section>
+
+                    {/* ── БЛОК 6: ДОСТАВКА ── */}
+                    <section className="bg-white py-12 md:py-16 border-t border-gray-100">
+                        <div className="max-w-4xl mx-auto px-4 md:px-8 text-center text-gray-800">
+                            <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-6" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                                Доставка капкейків по Києву
+                            </h2>
+                            <p className="text-sm md:text-base text-gray-600 mb-6 max-w-2xl mx-auto leading-relaxed text-left md:text-center">
+                                Ми доставляємо у всі райони Києва: <strong>Печерський, Шевченківський, Голосіївський, Дарницький, Оболонський, Подільський.</strong>
+                            </p>
+                            <Link to="/dostavka/" className="inline-flex items-center text-[#7A0019] hover:text-[#5a151f] font-bold text-sm tracking-widest uppercase border-b border-[#7A0019] pb-1 transition-all">
+                                Детальніше про доставку
+                            </Link>
+                        </div>
+                    </section>
+
+                    {/* ── БЛОК 7: CTA ── */}
+                    <div className="bg-[#7A0019] relative overflow-hidden py-16">
+                        <div className="max-w-4xl mx-auto px-4 md:px-8 text-center relative z-10">
+                            <h2 className="text-3xl md:text-5xl font-black text-white uppercase tracking-tight mb-6"
+                                style={{ fontFamily: "'Oswald', sans-serif" }}>
+                                Потрібні капкейки для свята?
+                            </h2>
+                            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                                <Link to="/torty-na-zamovlennya/" className="inline-flex items-center justify-center px-10 py-4 cursor-pointer font-black text-sm tracking-widest rounded-full transition-transform hover:scale-105 bg-[#E8C064] hover:bg-[#D4A83C] text-[#4a1c28] shadow-md">
+                                    Оформити замовлення
+                                </Link>
+                                <a href="tel:0979081504" className="inline-flex items-center justify-center gap-2 px-8 py-4 font-black text-sm tracking-widest rounded-full transition-transform hover:scale-105 border-2 border-white/40 text-white hover:bg-white/10 hover:border-white">
+                                    📞 Зателефонувати
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* ── БЛОК 8: FAQ Schema UI ── */}
+                    <section className="py-10 md:py-14 bg-[#FAFAFA]">
+                        <div className="max-w-3xl mx-auto px-4 md:px-8">
+                            <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] uppercase tracking-tight mb-8 text-center"
+                                style={{ fontFamily: "'Oswald', sans-serif" }}>
+                                Поширені запитання
+                            </h2>
+                            <div className="space-y-3">
+                                {cupcakesFaqData.map((faq, i) => (
+                                    <div key={i} className="bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden">
+                                        <button
+                                            onClick={() => setOpenFaq(openFaq === i ? null : i)}
+                                            className="w-full flex items-center justify-between p-4 md:p-5 text-left hover:bg-gray-50 transition-colors"
+                                        >
+                                            <h3 className="text-sm md:text-base font-bold text-gray-900 pr-4">{faq.q}</h3>
+                                            <svg className={`w-5 h-5 text-[#7A0019] flex-shrink-0 transition-transform duration-200 ${openFaq === i ? 'rotate-180' : ''}`}
+                                                fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
+                                                <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                                            </svg>
+                                        </button>
+                                        {openFaq === i && (
+                                            <div className="px-4 md:px-5 pb-4 md:pb-5 border-t border-gray-50">
+                                                <p className="text-gray-600 text-sm leading-relaxed">{faq.a}</p>
+                                            </div>
+                                        )}
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    </section>
+                </>
+            ) : category === 'gingerbread' ? (
+                <>
+                    {/* ── БЛОК 1: HERO (SEO Інтро) ── */}
+                    <section className="category-intro mt-12 mb-8 mx-auto px-4 max-w-5xl text-center">
+                        <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-4" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                            Авторські імбирні пряники для будь-якої події
+                        </h2>
+                        <p className="intro-text max-w-3xl mx-auto italic text-gray-600 mb-4">
+                            Кондитерська Antreme виготовляє імбирні пряники у Києві з натуральних інгредієнтів та ручним розписом. Це ідеальний варіант для подарунків, дитячих свят, корпоративів та сезонних заходів.
+                        </p>
+                        <p className="intro-text max-w-3xl mx-auto">
+                            Ми створюємо як поштучні пряники, так і великі брендовані партії.
+                        </p>
+                    </section>
+
+                    {/* ── БЛОК 2: КОЛИ ЗАМОВЛЯЮТЬ ── */}
+                    <section className="bg-white py-12 md:py-16 border-t border-gray-100">
+                        <div className="max-w-6xl mx-auto px-4 md:px-8 text-center text-gray-800">
+                            <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-10 text-center" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                                Коли замовляють імбирні пряники?
+                            </h2>
+                            <div className="grid grid-cols-2 lg:grid-cols-5 gap-4 mb-10">
+                                {[
+                                    { name: 'Новий рік', icon: '❄️', link: '/torty-na-zamovlennya/sezonni/' },
+                                    { name: 'Різдво', icon: '🎄', link: '/torty-na-zamovlennya/sezonni/' },
+                                    { name: 'Великдень', icon: '🥚', link: '/torty-na-zamovlennya/sezonni/' },
+                                    { name: 'День народження', icon: '🎂', link: '/torty-na-zamovlennya/na-den-narodzhennya/' },
+                                    { name: 'Корпоратив', icon: '💼', link: '/torty-na-zamovlennya/korporatyvni/' }
+                                ].map((event, idx) => (
+                                    <Link key={idx} to={event.link} className="bg-[#FAFAFA] p-4 rounded-2xl border border-gray-50 transition-transform hover:scale-105 shadow-sm flex flex-col items-center">
+                                        <div className="text-3xl mb-2">{event.icon}</div>
+                                        <h3 className="text-xs md:text-sm font-bold">{event.name}</h3>
+                                    </Link>
+                                ))}
+                            </div>
+                        </div>
+                    </section>
+
+                    {/* ── БЛОК 3: БРЕНДОВАНІ ── */}
+                    <section className="bg-[#FAFAFA] py-12 md:py-16 border-t border-gray-100">
+                        <div className="max-w-4xl mx-auto px-4 md:px-8 text-center">
+                            <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-6" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                                Пряники з логотипом компанії
+                            </h2>
+                            <p className="text-sm md:text-base text-gray-600 mb-8 max-w-2xl mx-auto leading-relaxed">
+                                Ми виготовляємо пряники з логотипом, корпоративною символікою або індивідуальним дизайном. Це ефективний формат подарунків для партнерів та співробітників.
+                            </p>
+                            <Link to="/torty-na-zamovlennya/korporatyvni/" className="inline-flex items-center text-[#7A0019] hover:text-[#5a151f] font-bold text-sm tracking-widest uppercase border-b border-[#7A0019] pb-1 transition-all">
+                                Корпоративні замовлення
+                            </Link>
+                        </div>
+                    </section>
+
+                    {/* ── БЛОК 4: ВАРТІСТЬ ── */}
+                    <section className="py-12 md:py-20 bg-white">
+                        <div className="max-w-4xl mx-auto px-4 md:px-8">
+                            <div className="bg-[#7A0019] rounded-[40px] p-8 md:p-12 text-center text-white relative overflow-hidden shadow-2xl">
+                                <h2 className="text-2xl md:text-3xl font-black mb-6 relative z-10 uppercase" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                                    Скільки коштують імбирні пряники?
+                                </h2>
+                                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-10 relative z-10">
+                                    <div className="p-4 rounded-2xl bg-white/10 backdrop-blur-sm border border-white/20">
+                                        <p className="text-xs uppercase tracking-widest opacity-70 mb-1">Ціна від</p>
+                                        <p className="text-2xl font-black text-[#E8C064]">70–100 ₴/шт</p>
+                                    </div>
+                                    <div className="p-4 rounded-2xl bg-white/10 backdrop-blur-sm border border-white/20">
+                                        <p className="text-xs uppercase tracking-widest opacity-70 mb-1">Мінімальне замовлення</p>
+                                        <p className="text-2xl font-black text-[#E8C064]">від 10 шт</p>
+                                    </div>
+                                    <div className="p-4 rounded-2xl bg-white/10 backdrop-blur-sm border border-white/20">
+                                        <p className="text-xs uppercase tracking-widest opacity-70 mb-1">Великі партії</p>
+                                        <p className="text-sm font-bold uppercase text-[#E8C064]">Індивідуально</p>
+                                    </div>
+                                </div>
+                                <div className="flex flex-col sm:flex-row gap-4 justify-center relative z-10">
+                                    <Link to="/torty-na-zamovlennya/" className="inline-flex items-center justify-center px-10 py-4 bg-[#E8C064] text-[#4a1c28] font-black uppercase tracking-widest text-sm rounded-full transition-all hover:scale-105 hover:bg-[#D4A83C] shadow-lg">
+                                        Замовити пряники
+                                    </Link>
+                                    <a href="tel:0979081504" className="inline-flex items-center justify-center px-10 py-4 border-2 border-white/40 text-white font-black uppercase tracking-widest text-sm rounded-full transition-all hover:bg-white/10">
+                                        ✉️ Зателефонувати
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    {/* ── БЛОК 5: ДОСТАВКА ── */}
+                    <section className="bg-[#FAFAFA] py-12 md:py-16 border-t border-gray-100">
+                        <div className="max-w-4xl mx-auto px-4 md:px-8 text-center text-gray-800">
+                            <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-6" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                                Доставка імбирних пряників у Києві
+                            </h2>
+                            <p className="text-sm md:text-base text-gray-600 mb-6 max-w-2xl mx-auto leading-relaxed text-left md:text-center">
+                                Ми доставляємо у всі райони Києва: <strong>Печерський, Шевченківський, Дарницький, Оболонський, Подільський та інші.</strong>
+                            </p>
+                            <div className="flex flex-wrap gap-4 justify-center items-center mb-6">
+                                <Link to="/torty-na-zamovlennya/" className="inline-flex items-center text-[#7A0019] hover:text-[#5a151f] uppercase tracking-widest text-xs font-bold border-b border-[#7A0019] pb-0.5 transition-all">Торти на замовлення</Link>
+                                <span className="text-gray-300">|</span>
+                                <Link to="/kapkeyky/" className="inline-flex items-center text-[#7A0019] hover:text-[#5a151f] uppercase tracking-widest text-xs font-bold border-b border-[#7A0019] pb-0.5 transition-all">Капкейки</Link>
+                                <span className="text-gray-300">|</span>
+                                <Link to="/nachynky/" className="inline-flex items-center text-[#7A0019] hover:text-[#5a151f] uppercase tracking-widest text-xs font-bold border-b border-[#7A0019] pb-0.5 transition-all">Начинки</Link>
+                            </div>
+                            <Link to="/dostavka/" className="inline-flex items-center text-[#7A0019] hover:text-[#5a151f] font-bold text-sm tracking-widest uppercase border-b border-[#7A0019] pb-1 transition-all">
+                                Детальніше про доставку
+                            </Link>
+                        </div>
+                    </section>
+
+                    {/* ── БЛОК 6: CTA ── */}
+                    <div className="bg-[#7A0019] relative overflow-hidden py-16">
+                        <div className="max-w-4xl mx-auto px-4 md:px-8 text-center relative z-10">
+                            <h2 className="text-3xl md:text-5xl font-black text-white uppercase tracking-tight mb-6"
+                                style={{ fontFamily: "'Oswald', sans-serif" }}>
+                                Потрібні святкові пряники?
+                            </h2>
+                            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                                <Link to="/torty-na-zamovlennya/" className="inline-flex items-center justify-center px-10 py-4 cursor-pointer font-black text-sm tracking-widest rounded-full transition-transform hover:scale-105 bg-[#E8C064] hover:bg-[#D4A83C] text-[#4a1c28] shadow-md">
+                                    Оформити замовлення
+                                </Link>
+                                <a href="tel:0979081504" className="inline-flex items-center justify-center gap-2 px-8 py-4 font-black text-sm tracking-widest rounded-full transition-transform hover:scale-105 border-2 border-white/40 text-white hover:bg-white/10 hover:border-white">
+                                    📞 Зателефонувати
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* ── БЛОК 7: FAQ Schema UI ── */}
+                    <section className="py-10 md:py-14 bg-[#FAFAFA]">
+                        <div className="max-w-3xl mx-auto px-4 md:px-8">
+                            <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] uppercase tracking-tight mb-8 text-center"
+                                style={{ fontFamily: "'Oswald', sans-serif" }}>
+                                Поширені запитання
+                            </h2>
+                            <div className="space-y-3">
+                                {gingerbreadFaqData.map((faq, i) => (
+                                    <div key={i} className="bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden">
+                                        <button
+                                            onClick={() => setOpenFaq(openFaq === i ? null : i)}
+                                            className="w-full flex items-center justify-between p-4 md:p-5 text-left hover:bg-gray-50 transition-colors"
+                                        >
+                                            <h3 className="text-sm md:text-base font-bold text-gray-900 pr-4">{faq.q}</h3>
+                                            <svg className={`w-5 h-5 text-[#7A0019] flex-shrink-0 transition-transform duration-200 ${openFaq === i ? 'rotate-180' : ''}`}
+                                                fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
+                                                <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                                            </svg>
+                                        </button>
+                                        {openFaq === i && (
+                                            <div className="px-4 md:px-5 pb-4 md:pb-5 border-t border-gray-50">
+                                                <p className="text-gray-600 text-sm leading-relaxed">{faq.a}</p>
+                                            </div>
+                                        )}
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    </section>
+                </>
+            ) : category === 'mousse' ? (
+                <>
+                    {/* ── БЛОК 1: HERO (SEO Інтро) ── */}
+                    <section className="category-intro mt-12 mb-8 mx-auto px-4 max-w-5xl text-center">
+                        <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-4" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                            Легка текстура та сучасний стиль
+                        </h2>
+                        <p className="intro-text max-w-3xl mx-auto italic text-gray-600 mb-4">
+                            Кондитерська Antreme виготовляє мусові торти у Києві з ніжною текстурою та сучасним дизайном. Це ідеальний вибір для тих, хто шукає легкий десерт без важких кремів.
+                        </p>
+                        <p className="intro-text max-w-3xl mx-auto">
+                            Мусовий торт поєднує витончену геометрію, дзеркальну глазур та збалансовані смаки, створюючи справжній кулінарний шедевр.
+                        </p>
+                    </section>
+
+                    {/* ── БЛОК 2: ПОПУЛЯРНІ СМАКИ ── */}
+                    <section className="bg-white py-12 md:py-16 border-t border-gray-100">
+                        <div className="max-w-6xl mx-auto px-4 md:px-8">
+                            <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-10 text-center" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                                Популярні поєднання смаків
+                            </h2>
+                            <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
+                                {[
+                                    { name: 'Малина – фісташка', icon: '🍓' },
+                                    { name: 'Манго – маракуйя', icon: '🥭' },
+                                    { name: 'Карамель – шоколад', icon: '🍫' },
+                                    { name: 'Лимон – ваніль', icon: '🍋' }
+                                ].map((flavor, idx) => (
+                                    <div key={idx} className="bg-[#FAFAFA] p-6 rounded-3xl border border-gray-50 text-center transition-transform hover:scale-105 shadow-sm">
+                                        <div className="text-3xl mb-3">{flavor.icon}</div>
+                                        <h3 className="text-sm font-bold text-gray-800">{flavor.name}</h3>
+                                    </div>
+                                ))}
+                            </div>
+                            <div className="text-center">
+                                <Link to="/nachynky/" className="inline-flex items-center text-[#7A0019] hover:text-[#5a151f] uppercase tracking-widest text-xs font-bold border-b border-[#7A0019] pb-0.5 transition-all">Дивитись всі начинки</Link>
+                            </div>
+                        </div>
+                    </section>
+
+                    {/* ── БЛОК 3: ДЛЯ ЯКИХ ПОДІЙ ── */}
+                    <section className="bg-[#FAFAFA] py-12 md:py-16 border-t border-gray-100">
+                        <div className="max-w-4xl mx-auto px-4 md:px-8 text-center">
+                            <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-8" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                                Коли обирають мусові торти?
+                            </h2>
+                            <ul className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-8 text-left">
+                                <li className="flex flex-col items-center text-center">
+                                    <div className="w-12 h-12 rounded-full bg-white shadow-sm flex items-center justify-center text-[#7A0019] mb-3">🎂</div>
+                                    <strong className="block text-gray-900 text-sm">День народження</strong>
+                                </li>
+                                <li className="flex flex-col items-center text-center">
+                                    <div className="w-12 h-12 rounded-full bg-white shadow-sm flex items-center justify-center text-[#7A0019] mb-3">💍</div>
+                                    <strong className="block text-gray-900 text-sm">Весілля</strong>
+                                </li>
+                                <li className="flex flex-col items-center text-center">
+                                    <div className="w-12 h-12 rounded-full bg-white shadow-sm flex items-center justify-center text-[#7A0019] mb-3">💼</div>
+                                    <strong className="block text-gray-900 text-sm">Корпоратив</strong>
+                                </li>
+                                <li className="flex flex-col items-center text-center">
+                                    <div className="w-12 h-12 rounded-full bg-white shadow-sm flex items-center justify-center text-[#7A0019] mb-3">🕯️</div>
+                                    <strong className="block text-gray-900 text-sm">Вечеря</strong>
+                                </li>
+                            </ul>
+                            <div className="flex flex-wrap gap-4 justify-center items-center">
+                                <Link to="/torty-na-zamovlennya/" className="inline-flex items-center text-[#7A0019] hover:text-[#5a151f] uppercase tracking-widest text-xs font-bold border-b border-[#7A0019] pb-0.5 transition-all">Торти на замовлення</Link>
+                                <span className="text-gray-300">|</span>
+                                <Link to="/torty-na-zamovlennya/vesilni/" className="inline-flex items-center text-[#7A0019] hover:text-[#5a151f] uppercase tracking-widest text-xs font-bold border-b border-[#7A0019] pb-0.5 transition-all">Весільні торти</Link>
+                                <span className="text-gray-300">|</span>
+                                <Link to="/torty-na-zamovlennya/korporatyvni/" className="inline-flex items-center text-[#7A0019] hover:text-[#5a151f] uppercase tracking-widest text-xs font-bold border-b border-[#7A0019] pb-0.5 transition-all">Корпоративні торти</Link>
+                            </div>
+                        </div>
+                    </section>
+
+                    {/* ── БЛОК 4: ВАРТІСТЬ ── */}
+                    <section className="py-12 md:py-20 bg-white">
+                        <div className="max-w-4xl mx-auto px-4 md:px-8">
+                            <div className="bg-[#7A0019] rounded-[40px] p-8 md:p-12 text-center text-white relative overflow-hidden shadow-2xl">
+                                <h2 className="text-2xl md:text-3xl font-black mb-6 relative z-10 uppercase" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                                    Скільки коштує мусовий торт?
+                                </h2>
+                                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-10 relative z-10">
+                                    <div className="p-4 rounded-2xl bg-white/10 backdrop-blur-sm border border-white/20">
+                                        <p className="text-xs uppercase tracking-widest opacity-70 mb-1">Ціна від</p>
+                                        <p className="text-2xl font-black text-[#E8C064]">750 ₴/кг</p>
+                                    </div>
+                                    <div className="p-4 rounded-2xl bg-white/10 backdrop-blur-sm border border-white/20">
+                                        <p className="text-xs uppercase tracking-widest opacity-70 mb-1">Мінімальна вага</p>
+                                        <p className="text-2xl font-black text-[#E8C064]">від 1 кг</p>
+                                    </div>
+                                    <div className="p-4 rounded-2xl bg-white/10 backdrop-blur-sm border border-white/20">
+                                        <p className="text-xs uppercase tracking-widest opacity-70 mb-1">Складний дизайн</p>
+                                        <p className="text-sm font-bold uppercase text-[#E8C064]">Індивідуально</p>
+                                    </div>
+                                </div>
+                                <div className="flex flex-col sm:flex-row gap-4 justify-center relative z-10">
+                                    <Link to="/torty-na-zamovlennya/" className="inline-flex items-center justify-center px-10 py-4 bg-[#E8C064] text-[#4a1c28] font-black uppercase tracking-widest text-sm rounded-full transition-all hover:scale-105 hover:bg-[#D4A83C] shadow-lg">
+                                        Оформити замовлення
+                                    </Link>
+                                    <a href="tel:0979081504" className="inline-flex items-center justify-center px-10 py-4 border-2 border-white/40 text-white font-black uppercase tracking-widest text-sm rounded-full transition-all hover:bg-white/10">
+                                        ✉️ Зателефонувати
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    {/* ── БЛОК 5: ДОСТАВКА ── */}
+                    <section className="bg-[#FAFAFA] py-12 md:py-16 border-y border-gray-100">
+                        <div className="max-w-4xl mx-auto px-4 md:px-8 text-center text-gray-800">
+                            <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-6" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                                Доставка по Києву
+                            </h2>
+                            <p className="text-sm md:text-base text-gray-600 mb-8 max-w-2xl mx-auto leading-relaxed">
+                                Мусові торти потребують дбайливого транспортування. Ми доставляємо десерти у спеціальних контейнерах по всьому Києву, зберігаючи ідеальну глазур та форму.
+                            </p>
+                            <Link to="/dostavka/" className="inline-flex items-center text-[#7A0019] hover:text-[#5a151f] font-bold text-sm tracking-widest uppercase border-b border-[#7A0019] pb-1 transition-all">
+                                Детальніше про доставку
+                            </Link>
+                        </div>
+                    </section>
+
+                    {/* ── БЛОК 6: CTA ── */}
+                    <div className="bg-[#7A0019] relative overflow-hidden py-16">
+                        <div className="max-w-4xl mx-auto px-4 md:px-8 text-center relative z-10">
+                            <h2 className="text-3xl md:text-5xl font-black text-white uppercase tracking-tight mb-6"
+                                style={{ fontFamily: "'Oswald', sans-serif" }}>
+                                Замовити мусовий торт у Києві
+                            </h2>
+                            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                                <Link to="/torty-na-zamovlennya/" className="inline-flex items-center justify-center px-10 py-4 cursor-pointer font-black text-sm tracking-widest rounded-full transition-transform hover:scale-105 bg-[#E8C064] hover:bg-[#D4A83C] text-[#4a1c28] shadow-md">
+                                    Оформити замовлення
+                                </Link>
+                                <a href="tel:0979081504" className="inline-flex items-center justify-center gap-2 px-8 py-4 font-black text-sm tracking-widest rounded-full transition-transform hover:scale-105 border-2 border-white/40 text-white hover:bg-white/10 hover:border-white">
+                                    📞 Зателефонувати
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* ── БЛОК 7: FAQ Schema UI ── */}
+                    <section className="py-10 md:py-14 bg-[#FAFAFA]">
+                        <div className="max-w-3xl mx-auto px-4 md:px-8">
+                            <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] uppercase tracking-tight mb-8 text-center"
+                                style={{ fontFamily: "'Oswald', sans-serif" }}>
+                                Поширені запитання
+                            </h2>
+                            <div className="space-y-3">
+                                {mousseCakesFaqData.map((faq, i) => (
+                                    <div key={i} className="bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden">
+                                        <button
+                                            onClick={() => setOpenFaq(openFaq === i ? null : i)}
+                                            className="w-full flex items-center justify-between p-4 md:p-5 text-left hover:bg-gray-50 transition-colors"
+                                        >
+                                            <h3 className="text-sm md:text-base font-bold text-gray-900 pr-4">{faq.q}</h3>
+                                            <svg className={`w-5 h-5 text-[#7A0019] flex-shrink-0 transition-transform duration-200 ${openFaq === i ? 'rotate-180' : ''}`}
+                                                fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
+                                                <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                                            </svg>
+                                        </button>
+                                        {openFaq === i && (
+                                            <div className="px-4 md:px-5 pb-4 md:pb-5 border-t border-gray-50">
+                                                <p className="text-gray-600 text-sm leading-relaxed">{faq.a}</p>
+                                            </div>
+                                        )}
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    </section>
+                </>
+            ) : category === 'girl' ? (
+                <>
+                    {/* ── БЛОК 1: HERO (SEO Інтро) ── */}
+                    <section className="category-intro mt-12 mb-8 mx-auto px-4 max-w-5xl text-center">
+                        <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-4" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                            Торт, який підкреслює характер
+                        </h2>
+                        <p className="intro-text max-w-3xl mx-auto italic text-gray-600 mb-4">
+                            Кондитерська Antreme створює торти для дівчат у Києві з індивідуальним дизайном. Це можуть бути ніжні пастельні варіанти, стильний мінімалізм або яскравий креативний декор.
+                        </p>
+                        <p className="intro-text max-w-3xl mx-auto">
+                            Такий торт стане особливим подарунком на день народження, річницю або іншу важливу подію для вашої коханої, сестри чи подруги.
+                        </p>
+                    </section>
+
+                    {/* ── БЛОК 2: ДЛЯ ЯКИХ ПОДІЙ ── */}
+                    <section className="bg-white py-12 md:py-16 border-t border-gray-100">
+                        <div className="max-w-6xl mx-auto px-4 md:px-8">
+                            <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-10 text-center" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                                Коли замовляють торт для дівчини?
+                            </h2>
+                            <div className="grid grid-cols-2 md:grid-cols-5 gap-4 mb-10">
+                                {[
+                                    { name: 'День народження', icon: '🎂' },
+                                    { name: 'Річниця', icon: '💑' },
+                                    { name: 'Освідчення', icon: '💍' },
+                                    { name: '8 березня', icon: '💐' },
+                                    { name: 'День закоханих', icon: '❤️' }
+                                ].map((event, idx) => (
+                                    <div key={idx} className="bg-[#FAFAFA] p-4 rounded-2xl border border-gray-50 text-center transition-transform hover:scale-105 shadow-sm">
+                                        <div className="text-3xl mb-2">{event.icon}</div>
+                                        <h3 className="text-xs md:text-sm font-bold text-gray-800">{event.name}</h3>
+                                    </div>
+                                ))}
+                            </div>
+                            <div className="flex flex-wrap gap-4 justify-center items-center">
+                                <Link to="/torty-na-zamovlennya/na-den-narodzhennya/" className="inline-flex items-center text-[#7A0019] hover:text-[#5a151f] uppercase tracking-widest text-xs font-bold border-b border-[#7A0019] pb-0.5 transition-all">День народження</Link>
+                                <span className="text-gray-300">|</span>
+                                <Link to="/torty-na-zamovlennya/sezonni/" className="inline-flex items-center text-[#7A0019] hover:text-[#5a151f] uppercase tracking-widest text-xs font-bold border-b border-[#7A0019] pb-0.5 transition-all">Сезонні свята</Link>
+                            </div>
+                        </div>
+                    </section>
+
+                    {/* ── БЛОК 3: ДИЗАЙН ── */}
+                    <section className="bg-[#FAFAFA] py-12 md:py-16 border-t border-gray-100">
+                        <div className="max-w-4xl mx-auto px-4 md:px-8 text-center">
+                            <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-8" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                                Варіанти дизайну
+                            </h2>
+                            <ul className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-8 text-left">
+                                <li className="flex flex-col items-center text-center">
+                                    <div className="w-12 h-12 rounded-full bg-pink-50 flex items-center justify-center text-pink-400 mb-3">🌸</div>
+                                    <strong className="block text-gray-900 text-sm">Квіти та пастель</strong>
+                                </li>
+                                <li className="flex flex-col items-center text-center">
+                                    <div className="w-12 h-12 rounded-full bg-gray-50 flex items-center justify-center text-gray-400 mb-3">✍️</div>
+                                    <strong className="block text-gray-900 text-sm">Мінімалізм</strong>
+                                </li>
+                                <li className="flex flex-col items-center text-center">
+                                    <div className="w-12 h-12 rounded-full bg-blue-50 flex items-center justify-center text-blue-400 mb-3">📸</div>
+                                    <strong className="block text-gray-900 text-sm">Фото на торті</strong>
+                                </li>
+                                <li className="flex flex-col items-center text-center">
+                                    <div className="w-12 h-12 rounded-full bg-gold-50 flex items-center justify-center text-[#7A0019] mb-3">❤️</div>
+                                    <strong className="block text-gray-900 text-sm">Побажання</strong>
+                                </li>
+                            </ul>
+                            <Link to="/foto-torty/" className="inline-flex items-center text-[#7A0019] hover:text-[#5a151f] uppercase tracking-widest text-xs font-bold border-b border-[#7A0019] pb-0.5 transition-all">Дивитись фото-торти</Link>
+                        </div>
+                    </section>
+
+                    {/* ── БЛОК 4: ВАРТІСТЬ ── */}
+                    <section className="py-12 md:py-20 bg-white">
+                        <div className="max-w-4xl mx-auto px-4 md:px-8">
+                            <div className="bg-[#7A0019] rounded-[40px] p-8 md:p-12 text-center text-white relative overflow-hidden shadow-2xl">
+                                <h2 className="text-2xl md:text-3xl font-black mb-6 relative z-10" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                                    Скільки коштує торт для дівчини?
+                                </h2>
+                                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-10 relative z-10">
+                                    <div className="p-4 rounded-2xl bg-white/10 backdrop-blur-sm border border-white/20">
+                                        <p className="text-xs uppercase tracking-widest opacity-70 mb-1">Ціна від</p>
+                                        <p className="text-2xl font-black">650 ₴/кг</p>
+                                    </div>
+                                    <div className="p-4 rounded-2xl bg-white/10 backdrop-blur-sm border border-white/20">
+                                        <p className="text-xs uppercase tracking-widest opacity-70 mb-1">Мінімальна вага</p>
+                                        <p className="text-2xl font-black">від 1 кг</p>
+                                    </div>
+                                    <div className="p-4 rounded-2xl bg-white/10 backdrop-blur-sm border border-white/20">
+                                        <p className="text-xs uppercase tracking-widest opacity-70 mb-1">Складний декор</p>
+                                        <p className="text-sm font-bold uppercase">Індивідуально</p>
+                                    </div>
+                                </div>
+                                <a href="tel:0979081504" className="inline-flex items-center justify-center px-10 py-4 bg-[#E8C064] text-[#4a1c28] font-black uppercase tracking-widest text-sm rounded-full transition-all hover:scale-105 hover:bg-[#D4A83C] shadow-lg relative z-10">
+                                    Замовити торт
+                                </a>
+                            </div>
+                        </div>
+                    </section>
+
+                    {/* ── БЛОК 5: НАЧИНКИ ── */}
+                    <section className="bg-[#FAFAFA] py-12 md:py-16 border-y border-gray-100">
+                        <div className="max-w-4xl mx-auto px-4 md:px-8 text-center">
+                            <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-6" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                                Начинки для тортів
+                            </h2>
+                            <p className="text-gray-600 mb-8 max-w-2xl mx-auto">
+                                Обирайте з понад 15 авторських начинок: від класичних бісквітних до легких мусових варіантів. Ми використовуємо тільки натуральні інгредієнти.
+                            </p>
+                            <div className="flex flex-wrap gap-4 justify-center items-center">
+                                <Link to="/nachynky/" className="inline-flex items-center text-[#7A0019] hover:text-[#5a151f] uppercase tracking-widest text-xs font-bold border-b border-[#7A0019] pb-0.5 transition-all">Всі начинки</Link>
+                                <span className="text-gray-300">|</span>
+                                <Link to="/musovi-torty/" className="inline-flex items-center text-[#7A0019] hover:text-[#5a151f] uppercase tracking-widest text-xs font-bold border-b border-[#7A0019] pb-0.5 transition-all">Мусові торти</Link>
+                                <span className="text-gray-300">|</span>
+                                <Link to="/biskvitni-torty/" className="inline-flex items-center text-[#7A0019] hover:text-[#5a151f] uppercase tracking-widest text-xs font-bold border-b border-[#7A0019] pb-0.5 transition-all">Бісквітні торти</Link>
+                            </div>
+                        </div>
+                    </section>
+
+                    {/* ── БЛОК 6: ДОСТАВКА ── */}
+                    <section className="py-12 md:py-16 bg-white">
+                        <div className="max-w-3xl mx-auto px-4 md:px-8 text-center">
+                            <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-6" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                                Доставка по Києву
+                            </h2>
+                            <p className="text-gray-700 mb-6 leading-relaxed">
+                                Ми дбайливо доставляємо торти у всі райони Києва: <strong>Печерський, Шевченківський, Голосіївський, Подільський, Дарницький, Оболонський</strong> та інші. Кожен торт транспортується у надійній упаковці.
+                            </p>
+                            <Link to="/dostavka/" className="inline-flex items-center text-[#7A0019] hover:text-[#5a151f] uppercase tracking-widest text-xs font-bold border-b border-[#7A0019] pb-0.5 transition-all">Детальніше про доставку</Link>
+                        </div>
+                    </section>
+
+                    {/* ── БЛОК 7: ПЕРЕВАГИ ── */}
+                    <section className="bg-[#FAFAFA] py-12 md:py-16 border-t border-gray-100">
+                        <div className="max-w-6xl mx-auto px-4 md:px-8">
+                            <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-10 text-center" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                                Чому обирають Antreme?
+                            </h2>
+                            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
+                                {[
+                                    { t: '20 років досвіду', d: 'Професійна майстерність.' },
+                                    { t: '6000+ замовлень', d: 'Довіра наших клієнтів.' },
+                                    { t: 'Індивідуальний дизайн', d: 'Втілюємо будь-які ідеї.' },
+                                    { t: 'Натуральні складові', d: 'Без штучних добавок.' },
+                                    { t: 'Фото перед відправкою', d: 'Повна впевненість у результаті.' }
+                                ].map((adv, idx) => (
+                                    <div key={idx} className="bg-white p-5 rounded-2xl shadow-sm border border-gray-100 text-center">
+                                        <h4 className="font-bold text-gray-900 text-sm mb-1">{adv.t}</h4>
+                                        <p className="text-xs text-gray-500">{adv.d}</p>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    </section>
+
+                    {/* ── БЛОК 8: CTA БАНЕР ── */}
+                    <div className="bg-[#7A0019] relative overflow-hidden py-16">
+                        <div className="max-w-4xl mx-auto px-4 md:px-8 text-center relative z-10">
+                            <h2 className="text-3xl md:text-5xl font-black text-white uppercase tracking-tight mb-6"
+                                style={{ fontFamily: "'Oswald', sans-serif" }}>
+                                Плануєте сюрприз?
+                            </h2>
+                            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                                <a href="tel:0979081504" className="inline-flex items-center justify-center gap-2 px-8 py-4 font-black text-sm tracking-widest rounded-full transition-transform hover:scale-105 bg-[#E8C064] hover:bg-[#D4A83C] text-[#4a1c28] shadow-md">
+                                    📞 Зателефонувати
+                                </a>
+                                <Link to="/torty-na-zamovlennya/" className="inline-flex items-center justify-center px-10 py-4 cursor-pointer font-black text-sm tracking-widest rounded-full transition-transform hover:scale-105 border-2 border-white/40 text-white hover:bg-white/10 hover:border-white">
+                                    Оформити замовлення
+                                </Link>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* ── БЛОК 9: FAQ Schema UI ── */}
+                    <section className="py-10 md:py-14 bg-[#FAFAFA]">
+                        <div className="max-w-3xl mx-auto px-4 md:px-8">
+                            <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] uppercase tracking-tight mb-8 text-center"
+                                style={{ fontFamily: "'Oswald', sans-serif" }}>
+                                Поширені запитання
+                            </h2>
+                            <div className="space-y-3">
+                                {girlCakesFaqData.map((faq, i) => (
+                                    <div key={i} className="bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden">
+                                        <button
+                                            onClick={() => setOpenFaq(openFaq === i ? null : i)}
+                                            className="w-full flex items-center justify-between p-4 md:p-5 text-left hover:bg-gray-50 transition-colors"
+                                        >
+                                            <h3 className="text-sm md:text-base font-bold text-gray-900 pr-4">{faq.q}</h3>
+                                            <svg className={`w-5 h-5 text-[#7A0019] flex-shrink-0 transition-transform duration-200 ${openFaq === i ? 'rotate-180' : ''}`}
+                                                fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
+                                                <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                                            </svg>
+                                        </button>
+                                        {openFaq === i && (
+                                            <div className="px-4 md:px-5 pb-4 md:pb-5 border-t border-gray-50">
                                                 <p className="text-gray-600 text-sm leading-relaxed">{faq.a}</p>
                                             </div>
                                         )}
