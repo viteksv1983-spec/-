@@ -121,7 +121,7 @@ export default function DistrictPage() {
                 >
                     <div className="absolute inset-0 opacity-20 pointer-events-none" style={{ backgroundImage: `url(${heroBanner})`, backgroundSize: 'cover', backgroundPosition: 'center' }}></div>
                     <div className="relative z-10">
-                        <h1 className="text-3xl md:text-5xl lg:text-6xl font-black text-white leading-tight mb-4 tracking-tight uppercase" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                        <h1 className="text-3xl md:text-5xl lg:text-6xl font-black text-white leading-tight mb-4 tracking-tight uppercase" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                             Торти на замовлення <br className="hidden md:block" /> <span className="text-[#F5C24D]">{districtData.name}</span>
                         </h1>
                         <p className="text-white/80 text-sm md:text-lg max-w-2xl mx-auto mb-8 font-medium">
@@ -138,7 +138,7 @@ export default function DistrictPage() {
             <div id="catalog" className="max-w-7xl mx-auto px-4 md:px-8 py-10 md:py-16">
 
                 <div className="bg-white p-6 md:p-10 rounded-3xl shadow-sm border border-gray-100 mb-12">
-                    <h2 className="text-2xl md:text-3xl font-black text-gray-900 mb-4" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                    <h2 className="text-2xl md:text-3xl font-black text-gray-900 mb-4" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                         Як ми доставляємо торти {districtData.name}?
                     </h2>
                     <p className="text-gray-600 mb-4 leading-relaxed">
@@ -152,7 +152,7 @@ export default function DistrictPage() {
                 </div>
 
                 <div className="mb-8 flex items-center justify-between border-b pb-4">
-                    <h2 className="text-2xl md:text-3xl font-black text-gray-900 uppercase tracking-tight" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                    <h2 className="text-2xl md:text-3xl font-black text-gray-900 uppercase tracking-tight" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                         Популярні торти
                     </h2>
                 </div>
@@ -169,12 +169,12 @@ export default function DistrictPage() {
                                     )}
                                 </Link>
                                 <Link to={getProductUrl(cake)}>
-                                    <h3 className="text-[12px] md:text-[14px] font-black text-gray-900 uppercase tracking-tight leading-tight line-clamp-2 min-h-[2rem] md:min-h-[2.5rem] text-center mb-2 group-hover:text-[#7A0019] transition-colors" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                                    <h3 className="text-[12px] md:text-[14px] font-black text-gray-900 uppercase tracking-tight leading-tight line-clamp-2 min-h-[2rem] md:min-h-[2.5rem] text-center mb-2 group-hover:text-[#7A0019] transition-colors" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                                         {cake.name}
                                     </h3>
                                 </Link>
                                 <div className="mt-auto flex items-center justify-between">
-                                    <span className="text-[16px] md:text-[20px] font-black" style={{ fontFamily: "'Oswald', sans-serif" }}>{cake.price} <span className="text-[10px] text-gray-400">₴</span></span>
+                                    <span className="text-[16px] md:text-[20px] font-black" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>{cake.price} <span className="text-[10px] text-gray-400">₴</span></span>
                                     <button onClick={(e) => { e.preventDefault(); handleQuickOrder(cake); }} className="px-3 border border-[#E8C064] text-[#7A0019] text-[9px] md:text-[10px] font-black uppercase rounded-lg h-8 md:h-9 hover:bg-[#FFF8E7] transition-colors whitespace-nowrap">
                                         1 клік
                                     </button>

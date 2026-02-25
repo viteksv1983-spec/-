@@ -8,7 +8,7 @@ function GalleryVideo() {
                 title="Відеогалерея | Процес створення тортів | Antreme Київ"
                 description="Подивіться за лаштунки кондитерської Antreme. Наші відео процесу створення тортів, декорування та оформлення."
             />
-            <h1 className="text-4xl font-bold text-gray-900 mb-8 uppercase" style={{ fontFamily: "'Oswald', sans-serif" }}>
+            <h1 className="text-4xl font-bold text-gray-900 mb-8 uppercase" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                 Відеогалерея
             </h1>
             <div className="bg-white p-20 rounded-2xl shadow-xl flex flex-col items-center justify-center">

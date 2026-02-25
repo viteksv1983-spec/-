@@ -266,7 +266,7 @@ function CakeDetail({ predefinedId, predefinedSlug, expectedCategory, groupType,
                     <div className="relative">
                         {/* Mobile-only title + stars above photo */}
                         <h1 className="lg:hidden text-2xl font-black text-gray-900 uppercase tracking-tight leading-tight mb-2 text-center"
-                            style={{ fontFamily: "'Oswald', sans-serif" }}>
+                            style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                             {cake.name}
                         </h1>
                         <div className="lg:hidden flex items-center justify-between mb-4 px-1">
@@ -387,7 +387,7 @@ function CakeDetail({ predefinedId, predefinedSlug, expectedCategory, groupType,
 
                         {/* Product Name (desktop only — mobile version is above the image) */}
                         <h1 className="hidden lg:block text-4xl font-black text-gray-900 uppercase tracking-tight leading-tight mb-4"
-                            style={{ fontFamily: "'Oswald', sans-serif" }}>
+                            style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                             {cake.name}
                         </h1>
 
@@ -421,7 +421,7 @@ function CakeDetail({ predefinedId, predefinedSlug, expectedCategory, groupType,
                         <div className="flex items-center justify-between mb-8 pb-6 border-b border-gray-100">
                             <div className="flex items-baseline gap-2">
                                 <span className="text-4xl md:text-5xl font-black text-gray-900 leading-none"
-                                    style={{ fontFamily: "'Oswald', sans-serif" }}>
+                                    style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                                     {displayPrice}
                                 </span>
                                 <span className="text-lg md:text-xl text-gray-400 font-bold">₴</span>
@@ -587,7 +587,7 @@ function CakeDetail({ predefinedId, predefinedSlug, expectedCategory, groupType,
                 <div className="max-w-6xl mx-auto px-4 py-3 flex items-center gap-3">
                     {/* Price */}
                     <div className="flex items-baseline gap-1 shrink-0">
-                        <span className="text-xl md:text-2xl font-black text-gray-900 leading-none" style={{ fontFamily: "'Oswald', sans-serif" }}>{displayPrice}</span>
+                        <span className="text-xl md:text-2xl font-black text-gray-900 leading-none" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>{displayPrice}</span>
                         <span className="text-sm text-gray-400 font-bold">₴</span>
                     </div>
 
@@ -648,7 +648,7 @@ function ProductCarousel({ title, subtitle, cakes, linkTo, linkText }) {
             <div className="flex items-end justify-between mb-5 md:mb-8">
                 <div>
                     {subtitle && <div className="text-[#E8C064] text-[10px] md:text-xs font-black uppercase tracking-[0.2em] mb-1">{subtitle}</div>}
-                    <h2 className="text-xl md:text-3xl font-black text-gray-900 tracking-tight uppercase leading-none" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                    <h2 className="text-xl md:text-3xl font-black text-gray-900 tracking-tight uppercase leading-none" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                         {title}
                     </h2>
                 </div>
@@ -689,7 +689,7 @@ function ProductCard({ cake, addToCart }) {
             <div className="p-2.5 md:p-4 flex flex-col h-full">
                 <Link to={getProductUrl(cake)}>
                     <h3 className="text-[10px] md:text-[13px] font-black text-gray-900 uppercase tracking-tight leading-tight line-clamp-2 min-h-[1.8rem] md:min-h-[2.2rem] text-center mb-1 group-hover:text-[#7A0019] transition-colors"
-                        style={{ fontFamily: "'Oswald', sans-serif" }}>
+                        style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                         {cake.name}
                     </h3>
                 </Link>
@@ -718,7 +718,7 @@ function ProductCard({ cake, addToCart }) {
 
                 <div className="mt-auto flex items-center justify-between gap-1">
                     <div className="flex items-baseline gap-0.5 shrink-0">
-                        <span className="text-[16px] md:text-[20px] font-black text-gray-900 leading-none" style={{ fontFamily: "'Oswald', sans-serif" }}>{cake.price}</span>
+                        <span className="text-[16px] md:text-[20px] font-black text-gray-900 leading-none" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>{cake.price}</span>
                         <span className="text-[9px] md:text-[11px] text-gray-400 font-bold">₴</span>
                     </div>
                     <button

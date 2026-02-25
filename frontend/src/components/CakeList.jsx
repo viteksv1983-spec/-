@@ -782,7 +782,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
             <div className="bg-white pt-6 md:pt-12 pb-4 md:pb-8 px-4 md:px-8">
                 <div className="max-w-7xl mx-auto text-center">
                     <h1 className="text-3xl md:text-6xl font-black text-gray-900 uppercase tracking-tight mb-2 md:mb-4"
-                        style={{ fontFamily: "'Oswald', sans-serif" }}>
+                        style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                         {getCategoryTitle()}
                     </h1>
                     <div className="flex items-center justify-center gap-3 mb-2">
@@ -871,7 +871,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                                         {/* Title at top */}
                                         <Link to={getProductUrl(cake)}>
                                             <h3 className="text-[11px] md:text-[14px] font-black text-gray-900 uppercase tracking-tight leading-tight line-clamp-2 min-h-[2rem] md:min-h-[2.5rem] text-center mb-1 group-hover:text-[#7A0019] transition-colors"
-                                                style={{ fontFamily: "'Oswald', sans-serif" }}>
+                                                style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                                                 {cake.name}
                                             </h3>
                                         </Link>
@@ -964,7 +964,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                                         <div className="mt-auto flex items-center justify-between gap-1.5">
                                             <div className="flex items-baseline gap-1 min-w-0 shrink-0">
                                                 <span className="text-[18px] md:text-[22px] font-black text-gray-900 leading-none"
-                                                    style={{ fontFamily: "'Oswald', sans-serif" }}>
+                                                    style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                                                     {cake.price}
                                                 </span>
                                                 <span className="text-[10px] md:text-xs text-gray-500 font-bold">₴</span>
@@ -1003,7 +1003,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                 <>
                     {/* ── БЛОК 2: Про корпоративні торти (Основний блок) ── */}
                     <section className="category-intro mt-8 mx-auto px-4">
-                        <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-4" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                        <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-4" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                             Торт для компанії, який підкреслює бренд
                         </h2>
                         <p className="intro-text">
@@ -1017,7 +1017,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                     {/* ── БЛОК 2.5: Для яких подій ── */}
                     <section className="bg-white py-10 md:py-14">
                         <div className="max-w-4xl mx-auto px-4 md:px-8 text-center">
-                            <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-6" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                            <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-6" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                                 Для яких корпоративних подій ми створюємо торти?
                             </h2>
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-left">
@@ -1067,7 +1067,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                                         <div className="w-16 h-16 rounded-full bg-[#FFF8E7] flex items-center justify-center text-3xl mb-4">
                                             {item.icon}
                                         </div>
-                                        <h3 className="text-[14px] font-black text-[#7A0019] uppercase tracking-wide mb-2" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                                        <h3 className="text-[14px] font-black text-[#7A0019] uppercase tracking-wide mb-2" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                                             {item.title}
                                         </h3>
                                         <p className="text-gray-500 text-sm">
@@ -1085,7 +1085,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                             <div className="bg-gradient-to-br from-[#FFF8E7] to-[#FFF3D4] rounded-2xl md:rounded-3xl p-6 md:p-8 border border-[#E8C064]/20 shadow-[0_4px_20px_rgba(232,192,100,0.15)] flex flex-col items-start md:items-center text-left md:text-center">
                                 <div className="flex items-center gap-3 mb-4 mx-auto justify-center w-full">
                                     <div className="w-12 h-12 rounded-xl bg-white flex items-center justify-center text-2xl shadow-sm flex-shrink-0">💼</div>
-                                    <h2 className="text-xl md:text-2xl font-black text-gray-900 tracking-tight text-left md:text-center" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                                    <h2 className="text-xl md:text-2xl font-black text-gray-900 tracking-tight text-left md:text-center" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                                         Вартість корпоративних замовлень
                                     </h2>
                                 </div>
@@ -1118,7 +1118,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                     {/* ── БЛОК 5: Начинки та формати ── */}
                     <section className="py-10 md:py-14 bg-white">
                         <div className="max-w-5xl mx-auto px-4 md:px-8 text-center">
-                            <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-4" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                            <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-4" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                                 Начинки та формати
                             </h2>
                             <p className="text-gray-600 mb-8 max-w-2xl mx-auto">
@@ -1147,7 +1147,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                     {/* ── БЛОК 6: Доставка ── */}
                     <section className="bg-white py-12 md:py-16 border-t border-gray-100">
                         <div className="max-w-5xl mx-auto px-4 md:px-8 text-center">
-                            <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-6" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                            <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-6" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                                 Доставка в офіси та на локації у Києві
                             </h2>
                             <p className="text-gray-600 leading-relaxed mb-6 max-w-2xl mx-auto md:text-lg">
@@ -1162,7 +1162,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                     {/* ── Call to Action Banner (Before FAQ) ── */}
                     <div className="relative py-12 md:py-16 overflow-hidden bg-[#7A0019] rounded-3xl mx-4 md:mx-8 my-8 shadow-xl">
                         <div className="container mx-auto px-6 text-center relative z-10">
-                            <h3 className="text-3xl md:text-4xl font-black mb-6 tracking-tight text-white" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                            <h3 className="text-3xl md:text-4xl font-black mb-6 tracking-tight text-white" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                                 Обговоріть корпоративне замовлення з нами
                             </h3>
                             <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -1182,7 +1182,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                     <section className="py-10 md:py-14 bg-[#FAFAFA]">
                         <div className="max-w-3xl mx-auto px-4 md:px-8">
                             <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] uppercase tracking-tight mb-8 text-center"
-                                style={{ fontFamily: "'Oswald', sans-serif" }}>
+                                style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                                 Поширені запитання (B2B)
                             </h2>
                             <div className="space-y-3">
@@ -1244,7 +1244,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                                         <div className="w-16 h-16 rounded-full bg-[#FFF8E7] flex items-center justify-center text-3xl mb-4">
                                             {item.icon}
                                         </div>
-                                        <h3 className="text-[14px] font-black text-[#7A0019] uppercase tracking-wide mb-2" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                                        <h3 className="text-[14px] font-black text-[#7A0019] uppercase tracking-wide mb-2" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                                             {item.title}
                                         </h3>
                                         <p className="text-gray-500 text-sm">
@@ -1262,7 +1262,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                             <div className="bg-gradient-to-br from-[#FFF8E7] to-[#FFF3D4] rounded-2xl md:rounded-3xl p-6 md:p-8 border border-[#E8C064]/20 shadow-[0_4px_20px_rgba(232,192,100,0.15)] flex flex-col items-start md:items-center text-left md:text-center">
                                 <div className="flex items-center gap-3 mb-4 mx-auto justify-center w-full">
                                     <div className="w-12 h-12 rounded-xl bg-white flex items-center justify-center text-2xl shadow-sm flex-shrink-0">💰</div>
-                                    <h2 className="text-xl md:text-2xl font-black text-gray-900 tracking-tight text-left md:text-center" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                                    <h2 className="text-xl md:text-2xl font-black text-gray-900 tracking-tight text-left md:text-center" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                                         Скільки коштує весільний торт у Києві
                                     </h2>
                                 </div>
@@ -1303,7 +1303,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                     <section className="bg-[#FAFAFA] py-10 md:py-14">
                         <div className="max-w-5xl mx-auto px-4 md:px-8 text-center">
                             <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-4"
-                                style={{ fontFamily: "'Oswald', sans-serif" }}>
+                                style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                                 Популярні стилі весільних тортів
                             </h2>
                             <p className="text-gray-600 mb-8 max-w-2xl mx-auto">
@@ -1333,7 +1333,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                     <section className="py-10 md:py-14 bg-white">
                         <div className="max-w-4xl mx-auto px-4 md:px-8 text-center">
                             <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-4"
-                                style={{ fontFamily: "'Oswald', sans-serif" }}>
+                                style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                                 Начинки для весільного торта
                             </h2>
                             <p className="text-gray-600 mb-8 max-w-2xl mx-auto">
@@ -1366,7 +1366,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                     <section className="bg-white py-12 md:py-16 border-t border-gray-100">
                         <div className="max-w-5xl mx-auto px-4 md:px-8 text-center">
                             <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-6"
-                                style={{ fontFamily: "'Oswald', sans-serif" }}>
+                                style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                                 Доставка весільних тортів у Києві
                             </h2>
                             <p className="text-gray-600 leading-relaxed mb-6 max-w-2xl mx-auto md:text-lg">
@@ -1382,7 +1382,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                     <section className="py-10 md:py-14 bg-[#FAFAFA]">
                         <div className="max-w-4xl mx-auto px-4 md:px-8">
                             <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-8 text-center"
-                                style={{ fontFamily: "'Oswald', sans-serif" }}>
+                                style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                                 Як замовити весільний торт
                             </h2>
                             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -1407,7 +1407,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                     {/* ── Call to Action Banner (Before FAQ) ── */}
                     <div className="relative py-12 md:py-16 overflow-hidden bg-[#7A0019] rounded-3xl mx-4 md:mx-8 my-8 shadow-xl">
                         <div className="container mx-auto px-6 text-center relative z-10">
-                            <h3 className="text-3xl md:text-4xl font-black mb-6 tracking-tight text-white" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                            <h3 className="text-3xl md:text-4xl font-black mb-6 tracking-tight text-white" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                                 Обговоріть деталі замовлення зараз
                             </h3>
                             <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -1428,7 +1428,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                     <section className="py-10 md:py-14">
                         <div className="max-w-3xl mx-auto px-4 md:px-8">
                             <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] uppercase tracking-tight mb-8 text-center"
-                                style={{ fontFamily: "'Oswald', sans-serif" }}>
+                                style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                                 Поширені запитання
                             </h2>
                             <div className="space-y-3">
@@ -1459,7 +1459,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                     <section className="bg-[#FAFAFA] py-10 md:py-14">
                         <div className="max-w-5xl mx-auto px-4 md:px-8">
                             <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] uppercase tracking-tight mb-8 text-center"
-                                style={{ fontFamily: "'Oswald', sans-serif" }}>
+                                style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                                 Інші категорії тортів
                             </h2>
                             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
@@ -1471,7 +1471,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                                     <Link key={i} to={cat.to}
                                         className="bg-white rounded-2xl p-6 border border-gray-100 shadow-[0_4px_20px_rgba(0,0,0,0.06)] hover:shadow-[0_8px_30px_rgba(0,0,0,0.1)] transition-all group text-center">
                                         <div className="text-4xl mb-3">{cat.icon}</div>
-                                        <h3 className="font-black text-gray-900 uppercase text-sm tracking-wide mb-1 group-hover:text-[#7A0019] transition-colors" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                                        <h3 className="font-black text-gray-900 uppercase text-sm tracking-wide mb-1 group-hover:text-[#7A0019] transition-colors" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                                             {cat.title}
                                         </h3>
                                         <p className="text-xs text-gray-500">{cat.desc}</p>
@@ -1497,7 +1497,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                 <>
                     {/* ── БЛОК 2: SEO Інтро ── */}
                     <section className="category-intro mt-12 mb-8">
-                        <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-4" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                        <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-4" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                             Дитячі торти на день народження в Києві
                         </h2>
                         <p className="intro-text">
@@ -1514,22 +1514,22 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
                                 <div className="bg-white rounded-2xl p-6 border border-gray-100 shadow-[0_4px_20px_rgba(0,0,0,0.04)] flex flex-col items-center text-center hover:-translate-y-1 transition-transform duration-300">
                                     <div className="w-16 h-16 rounded-full bg-[#FFF8E7] flex items-center justify-center text-3xl mb-4">🌿</div>
-                                    <h3 className="text-[14px] font-black text-[#7A0019] uppercase tracking-wide mb-2" style={{ fontFamily: "'Oswald', sans-serif" }}>100% натурально</h3>
+                                    <h3 className="text-[14px] font-black text-[#7A0019] uppercase tracking-wide mb-2" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>100% натурально</h3>
                                     <p className="text-gray-500 text-sm">Тільки вершкове масло та вершки</p>
                                 </div>
                                 <div className="bg-white rounded-2xl p-6 border border-gray-100 shadow-[0_4px_20px_rgba(0,0,0,0.04)] flex flex-col items-center text-center hover:-translate-y-1 transition-transform duration-300">
                                     <div className="w-16 h-16 rounded-full bg-[#FFF8E7] flex items-center justify-center text-3xl mb-4">🎨</div>
-                                    <h3 className="text-[14px] font-black text-[#7A0019] uppercase tracking-wide mb-2" style={{ fontFamily: "'Oswald', sans-serif" }}>Безпечні фарби</h3>
+                                    <h3 className="text-[14px] font-black text-[#7A0019] uppercase tracking-wide mb-2" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>Безпечні фарби</h3>
                                     <p className="text-gray-500 text-sm">Сертифіковані харчові барвники</p>
                                 </div>
                                 <div className="bg-white rounded-2xl p-6 border border-gray-100 shadow-[0_4px_20px_rgba(0,0,0,0.04)] flex flex-col items-center text-center hover:-translate-y-1 transition-transform duration-300">
                                     <div className="w-16 h-16 rounded-full bg-[#FFF8E7] flex items-center justify-center text-3xl mb-4">✨</div>
-                                    <h3 className="text-[14px] font-black text-[#7A0019] uppercase tracking-wide mb-2" style={{ fontFamily: "'Oswald', sans-serif" }}>Казкові дизайни</h3>
+                                    <h3 className="text-[14px] font-black text-[#7A0019] uppercase tracking-wide mb-2" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>Казкові дизайни</h3>
                                     <p className="text-gray-500 text-sm">Будь-які герої та оформлення</p>
                                 </div>
                                 <div className="bg-white rounded-2xl p-6 border border-gray-100 shadow-[0_4px_20px_rgba(0,0,0,0.04)] flex flex-col items-center text-center hover:-translate-y-1 transition-transform duration-300">
                                     <div className="w-16 h-16 rounded-full bg-[#FFF8E7] flex items-center justify-center text-3xl mb-4">🚕</div>
-                                    <h3 className="text-[14px] font-black text-[#7A0019] uppercase tracking-wide mb-2" style={{ fontFamily: "'Oswald', sans-serif" }}>Бережна доставка</h3>
+                                    <h3 className="text-[14px] font-black text-[#7A0019] uppercase tracking-wide mb-2" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>Бережна доставка</h3>
                                     <p className="text-gray-500 text-sm">Безпечне перевезення по Києву</p>
                                 </div>
                             </div>
@@ -1542,7 +1542,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                             <div className="bg-gradient-to-br from-[#FFF8E7] to-[#FFF3D4] rounded-2xl md:rounded-3xl p-6 md:p-8 border border-[#E8C064]/20 shadow-[0_4px_20px_rgba(232,192,100,0.15)] flex flex-col items-start md:items-center text-left md:text-center">
                                 <div className="flex items-center gap-3 mb-4 mx-auto justify-center w-full">
                                     <div className="w-12 h-12 rounded-xl bg-white flex items-center justify-center text-2xl shadow-sm flex-shrink-0">💰</div>
-                                    <h2 className="text-xl md:text-2xl font-black text-gray-900 tracking-tight text-left md:text-center" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                                    <h2 className="text-xl md:text-2xl font-black text-gray-900 tracking-tight text-left md:text-center" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                                         Скільки коштує дитячий торт у Києві
                                     </h2>
                                 </div>
@@ -1582,7 +1582,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                     {/* ── БЛОК 5: Популярні стилі ── */}
                     <section className="bg-[#FAFAFA] py-10 md:py-14">
                         <div className="max-w-5xl mx-auto px-4 md:px-8 text-center">
-                            <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-4" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                            <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-4" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                                 Популярні дизайни дитячих тортів
                             </h2>
                             <p className="text-gray-600 mb-8 max-w-2xl mx-auto">
@@ -1612,7 +1612,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                     {/* ── БЛОК 6: Начинки ── */}
                     <section className="py-10 md:py-14 bg-white">
                         <div className="max-w-4xl mx-auto px-4 md:px-8 text-center">
-                            <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-4" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                            <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-4" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                                 Безпечні начинки для дітей
                             </h2>
                             <p className="text-gray-600 mb-8 max-w-2xl mx-auto">
@@ -1643,7 +1643,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                     {/* ── БЛОК 7: Доставка ── */}
                     <section className="bg-white py-12 md:py-16 border-t border-gray-100">
                         <div className="max-w-5xl mx-auto px-4 md:px-8 text-center">
-                            <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-6" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                            <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-6" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                                 Доставка дитячих тортів у Києві
                             </h2>
                             <p className="text-gray-600 leading-relaxed mb-6 max-w-2xl mx-auto md:text-lg">
@@ -1658,7 +1658,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                     {/* ── БЛОК 8: Як замовити ── */}
                     <section className="py-10 md:py-14 bg-[#FAFAFA]">
                         <div className="max-w-4xl mx-auto px-4 md:px-8">
-                            <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-8 text-center" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                            <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-8 text-center" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                                 Як замовити дитячий торт
                             </h2>
                             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -1683,7 +1683,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                     {/* ── Call to Action Banner (Before FAQ) ── */}
                     <div className="relative py-12 md:py-16 overflow-hidden bg-[#7A0019] rounded-3xl mx-4 md:mx-8 my-8 shadow-xl">
                         <div className="container mx-auto px-6 text-center relative z-10">
-                            <h3 className="text-3xl md:text-4xl font-black mb-6 tracking-tight text-white" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                            <h3 className="text-3xl md:text-4xl font-black mb-6 tracking-tight text-white" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                                 Обговоріть деталі свята з кондитером
                             </h3>
                             <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -1703,7 +1703,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                     <section className="py-10 md:py-14 bg-[#FAFAFA]">
                         <div className="max-w-3xl mx-auto px-4 md:px-8">
                             <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] uppercase tracking-tight mb-8 text-center"
-                                style={{ fontFamily: "'Oswald', sans-serif" }}>
+                                style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                                 Поширені запитання (FAQ)
                             </h2>
                             <div className="space-y-3">
@@ -1734,7 +1734,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                 <>
                     {/* ── БЛОК 2: SEO Інтро (Boy) ── */}
                     <section className="category-intro mt-12 mb-8">
-                        <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-4" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                        <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-4" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                             Дизайни тортів для хлопчиків: від супергероїв до машинок
                         </h2>
                         <p className="intro-text">
@@ -1748,7 +1748,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                     {/* ── БЛОК 3: Популярні теми ── */}
                     <section className="bg-[#FDFBF7] py-10 md:py-14 border-t border-b border-gray-100">
                         <div className="max-w-5xl mx-auto px-4 md:px-8 text-center">
-                            <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-8" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                            <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-8" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                                 Модні теми для хлоп'ячого свята
                             </h2>
                             <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
@@ -1772,7 +1772,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                     <section className="py-10 md:py-14">
                         <div className="max-w-3xl mx-auto px-4 md:px-8">
                             <div className="bg-[#7A0019] text-white rounded-3xl p-8 relative overflow-hidden">
-                                <h2 className="text-2xl md:text-3xl font-black mb-4 relative z-10" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                                <h2 className="text-2xl md:text-3xl font-black mb-4 relative z-10" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                                     Вартість торта для хлопчика
                                 </h2>
                                 <p className="mb-6 opacity-90 relative z-10">
@@ -1805,7 +1805,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                     {/* ── БЛОК 5: Начинки та сестрички ── */}
                     <section className="py-10 md:py-14 bg-white">
                         <div className="max-w-4xl mx-auto px-4 md:px-8 text-center">
-                            <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-8" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                            <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-8" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                                 Найсмачніші начинки
                             </h2>
                             <p className="text-gray-600 mb-10 max-w-2xl mx-auto leading-relaxed">
@@ -1822,7 +1822,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                     {/* ── БЛОК 6: Доставка ── */}
                     <section className="bg-white py-12 md:py-16 border-t border-gray-100">
                         <div className="max-w-5xl mx-auto px-4 md:px-8 text-center">
-                            <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-6" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                            <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-6" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                                 Доставка по Києву
                             </h2>
                             <p className="text-gray-600 leading-relaxed mb-10 max-w-2xl mx-auto md:text-lg">
@@ -1840,7 +1840,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                     <section className="py-10 md:py-14 bg-[#FAFAFA]">
                         <div className="max-w-3xl mx-auto px-4 md:px-8">
                             <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] uppercase tracking-tight mb-8 text-center"
-                                style={{ fontFamily: "'Oswald', sans-serif" }}>
+                                style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                                 Поширені запитання
                             </h2>
                             <div className="space-y-3">
@@ -1872,7 +1872,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                 <>
                     {/* ── БЛОК 1: HERO ТЕКСТ (SEO Інтро) ── */}
                     <section className="category-intro mt-12 mb-8 mx-auto px-4 max-w-5xl">
-                        <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-4" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                        <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-4" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                             Замовити торт на день народження в Києві — індивідуальний дизайн для будь-якого віку
                         </h2>
                         <p className="intro-text">
@@ -1892,22 +1892,22 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
                                 <div className="bg-white rounded-2xl p-6 border border-gray-100 shadow-[0_4px_20px_rgba(0,0,0,0.04)] flex flex-col items-center text-center hover:-translate-y-1 transition-transform duration-300">
                                     <div className="w-16 h-16 rounded-full bg-[#FFF8E7] flex items-center justify-center text-3xl mb-4">🎨</div>
-                                    <h3 className="text-[14px] font-black text-[#7A0019] uppercase tracking-wide mb-2" style={{ fontFamily: "'Oswald', sans-serif" }}>Індивідуальний дизайн</h3>
+                                    <h3 className="text-[14px] font-black text-[#7A0019] uppercase tracking-wide mb-2" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>Індивідуальний дизайн</h3>
                                     <p className="text-gray-500 text-sm">Враховуємо всі побажання</p>
                                 </div>
                                 <div className="bg-white rounded-2xl p-6 border border-gray-100 shadow-[0_4px_20px_rgba(0,0,0,0.04)] flex flex-col items-center text-center hover:-translate-y-1 transition-transform duration-300">
                                     <div className="w-16 h-16 rounded-full bg-[#FFF8E7] flex items-center justify-center text-3xl mb-4">🍰</div>
-                                    <h3 className="text-[14px] font-black text-[#7A0019] uppercase tracking-wide mb-2" style={{ fontFamily: "'Oswald', sans-serif" }}>Понад 15 начинок</h3>
+                                    <h3 className="text-[14px] font-black text-[#7A0019] uppercase tracking-wide mb-2" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>Понад 15 начинок</h3>
                                     <p className="text-gray-500 text-sm">Авторські смакові поєднання</p>
                                 </div>
                                 <div className="bg-white rounded-2xl p-6 border border-gray-100 shadow-[0_4px_20px_rgba(0,0,0,0.04)] flex flex-col items-center text-center hover:-translate-y-1 transition-transform duration-300">
                                     <div className="w-16 h-16 rounded-full bg-[#FFF8E7] flex items-center justify-center text-3xl mb-4">💰</div>
-                                    <h3 className="text-[14px] font-black text-[#7A0019] uppercase tracking-wide mb-2" style={{ fontFamily: "'Oswald', sans-serif" }}>Прозора вартість</h3>
+                                    <h3 className="text-[14px] font-black text-[#7A0019] uppercase tracking-wide mb-2" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>Прозора вартість</h3>
                                     <p className="text-gray-500 text-sm">Без прихованих та раптових доплат</p>
                                 </div>
                                 <div className="bg-white rounded-2xl p-6 border border-gray-100 shadow-[0_4px_20px_rgba(0,0,0,0.04)] flex flex-col items-center text-center hover:-translate-y-1 transition-transform duration-300">
                                     <div className="w-16 h-16 rounded-full bg-[#FFF8E7] flex items-center justify-center text-3xl mb-4">🚕</div>
-                                    <h3 className="text-[14px] font-black text-[#7A0019] uppercase tracking-wide mb-2" style={{ fontFamily: "'Oswald', sans-serif" }}>Доставка по Києву</h3>
+                                    <h3 className="text-[14px] font-black text-[#7A0019] uppercase tracking-wide mb-2" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>Доставка по Києву</h3>
                                     <p className="text-gray-500 text-sm">В усі райони точно у визначений час</p>
                                 </div>
                             </div>
@@ -1920,7 +1920,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                             <div className="bg-gradient-to-br from-[#FFF8E7] to-[#FFF3D4] rounded-2xl md:rounded-3xl p-6 md:p-8 border border-[#E8C064]/20 shadow-[0_4px_20px_rgba(232,192,100,0.15)] flex flex-col items-start md:items-center text-left md:text-center">
                                 <div className="flex items-center gap-3 mb-4 mx-auto justify-center w-full">
                                     <div className="w-12 h-12 rounded-xl bg-white flex items-center justify-center text-2xl shadow-sm flex-shrink-0">💰</div>
-                                    <h2 className="text-xl md:text-2xl font-black text-gray-900 tracking-tight text-left md:text-center" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                                    <h2 className="text-xl md:text-2xl font-black text-gray-900 tracking-tight text-left md:text-center" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                                         Скільки коштує торт на день народження у Києві?
                                     </h2>
                                 </div>
@@ -1957,7 +1957,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                     {/* ── БЛОК 4: ПОПУЛЯРНІ ДИЗАЙНИ ── */}
                     <section className="bg-[#FAFAFA] py-10 md:py-14 mt-6">
                         <div className="max-w-6xl mx-auto px-4 md:px-8 text-center">
-                            <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-8" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                            <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-8" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                                 Популярні дизайни тортів на день народження
                             </h2>
                             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3 md:gap-4 mb-4">
@@ -1991,7 +1991,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                     {/* ── БЛОК 6: ДОСТАВКА ── */}
                     <section className="bg-white py-12 md:py-16 border-t border-gray-100">
                         <div className="max-w-5xl mx-auto px-4 md:px-8 text-center">
-                            <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-6" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                            <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-6" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                                 Доставка тортів на день народження по Києву
                             </h2>
                             <p className="text-gray-600 leading-relaxed max-w-3xl mx-auto md:text-lg">
@@ -2003,7 +2003,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                     {/* ── БЛОК 7: Як замовити ── */}
                     <section className="py-12 md:py-16 bg-[#FAFAFA] border-t border-gray-100">
                         <div className="max-w-5xl mx-auto px-4 md:px-8">
-                            <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-8 text-center" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                            <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-8 text-center" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                                 Як замовити святковий торт
                             </h2>
                             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -2028,7 +2028,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                     {/* ── БЛОК 8: CTA БЛОК ── */}
                     <div className="relative py-12 md:py-16 overflow-hidden bg-[#7A0019] rounded-3xl mx-4 md:mx-8 my-8 shadow-xl">
                         <div className="container mx-auto px-6 text-center relative z-10">
-                            <h3 className="text-3xl md:text-4xl font-black mb-6 tracking-tight text-white" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                            <h3 className="text-3xl md:text-4xl font-black mb-6 tracking-tight text-white" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                                 Обговоріть деталі святкового торта вже сьогодні
                             </h3>
                             <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -2048,7 +2048,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                     <section className="py-10 md:py-14 bg-[#FAFAFA]">
                         <div className="max-w-3xl mx-auto px-4 md:px-8">
                             <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] uppercase tracking-tight mb-8 text-center"
-                                style={{ fontFamily: "'Oswald', sans-serif" }}>
+                                style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                                 Поширені запитання (FAQ)
                             </h2>
                             <div className="space-y-3">
@@ -2079,7 +2079,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                 <>
                     {/* ── БЛОК 1: HERO ТЕКСТ (SEO Інтро) ── */}
                     <section className="category-intro mt-12 mb-8 mx-auto px-4 max-w-5xl">
-                        <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-4" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                        <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-4" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                             Торт на ювілей у Києві — стильний акцент святкового вечора
                         </h2>
                         <p className="intro-text">
@@ -2099,22 +2099,22 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
                                 <div className="bg-white rounded-2xl p-6 border border-gray-100 shadow-[0_4px_20px_rgba(0,0,0,0.04)] flex flex-col items-center text-center hover:-translate-y-1 transition-transform duration-300">
                                     <div className="w-16 h-16 rounded-full bg-[#FFF8E7] flex items-center justify-center text-3xl mb-4">👑</div>
-                                    <h3 className="text-[14px] font-black text-[#7A0019] uppercase tracking-wide mb-2" style={{ fontFamily: "'Oswald', sans-serif" }}>Індивідуальний дизайн</h3>
+                                    <h3 className="text-[14px] font-black text-[#7A0019] uppercase tracking-wide mb-2" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>Індивідуальний дизайн</h3>
                                     <p className="text-gray-500 text-sm">Створюємо під ваш вік і стиль</p>
                                 </div>
                                 <div className="bg-white rounded-2xl p-6 border border-gray-100 shadow-[0_4px_20px_rgba(0,0,0,0.04)] flex flex-col items-center text-center hover:-translate-y-1 transition-transform duration-300">
                                     <div className="w-16 h-16 rounded-full bg-[#FFF8E7] flex items-center justify-center text-3xl mb-4">🎨</div>
-                                    <h3 className="text-[14px] font-black text-[#7A0019] uppercase tracking-wide mb-2" style={{ fontFamily: "'Oswald', sans-serif" }}>Об'ємні цифри</h3>
+                                    <h3 className="text-[14px] font-black text-[#7A0019] uppercase tracking-wide mb-2" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>Об'ємні цифри</h3>
                                     <p className="text-gray-500 text-sm">Декорація цифр та індивідуальних написів</p>
                                 </div>
                                 <div className="bg-white rounded-2xl p-6 border border-gray-100 shadow-[0_4px_20px_rgba(0,0,0,0.04)] flex flex-col items-center text-center hover:-translate-y-1 transition-transform duration-300">
                                     <div className="w-16 h-16 rounded-full bg-[#FFF8E7] flex items-center justify-center text-3xl mb-4">🍰</div>
-                                    <h3 className="text-[14px] font-black text-[#7A0019] uppercase tracking-wide mb-2" style={{ fontFamily: "'Oswald', sans-serif" }}>Понад 15 начинок</h3>
+                                    <h3 className="text-[14px] font-black text-[#7A0019] uppercase tracking-wide mb-2" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>Понад 15 начинок</h3>
                                     <p className="text-gray-500 text-sm">Ніжні креми, бісквіти та соковиті фрукти</p>
                                 </div>
                                 <div className="bg-white rounded-2xl p-6 border border-gray-100 shadow-[0_4px_20px_rgba(0,0,0,0.04)] flex flex-col items-center text-center hover:-translate-y-1 transition-transform duration-300">
                                     <div className="w-16 h-16 rounded-full bg-[#FFF8E7] flex items-center justify-center text-3xl mb-4">🚕</div>
-                                    <h3 className="text-[14px] font-black text-[#7A0019] uppercase tracking-wide mb-2" style={{ fontFamily: "'Oswald', sans-serif" }}>Доставка по Києву</h3>
+                                    <h3 className="text-[14px] font-black text-[#7A0019] uppercase tracking-wide mb-2" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>Доставка по Києву</h3>
                                     <p className="text-gray-500 text-sm">Надійна адресна доставка в строк</p>
                                 </div>
                             </div>
@@ -2127,7 +2127,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                             <div className="bg-gradient-to-br from-[#FFF8E7] to-[#FFF3D4] rounded-2xl md:rounded-3xl p-6 md:p-8 border border-[#E8C064]/20 shadow-[0_4px_20px_rgba(232,192,100,0.15)] flex flex-col items-start md:items-center text-left md:text-center">
                                 <div className="flex items-center gap-3 mb-4 mx-auto justify-center w-full">
                                     <div className="w-12 h-12 rounded-xl bg-white flex items-center justify-center text-2xl shadow-sm flex-shrink-0">💰</div>
-                                    <h2 className="text-xl md:text-2xl font-black text-gray-900 tracking-tight text-left md:text-center" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                                    <h2 className="text-xl md:text-2xl font-black text-gray-900 tracking-tight text-left md:text-center" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                                         Скільки коштує ювілейний торт у Києві?
                                     </h2>
                                 </div>
@@ -2160,7 +2160,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                     {/* ── БЛОК 4: ПОПУЛЯРНІ ДИЗАЙНИ ── */}
                     <section className="bg-[#FAFAFA] py-10 md:py-14 mt-6">
                         <div className="max-w-6xl mx-auto px-4 md:px-8 text-center">
-                            <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-8" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                            <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-8" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                                 Популярні ювілейні дизайни
                             </h2>
                             <div className="grid grid-cols-2 md:grid-cols-5 gap-3 md:gap-4 mb-4">
@@ -2195,7 +2195,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                     <section className="bg-white py-12 md:py-16 border-t border-gray-100">
                         <div className="max-w-5xl mx-auto px-4 md:px-8 grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 text-center md:text-left">
                             <div>
-                                <h2 className="text-2xl font-black text-[#7A0019] tracking-tight mb-4" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                                <h2 className="text-2xl font-black text-[#7A0019] tracking-tight mb-4" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                                     Начинки для ювілейного торта
                                 </h2>
                                 <p className="text-gray-600 leading-relaxed mb-4">
@@ -2206,7 +2206,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                                 </Link>
                             </div>
                             <div>
-                                <h2 className="text-2xl font-black text-[#7A0019] tracking-tight mb-4" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                                <h2 className="text-2xl font-black text-[#7A0019] tracking-tight mb-4" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                                     Доставка ювілейних тортів по Києву
                                 </h2>
                                 <p className="text-gray-600 leading-relaxed mb-4">
@@ -2222,7 +2222,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                     {/* ── БЛОК 6: CTA БЛОК ── */}
                     <div className="relative py-12 md:py-16 overflow-hidden bg-[#7A0019] rounded-3xl mx-4 md:mx-8 my-8 shadow-xl">
                         <div className="container mx-auto px-6 text-center relative z-10">
-                            <h3 className="text-3xl md:text-4xl font-black mb-6 tracking-tight text-white" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                            <h3 className="text-3xl md:text-4xl font-black mb-6 tracking-tight text-white" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                                 Готові замовити ювілейний торт?
                             </h3>
                             <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -2242,7 +2242,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                     <section className="py-10 md:py-14 bg-[#FAFAFA]">
                         <div className="max-w-3xl mx-auto px-4 md:px-8">
                             <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] uppercase tracking-tight mb-8 text-center"
-                                style={{ fontFamily: "'Oswald', sans-serif" }}>
+                                style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                                 Поширені запитання (FAQ)
                             </h2>
                             <div className="space-y-3">
@@ -2275,7 +2275,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                     <div className="bg-[#FAFAFA] pt-8 md:pt-16 pb-12 md:pb-20 px-4 md:px-8 shadow-inner border-b border-gray-100">
                         <div className="max-w-4xl mx-auto text-center">
                             <h2 className="text-2xl md:text-4xl font-black text-[#7A0019] mb-6 uppercase tracking-tight"
-                                style={{ fontFamily: "'Oswald', sans-serif" }}>
+                                style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                                 Стильні торти для жінок на день народження та ювілей
                             </h2>
                             <p className="text-gray-700 text-sm md:text-base leading-relaxed mb-6 max-w-3xl mx-auto">
@@ -2314,7 +2314,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                     {/* ── БЛОК 4: ПОПУЛЯРНІ ВАРІАНТИ ── */}
                     <section className="py-12 md:py-16 bg-[#FDFBF7] border-t border-b border-[#E8C064]/20 relative overflow-hidden">
                         <div className="max-w-4xl mx-auto px-4 md:px-8 text-center relative z-10">
-                            <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-8" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                            <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-8" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                                 Популярні варіанти тортів для жінок
                             </h2>
                             <div className="grid grid-cols-2 lg:grid-cols-5 gap-3 md:gap-4 mb-4">
@@ -2348,7 +2348,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                     {/* ── БЛОК 5: ЦІНИ ── */}
                     <section className="bg-white py-12 md:py-16">
                         <div className="max-w-4xl mx-auto px-4 md:px-8 text-center">
-                            <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-6" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                            <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-6" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                                 Скільки коштує торт для жінки у Києві?
                             </h2>
                             <p className="text-gray-600 mb-8 max-w-2xl mx-auto text-sm md:text-base leading-relaxed">
@@ -2375,7 +2375,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                     <section className="bg-white py-12 md:py-16 border-t border-gray-100">
                         <div className="max-w-5xl mx-auto px-4 md:px-8 grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 text-center md:text-left">
                             <div>
-                                <h2 className="text-2xl font-black text-[#7A0019] tracking-tight mb-4" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                                <h2 className="text-2xl font-black text-[#7A0019] tracking-tight mb-4" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                                     Начинки для святкового торта
                                 </h2>
                                 <p className="text-gray-600 leading-relaxed mb-4">
@@ -2386,7 +2386,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                                 </Link>
                             </div>
                             <div>
-                                <h2 className="text-2xl font-black text-[#7A0019] tracking-tight mb-4" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                                <h2 className="text-2xl font-black text-[#7A0019] tracking-tight mb-4" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                                     Доставка тортів для жінок по Києву
                                 </h2>
                                 <p className="text-gray-600 leading-relaxed mb-4">
@@ -2402,7 +2402,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                     {/* ── БЛОК 7: CTA БЛОК ── */}
                     <div className="relative py-12 md:py-16 overflow-hidden bg-[#7A0019] rounded-3xl mx-4 md:mx-8 my-8 shadow-xl">
                         <div className="container mx-auto px-6 text-center relative z-10">
-                            <h3 className="text-3xl md:text-4xl font-black mb-6 tracking-tight text-white" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                            <h3 className="text-3xl md:text-4xl font-black mb-6 tracking-tight text-white" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                                 Замовте стильний торт для жінки вже сьогодні
                             </h3>
                             <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -2422,7 +2422,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                     <section className="py-10 md:py-14 bg-[#FAFAFA]">
                         <div className="max-w-3xl mx-auto px-4 md:px-8">
                             <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] uppercase tracking-tight mb-8 text-center"
-                                style={{ fontFamily: "'Oswald', sans-serif" }}>
+                                style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                                 Поширені запитання (FAQ)
                             </h2>
                             <div className="space-y-3">
@@ -2455,7 +2455,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                     <div className="bg-[#FAFAFA] pt-8 md:pt-16 pb-12 md:pb-20 px-4 md:px-8 shadow-inner border-b border-gray-100">
                         <div className="max-w-4xl mx-auto text-center">
                             <h2 className="text-2xl md:text-4xl font-black text-[#7A0019] mb-6 uppercase tracking-tight"
-                                style={{ fontFamily: "'Oswald', sans-serif" }}>
+                                style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                                 Стильні та лаконічні торти для чоловіків
                             </h2>
                             <p className="text-gray-700 text-sm md:text-base leading-relaxed mb-6 max-w-3xl mx-auto">
@@ -2494,7 +2494,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                     {/* ── БЛОК 4: ПОПУЛЯРНІ ВАРІАНТИ ── */}
                     <section className="py-12 md:py-16 bg-[#FDFBF7] border-t border-b border-gray-200 relative overflow-hidden">
                         <div className="max-w-4xl mx-auto px-4 md:px-8 text-center relative z-10">
-                            <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-8" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                            <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-8" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                                 Популярні варіанти тортів для чоловіків
                             </h2>
                             <div className="grid grid-cols-2 lg:grid-cols-5 gap-3 md:gap-4 mb-4">
@@ -2528,7 +2528,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                     {/* ── БЛОК 5: ЦІНИ ── */}
                     <section className="bg-white py-12 md:py-16">
                         <div className="max-w-4xl mx-auto px-4 md:px-8 text-center">
-                            <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-6" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                            <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-6" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                                 Скільки коштує торт для чоловіка у Києві?
                             </h2>
                             <p className="text-gray-600 mb-8 max-w-2xl mx-auto text-sm md:text-base leading-relaxed">
@@ -2555,7 +2555,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                     <section className="bg-white py-12 md:py-16 border-t border-gray-100">
                         <div className="max-w-5xl mx-auto px-4 md:px-8 grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 text-center md:text-left">
                             <div>
-                                <h2 className="text-2xl font-black text-[#7A0019] tracking-tight mb-4" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                                <h2 className="text-2xl font-black text-[#7A0019] tracking-tight mb-4" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                                     Начинки для святкового чоловічого торта
                                 </h2>
                                 <p className="text-gray-600 leading-relaxed mb-4">
@@ -2566,7 +2566,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                                 </Link>
                             </div>
                             <div>
-                                <h2 className="text-2xl font-black text-[#7A0019] tracking-tight mb-4" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                                <h2 className="text-2xl font-black text-[#7A0019] tracking-tight mb-4" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                                     Доставка тортів для чоловіків по Києву
                                 </h2>
                                 <p className="text-gray-600 leading-relaxed mb-4">
@@ -2582,7 +2582,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                     {/* ── БЛОК 7: CTA БЛОК ── */}
                     <div className="relative py-12 md:py-16 overflow-hidden bg-[#7A0019] rounded-3xl mx-4 md:mx-8 my-8 shadow-xl">
                         <div className="container mx-auto px-6 text-center relative z-10">
-                            <h3 className="text-3xl md:text-4xl font-black mb-6 tracking-tight text-white" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                            <h3 className="text-3xl md:text-4xl font-black mb-6 tracking-tight text-white" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                                 Замовте торт для чоловіка вже сьогодні
                             </h3>
                             <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -2602,7 +2602,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                     <section className="py-10 md:py-14 bg-[#FAFAFA]">
                         <div className="max-w-3xl mx-auto px-4 md:px-8">
                             <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] uppercase tracking-tight mb-8 text-center"
-                                style={{ fontFamily: "'Oswald', sans-serif" }}>
+                                style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                                 Поширені запитання (FAQ)
                             </h2>
                             <div className="space-y-3">
@@ -2635,7 +2635,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                     <div className="bg-[#FAFAFA] pt-8 md:pt-16 pb-12 md:pb-20 px-4 md:px-8 shadow-inner border-b border-gray-100">
                         <div className="max-w-4xl mx-auto text-center">
                             <h2 className="text-2xl md:text-4xl font-black text-[#7A0019] mb-6 uppercase tracking-tight"
-                                style={{ fontFamily: "'Oswald', sans-serif" }}>
+                                style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                                 Маленький торт з великим настроєм
                             </h2>
                             <div className="w-20 h-1 bg-[#E8C064] mx-auto mb-8"></div>
@@ -2662,7 +2662,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                                 ].map((item, id) => (
                                     <div key={id} className="bg-[#FDFBF7] p-6 rounded-2xl border border-orange-50 text-center hover:shadow-lg transition-shadow">
                                         <div className="text-3xl mb-3">{item.icon}</div>
-                                        <h3 className="font-black text-[#4a1c28] uppercase text-sm mb-2" style={{ fontFamily: "'Oswald', sans-serif" }}>{item.t}</h3>
+                                        <h3 className="font-black text-[#4a1c28] uppercase text-sm mb-2" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>{item.t}</h3>
                                         <p className="text-gray-500 text-xs leading-tight">{item.d}</p>
                                     </div>
                                 ))}
@@ -2674,7 +2674,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                     <section className="bg-[#FDFBF7] py-12 md:py-20 px-4 md:px-8">
                         <div className="max-w-4xl mx-auto">
                             <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] mb-10 text-center uppercase tracking-tight"
-                                style={{ fontFamily: "'Oswald', sans-serif" }}>
+                                style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                                 Скільки коштує бенто торт у Києві?
                             </h2>
                             <div className="bg-white rounded-3xl p-6 md:p-10 shadow-sm border border-orange-100 mb-8">
@@ -2708,7 +2708,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                     <section className="py-12 md:py-20 bg-white px-4">
                         <div className="max-w-4xl mx-auto">
                             <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] mb-8 text-center uppercase tracking-tight"
-                                style={{ fontFamily: "'Oswald', sans-serif" }}>
+                                style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                                 Популярні варіанти бенто тортів
                             </h2>
                             <div className="flex flex-wrap justify-center gap-3 mb-10">
@@ -2736,7 +2736,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                     <section className="bg-white py-12 md:py-16 border-t border-gray-100">
                         <div className="max-w-5xl mx-auto px-4 md:px-8 grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 text-center md:text-left">
                             <div>
-                                <h2 className="text-2xl font-black text-[#7A0019] tracking-tight mb-4" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                                <h2 className="text-2xl font-black text-[#7A0019] tracking-tight mb-4" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                                     Начинки для бенто торта
                                 </h2>
                                 <p className="text-gray-600 leading-relaxed mb-4">
@@ -2747,7 +2747,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                                 </Link>
                             </div>
                             <div>
-                                <h2 className="text-2xl font-black text-[#7A0019] tracking-tight mb-4" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                                <h2 className="text-2xl font-black text-[#7A0019] tracking-tight mb-4" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                                     Доставка бенто тортів по Києву
                                 </h2>
                                 <p className="text-gray-600 leading-relaxed mb-4">
@@ -2764,7 +2764,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                     <div className="relative py-12 md:py-16 overflow-hidden bg-[#7A0019] rounded-3xl mx-4 md:mx-8 my-8 shadow-xl">
                         <div className="container mx-auto px-6 text-center relative z-10">
                             <p className="text-[#9C751E] font-bold uppercase tracking-widest text-xs mb-3">Хочете зробити сюрприз?</p>
-                            <h3 className="text-3xl md:text-4xl font-black mb-6 tracking-tight text-white" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                            <h3 className="text-3xl md:text-4xl font-black mb-6 tracking-tight text-white" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                                 Замовте бенто торт вже сьогодні
                             </h3>
                             <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -2784,7 +2784,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                     <section className="py-10 md:py-14 bg-[#FAFAFA]">
                         <div className="max-w-3xl mx-auto px-4 md:px-8">
                             <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] uppercase tracking-tight mb-8 text-center"
-                                style={{ fontFamily: "'Oswald', sans-serif" }}>
+                                style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                                 Поширені запитання
                             </h2>
                             <div className="space-y-3">
@@ -2815,7 +2815,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                 <>
                     {/* ── БЛОК 1: HERO (SEO Інтро) ── */}
                     <section className="category-intro mt-12 mb-8 mx-auto px-4 max-w-5xl">
-                        <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-4" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                        <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-4" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                             Торт з вашим фото — яскравий акцент свята
                         </h2>
                         <p className="intro-text">
@@ -2829,7 +2829,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                     {/* ── БЛОК 2: ЯК ЗАМОВИТИ ── */}
                     <section className="bg-white py-12 md:py-16 border-t border-gray-100">
                         <div className="max-w-6xl mx-auto px-4 md:px-8 text-center">
-                            <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-8" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                            <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-8" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                                 Як замовити торт з фото?
                             </h2>
                             <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
@@ -2863,7 +2863,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                     {/* ── БЛОК 3: ВАРІАНТИ ДИЗАЙНУ ── */}
                     <section className="bg-white py-12 md:py-16 border-t border-gray-100">
                         <div className="max-w-6xl mx-auto px-4 md:px-8 text-center">
-                            <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-8" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                            <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-8" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                                 Які фото можна розмістити?
                             </h2>
                             <div className="flex flex-wrap justify-center gap-4 mb-8">
@@ -2884,7 +2884,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                         <div className="max-w-3xl mx-auto px-4 md:px-8">
                             <div className="bg-white rounded-2xl md:rounded-3xl p-6 md:p-8 border border-[#E8C064]/20 shadow-sm flex flex-col md:flex-row items-center justify-between">
                                 <div className="mb-6 md:mb-0 md:pr-8 text-center md:text-left">
-                                    <h2 className="text-xl md:text-2xl font-black text-[#7A0019] mb-4 pb-2 border-b-2 border-[#E8C064]/50 inline-block" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                                    <h2 className="text-xl md:text-2xl font-black text-[#7A0019] mb-4 pb-2 border-b-2 border-[#E8C064]/50 inline-block" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                                         Скільки коштує фото-торт?
                                     </h2>
                                     <ul className="space-y-3 mt-4">
@@ -2911,7 +2911,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                     {/* ── БЛОК 5: НАЧИНКИ ── */}
                     <section className="bg-white py-12 border-t border-gray-100">
                         <div className="max-w-5xl mx-auto px-4 md:px-8 text-center">
-                            <h2 className="text-2xl font-black text-[#7A0019] tracking-tight mb-4" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                            <h2 className="text-2xl font-black text-[#7A0019] tracking-tight mb-4" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                                 Начинки для фото-тортів
                             </h2>
                             <p className="text-gray-600 leading-relaxed mb-6 max-w-2xl mx-auto">
@@ -2928,7 +2928,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                     {/* ── БЛОК 6: ДОСТАВКА ── */}
                     <section className="bg-[#FAFAFA] py-12 border-t border-gray-100">
                         <div className="max-w-5xl mx-auto px-4 md:px-8 text-center">
-                            <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-6" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                            <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-6" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                                 Доставка фото-тортів по Києву
                             </h2>
                             <p className="text-gray-600 leading-relaxed max-w-3xl mx-auto md:text-lg mb-6">
@@ -2944,7 +2944,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                     {/* ── БЛОК 7: ПЕРЕВАГИ (Як у Весільних) ── */}
                     <section className="bg-white py-12 md:py-16 border-t border-gray-100">
                         <div className="max-w-6xl mx-auto px-4 md:px-8 text-center">
-                            <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-10" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                            <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-10" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                                 Чому обирають Antreme?
                             </h2>
                             <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
@@ -2971,7 +2971,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                     {/* ── БЛОК 8: CTA ── */}
                     <div className="relative py-12 md:py-16 overflow-hidden bg-[#7A0019] rounded-3xl mx-4 md:mx-8 my-8 shadow-xl">
                         <div className="container mx-auto px-6 text-center relative z-10">
-                            <h2 className="text-3xl md:text-4xl font-black mb-6 tracking-tight text-white" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                            <h2 className="text-3xl md:text-4xl font-black mb-6 tracking-tight text-white" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                                 Хочете торт з вашим фото?
                             </h2>
                             <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -2991,7 +2991,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                     <section className="py-10 md:py-14 bg-[#FAFAFA]">
                         <div className="max-w-3xl mx-auto px-4 md:px-8">
                             <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] uppercase tracking-tight mb-8 text-center"
-                                style={{ fontFamily: "'Oswald', sans-serif" }}>
+                                style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                                 Поширені запитання
                             </h2>
                             <div className="space-y-3">
@@ -3022,7 +3022,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                 <>
                     {/* ── БЛОК 1: HERO (SEO Інтро) ── */}
                     <section className="category-intro mt-12 mb-8 mx-auto px-4 max-w-5xl">
-                        <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-4" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                        <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-4" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                             Торти до свят протягом року
                         </h2>
                         <p className="intro-text">
@@ -3036,41 +3036,41 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                     {/* ── БЛОК 2: ОСНОВНІ СЕЗОННІ СВЯТА ── */}
                     <section className="bg-white py-12 md:py-16 border-t border-gray-100">
                         <div className="max-w-6xl mx-auto px-4 md:px-8">
-                            <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-10 text-center" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                            <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-10 text-center" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                                 До яких свят замовляють торти?
                             </h2>
                             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
                                 {/* Новий рік */}
                                 <div className="bg-[#FAFAFA] p-6 rounded-3xl border border-gray-100 hover:shadow-lg transition-shadow border-t-4 border-t-[#7A0019]">
-                                    <h3 className="text-xl font-bold text-gray-900 mb-3" style={{ fontFamily: "'Oswald', sans-serif" }}>Новий рік</h3>
+                                    <h3 className="text-xl font-bold text-gray-900 mb-3" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>Новий рік</h3>
                                     <p className="text-sm text-gray-600 leading-relaxed">
                                         Торт з новорічним декором, кремовими ялинками та сніжинками.
                                     </p>
                                 </div>
                                 {/* День святого Валентина */}
                                 <div className="bg-[#FAFAFA] p-6 rounded-3xl border border-gray-100 hover:shadow-lg transition-shadow border-t-4 border-t-[#7A0019]">
-                                    <h3 className="text-xl font-bold text-gray-900 mb-3" style={{ fontFamily: "'Oswald', sans-serif" }}>День святого Валентина</h3>
+                                    <h3 className="text-xl font-bold text-gray-900 mb-3" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>День святого Валентина</h3>
                                     <p className="text-sm text-gray-600 leading-relaxed">
                                         Романтичні дизайни у червоних і рожевих відтінках.
                                     </p>
                                 </div>
                                 {/* 8 березня */}
                                 <div className="bg-[#FAFAFA] p-6 rounded-3xl border border-gray-100 hover:shadow-lg transition-shadow border-t-4 border-t-[#7A0019]">
-                                    <h3 className="text-xl font-bold text-gray-900 mb-3" style={{ fontFamily: "'Oswald', sans-serif" }}>8 березня</h3>
+                                    <h3 className="text-xl font-bold text-gray-900 mb-3" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>8 березня</h3>
                                     <p className="text-sm text-gray-600 leading-relaxed">
                                         Ніжні весняні торти з квітами.
                                     </p>
                                 </div>
                                 {/* Великдень */}
                                 <div className="bg-[#FAFAFA] p-6 rounded-3xl border border-gray-100 hover:shadow-lg transition-shadow border-t-4 border-t-[#7A0019]">
-                                    <h3 className="text-xl font-bold text-gray-900 mb-3" style={{ fontFamily: "'Oswald', sans-serif" }}>Великдень</h3>
+                                    <h3 className="text-xl font-bold text-gray-900 mb-3" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>Великдень</h3>
                                     <p className="text-sm text-gray-600 leading-relaxed">
                                         Світлі пастельні торти з тематичним декором.
                                     </p>
                                 </div>
                                 {/* Хелловін */}
                                 <div className="bg-[#FAFAFA] p-6 rounded-3xl border border-gray-100 hover:shadow-lg transition-shadow border-t-4 border-t-[#7A0019]">
-                                    <h3 className="text-xl font-bold text-gray-900 mb-3" style={{ fontFamily: "'Oswald', sans-serif" }}>Хелловін</h3>
+                                    <h3 className="text-xl font-bold text-gray-900 mb-3" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>Хелловін</h3>
                                     <p className="text-sm text-gray-600 leading-relaxed">
                                         Яскраві та креативні варіанти.
                                     </p>
@@ -3087,7 +3087,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                     {/* ── БЛОК 3: ДИЗАЙН ── */}
                     <section className="bg-[#FAFAFA] py-12 md:py-16 border-t border-gray-100">
                         <div className="max-w-4xl mx-auto px-4 md:px-8 text-center">
-                            <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-8" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                            <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-8" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                                 Дизайн сезонних тортів
                             </h2>
                             <ul className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-8 text-left">
@@ -3117,7 +3117,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                     {/* ── БЛОК 4: СКІЛЬКИ КОШТУЄ ── */}
                     <section className="py-12 md:py-16 bg-white border-t border-gray-100">
                         <div className="max-w-4xl mx-auto px-4 md:px-8 text-center">
-                            <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-8" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                            <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-8" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                                 Скільки коштує сезонний торт?
                             </h2>
                             <div className="flex flex-col md:flex-row gap-6 justify-center text-left">
@@ -3138,7 +3138,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                     {/* ── БЛОК 5: НАЧИНКИ ── */}
                     <section className="bg-[#FAFAFA] py-12 md:py-16 border-t border-gray-100">
                         <div className="max-w-4xl mx-auto px-4 md:px-8 text-center">
-                            <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-6" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                            <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-6" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                                 Начинки для сезонних тортів
                             </h2>
                             <div className="flex flex-wrap gap-4 justify-center items-center mt-6">
@@ -3153,7 +3153,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                     {/* ── БЛОК 6: ДОСТАВКА ── */}
                     <section className="bg-white py-12 md:py-16 border-t border-gray-100">
                         <div className="max-w-4xl mx-auto px-4 md:px-8 text-center text-gray-800">
-                            <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-6" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                            <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-6" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                                 Доставка сезонних тортів по Києву
                             </h2>
                             <p className="text-sm md:text-base text-gray-600 mb-4 max-w-2xl mx-auto">
@@ -3169,7 +3169,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                     <section className="bg-[#FAFAFA] py-12 md:py-16 border-t border-gray-100">
                         <div className="max-w-7xl mx-auto px-4 md:px-8">
                             <h2 className="text-2xl md:text-3xl font-black text-center text-[#7A0019] uppercase tracking-tight mb-10"
-                                style={{ fontFamily: "'Oswald', sans-serif" }}>
+                                style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                                 Чому обирають Antreme?
                             </h2>
                             <div className="grid grid-cols-2 md:grid-cols-5 gap-6 text-center">
@@ -3201,7 +3201,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                     <div className="bg-[#7A0019] relative overflow-hidden py-16">
                         <div className="max-w-4xl mx-auto px-4 md:px-8 text-center relative z-10">
                             <h2 className="text-3xl md:text-5xl font-black text-white uppercase tracking-tight mb-6"
-                                style={{ fontFamily: "'Oswald', sans-serif" }}>
+                                style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                                 Плануєте свято?
                             </h2>
                             <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -3221,7 +3221,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                     <section className="py-10 md:py-14 bg-[#FAFAFA]">
                         <div className="max-w-3xl mx-auto px-4 md:px-8">
                             <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] uppercase tracking-tight mb-8 text-center"
-                                style={{ fontFamily: "'Oswald', sans-serif" }}>
+                                style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                                 Поширені запитання
                             </h2>
                             <div className="space-y-3">
@@ -3252,7 +3252,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                 <>
                     {/* ── БЛОК 1: HERO (SEO Інтро) ── */}
                     <section className="category-intro mt-12 mb-8 mx-auto px-4 max-w-5xl">
-                        <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-4" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                        <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-4" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                             Торт, що відображає захоплення
                         </h2>
                         <p className="intro-text">
@@ -3266,7 +3266,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                     {/* ── БЛОК 2: ПОПУЛЯРНІ НАПРЯМКИ ── */}
                     <section className="bg-white py-12 md:py-16 border-t border-gray-100">
                         <div className="max-w-6xl mx-auto px-4 md:px-8">
-                            <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-10 text-center" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                            <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-10 text-center" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                                 Для яких хобі замовляють торти?
                             </h2>
                             <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-4 mb-10">
@@ -3312,7 +3312,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                     {/* ── БЛОК 3: ДИЗАЙН ── */}
                     <section className="bg-[#FAFAFA] py-12 md:py-16 border-t border-gray-100">
                         <div className="max-w-4xl mx-auto px-4 md:px-8 text-center">
-                            <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-8" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                            <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-8" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                                 Дизайн тематичних тортів
                             </h2>
                             <ul className="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-8 text-left">
@@ -3342,7 +3342,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                     {/* ── БЛОК 4: СКІЛЬКИ КОШТУЄ ── */}
                     <section className="py-12 md:py-16 bg-white border-t border-gray-100">
                         <div className="max-w-4xl mx-auto px-4 md:px-8 text-center">
-                            <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-8" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                            <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-8" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                                 Скільки коштує торт за хобі?
                             </h2>
                             <div className="flex flex-col md:flex-row gap-6 justify-center text-left">
@@ -3367,7 +3367,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                     {/* ── БЛОК 5: НАЧИНКИ ── */}
                     <section className="bg-[#FAFAFA] py-12 md:py-16 border-t border-gray-100">
                         <div className="max-w-4xl mx-auto px-4 md:px-8 text-center">
-                            <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-6" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                            <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-6" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                                 Начинки для тематичних тортів
                             </h2>
                             <p className="text-sm md:text-base text-gray-600 mb-8 max-w-2xl mx-auto">
@@ -3385,7 +3385,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                     {/* ── БЛОК 6: ДОСТАВКА ── */}
                     <section className="bg-white py-12 md:py-16 border-t border-gray-100">
                         <div className="max-w-4xl mx-auto px-4 md:px-8 text-center text-gray-800">
-                            <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-6" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                            <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-6" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                                 Доставка по Києву
                             </h2>
                             <p className="text-sm md:text-base text-gray-600 mb-4 max-w-2xl mx-auto">
@@ -3401,7 +3401,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                     <section className="bg-[#FAFAFA] py-12 md:py-16 border-t border-gray-100">
                         <div className="max-w-7xl mx-auto px-4 md:px-8">
                             <h2 className="text-2xl md:text-3xl font-black text-center text-[#7A0019] uppercase tracking-tight mb-10"
-                                style={{ fontFamily: "'Oswald', sans-serif" }}>
+                                style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                                 Чому обирають Antreme?
                             </h2>
                             <div className="grid grid-cols-2 md:grid-cols-5 gap-6 text-center">
@@ -3433,7 +3433,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                     <div className="bg-[#7A0019] relative overflow-hidden py-16">
                         <div className="max-w-4xl mx-auto px-4 md:px-8 text-center relative z-10">
                             <h2 className="text-3xl md:text-5xl font-black text-white uppercase tracking-tight mb-6"
-                                style={{ fontFamily: "'Oswald', sans-serif" }}>
+                                style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                                 Потрібен торт, що відображає хобі?
                             </h2>
                             <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -3453,7 +3453,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                     <section className="py-10 md:py-14 bg-[#FAFAFA]">
                         <div className="max-w-3xl mx-auto px-4 md:px-8">
                             <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] uppercase tracking-tight mb-8 text-center"
-                                style={{ fontFamily: "'Oswald', sans-serif" }}>
+                                style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                                 Поширені запитання
                             </h2>
                             <div className="space-y-3">
@@ -3484,7 +3484,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                 <>
                     {/* ── БЛОК 1: HERO (SEO Інтро) ── */}
                     <section className="category-intro mt-12 mb-8 mx-auto px-4 max-w-5xl text-center">
-                        <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-4" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                        <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-4" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                             Класичний формат, що завжди доречний
                         </h2>
                         <p className="intro-text max-w-3xl mx-auto italic text-gray-600 mb-4">
@@ -3498,7 +3498,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                     {/* ── БЛОК 2: ПОПУЛЯРНІ СМАКИ ── */}
                     <section className="bg-white py-12 md:py-16 border-t border-gray-100">
                         <div className="max-w-6xl mx-auto px-4 md:px-8">
-                            <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-10 text-center" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                            <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-10 text-center" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                                 Популярні смаки бісквітних тортів
                             </h2>
                             <div className="grid grid-cols-2 lg:grid-cols-5 gap-6 mb-10">
@@ -3524,7 +3524,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                     {/* ── БЛОК 3: ДЛЯ ЯКИХ ПОДІЙ ── */}
                     <section className="bg-[#FAFAFA] py-12 md:py-16 border-t border-gray-100">
                         <div className="max-w-6xl mx-auto px-4 md:px-8">
-                            <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-10 text-center" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                            <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-10 text-center" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                                 Для яких подій обирають бісквітні торти?
                             </h2>
                             <div className="grid grid-cols-2 md:grid-cols-5 gap-4 mb-10">
@@ -3550,7 +3550,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                     {/* ── БЛОК 4: ДИЗАЙН ── */}
                     <section className="bg-white py-12 md:py-16 border-t border-gray-100">
                         <div className="max-w-4xl mx-auto px-4 md:px-8 text-center">
-                            <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-8" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                            <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-8" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                                 Дизайн бісквітних тортів
                             </h2>
                             <ul className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-8 text-left">
@@ -3579,7 +3579,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                     <section className="py-12 md:py-20 bg-[#FAFAFA]">
                         <div className="max-w-4xl mx-auto px-4 md:px-8">
                             <div className="bg-[#7A0019] rounded-[40px] p-8 md:p-12 text-center text-white relative overflow-hidden shadow-2xl">
-                                <h2 className="text-2xl md:text-3xl font-black mb-6 relative z-10 uppercase" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                                <h2 className="text-2xl md:text-3xl font-black mb-6 relative z-10 uppercase" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                                     Скільки коштує бісквітний торт?
                                 </h2>
                                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-10 relative z-10">
@@ -3611,7 +3611,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                     {/* ── БЛОК 6: ДОСТАВКА ── */}
                     <section className="bg-white py-12 md:py-16 border-t border-gray-100">
                         <div className="max-w-4xl mx-auto px-4 md:px-8 text-center text-gray-800">
-                            <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-6" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                            <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-6" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                                 Доставка по Києву
                             </h2>
                             <p className="text-sm md:text-base text-gray-600 mb-6 max-w-2xl mx-auto leading-relaxed text-left md:text-center">
@@ -3627,7 +3627,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                     <div className="bg-[#7A0019] relative overflow-hidden py-16">
                         <div className="max-w-4xl mx-auto px-4 md:px-8 text-center relative z-10">
                             <h2 className="text-3xl md:text-5xl font-black text-white uppercase tracking-tight mb-6"
-                                style={{ fontFamily: "'Oswald', sans-serif" }}>
+                                style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                                 Замовити бісквітний торт у Києві
                             </h2>
                             <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -3645,7 +3645,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                     <section className="py-10 md:py-14 bg-[#FAFAFA]">
                         <div className="max-w-3xl mx-auto px-4 md:px-8">
                             <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] uppercase tracking-tight mb-8 text-center"
-                                style={{ fontFamily: "'Oswald', sans-serif" }}>
+                                style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                                 Поширені запитання
                             </h2>
                             <div className="space-y-3">
@@ -3676,7 +3676,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                 <>
                     {/* ── БЛОК 1: HERO (SEO Інтро) ── */}
                     <section className="category-intro mt-12 mb-8 mx-auto px-4 max-w-5xl text-center">
-                        <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-4" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                        <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-4" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                             Індивідуальні капкейки для будь-якої події
                         </h2>
                         <p className="intro-text max-w-3xl mx-auto italic text-gray-600 mb-4">
@@ -3690,7 +3690,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                     {/* ── БЛОК 2: КОЛИ ЗАМОВЛЯЮТЬ ── */}
                     <section className="bg-white py-12 md:py-16 border-t border-gray-100">
                         <div className="max-w-6xl mx-auto px-4 md:px-8 text-center text-gray-800">
-                            <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-10 text-center" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                            <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-10 text-center" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                                 Коли замовляють капкейки?
                             </h2>
                             <div className="grid grid-cols-2 md:grid-cols-5 gap-4 mb-10">
@@ -3713,7 +3713,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                     {/* ── БЛОК 3: ДИЗАЙН ── */}
                     <section className="bg-[#FAFAFA] py-12 md:py-16 border-t border-gray-100">
                         <div className="max-w-4xl mx-auto px-4 md:px-8 text-center">
-                            <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-8" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                            <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-8" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                                 Дизайн капкейків
                             </h2>
                             <ul className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-8 text-left">
@@ -3742,7 +3742,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                     <section className="py-12 md:py-20 bg-white">
                         <div className="max-w-4xl mx-auto px-4 md:px-8">
                             <div className="bg-[#7A0019] rounded-[40px] p-8 md:p-12 text-center text-white relative overflow-hidden shadow-2xl">
-                                <h2 className="text-2xl md:text-3xl font-black mb-6 relative z-10 uppercase" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                                <h2 className="text-2xl md:text-3xl font-black mb-6 relative z-10 uppercase" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                                     Скільки коштують капкейки?
                                 </h2>
                                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-10 relative z-10">
@@ -3774,7 +3774,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                     {/* ── БЛОК 5: СМАКИ ── */}
                     <section className="bg-[#FAFAFA] py-12 md:py-16 border-t border-gray-100">
                         <div className="max-w-4xl mx-auto px-4 md:px-8 text-center">
-                            <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-10" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                            <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-10" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                                 Смаки капкейків
                             </h2>
                             <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-10">
@@ -3797,7 +3797,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                     {/* ── БЛОК 6: ДОСТАВКА ── */}
                     <section className="bg-white py-12 md:py-16 border-t border-gray-100">
                         <div className="max-w-4xl mx-auto px-4 md:px-8 text-center text-gray-800">
-                            <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-6" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                            <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-6" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                                 Доставка капкейків по Києву
                             </h2>
                             <p className="text-sm md:text-base text-gray-600 mb-6 max-w-2xl mx-auto leading-relaxed text-left md:text-center">
@@ -3813,7 +3813,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                     <div className="bg-[#7A0019] relative overflow-hidden py-16">
                         <div className="max-w-4xl mx-auto px-4 md:px-8 text-center relative z-10">
                             <h2 className="text-3xl md:text-5xl font-black text-white uppercase tracking-tight mb-6"
-                                style={{ fontFamily: "'Oswald', sans-serif" }}>
+                                style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                                 Потрібні капкейки для свята?
                             </h2>
                             <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -3831,7 +3831,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                     <section className="py-10 md:py-14 bg-[#FAFAFA]">
                         <div className="max-w-3xl mx-auto px-4 md:px-8">
                             <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] uppercase tracking-tight mb-8 text-center"
-                                style={{ fontFamily: "'Oswald', sans-serif" }}>
+                                style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                                 Поширені запитання
                             </h2>
                             <div className="space-y-3">
@@ -3862,7 +3862,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                 <>
                     {/* ── БЛОК 1: HERO (SEO Інтро) ── */}
                     <section className="category-intro mt-12 mb-8 mx-auto px-4 max-w-5xl text-center">
-                        <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-4" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                        <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-4" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                             Авторські імбирні пряники для будь-якої події
                         </h2>
                         <p className="intro-text max-w-3xl mx-auto italic text-gray-600 mb-4">
@@ -3876,7 +3876,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                     {/* ── БЛОК 2: КОЛИ ЗАМОВЛЯЮТЬ ── */}
                     <section className="bg-white py-12 md:py-16 border-t border-gray-100">
                         <div className="max-w-6xl mx-auto px-4 md:px-8 text-center text-gray-800">
-                            <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-10 text-center" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                            <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-10 text-center" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                                 Коли замовляють імбирні пряники?
                             </h2>
                             <div className="grid grid-cols-2 lg:grid-cols-5 gap-4 mb-10">
@@ -3899,7 +3899,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                     {/* ── БЛОК 3: БРЕНДОВАНІ ── */}
                     <section className="bg-[#FAFAFA] py-12 md:py-16 border-t border-gray-100">
                         <div className="max-w-4xl mx-auto px-4 md:px-8 text-center">
-                            <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-6" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                            <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-6" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                                 Пряники з логотипом компанії
                             </h2>
                             <p className="text-sm md:text-base text-gray-600 mb-8 max-w-2xl mx-auto leading-relaxed">
@@ -3915,7 +3915,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                     <section className="py-12 md:py-20 bg-white">
                         <div className="max-w-4xl mx-auto px-4 md:px-8">
                             <div className="bg-[#7A0019] rounded-[40px] p-8 md:p-12 text-center text-white relative overflow-hidden shadow-2xl">
-                                <h2 className="text-2xl md:text-3xl font-black mb-6 relative z-10 uppercase" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                                <h2 className="text-2xl md:text-3xl font-black mb-6 relative z-10 uppercase" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                                     Скільки коштують імбирні пряники?
                                 </h2>
                                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-10 relative z-10">
@@ -3947,7 +3947,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                     {/* ── БЛОК 5: ДОСТАВКА ── */}
                     <section className="bg-[#FAFAFA] py-12 md:py-16 border-t border-gray-100">
                         <div className="max-w-4xl mx-auto px-4 md:px-8 text-center text-gray-800">
-                            <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-6" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                            <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-6" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                                 Доставка імбирних пряників у Києві
                             </h2>
                             <p className="text-sm md:text-base text-gray-600 mb-6 max-w-2xl mx-auto leading-relaxed text-left md:text-center">
@@ -3970,7 +3970,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                     <div className="bg-[#7A0019] relative overflow-hidden py-16">
                         <div className="max-w-4xl mx-auto px-4 md:px-8 text-center relative z-10">
                             <h2 className="text-3xl md:text-5xl font-black text-white uppercase tracking-tight mb-6"
-                                style={{ fontFamily: "'Oswald', sans-serif" }}>
+                                style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                                 Потрібні святкові пряники?
                             </h2>
                             <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -3988,7 +3988,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                     <section className="py-10 md:py-14 bg-[#FAFAFA]">
                         <div className="max-w-3xl mx-auto px-4 md:px-8">
                             <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] uppercase tracking-tight mb-8 text-center"
-                                style={{ fontFamily: "'Oswald', sans-serif" }}>
+                                style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                                 Поширені запитання
                             </h2>
                             <div className="space-y-3">
@@ -4019,7 +4019,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                 <>
                     {/* ── БЛОК 1: HERO (SEO Інтро) ── */}
                     <section className="category-intro mt-12 mb-8 mx-auto px-4 max-w-5xl text-center">
-                        <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-4" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                        <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-4" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                             Легка текстура та сучасний стиль
                         </h2>
                         <p className="intro-text max-w-3xl mx-auto italic text-gray-600 mb-4">
@@ -4033,7 +4033,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                     {/* ── БЛОК 2: ПОПУЛЯРНІ СМАКИ ── */}
                     <section className="bg-white py-12 md:py-16 border-t border-gray-100">
                         <div className="max-w-6xl mx-auto px-4 md:px-8">
-                            <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-10 text-center" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                            <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-10 text-center" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                                 Популярні поєднання смаків
                             </h2>
                             <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
@@ -4058,7 +4058,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                     {/* ── БЛОК 3: ДЛЯ ЯКИХ ПОДІЙ ── */}
                     <section className="bg-[#FAFAFA] py-12 md:py-16 border-t border-gray-100">
                         <div className="max-w-4xl mx-auto px-4 md:px-8 text-center">
-                            <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-8" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                            <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-8" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                                 Коли обирають мусові торти?
                             </h2>
                             <ul className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-8 text-left">
@@ -4093,7 +4093,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                     <section className="py-12 md:py-20 bg-white">
                         <div className="max-w-4xl mx-auto px-4 md:px-8">
                             <div className="bg-[#7A0019] rounded-[40px] p-8 md:p-12 text-center text-white relative overflow-hidden shadow-2xl">
-                                <h2 className="text-2xl md:text-3xl font-black mb-6 relative z-10 uppercase" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                                <h2 className="text-2xl md:text-3xl font-black mb-6 relative z-10 uppercase" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                                     Скільки коштує мусовий торт?
                                 </h2>
                                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-10 relative z-10">
@@ -4125,7 +4125,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                     {/* ── БЛОК 5: ДОСТАВКА ── */}
                     <section className="bg-[#FAFAFA] py-12 md:py-16 border-y border-gray-100">
                         <div className="max-w-4xl mx-auto px-4 md:px-8 text-center text-gray-800">
-                            <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-6" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                            <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-6" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                                 Доставка по Києву
                             </h2>
                             <p className="text-sm md:text-base text-gray-600 mb-8 max-w-2xl mx-auto leading-relaxed">
@@ -4141,7 +4141,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                     <div className="bg-[#7A0019] relative overflow-hidden py-16">
                         <div className="max-w-4xl mx-auto px-4 md:px-8 text-center relative z-10">
                             <h2 className="text-3xl md:text-5xl font-black text-white uppercase tracking-tight mb-6"
-                                style={{ fontFamily: "'Oswald', sans-serif" }}>
+                                style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                                 Замовити мусовий торт у Києві
                             </h2>
                             <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -4159,7 +4159,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                     <section className="py-10 md:py-14 bg-[#FAFAFA]">
                         <div className="max-w-3xl mx-auto px-4 md:px-8">
                             <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] uppercase tracking-tight mb-8 text-center"
-                                style={{ fontFamily: "'Oswald', sans-serif" }}>
+                                style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                                 Поширені запитання
                             </h2>
                             <div className="space-y-3">
@@ -4190,7 +4190,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                 <>
                     {/* ── БЛОК 1: HERO (SEO Інтро) ── */}
                     <section className="category-intro mt-12 mb-8 mx-auto px-4 max-w-5xl text-center">
-                        <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-4" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                        <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-4" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                             Торт, який підкреслює характер
                         </h2>
                         <p className="intro-text max-w-3xl mx-auto italic text-gray-600 mb-4">
@@ -4204,7 +4204,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                     {/* ── БЛОК 2: ДЛЯ ЯКИХ ПОДІЙ ── */}
                     <section className="bg-white py-12 md:py-16 border-t border-gray-100">
                         <div className="max-w-6xl mx-auto px-4 md:px-8">
-                            <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-10 text-center" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                            <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-10 text-center" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                                 Коли замовляють торт для дівчини?
                             </h2>
                             <div className="grid grid-cols-2 md:grid-cols-5 gap-4 mb-10">
@@ -4232,7 +4232,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                     {/* ── БЛОК 3: ДИЗАЙН ── */}
                     <section className="bg-[#FAFAFA] py-12 md:py-16 border-t border-gray-100">
                         <div className="max-w-4xl mx-auto px-4 md:px-8 text-center">
-                            <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-8" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                            <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-8" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                                 Варіанти дизайну
                             </h2>
                             <ul className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-8 text-left">
@@ -4261,7 +4261,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                     <section className="py-12 md:py-20 bg-white">
                         <div className="max-w-4xl mx-auto px-4 md:px-8">
                             <div className="bg-[#7A0019] rounded-[40px] p-8 md:p-12 text-center text-white relative overflow-hidden shadow-2xl">
-                                <h2 className="text-2xl md:text-3xl font-black mb-6 relative z-10" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                                <h2 className="text-2xl md:text-3xl font-black mb-6 relative z-10" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                                     Скільки коштує торт для дівчини?
                                 </h2>
                                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-10 relative z-10">
@@ -4288,7 +4288,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                     {/* ── БЛОК 5: НАЧИНКИ ── */}
                     <section className="bg-[#FAFAFA] py-12 md:py-16 border-y border-gray-100">
                         <div className="max-w-4xl mx-auto px-4 md:px-8 text-center">
-                            <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-6" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                            <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-6" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                                 Начинки для тортів
                             </h2>
                             <p className="text-gray-600 mb-8 max-w-2xl mx-auto">
@@ -4307,7 +4307,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                     {/* ── БЛОК 6: ДОСТАВКА ── */}
                     <section className="py-12 md:py-16 bg-white">
                         <div className="max-w-3xl mx-auto px-4 md:px-8 text-center">
-                            <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-6" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                            <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-6" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                                 Доставка по Києву
                             </h2>
                             <p className="text-gray-700 mb-6 leading-relaxed">
@@ -4320,7 +4320,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                     {/* ── БЛОК 7: ПЕРЕВАГИ ── */}
                     <section className="bg-[#FAFAFA] py-12 md:py-16 border-t border-gray-100">
                         <div className="max-w-6xl mx-auto px-4 md:px-8">
-                            <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-10 text-center" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                            <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-10 text-center" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                                 Чому обирають Antreme?
                             </h2>
                             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
@@ -4344,7 +4344,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                     <div className="bg-[#7A0019] relative overflow-hidden py-16">
                         <div className="max-w-4xl mx-auto px-4 md:px-8 text-center relative z-10">
                             <h2 className="text-3xl md:text-5xl font-black text-white uppercase tracking-tight mb-6"
-                                style={{ fontFamily: "'Oswald', sans-serif" }}>
+                                style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                                 Плануєте сюрприз?
                             </h2>
                             <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -4362,7 +4362,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                     <section className="py-10 md:py-14 bg-[#FAFAFA]">
                         <div className="max-w-3xl mx-auto px-4 md:px-8">
                             <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] uppercase tracking-tight mb-8 text-center"
-                                style={{ fontFamily: "'Oswald', sans-serif" }}>
+                                style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                                 Поширені запитання
                             </h2>
                             <div className="space-y-3">
@@ -4393,7 +4393,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                 <>
                     {/* ── БЛОК 1: HERO (SEO Інтро) ── */}
                     <section className="category-intro mt-12 mb-8 mx-auto px-4 max-w-5xl text-center">
-                        <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-4" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                        <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-4" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                             Торт у національному стилі
                         </h2>
                         <p className="intro-text max-w-3xl mx-auto">
@@ -4407,24 +4407,24 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                     {/* ── БЛОК 2: ДЛЯ ЯКИХ ПОДІЙ ── */}
                     <section className="bg-white py-12 md:py-16 border-t border-gray-100">
                         <div className="max-w-6xl mx-auto px-4 md:px-8">
-                            <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-10 text-center" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                            <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-10 text-center" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                                 Коли замовляють патріотичні торти?
                             </h2>
                             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
                                 <div className="bg-[#FAFAFA] p-6 rounded-3xl border border-gray-100 border-t-4 border-t-[#0057B7]">
-                                    <h3 className="text-xl font-bold text-gray-900 mb-3" style={{ fontFamily: "'Oswald', sans-serif" }}>Державні свята</h3>
+                                    <h3 className="text-xl font-bold text-gray-900 mb-3" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>Державні свята</h3>
                                     <p className="text-sm text-gray-600 leading-relaxed">
                                         День Незалежності, День Конституції та інші офіційні дати.
                                     </p>
                                 </div>
                                 <div className="bg-[#FAFAFA] p-6 rounded-3xl border border-gray-100 border-t-4 border-t-[#FFD700]">
-                                    <h3 className="text-xl font-bold text-gray-900 mb-3" style={{ fontFamily: "'Oswald', sans-serif" }}>Підтримка військових</h3>
+                                    <h3 className="text-xl font-bold text-gray-900 mb-3" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>Підтримка військових</h3>
                                     <p className="text-sm text-gray-600 leading-relaxed">
                                         Подарунок для захисників та захисниць України.
                                     </p>
                                 </div>
                                 <div className="bg-[#FAFAFA] p-6 rounded-3xl border border-gray-100 border-t-4 border-t-[#7A0019]">
-                                    <h3 className="text-xl font-bold text-gray-900 mb-3" style={{ fontFamily: "'Oswald', sans-serif" }}>Урочисті та благодійні події</h3>
+                                    <h3 className="text-xl font-bold text-gray-900 mb-3" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>Урочисті та благодійні події</h3>
                                     <p className="text-sm text-gray-600 leading-relaxed">
                                         Заходи, спрямовані на підтримку українських ініціатив.
                                     </p>
@@ -4441,7 +4441,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                     {/* ── БЛОК 3: ДИЗАЙН ── */}
                     <section className="bg-[#FAFAFA] py-12 md:py-16 border-t border-gray-100">
                         <div className="max-w-4xl mx-auto px-4 md:px-8 text-center">
-                            <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-8" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                            <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-8" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                                 Варіанти оформлення
                             </h2>
                             <ul className="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-8 text-left">
@@ -4471,7 +4471,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                     {/* ── БЛОК 4: СКІЛЬКИ КОШТУЄ ── */}
                     <section className="py-12 md:py-16 bg-white border-t border-gray-100">
                         <div className="max-w-4xl mx-auto px-4 md:px-8 text-center">
-                            <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-8" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                            <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-8" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                                 Скільки коштує патріотичний торт?
                             </h2>
                             <div className="flex flex-col md:flex-row gap-6 justify-center text-left">
@@ -4496,7 +4496,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                     {/* ── БЛОК 5: НАЧИНКИ ── */}
                     <section className="bg-[#FAFAFA] py-12 md:py-16 border-t border-gray-100">
                         <div className="max-w-4xl mx-auto px-4 md:px-8 text-center">
-                            <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-6" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                            <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-6" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                                 Начинки для патріотичних тортів
                             </h2>
                             <p className="text-sm md:text-base text-gray-600 mb-8 max-w-2xl mx-auto">
@@ -4514,7 +4514,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                     {/* ── БЛОК 6: ДОСТАВКА ── */}
                     <section className="bg-white py-12 md:py-16 border-t border-gray-100">
                         <div className="max-w-4xl mx-auto px-4 md:px-8 text-center">
-                            <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-6" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                            <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-6" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                                 Доставка по Києву
                             </h2>
                             <p className="text-sm md:text-base text-gray-600 mb-4">
@@ -4530,7 +4530,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                     <section className="bg-[#FAFAFA] py-12 md:py-16 border-t border-gray-100">
                         <div className="max-w-7xl mx-auto px-4 md:px-8">
                             <h2 className="text-2xl md:text-3xl font-black text-center text-[#7A0019] uppercase tracking-tight mb-10"
-                                style={{ fontFamily: "'Oswald', sans-serif" }}>
+                                style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                                 Чому обирають Antreme?
                             </h2>
                             <div className="grid grid-cols-2 lg:grid-cols-5 gap-6 text-center">
@@ -4562,7 +4562,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                     <div className="bg-[#7A0019] relative overflow-hidden py-16">
                         <div className="max-w-4xl mx-auto px-4 md:px-8 text-center relative z-10">
                             <h2 className="text-3xl md:text-5xl font-black text-white uppercase tracking-tight mb-6"
-                                style={{ fontFamily: "'Oswald', sans-serif" }}>
+                                style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                                 Потрібен патріотичний торт у Києві?
                             </h2>
                             <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -4582,7 +4582,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                     <section className="py-10 md:py-14 bg-[#FAFAFA]">
                         <div className="max-w-3xl mx-auto px-4 md:px-8">
                             <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] uppercase tracking-tight mb-8 text-center"
-                                style={{ fontFamily: "'Oswald', sans-serif" }}>
+                                style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                                 Поширені запитання
                             </h2>
                             <div className="space-y-3">
@@ -4613,7 +4613,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                 <>
                     {/* ── БЛОК 1: HERO (SEO Інтро) ── */}
                     <section className="category-intro mt-12 mb-8 mx-auto px-4 max-w-5xl">
-                        <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-4" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                        <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-4" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                             Тематичний торт для особливої професії
                         </h2>
                         <p className="intro-text">
@@ -4627,7 +4627,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                     {/* ── БЛОК 2: ДЛЯ ЯКИХ ПРОФЕСІЙ ── */}
                     <section className="bg-white py-12 md:py-16 border-t border-gray-100">
                         <div className="max-w-6xl mx-auto px-4 md:px-8 text-center">
-                            <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-8" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                            <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-8" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                                 Для яких професій замовляють торти?
                             </h2>
                             <div className="grid grid-cols-2 md:grid-cols-6 gap-4 mb-8">
@@ -4678,7 +4678,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                                     <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
                                 </div>
                                 <div className="w-full md:w-1/2">
-                                    <h2 className="text-3xl md:text-4xl font-black text-[#7A0019] tracking-tight mb-8" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                                    <h2 className="text-3xl md:text-4xl font-black text-[#7A0019] tracking-tight mb-8" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                                         Дизайн тематичних тортів
                                     </h2>
                                     <ul className="space-y-5 mb-8">
@@ -4719,7 +4719,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                     {/* ── БЛОК 4: СКІЛЬКИ КОШТУЄ ── */}
                     <section className="bg-white py-12 md:py-16 border-t border-gray-100 text-center">
                         <div className="max-w-5xl mx-auto px-4 md:px-8">
-                            <h2 className="text-3xl font-black text-[#7A0019] tracking-tight mb-8" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                            <h2 className="text-3xl font-black text-[#7A0019] tracking-tight mb-8" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                                 Скільки коштує торт на професійне свято?
                             </h2>
                             <div className="flex flex-col md:flex-row justify-center gap-6 mb-10">
@@ -4745,7 +4745,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                     {/* ── БЛОК 5: НАЧИНКИ ── */}
                     <section className="bg-[#FAFAFA] py-12 border-t border-gray-100 text-center">
                         <div className="max-w-5xl mx-auto px-4 md:px-8">
-                            <h2 className="text-2xl font-black text-[#7A0019] tracking-tight mb-4" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                            <h2 className="text-2xl font-black text-[#7A0019] tracking-tight mb-4" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                                 Начинки для тематичних тортів
                             </h2>
                             <p className="text-gray-600 leading-relaxed mb-6 max-w-2xl mx-auto">
@@ -4762,7 +4762,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                     {/* ── БЛОК 6: ДОСТАВКА ── */}
                     <section className="bg-white py-12 border-t border-gray-100 text-center">
                         <div className="max-w-5xl mx-auto px-4 md:px-8">
-                            <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-6" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                            <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-6" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                                 Доставка по Києву
                             </h2>
                             <p className="text-gray-600 leading-relaxed max-w-3xl mx-auto md:text-lg mb-6">
@@ -4778,7 +4778,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                     {/* ── БЛОК 7: ПЕРЕВАГИ ── */}
                     <section className="bg-[#FAFAFA] py-12 md:py-16 border-t border-gray-100 text-center">
                         <div className="max-w-6xl mx-auto px-4 md:px-8">
-                            <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-10" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                            <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-10" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                                 Чому обирають Antreme?
                             </h2>
                             <div className="grid grid-cols-2 lg:grid-cols-5 gap-6">
@@ -4809,7 +4809,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                     {/* ── БЛОК 8: CTA ── */}
                     <div className="relative py-12 md:py-16 overflow-hidden bg-[#7A0019] rounded-3xl mx-4 md:mx-8 my-8 shadow-xl">
                         <div className="container mx-auto px-6 text-center relative z-10">
-                            <h2 className="text-3xl md:text-4xl font-black mb-6 tracking-tight text-white" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                            <h2 className="text-3xl md:text-4xl font-black mb-6 tracking-tight text-white" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                                 Потрібен торт на професійне свято?
                             </h2>
                             <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -4829,7 +4829,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                     <section className="py-10 md:py-14 bg-white">
                         <div className="max-w-3xl mx-auto px-4 md:px-8">
                             <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] uppercase tracking-tight mb-8 text-center"
-                                style={{ fontFamily: "'Oswald', sans-serif" }}>
+                                style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                                 FAQ: Найчастіші запитання
                             </h2>
                             <div className="space-y-3">
@@ -4860,7 +4860,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                 <>
                     {/* ── БЛОК 1: HERO (SEO Інтро) ── */}
                     <section className="category-intro mt-12 mb-8 mx-auto px-4 max-w-5xl">
-                        <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-4" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                        <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-4" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                             Ніжний торт для особливого дня
                         </h2>
                         <p className="intro-text">
@@ -4874,7 +4874,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                     {/* ── БЛОК 2: ДИЗАЙН ── */}
                     <section className="bg-white py-12 md:py-16 border-t border-gray-100">
                         <div className="max-w-6xl mx-auto px-4 md:px-8 text-center">
-                            <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-8" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                            <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-8" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                                 Дизайн тортів на хрестини
                             </h2>
                             <div className="grid grid-cols-2 md:grid-cols-5 gap-4 mb-8">
@@ -4905,7 +4905,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                         <div className="max-w-3xl mx-auto px-4 md:px-8">
                             <div className="bg-white rounded-2xl md:rounded-3xl p-6 md:p-8 border border-[#E8C064]/20 shadow-sm flex flex-col md:flex-row items-center justify-between">
                                 <div className="mb-6 md:mb-0 md:pr-8 text-center md:text-left">
-                                    <h2 className="text-xl md:text-2xl font-black text-[#7A0019] mb-4 pb-2 border-b-2 border-[#E8C064]/50 inline-block" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                                    <h2 className="text-xl md:text-2xl font-black text-[#7A0019] mb-4 pb-2 border-b-2 border-[#E8C064]/50 inline-block" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                                         Скільки коштує торт на хрестини?
                                     </h2>
                                     <ul className="space-y-3 mt-4">
@@ -4932,7 +4932,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                     {/* ── БЛОК 4: НАЧИНКИ ── */}
                     <section className="bg-white py-12 border-t border-gray-100">
                         <div className="max-w-5xl mx-auto px-4 md:px-8 text-center">
-                            <h2 className="text-2xl font-black text-[#7A0019] tracking-tight mb-4" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                            <h2 className="text-2xl font-black text-[#7A0019] tracking-tight mb-4" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                                 Начинки для хрестильного торта
                             </h2>
                             <p className="text-gray-600 leading-relaxed mb-6 max-w-2xl mx-auto">
@@ -4949,7 +4949,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                     {/* ── БЛОК 5: ДОСТАВКА ── */}
                     <section className="bg-[#FAFAFA] py-12 border-t border-gray-100">
                         <div className="max-w-5xl mx-auto px-4 md:px-8 text-center">
-                            <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-6" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                            <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-6" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                                 Доставка тортів на хрестини по Києву
                             </h2>
                             <p className="text-gray-600 leading-relaxed max-w-3xl mx-auto md:text-lg mb-6">
@@ -4965,7 +4965,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                     {/* ── БЛОК 6: ПЕРЕВАГИ (Як у Весільних) ── */}
                     <section className="bg-white py-12 md:py-16 border-t border-gray-100">
                         <div className="max-w-6xl mx-auto px-4 md:px-8 text-center">
-                            <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-10" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                            <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-10" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                                 Чому обирають Antreme?
                             </h2>
                             <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
@@ -4992,7 +4992,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                     {/* ── БЛОК 7: CTA ── */}
                     <div className="relative py-12 md:py-16 overflow-hidden bg-[#7A0019] rounded-3xl mx-4 md:mx-8 my-8 shadow-xl">
                         <div className="container mx-auto px-6 text-center relative z-10">
-                            <h2 className="text-3xl md:text-4xl font-black mb-6 tracking-tight text-white" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                            <h2 className="text-3xl md:text-4xl font-black mb-6 tracking-tight text-white" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                                 Плануєте хрестини у Києві?
                             </h2>
                             <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -5012,7 +5012,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                     <section className="py-10 md:py-14 bg-[#FAFAFA]">
                         <div className="max-w-3xl mx-auto px-4 md:px-8">
                             <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] uppercase tracking-tight mb-8 text-center"
-                                style={{ fontFamily: "'Oswald', sans-serif" }}>
+                                style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                                 Поширені запитання
                             </h2>
                             <div className="space-y-3">
@@ -5043,7 +5043,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                 <>
                     {/* ── БЛОК 1: HERO (SEO Інтро) ── */}
                     <section className="category-intro mt-12 mb-8 mx-auto px-4 max-w-5xl">
-                        <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-4" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                        <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-4" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                             Найсолодший момент — дізнатися стать малюка
                         </h2>
                         <p className="intro-text">
@@ -5057,7 +5057,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                     {/* ── БЛОК 2: ЯКИЙ СЮРПРИЗ (Варіанти) ── */}
                     <section className="bg-white py-12 md:py-16 border-t border-gray-100">
                         <div className="max-w-5xl mx-auto px-4 md:px-8 text-center">
-                            <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-8" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                            <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-8" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                                 Який сюрприз можна зробити?
                             </h2>
                             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mb-8">
@@ -5086,7 +5086,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                     {/* ── БЛОК 3: ДИЗАЙН ── */}
                     <section className="bg-[#FDFBF7] py-12 md:py-16 border-t border-b border-gray-100">
                         <div className="max-w-6xl mx-auto px-4 md:px-8 text-center">
-                            <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-8" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                            <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-8" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                                 Дизайн торта для гендер пати
                             </h2>
                             <div className="flex flex-wrap justify-center gap-4 mb-8">
@@ -5106,7 +5106,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                         <div className="max-w-3xl mx-auto px-4 md:px-8">
                             <div className="bg-gradient-to-br from-[#FFF8E7] to-[#FFF3D4] rounded-2xl md:rounded-3xl p-6 md:p-8 border border-[#E8C064]/20 shadow-[0_4px_20px_rgba(232,192,100,0.15)] flex flex-col md:flex-row items-center justify-between">
                                 <div className="mb-6 md:mb-0 md:pr-8 text-center md:text-left">
-                                    <h2 className="text-xl md:text-2xl font-black text-[#7A0019] mb-4 pb-2 border-b-2 border-[#E8C064]/50 inline-block" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                                    <h2 className="text-xl md:text-2xl font-black text-[#7A0019] mb-4 pb-2 border-b-2 border-[#E8C064]/50 inline-block" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                                         Скільки коштує торт Gender Reveal?
                                     </h2>
                                     <ul className="space-y-3 mt-4">
@@ -5133,7 +5133,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                     {/* ── БЛОК 5: ДОСТАВКА ── */}
                     <section className="bg-white py-12 md:py-16 border-t border-gray-100">
                         <div className="max-w-5xl mx-auto px-4 md:px-8 text-center">
-                            <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-6" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                            <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-6" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                                 Доставка торта Gender Reveal по Києву
                             </h2>
                             <p className="text-gray-600 leading-relaxed max-w-3xl mx-auto md:text-lg mb-6">
@@ -5149,7 +5149,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                     {/* ── БЛОК 6: ПЕРЕВАГИ (Як у Весільних) ── */}
                     <section className="bg-[#FDFBF7] py-12 md:py-16 border-t border-gray-100">
                         <div className="max-w-6xl mx-auto px-4 md:px-8 text-center">
-                            <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-10" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                            <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] tracking-tight mb-10" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                                 Чому обирають Antreme?
                             </h2>
                             <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
@@ -5180,7 +5180,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                     {/* ── БЛОК 7: CTA ── */}
                     <div className="relative py-12 md:py-16 overflow-hidden bg-[#7A0019] rounded-3xl mx-4 md:mx-8 my-8 shadow-xl">
                         <div className="container mx-auto px-6 text-center relative z-10">
-                            <h2 className="text-3xl md:text-4xl font-black mb-6 tracking-tight text-white" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                            <h2 className="text-3xl md:text-4xl font-black mb-6 tracking-tight text-white" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                                 Готові відкрити головну інтригу?
                             </h2>
                             <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -5203,7 +5203,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                     <section className="py-10 md:py-14 bg-[#FAFAFA]">
                         <div className="max-w-3xl mx-auto px-4 md:px-8">
                             <h2 className="text-2xl md:text-3xl font-black text-[#7A0019] uppercase tracking-tight mb-8 text-center"
-                                style={{ fontFamily: "'Oswald', sans-serif" }}>
+                                style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                                 Поширені запитання
                             </h2>
                             <div className="space-y-3">
@@ -5271,7 +5271,7 @@ function CakeList({ predefinedCategory, predefinedSlug, groupType }) {
                                         <div className="w-10 h-1 bg-gray-300 rounded-full" />
                                     </div>
                                     <div className="flex items-center justify-between px-6 py-4">
-                                        <h3 className="text-lg font-black text-gray-900 uppercase tracking-tight" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                                        <h3 className="text-lg font-black text-gray-900 uppercase tracking-tight" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                                             Фільтр
                                         </h3>
                                         <button onClick={() => setIsFilterOpen(false)} className="w-9 h-9 rounded-full bg-gray-100 flex items-center justify-center hover:bg-gray-200 transition-colors">

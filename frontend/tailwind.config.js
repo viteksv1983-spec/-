@@ -7,8 +7,8 @@ export default {
     theme: {
         extend: {
             fontFamily: {
-                sans: ['Montserrat', 'sans-serif'],
-                serif: ['Montserrat', 'sans-serif'], // Accessing antreme usually uses sans-serif even for headers
+                sans: ['Montserrat', '"Montserrat Fallback"', 'sans-serif'],
+                serif: ['Montserrat', '"Montserrat Fallback"', 'sans-serif'], // Accessing antreme usually uses sans-serif even for headers
             },
             colors: {
                 antreme: {

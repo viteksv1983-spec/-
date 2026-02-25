@@ -61,7 +61,7 @@ function Fillings() {
                 />
             </div>
             <div className="p-6 flex flex-col flex-grow">
-                <h3 className="text-xl font-bold text-gray-900 mb-2 uppercase tracking-tight" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                <h3 className="text-xl font-bold text-gray-900 mb-2 uppercase tracking-tight" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                     {filling.name}
                 </h3>
                 <p className="text-gray-600 text-sm leading-relaxed flex-grow">
@@ -82,7 +82,7 @@ function Fillings() {
             {/* Title & Hero Section */}
             <div className="bg-white py-16 border-b border-gray-100">
                 <div className="container mx-auto px-6 text-center">
-                    <h1 className="text-3xl md:text-5xl lg:text-6xl font-black text-gray-900 uppercase tracking-tight mb-6" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                    <h1 className="text-3xl md:text-5xl lg:text-6xl font-black text-gray-900 uppercase tracking-tight mb-6" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                         Начинки для тортів на замовлення в Києві
                     </h1>
                     <div className="w-24 h-1.5 bg-[#7A0019] mx-auto mb-8 rounded-full"></div>
@@ -103,7 +103,7 @@ function Fillings() {
 
                 {/* Chocolate Section */}
                 <section className="mb-20">
-                    <h2 className="text-3xl font-black text-gray-900 uppercase tracking-tight mb-10 border-l-8 border-[#7A0019] pl-6" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                    <h2 className="text-3xl font-black text-gray-900 uppercase tracking-tight mb-10 border-l-8 border-[#7A0019] pl-6" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                         Шоколадні начинки
                     </h2>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -113,7 +113,7 @@ function Fillings() {
 
                 {/* Fruit Section */}
                 <section className="mb-20">
-                    <h2 className="text-3xl font-black text-gray-900 uppercase tracking-tight mb-10 border-l-8 border-[#E8C064] pl-6" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                    <h2 className="text-3xl font-black text-gray-900 uppercase tracking-tight mb-10 border-l-8 border-[#E8C064] pl-6" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                         Фруктові та ягідні
                     </h2>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -123,7 +123,7 @@ function Fillings() {
 
                 {/* Classic Section */}
                 <section className="mb-20">
-                    <h2 className="text-3xl font-black text-gray-900 uppercase tracking-tight mb-10 border-l-8 border-[#7A0019] pl-6" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                    <h2 className="text-3xl font-black text-gray-900 uppercase tracking-tight mb-10 border-l-8 border-[#7A0019] pl-6" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                         Класичні
                     </h2>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -133,7 +133,7 @@ function Fillings() {
 
                 {/* Mousse Section */}
                 <section className="mb-20">
-                    <h2 className="text-3xl font-black text-gray-900 uppercase tracking-tight mb-10 border-l-8 border-[#E8C064] pl-6" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                    <h2 className="text-3xl font-black text-gray-900 uppercase tracking-tight mb-10 border-l-8 border-[#E8C064] pl-6" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                         Мусові
                     </h2>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -144,7 +144,7 @@ function Fillings() {
                 {/* How to choose */}
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-20">
                     <section className="bg-white p-10 rounded-3xl shadow-sm border border-gray-100">
-                        <h2 className="text-2xl font-black text-gray-900 uppercase mb-6" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                        <h2 className="text-2xl font-black text-gray-900 uppercase mb-6" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                             Як обрати начинку для торта?
                         </h2>
                         <ul className="space-y-4 text-gray-700">
@@ -168,7 +168,7 @@ function Fillings() {
                     </section>
 
                     <section className="bg-[#7A0019] text-white p-10 rounded-3xl shadow-xl">
-                        <h2 className="text-2xl font-black uppercase mb-6" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                        <h2 className="text-2xl font-black uppercase mb-6" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                             Якість інгредієнтів
                         </h2>
                         <p className="mb-6 leading-relaxed opacity-90">
@@ -182,7 +182,7 @@ function Fillings() {
 
                 {/* Delivery Block */}
                 <section className="bg-white p-10 rounded-3xl shadow-sm border border-gray-100 mb-20">
-                    <h2 className="text-2xl font-black text-gray-900 uppercase mb-6" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                    <h2 className="text-2xl font-black text-gray-900 uppercase mb-6" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                         Доставка тортів з обраною начинкою по Києву
                     </h2>
                     <p className="text-gray-600 mb-6 leading-relaxed">
@@ -195,7 +195,7 @@ function Fillings() {
 
                 {/* FAQ Block */}
                 <section className="max-w-4xl mx-auto mb-20">
-                    <h2 className="text-3xl font-black text-gray-900 uppercase tracking-tight mb-10 text-center" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                    <h2 className="text-3xl font-black text-gray-900 uppercase tracking-tight mb-10 text-center" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                         Часті запитання
                     </h2>
                     <div className="space-y-6">
@@ -211,7 +211,7 @@ function Fillings() {
                 {/* CTA Block */}
                 <div className="max-w-5xl mx-auto rounded-[3rem] p-12 md:p-20 text-center relative overflow-hidden bg-gradient-to-br from-[#7A0019] to-[#4D0010] shadow-2xl">
                     <div className="relative z-10">
-                        <h2 className="text-3xl md:text-5xl font-black text-white uppercase mb-6" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                        <h2 className="text-3xl md:text-5xl font-black text-white uppercase mb-6" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                             Не знаєте, яку начинку обрати?
                         </h2>
                         <p className="text-white/80 text-lg mb-10 max-w-2xl mx-auto">

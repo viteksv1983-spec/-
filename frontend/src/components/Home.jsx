@@ -317,10 +317,10 @@ function Home() {
                     {/* — ORDER 1: Text Block — */}
                     <div className="relative flex flex-col order-1 px-5 md:px-12 lg:px-16 pt-8 pb-4 md:pb-16 md:pt-16 md:pr-[45%] lg:pr-[42%] md:min-h-[440px] lg:min-h-[480px] justify-center" style={{ zIndex: 10 }}>
                         <div className="w-[65%] md:w-auto">
-                            <h1 className="text-[28px] md:text-[40px] lg:text-[50px] xl:text-[56px] font-black text-white leading-[1.15] mb-2 md:mb-3 tracking-tight max-w-[200px] md:max-w-none" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                            <h1 className="text-[28px] md:text-[40px] lg:text-[50px] xl:text-[56px] font-black text-white leading-[1.15] mb-2 md:mb-3 tracking-tight max-w-[200px] md:max-w-none" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                                 Торти на замовлення в Києві — кондитерська Antreme
                             </h1>
-                            <div className="text-[#F5C24D] text-[11px] md:text-[13px] lg:text-[14px] font-black leading-tight mb-2 md:mb-5 tracking-[0.1em] uppercase" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                            <div className="text-[#F5C24D] text-[11px] md:text-[13px] lg:text-[14px] font-black leading-tight mb-2 md:mb-5 tracking-[0.1em] uppercase" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                                 КОНДИТЕРСЬКА <br className="md:hidden" />
                                 МАЙСТЕРНЯ <br className="md:hidden" />
                                 ANTREME
@@ -347,14 +347,14 @@ function Home() {
                             <button
                                 onClick={handleQuickOrderDefault}
                                 className="h-[48px] lg:h-[52px] px-6 lg:px-8 bg-gradient-to-b from-[#FAD872] via-[#F5C24D] to-[#D4A048] hover:brightness-110 text-[#5E0C1B] font-black uppercase tracking-wider text-[12px] lg:text-[13px] rounded-full transition-all duration-300 shadow-[0_8px_20px_rgba(245,194,77,0.45)] active:scale-95 flex items-center justify-center whitespace-nowrap"
-                                style={{ fontFamily: "'Oswald', sans-serif" }}
+                                style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}
                             >
                                 ЗАМОВИТИ ТОРТ
                             </button>
                             <Link
                                 to="/torty-na-zamovlennya/"
                                 className="h-[48px] lg:h-[52px] px-5 lg:px-6 bg-transparent border border-white/30 hover:border-white/60 hover:bg-white/10 text-white font-black uppercase tracking-wider text-[11px] lg:text-[12px] rounded-full transition-all duration-300 flex items-center justify-center text-center whitespace-nowrap"
-                                style={{ fontFamily: "'Oswald', sans-serif" }}
+                                style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}
                             >
                                 ПЕРЕГЛЯНУТИ КАТАЛОГ
                             </Link>
@@ -366,14 +366,14 @@ function Home() {
                         <button
                             onClick={handleQuickOrderDefault}
                             className="flex-1 h-[42px] bg-gradient-to-b from-[#FAD872] via-[#F5C24D] to-[#D4A048] hover:brightness-110 text-[#5E0C1B] font-black uppercase tracking-wider text-[11px] rounded-[20px] transition-all duration-300 shadow-[0_4px_12px_rgba(245,194,77,0.3)] min-w-[140px]"
-                            style={{ fontFamily: "'Oswald', sans-serif" }}
+                            style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}
                         >
                             ЗАМОВИТИ ТОРТ
                         </button>
                         <Link
                             to="/torty-na-zamovlennya/"
                             className="flex-1 h-[42px] bg-[#9e1634] bg-opacity-90 border border-white/20 hover:bg-[#8B1030] text-white font-black uppercase tracking-[0.05em] text-[10px] rounded-[20px] transition-all duration-300 shadow-sm flex flex-col items-center justify-center leading-[1.2]"
-                            style={{ fontFamily: "'Oswald', sans-serif" }}
+                            style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}
                         >
                             <span>ПЕРЕГЛЯНУТИ</span>
                             <span>КАТАЛОГ</span>
@@ -401,7 +401,7 @@ function Home() {
                         return (
                             <div key={cat.slug} className={`group relative flex flex-row items-center ${style.bg} rounded-[1.5rem] md:rounded-[2rem] ${style.shadow} transition-all duration-500 overflow-visible ${style.border} border hover:-translate-y-1 min-h-[130px] md:min-h-[160px] `}>
                                 <div className="flex-1 px-5 md:px-7 py-5 md:py-7 z-10 w-[60%]">
-                                    <h2 className="text-[17px] md:text-[20px] lg:text-[22px] font-black text-gray-900 mb-1.5 uppercase tracking-tight leading-tight" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                                    <h2 className="text-[17px] md:text-[20px] lg:text-[22px] font-black text-gray-900 mb-1.5 uppercase tracking-tight leading-tight" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                                         {cat.name}
                                     </h2>
                                     <p className="text-gray-700 mb-4 text-[11px] md:text-[13px] font-medium leading-snug whitespace-pre-line">
@@ -424,7 +424,7 @@ function Home() {
             <section className="relative py-24 md:py-36 overflow-hidden bg-[#FDFBF7]">
                 <div className="max-w-5xl mx-auto px-6 text-center relative z-10">
                     <div className="text-xs font-bold uppercase tracking-[0.3em] text-[#8B6508] mb-6">Наші принципи</div>
-                    <h2 className="text-5xl md:text-8xl lg:text-[110px] font-black mb-10 leading-none uppercase tracking-tighter" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                    <h2 className="text-5xl md:text-8xl lg:text-[110px] font-black mb-10 leading-none uppercase tracking-tighter" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                         <span className="text-[#9C751E]">СМАК</span>
                         <span className="text-gray-300 hidden md:inline"> / </span>
                         <span className="text-gray-900">ЯКІСТЬ</span>
@@ -453,7 +453,7 @@ function Home() {
                                     loading="lazy"
                                 />
                                 <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-8">
-                                    <h3 className="text-white text-2xl font-bold" style={{ fontFamily: "'Oswald', sans-serif" }}>Людмила Приходько</h3>
+                                    <h3 className="text-white text-2xl font-bold" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>Людмила Приходько</h3>
                                     <p className="text-[#9C751E] font-medium">Шеф-кондитер</p>
                                 </div>
                             </div>
@@ -463,7 +463,7 @@ function Home() {
                         <div className="w-full lg:w-1/2 relative flex flex-col items-center text-center">
                             <img src={logo} alt="Antreme — авторська кондитерська тортів у Києві" className="w-[380px] h-auto object-contain mb-4 animate-fade-in" loading="lazy" />
 
-                            <h2 className="text-4xl md:text-5xl font-black text-gray-900 mb-6 leading-tight animate-fade-in uppercase tracking-tight" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                            <h2 className="text-4xl md:text-5xl font-black text-gray-900 mb-6 leading-tight animate-fade-in uppercase tracking-tight" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                                 ТОРТИ З <span className="text-[#7A0019]">ДУШЕЮ</span> ТА <span className="text-[#9C751E]">ЛЮБОВ'Ю</span>
                             </h2>
 
@@ -504,7 +504,7 @@ function Home() {
                                         Нова Колекція
                                     </span>
                                 </div>
-                                <h2 className="text-3xl md:text-6xl font-black text-gray-900 uppercase tracking-tighter leading-none mb-6" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                                <h2 className="text-3xl md:text-6xl font-black text-gray-900 uppercase tracking-tighter leading-none mb-6" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                                     Торти для вашого <br />
                                     <span className="text-[#7A0019]">особливого свята</span>
                                 </h2>
@@ -541,7 +541,7 @@ function Home() {
                 <div className="container mx-auto px-6 relative z-10">
                     <div className="text-center mb-8 md:mb-14 animate-fade-in">
                         <div className="text-xs font-bold uppercase tracking-[0.3em] text-[#8B6508] mb-3">Популярні</div>
-                        <h2 className="text-3xl md:text-5xl font-black text-gray-900 mb-2 md:mb-4" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                        <h2 className="text-3xl md:text-5xl font-black text-gray-900 mb-2 md:mb-4" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                             Обирають найчастіше
                         </h2>
                         <div className="w-16 h-1 bg-[#E8C064] mx-auto mt-4 rounded-full" />
@@ -644,7 +644,7 @@ function Home() {
             {/* ===== PROCESS SECTION (How to Order) ===== */}
             <div className="py-16 md:py-24 max-w-7xl mx-auto px-4 md:px-10">
                 <div className="text-center mb-12 md:mb-16">
-                    <h2 className="text-3xl md:text-5xl font-black text-gray-900 uppercase tracking-tight mb-4" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                    <h2 className="text-3xl md:text-5xl font-black text-gray-900 uppercase tracking-tight mb-4" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                         Як зробити <span className="text-[#9C751E]">замовлення</span>?
                     </h2>
                     <p className="text-gray-500 font-medium italic max-w-xl mx-auto" style={{ fontFamily: "'Dancing Script', cursive" }}>
@@ -664,7 +664,7 @@ function Home() {
                     ].map((item, i) => (
                         <div key={i} className="relative z-10 flex flex-col items-center text-center group">
                             <div className="w-24 h-24 rounded-full bg-white border-4 border-[#FDFBF7] shadow-xl flex items-center justify-center mb-6 group-hover:-translate-y-2 transition-transform duration-300">
-                                <span className="text-3xl font-black text-[#7A0019]" style={{ fontFamily: "'Oswald', sans-serif" }}>{item.step}</span>
+                                <span className="text-3xl font-black text-[#7A0019]" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>{item.step}</span>
                             </div>
                             <h3 className="text-lg font-bold text-gray-900 mb-2">{item.title}</h3>
                             <p className="text-sm text-gray-500 max-w-[200px]">{item.desc}</p>
@@ -677,7 +677,7 @@ function Home() {
             <div className="relative py-24 md:py-36 overflow-hidden bg-[#7A0019] rounded-3xl mx-4 md:mx-8 mb-8">
                 <div className="container mx-auto px-6 text-center relative z-10">
                     <div className="text-xs font-bold uppercase tracking-[0.3em] text-[#E8C064] mb-5">Antreme</div>
-                    <h3 className="text-4xl md:text-6xl font-black mb-5 animate-fade-in tracking-tight text-white uppercase" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                    <h3 className="text-4xl md:text-6xl font-black mb-5 animate-fade-in tracking-tight text-white uppercase" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                         ГОТОВІ ЗАМОВИТИ <span className="text-[#E8C064]">ТОРТ МРІЇ?</span>
                     </h3>
                     <p className="text-xl mb-10 text-white/65 italic max-w-2xl mx-auto animate-fade-in-delayed" style={{ fontFamily: "'Dancing Script', cursive" }}>
@@ -700,7 +700,7 @@ function Home() {
                     {/* Section Header */}
                     <div className="text-center mb-10 md:mb-14">
                         <div className="text-xs font-bold uppercase tracking-[0.3em] text-[#8B6508] mb-3">Доставка</div>
-                        <h2 className="text-3xl md:text-5xl font-black text-gray-900 uppercase tracking-tight mb-3" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                        <h2 className="text-3xl md:text-5xl font-black text-gray-900 uppercase tracking-tight mb-3" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                             Доставляємо у <span className="text-[#7A0019]">всі райони Києва</span>
                         </h2>
                         <p className="text-gray-500 text-sm md:text-base max-w-xl mx-auto">
@@ -730,7 +730,7 @@ function Home() {
                                 <div className="flex items-center gap-3 mb-4">
                                     <div className="w-12 h-12 rounded-xl bg-[#FFF8E7] flex items-center justify-center text-2xl">🚕</div>
                                     <div>
-                                        <h3 className="font-black text-gray-900 uppercase text-sm tracking-wide" style={{ fontFamily: "'Oswald', sans-serif" }}>Доставка на таксі</h3>
+                                        <h3 className="font-black text-gray-900 uppercase text-sm tracking-wide" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>Доставка на таксі</h3>
                                         <p className="text-xs text-gray-500">По всьому Києву</p>
                                     </div>
                                 </div>
@@ -747,7 +747,7 @@ function Home() {
                                 <div className="flex items-center gap-3 mb-4">
                                     <div className="w-12 h-12 rounded-xl bg-[#F0FFF4] flex items-center justify-center text-2xl">🏪</div>
                                     <div>
-                                        <h3 className="font-black text-gray-900 uppercase text-sm tracking-wide" style={{ fontFamily: "'Oswald', sans-serif" }}>Самовивіз</h3>
+                                        <h3 className="font-black text-gray-900 uppercase text-sm tracking-wide" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>Самовивіз</h3>
                                         <p className="text-xs text-gray-500">г. Київ, вул. Прирічна 11</p>
                                     </div>
                                 </div>
@@ -791,7 +791,7 @@ function Home() {
                                 <svg className="w-5 h-5 md:w-6 md:h-6 fill-white" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 1.366.062 2.633.332 3.608 1.308.975.975 1.245 2.242 1.308 3.608.058 1.266.07 1.646.07 4.85s-.012 3.584-.07 4.85c-.062 1.366-.332 2.633-1.308 3.608-.975.975-2.242 1.245-3.608 1.308-1.266.058-1.646.07-4.85.07s-3.584-.012-4.85-.07c-1.366-.062-2.633-.332-3.608-1.308-.975-.975-1.245-2.242-1.308-3.608-.058-1.266-.07-1.646-.07-4.85s.012-3.584.07-4.85c.062-1.366.332-2.633 1.308-3.608.975-.975 2.242-1.245 3.608-1.308 1.266-.058 1.646-.07 4.85-.07zm0-2.163c-3.259 0-3.667.014-4.947.072-1.277.058-2.148.262-2.91.56a5.89 5.89 0 00-2.126 1.384 5.89 5.89 0 00-1.383 2.127c-.298.762-.502 1.633-.561 2.91-.057 1.28-.072 1.688-.072 4.947s.015 3.667.072 4.947c.059 1.277.263 2.148.561 2.91a5.89 5.89 0 001.383 2.127 5.89 5.89 0 002.127 1.383c.762.298 1.633.502 2.91.561 1.28.057 1.688.072 4.947.072s3.667-.015 4.947-.072c1.277-.059 2.148-.263 2.91-.561a5.89 5.89 0 002.127-1.383 5.89 5.89 0 001.383-2.127c.298-.762.502-1.633.561-2.91.057-1.28.072-1.688.072-4.947s-.015-3.667-.072-4.947c-.059-1.277-.263-2.148-.561-2.91a5.89 5.89 0 00-1.383-2.127 5.89 5.89 0 00-2.127-1.383c-.762-.298-1.633-.502-2.91-.561-1.28-.057-1.688-.072-4.947-.072zM12 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" /></svg>
                             </div>
                         </div>
-                        <h2 className="text-2xl md:text-4xl font-black text-gray-900 uppercase tracking-tight mb-2" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                        <h2 className="text-2xl md:text-4xl font-black text-gray-900 uppercase tracking-tight mb-2" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                             Відгуки клієнтів
                         </h2>
                         <p className="text-gray-500 text-sm md:text-base italic" style={{ fontFamily: "'Dancing Script', cursive" }}>
@@ -915,7 +915,7 @@ function Home() {
 
                         <p>Кожне замовлення задокументоване. Кожен відгук — справжній.</p>
 
-                        <h2 className="text-2xl md:text-3xl font-black text-gray-900 mt-8 mb-3 uppercase tracking-tight" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                        <h2 className="text-2xl md:text-3xl font-black text-gray-900 mt-8 mb-3 uppercase tracking-tight" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                             Чому обирають Antreme, а не іншу кондитерську
                         </h2>
                         <p>Більшість кондитерських у Києві пропонують стандартний набір: каталог шаблонів, обмежений список начинок, мінімальне залучення клієнта до процесу. Antreme працює інакше.</p>
@@ -926,7 +926,7 @@ function Home() {
                             <li><strong>Шеф-кондитер із 20-річним стажем.</strong> Людмила Приходько особисто контролює кожен етап — від замісу до пакування. Це не конвеєр, а майстерня з іменем.</li>
                         </ul>
 
-                        <h2 className="text-2xl md:text-3xl font-black text-gray-900 mt-8 mb-3 uppercase tracking-tight" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                        <h2 className="text-2xl md:text-3xl font-black text-gray-900 mt-8 mb-3 uppercase tracking-tight" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                             Торт під замовлення: повний цикл — від ідеї до подачі
                         </h2>
                         <p>Жодного готового торта на вітрині. Кожен <strong>торт під замовлення</strong> проходить погодження дизайну, ваги, начинки, дати та часу отримання. Виробництво стартує лише після затвердження всіх деталей — тому результат завжди відповідає очікуванням.</p>
@@ -940,7 +940,7 @@ function Home() {
                             <li>– цінує натуральний склад та персональний підхід</li>
                         </ul>
 
-                        <h2 className="text-2xl md:text-3xl font-black text-gray-900 mt-8 mb-3 uppercase tracking-tight" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                        <h2 className="text-2xl md:text-3xl font-black text-gray-900 mt-8 mb-3 uppercase tracking-tight" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                             Скільки коштує торт на замовлення у Києві
                         </h2>
                         <p>Вартість залежить від трьох факторів: вага виробу, обрана начинка та складність декору. Немає фіксованого прайсу — є чесний індивідуальний розрахунок під ваше замовлення.</p>
@@ -953,7 +953,7 @@ function Home() {
                         <p>Щоб дізнатись, <strong>скільки коштує торт</strong> саме для вашої події — надішліть запит із датою, форматом заходу та кількістю гостей. Точний розрахунок — протягом години.</p>
                         <p className="mt-2 text-gray-500 text-sm">Остаточна вартість залежить від складності декору, кількості ярусів та термінів виготовлення.</p>
 
-                        <h2 className="text-2xl md:text-3xl font-black text-gray-900 mt-8 mb-3 uppercase tracking-tight" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                        <h2 className="text-2xl md:text-3xl font-black text-gray-900 mt-8 mb-3 uppercase tracking-tight" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                             Категорії тортів на замовлення в Києві
                         </h2>
 
@@ -975,7 +975,7 @@ function Home() {
                         <h3 className="text-lg font-bold text-gray-900 mt-5 mb-2">Корпоративні торти</h3>
                         <p><strong>Корпоративний торт</strong> із логотипом, у фірмових кольорах або під тематику івенту. Ефектний акцент для презентацій, річниць компанії та командних свят. <Link to="/torty-na-zamovlennya/korporatyvni/" className="text-[#7A0019] font-semibold underline underline-offset-2 hover:text-[#9C142B]">Корпоративні торти на замовлення в Києві →</Link></p>
 
-                        <h2 className="text-2xl md:text-3xl font-black text-gray-900 mt-8 mb-3 uppercase tracking-tight" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                        <h2 className="text-2xl md:text-3xl font-black text-gray-900 mt-8 mb-3 uppercase tracking-tight" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                             Начинки: 15+ авторських смаків
                         </h2>
                         <p>Кожна начинка — це перевірена рецептура, відпрацьована на тисячах замовлень. Найпопулярніші позиції:</p>
@@ -990,14 +990,14 @@ function Home() {
                         </ul>
                         <p className="mt-2">Індивідуальні комбінації також доступні — достатньо вказати побажання при оформленні. <Link to="/nachynky/" className="text-[#7A0019] font-semibold underline underline-offset-2 hover:text-[#9C142B]">Начинки для тортів на замовлення →</Link></p>
 
-                        <h2 className="text-2xl md:text-3xl font-black text-gray-900 mt-8 mb-3 uppercase tracking-tight" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                        <h2 className="text-2xl md:text-3xl font-black text-gray-900 mt-8 mb-3 uppercase tracking-tight" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                             Доставка тортів у всі райони Києва
                         </h2>
                         <p><strong>Доставка тортів Київ</strong> охоплює всі райони без обмежень: Печерськ, Шевченківський, Голосіївський, Солом'янка, Оболонь, Поділ, Дарниця, Позняки, Осокорки, Троєщина, Деснянський район, Святошин. Лівий та правий берег — однаково.</p>
                         <p>Потрібен <strong>торт з доставкою</strong> додому, <strong>доставка в ресторан</strong> чи офіс? Час подачі, температурний режим та формат транспортування узгоджуються заздалегідь. Кондитер особисто передає виріб водію з детальними інструкціями.</p>
                         <p>Доставка можлива як на домашню адресу, так і в ресторан, банкетний зал або офіс у будь-якому районі Києва. <Link to="/dostavka/" className="text-[#7A0019] font-semibold underline underline-offset-2 hover:text-[#9C142B]">Доставка тортів по Києву — умови та райони →</Link></p>
 
-                        <h2 className="text-2xl md:text-3xl font-black text-gray-900 mt-8 mb-3 uppercase tracking-tight" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                        <h2 className="text-2xl md:text-3xl font-black text-gray-900 mt-8 mb-3 uppercase tracking-tight" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                             Як замовити торт у Києві
                         </h2>
                         <ol className="list-decimal pl-5 space-y-2">
@@ -1008,7 +1008,7 @@ function Home() {
                         </ol>
                         <p className="mt-3">Якщо ви плануєте <strong>купити торт у Києві</strong> для особливої події — підготуємо індивідуальну пропозицію.</p>
 
-                        <h2 className="text-2xl md:text-3xl font-black text-gray-900 mt-8 mb-3 uppercase tracking-tight" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                        <h2 className="text-2xl md:text-3xl font-black text-gray-900 mt-8 mb-3 uppercase tracking-tight" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                             Портфоліо та реальні відгуки клієнтів у Києві
                         </h2>
                         <p>6 000+ виконаних замовлень. Тисячі фотографій реальних робіт — не студійних постановок, а тортів, які були доставлені клієнтам по всьому Києву. Instagram Antreme — це публічний архів результатів, відкритий для перевірки. <Link to="/vidguky/" className="text-[#7A0019] font-semibold underline underline-offset-2 hover:text-[#9C142B]">Відгуки про торти на замовлення — Antreme Київ →</Link></p>
@@ -1023,7 +1023,7 @@ function Home() {
 
                 {/* --- CTA Repeat Block --- */}
                 <section className="text-center py-10 mb-12">
-                    <h2 className="text-2xl md:text-3xl font-black text-gray-900 mb-3 uppercase tracking-tight" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                    <h2 className="text-2xl md:text-3xl font-black text-gray-900 mb-3 uppercase tracking-tight" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                         Готові замовити торт у Києві?
                     </h2>
                     <p className="text-gray-500 text-sm md:text-base mb-6 max-w-lg mx-auto">
@@ -1041,7 +1041,7 @@ function Home() {
 
                 {/* --- FAQ Block --- */}
                 <div className="max-w-4xl mx-auto">
-                    <h2 className="text-2xl font-black text-center text-gray-900 mb-8 uppercase tracking-wide" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                    <h2 className="text-2xl font-black text-center text-gray-900 mb-8 uppercase tracking-wide" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                         Часті запитання
                     </h2>
                     <div className="space-y-4">

@@ -16,7 +16,7 @@ function Delivery() {
                 <div className="relative z-10 container mx-auto px-6">
                     <div className="text-xs font-bold uppercase tracking-[0.3em] text-[#E8C064] mb-4">Antreme</div>
                     <h1 className="text-4xl md:text-6xl font-black text-gray-900 uppercase tracking-tight mb-4"
-                        style={{ fontFamily: "'Oswald', sans-serif" }}>
+                        style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                         Доставка
                     </h1>
                     <div className="w-20 h-1 bg-[#E8C064] mx-auto mb-6 rounded-full" />
@@ -72,7 +72,7 @@ function Delivery() {
                                 )}
                                 <div className="text-5xl mb-5">{item.icon}</div>
                                 <h3 className="text-xl font-black text-gray-900 mb-3 uppercase"
-                                    style={{ fontFamily: "'Oswald', sans-serif" }}>{item.title}</h3>
+                                    style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>{item.title}</h3>
                                 <p className="text-gray-500 mb-5 text-sm">{item.desc}</p>
                                 <div className="text-2xl font-black mb-2" style={{ color: item.priceColor }}>{item.price}</div>
                                 <p className="text-xs text-gray-500">{item.sub}</p>
@@ -83,7 +83,7 @@ function Delivery() {
                     {/* Important Info */}
                     <div className="bg-white rounded-2xl md:rounded-3xl p-8 md:p-12 mb-12 border border-gray-100 shadow-[0_4px_20px_rgba(0,0,0,0.06)]">
                         <h2 className="text-2xl font-black text-gray-900 mb-8 uppercase flex items-center gap-3"
-                            style={{ fontFamily: "'Oswald', sans-serif" }}>
+                            style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                             <span className="w-8 h-1 bg-[#E8C064] rounded-full inline-block" />
                             Важлива інформація
                         </h2>
@@ -100,7 +100,7 @@ function Delivery() {
                                     </div>
                                     <div>
                                         <h4 className="font-black text-gray-900 mb-1.5 uppercase text-sm tracking-wide"
-                                            style={{ fontFamily: "'Oswald', sans-serif" }}>{item.title}</h4>
+                                            style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>{item.title}</h4>
                                         <p className="text-gray-500 text-sm leading-relaxed">{item.text}</p>
                                     </div>
                                 </div>
@@ -111,7 +111,7 @@ function Delivery() {
                     {/* Delivery Zones Table */}
                     <div className="mb-14">
                         <h2 className="text-2xl font-black text-gray-900 text-center uppercase mb-8"
-                            style={{ fontFamily: "'Oswald', sans-serif" }}>
+                            style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                             Зони доставки по місту
                         </h2>
                         <div className="overflow-x-auto bg-white rounded-2xl md:rounded-3xl border border-gray-100 shadow-[0_4px_20px_rgba(0,0,0,0.06)]">
@@ -147,7 +147,7 @@ function Delivery() {
                     <div className="rounded-2xl md:rounded-3xl p-10 md:p-14 text-center relative overflow-hidden bg-[#7A0019]">
                         <div className="relative z-10">
                             <h2 className="text-3xl md:text-5xl font-black text-white uppercase mb-4"
-                                style={{ fontFamily: "'Oswald', sans-serif" }}>
+                                style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                                 Є питання щодо доставки?
                             </h2>
                             <p className="text-white/70 text-lg mb-8">

@@ -14,7 +14,7 @@ function Footer() {
                     {/* Brand Section */}
                     <div className="lg:col-span-1 flex flex-col items-center lg:items-start space-y-2 md:space-y-8">
                         <Link to="/" className="group block text-center lg:text-left">
-                            <span className="text-3xl md:text-5xl font-black text-white uppercase tracking-widest drop-shadow-[0_4px_10px_rgba(0,0,0,0.3)] group-hover:text-[#F5C24D] transition-all duration-500 block" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                            <span className="text-3xl md:text-5xl font-black text-white uppercase tracking-widest drop-shadow-[0_4px_10px_rgba(0,0,0,0.3)] group-hover:text-[#F5C24D] transition-all duration-500 block" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                                 ANTREME
                             </span>
                         </Link>
@@ -43,7 +43,7 @@ function Footer() {
 
                     {/* Navigation */}
                     <div className="flex flex-col items-center lg:items-start text-center lg:text-left mt-4 md:mt-0">
-                        <h3 className="text-base md:text-xl font-bold text-[#F5C24D] mb-3 md:mb-8 uppercase tracking-[0.2em] border-b border-[#F5C24D]/20 pb-1 md:pb-2 px-4" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                        <h3 className="text-base md:text-xl font-bold text-[#F5C24D] mb-3 md:mb-8 uppercase tracking-[0.2em] border-b border-[#F5C24D]/20 pb-1 md:pb-2 px-4" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                             Навігація
                         </h3>
                         <ul className="grid grid-cols-2 lg:grid-cols-1 gap-y-2 gap-x-4 md:gap-4 font-medium w-full text-[13px] md:text-base px-2">
@@ -81,7 +81,7 @@ function Footer() {
                     {/* Contacts & Map Section */}
                     <div className="lg:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10 mt-4 md:mt-0">
                         <div className="flex flex-col items-center md:items-start text-center md:text-left">
-                            <h3 className="text-base md:text-xl font-bold text-[#F5C24D] mb-3 md:mb-8 uppercase tracking-[0.2em] border-b border-[#F5C24D]/20 pb-1 w-full max-w-[150px] md:max-w-none px-4 md:px-0" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                            <h3 className="text-base md:text-xl font-bold text-[#F5C24D] mb-3 md:mb-8 uppercase tracking-[0.2em] border-b border-[#F5C24D]/20 pb-1 w-full max-w-[150px] md:max-w-none px-4 md:px-0" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                                 Контакти
                             </h3>
                             <div className="space-y-4 md:space-y-6 flex flex-col items-center md:items-start w-full">

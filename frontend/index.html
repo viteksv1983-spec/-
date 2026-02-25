@@ -42,10 +42,15 @@
     }
   </style>
 
-  <!-- Google Fonts: Loaded synchronously to prevent massive CLS -->
+  <!-- Non-render-blocking fonts: loads as print, swaps to all on load -->
   <link
     href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Oswald:wght@500;600;700&family=Dancing+Script:wght@400;700&display=swap"
-    rel="stylesheet" />
+    rel="stylesheet" media="print" onload="this.media='all'" />
+  <noscript>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Oswald:wght@500;600;700&family=Dancing+Script:wght@400;700&display=swap"
+      rel="stylesheet" />
+  </noscript>
 
   <!-- Basic Fallback Title -->
   <title>Antreme – Кондитерська майстерня</title>

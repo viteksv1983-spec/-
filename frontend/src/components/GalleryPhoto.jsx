@@ -8,7 +8,7 @@ function GalleryPhoto() {
                 title="Фотогалерея тортів | Фото наших робіт | Antreme"
                 description="Перегляньте нашу фотогалерею неймовірних тортів ручної роботи: весільні, дитячі, бенто-торти та інші десерти від Antreme."
             />
-            <h1 className="text-4xl font-bold text-gray-900 mb-8 uppercase" style={{ fontFamily: "'Oswald', sans-serif" }}>
+            <h1 className="text-4xl font-bold text-gray-900 mb-8 uppercase" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                 Фотогалерея
             </h1>
             <div className="bg-white p-20 rounded-2xl shadow-xl flex flex-col items-center justify-center">

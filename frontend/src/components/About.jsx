@@ -19,7 +19,7 @@ function About() {
                 <div className="relative z-10 text-center px-6">
                     <div className="text-xs font-bold uppercase tracking-[0.3em] text-[#FFD700] mb-4">Antreme</div>
                     <h1 className="text-5xl md:text-8xl font-black text-white uppercase tracking-tight mb-4 drop-shadow-2xl"
-                        style={{ fontFamily: "'Oswald', sans-serif" }}>
+                        style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                         Про нас
                     </h1>
                     <div className="w-20 h-1 bg-[#FFD700] mx-auto mb-6 rounded-full" />
@@ -33,7 +33,7 @@ function About() {
             <section className="container mx-auto px-6 py-20 md:py-28">
                 <div className="max-w-4xl mx-auto text-center mb-20">
                     <h2 className="text-3xl md:text-5xl font-black text-white uppercase tracking-tight mb-6"
-                        style={{ fontFamily: "'Oswald', sans-serif" }}>
+                        style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                         Тільки найкраще для <span style={{ color: '#FFD700' }}>ваших моментів</span>
                     </h2>
                     <div className="w-16 h-1 bg-[#FFD700] mx-auto mb-8 rounded-full" />
@@ -56,7 +56,7 @@ function About() {
                     </div>
                     <div className="space-y-6">
                         <h3 className="text-3xl font-black text-white uppercase tracking-tight"
-                            style={{ fontFamily: "'Oswald', sans-serif" }}>
+                            style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                             Натуральність та <span style={{ color: '#FFD700' }}>Якість</span>
                         </h3>
                         <p className="text-white/60 text-lg leading-relaxed">
@@ -90,7 +90,7 @@ function About() {
                             <div>
                                 <div className="text-xs font-bold uppercase tracking-[0.3em] text-[#FFD700] mb-4">Знайомтесь</div>
                                 <h2 className="text-4xl md:text-5xl font-black text-white uppercase tracking-tight mb-4"
-                                    style={{ fontFamily: "'Oswald', sans-serif" }}>
+                                    style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                                     Моя мета — зробити ваше свято <span style={{ color: '#FFD700' }}>незабутнім</span>
                                 </h2>
                                 <p className="text-[#FFD700] font-black italic text-lg">
@@ -131,7 +131,7 @@ function About() {
             <section className="container mx-auto px-6 py-20 md:py-28">
                 <div className="text-center mb-14">
                     <h2 className="text-3xl md:text-5xl font-black text-white uppercase tracking-tight"
-                        style={{ fontFamily: "'Oswald', sans-serif" }}>
+                        style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                         Antreme у <span style={{ color: '#FFD700' }}>цифрах</span>
                     </h2>
                     <div className="w-16 h-1 bg-[#FFD700] mx-auto mt-5 rounded-full" />
@@ -147,7 +147,7 @@ function About() {
                             style={{ background: 'rgba(255,255,255,0.05)', backdropFilter: 'blur(10px)' }}>
                             <div className="text-3xl mb-3">{stat.icon}</div>
                             <div className="text-4xl font-black text-[#FFD700] mb-2"
-                                style={{ fontFamily: "'Oswald', sans-serif" }}>{stat.val}</div>
+                                style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>{stat.val}</div>
                             <div className="text-xs font-bold text-white/40 uppercase tracking-widest">{stat.label}</div>
                         </div>
                     ))}

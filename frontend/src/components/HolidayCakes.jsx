@@ -92,7 +92,7 @@ function HolidayCakes() {
             <div className="pt-10 pb-6 md:pt-14 md:pb-8 text-center flex flex-col items-center">
                 <div className="container mx-auto px-6 flex flex-col items-center">
                     <h1 className="text-3xl md:text-5xl font-black text-[#3b1218] uppercase tracking-wide mb-3"
-                        style={{ fontFamily: "'Oswald', sans-serif" }}>
+                        style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                         Торти на замовлення
                     </h1>
                     {/* Decorative Flourish */}
@@ -157,7 +157,7 @@ function HolidayCakes() {
                             {/* Title */}
                             <div className="w-full p-4 md:p-5 text-center">
                                 <h3 className="text-sm md:text-base font-black text-[#1d263b] uppercase tracking-tight text-center leading-tight group-hover:text-antreme-red transition-colors duration-300"
-                                    style={{ fontFamily: "'Oswald', sans-serif" }}>
+                                    style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                                     {cat.title}
                                 </h3>
                             </div>
@@ -170,7 +170,7 @@ function HolidayCakes() {
 
                 {/* ОСНОВНИЙ SEO-БЛОК ВНИЗУ СТРАНИЦЫ */}
                 <section className="seo-content-block container mx-auto max-w-4xl bg-white rounded-3xl p-8 md:p-14 border border-gray-100 shadow-[0_4px_20px_rgba(0,0,0,0.03)] mt-16 mb-12">
-                    <h2 className="text-2xl md:text-3xl font-black text-[#1d263b] mb-6 tracking-tight text-center md:text-left" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                    <h2 className="text-2xl md:text-3xl font-black text-[#1d263b] mb-6 tracking-tight text-center md:text-left" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                         Торти на замовлення в Києві — ціна, терміни, умови
                     </h2>
                     <div className="prose prose-sm md:prose-base max-w-none text-gray-700 leading-relaxed md:leading-loose">
@@ -215,7 +215,7 @@ function HolidayCakes() {
 
                 {/* FAQ БЛОК */}
                 <section className="faq container mx-auto max-w-5xl lg:max-w-[1050px] mb-16">
-                    <h2 className="text-2xl md:text-3xl font-black text-[#1d263b] mb-6 text-center tracking-tight" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                    <h2 className="text-2xl md:text-3xl font-black text-[#1d263b] mb-6 text-center tracking-tight" style={{ fontFamily: "'Oswald', 'Oswald Fallback', sans-serif" }}>
                         Часті запитання
                     </h2>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
