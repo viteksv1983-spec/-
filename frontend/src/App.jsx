@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
 import { CartProvider } from './context/CartContext';
-import React, { Suspense } from 'react';
+import React, { Suspense, useEffect } from 'react';
 
 // Layouts (always needed)
 import PublicLayout from './components/PublicLayout';
@@ -43,6 +43,19 @@ const SEOPages = React.lazy(() => import('./components/admin/SEOPages'));
 const TelegramSettings = React.lazy(() => import('./components/admin/TelegramSettings'));
 
 function App() {
+  useEffect(() => {
+    // Hide global preloader smoothly once React evaluates and starts rendering
+    const preloader = document.getElementById('global-preloader');
+    if (preloader) {
+      setTimeout(() => {
+        preloader.classList.add('hidden');
+        setTimeout(() => {
+          preloader.style.display = 'none';
+        }, 500); // Wait for CSS transition (0.5s)
+      }, 300); // Give React a moment to paint the initial layout
+    }
+  }, []);
+
   return (
     <AuthProvider>
       <CartProvider>
