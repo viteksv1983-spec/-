@@ -17,11 +17,9 @@
   <link rel="preload" as="image" type="image/webp" href="/transparent-hero-cake.webp" media="(max-width: 767px)"
     fetchpriority="high" />
 
-  <!-- Preload critical font files to prevent CLS -->
+  <!-- Preload critical font file to prevent CLS -->
   <link rel="preload" as="font" type="font/woff2" crossorigin
     href="https://fonts.gstatic.com/s/oswald/v53/TK3_WkUHHAIjg75cFRf3bXL8LICs1_FvsUZiZQ.woff2" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="https://fonts.gstatic.com/s/montserrat/v29/JTUSjIg1_i6t8kCHKm459WlhyyTh89Y0Y_q5.woff2" />
 
   <!-- Font-face fallback with size-adjust to minimize CLS -->
   <style>
@@ -33,6 +31,7 @@
       descent-override: 30%;
       line-gap-override: 0%;
     }
+
     @font-face {
       font-family: 'Montserrat Fallback';
       src: local('Segoe UI'), local('Arial');
